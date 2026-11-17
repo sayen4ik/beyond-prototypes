@@ -1,0 +1,2131 @@
+<!doctype html>
+<html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{margin:0}[hidden]{display:none!important}</style></head><body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@rive-app/webgl2@2.47.1/rive.js"></script>
+<script>window.__RIVE_WASM="@@FILE:bin/rive.wasm@@";</script>
+<script>window.__FISH_RIV="@@FILE:bin/fish.riv@@";window.__LEADER_LIGHT={"v":"5.7.4","fr":30,"ip":0,"op":552,"w":1000,"h":852,"nm":"leader_light","ddd":0,"assets":[{"id":"beam_img","w":753,"h":1317,"u":"","e":1,"p":"data:image/png;base64,@@FILE:a/_e211bc20b578.png@@"},{"id":"fog_img","w":1200,"h":852,"u":"","e":1,"p":"data:image/png;base64,@@FILE:a/_d79888c5c387.png@@"},{"id":"fog_comp","layers":[{"ddd":0,"ind":1,"ty":2,"nm":"fog1","refId":"fog_img","sr":1,"ip":0,"op":552,"st":0,"bm":0,"ks":{"a":{"a":0,"k":[600.0,426.0,0]},"p":{"a":1,"k":[{"t":0,"s":[362.0,426.0,0],"o":{"x":0,"y":0},"i":{"x":1,"y":1}},{"t":552,"s":[638.0,426.0,0],"o":{"x":0,"y":0},"i":{"x":1,"y":1}}]},"s":{"a":0,"k":[100.0,100.0,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100},"sk":{"a":0,"k":0},"sa":{"a":0,"k":0}}},{"ddd":0,"ind":2,"ty":2,"nm":"fog2","refId":"fog_img","sr":1,"ip":0,"op":552,"st":0,"bm":0,"ks":{"a":{"a":0,"k":[600.0,426.0,0]},"p":{"a":1,"k":[{"t":0,"s":[293.0,516.0,0],"o":{"x":0,"y":0},"i":{"x":1,"y":1}},{"t":552,"s":[707.0,516.0,0],"o":{"x":0,"y":0},"i":{"x":1,"y":1}}]},"s":{"a":0,"k":[150.0,150.0,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":70},"sk":{"a":0,"k":0},"sa":{"a":0,"k":0}}}]}],"markers":[{"tm":0,"cm":"appear","dr":72},{"tm":72,"cm":"loop","dr":480}],"layers":[{"ddd":0,"ind":1,"ty":0,"nm":"fog_mask","refId":"fog_comp","sr":1,"w":1000,"h":852,"ip":0,"op":552,"st":0,"bm":0,"td":1,"ks":{"a":{"a":0,"k":[0,0,0]},"p":{"a":0,"k":[0,0,0]},"s":{"a":0,"k":[100,100,100]},"r":{"a":0,"k":0},"o":{"a":0,"k":100},"sk":{"a":0,"k":0},"sa":{"a":0,"k":0}},"cl":"beam"},{"ddd":0,"ind":2,"ty":2,"nm":"beam_in_fog","refId":"beam_img","sr":1,"ip":0,"op":552,"st":0,"bm":0,"ks":{"a":{"a":0,"k":[376.5,0,0]},"p":{"a":0,"k":[500,-54,0]},"sk":{"a":0,"k":0},"sa":{"a":0,"k":0},"s":{"a":0,"k":[52.191235059760956,52.191235059760956,100]},"r":{"a":1,"k":[{"t":0,"s":[21.97],"o":{"x":[0.42],"y":[0.0]},"i":{"x":[0.58],"y":[1.0]}},{"t":15.5,"s":[-3.48],"o":{"x":[0.42],"y":[0.0]},"i":{"x":[0.58],"y":[1.0]}},{"t":19,"s":[-3.48],"o":{"x":[0.42],"y":[0.0]},"i":{"x":[0.58],"y":[1.0]}},{"t":37,"s":[1.0],"o":{"x":[0.42],"y":[0.0]},"i":{"x":[0.58],"y":[1.0]}},{"t":41.5,"s":[1.0],"o":{"x":[0.42],"y":[0.0]},"i":{"x":[0.58],"y":[1.0]}},{"t":71.5,"s":[0]}]},"o":{"a":1,"k":[{"t":0,"s":[0.0],"o":{"x":[0.3],"y":[0]},"i":{"x":[0.6],"y":[1]}},{"t":6,"s":[67.5],"o":{"x":[0.42],"y":[0.0]},"i":{"x":[0.58],"y":[1.0]}},{"t":72,"s":[67.5],"o":{"x":[0.42],"y":[0.0]},"i":{"x":[0.58],"y":[1.0]}},{"t":192.0,"s":[55.35],"o":{"x":[0.42],"y":[0.0]},"i":{"x":[0.58],"y":[1.0]}},{"t":312.0,"s":[67.5],"o":{"x":[0.42],"y":[0.0]},"i":{"x":[0.58],"y":[1.0]}},{"t":432.0,"s":[55.35],"o":{"x":[0.42],"y":[0.0]},"i":{"x":[0.58],"y":[1.0]}},{"t":552,"s":[67.5]}]}},"tt":1,"cl":"beam"},{"ddd":0,"ind":3,"ty":2,"nm":"beam","refId":"beam_img","sr":1,"ip":0,"op":552,"st":0,"bm":0,"ks":{"a":{"a":0,"k":[376.5,0,0]},"p":{"a":0,"k":[500,-54,0]},"sk":{"a":0,"k":0},"sa":{"a":0,"k":0},"s":{"a":0,"k":[52.191235059760956,52.191235059760956,100]},"r":{"a":1,"k":[{"t":0,"s":[21.97],"o":{"x":[0.42],"y":[0.0]},"i":{"x":[0.58],"y":[1.0]}},{"t":15.5,"s":[-3.48],"o":{"x":[0.42],"y":[0.0]},"i":{"x":[0.58],"y":[1.0]}},{"t":19,"s":[-3.48],"o":{"x":[0.42],"y":[0.0]},"i":{"x":[0.58],"y":[1.0]}},{"t":37,"s":[1.0],"o":{"x":[0.42],"y":[0.0]},"i":{"x":[0.58],"y":[1.0]}},{"t":41.5,"s":[1.0],"o":{"x":[0.42],"y":[0.0]},"i":{"x":[0.58],"y":[1.0]}},{"t":71.5,"s":[0]}]},"o":{"a":1,"k":[{"t":0,"s":[0.0],"o":{"x":[0.3],"y":[0]},"i":{"x":[0.6],"y":[1]}},{"t":6,"s":[66.25],"o":{"x":[0.42],"y":[0.0]},"i":{"x":[0.58],"y":[1.0]}},{"t":72,"s":[66.25],"o":{"x":[0.42],"y":[0.0]},"i":{"x":[0.58],"y":[1.0]}},{"t":192.0,"s":[54.324999999999996],"o":{"x":[0.42],"y":[0.0]},"i":{"x":[0.58],"y":[1.0]}},{"t":312.0,"s":[66.25],"o":{"x":[0.42],"y":[0.0]},"i":{"x":[0.58],"y":[1.0]}},{"t":432.0,"s":[54.324999999999996],"o":{"x":[0.42],"y":[0.0]},"i":{"x":[0.58],"y":[1.0]}},{"t":552,"s":[66.25]}]}},"cl":"beam"}]};</script>
+<script>window.__A={"a/av_0.webp":"data:image/webp;base64,@@FILE:a/av_0.webp@@",⏎
+"a/av_1.webp":"data:image/webp;base64,@@FILE:a/av_1.webp@@",⏎
+"a/av_2.webp":"data:image/webp;base64,@@FILE:a/av_2.webp@@",⏎
+"a/av_3.webp":"data:image/webp;base64,@@FILE:a/av_3.webp@@",⏎
+"a/av_4.webp":"data:image/webp;base64,@@FILE:a/av_4.webp@@",⏎
+"a/av_5.webp":"data:image/webp;base64,@@FILE:a/av_5.webp@@",⏎
+"a/bg.webp":"data:image/webp;base64,@@FILE:a/bg.webp@@",⏎
+"a/cb_label.png":"data:image/png;base64,@@FILE:a/cb_label.png@@",⏎
+"a/cb_num_0.png":"data:image/png;base64,@@FILE:a/cb_num_0.png@@",⏎
+"a/cb_num_1.png":"data:image/png;base64,@@FILE:a/cb_num_1.png@@",⏎
+"a/cb_num_2.png":"data:image/png;base64,@@FILE:a/cb_num_2.png@@",⏎
+"a/cb_num_3.png":"data:image/png;base64,@@FILE:a/cb_num_3.png@@",⏎
+"a/cb_num_4.png":"data:image/png;base64,@@FILE:a/cb_num_4.png@@",⏎
+"a/cb_num_5.png":"data:image/png;base64,@@FILE:a/cb_num_5.png@@",⏎
+"a/cback.webp":"data:image/webp;base64,@@FILE:a/cback.webp@@",⏎
+"a/cbg_0.webp":"data:image/webp;base64,@@FILE:a/cbg_0.webp@@",⏎
+"a/cbg_1.webp":"data:image/webp;base64,@@FILE:a/cbg_1.webp@@",⏎
+"a/cbg_2.webp":"data:image/webp;base64,@@FILE:a/cbg_2.webp@@",⏎
+"a/cbg_3.webp":"data:image/webp;base64,@@FILE:a/cbg_3.webp@@",⏎
+"a/cbg_4.webp":"data:image/webp;base64,@@FILE:a/cbg_4.webp@@",⏎
+"a/cbg_5.webp":"data:image/webp;base64,@@FILE:a/cbg_5.webp@@",⏎
+"a/cgold_18.png":"data:image/png;base64,@@FILE:a/cgold_18.png@@",⏎
+"a/cgold_19.png":"data:image/png;base64,@@FILE:a/cgold_19.png@@",⏎
+"a/cgold_20.png":"data:image/png;base64,@@FILE:a/cgold_20.png@@",⏎
+"a/cgold_21.png":"data:image/png;base64,@@FILE:a/cgold_21.png@@",⏎
+"a/cgold_22.png":"data:image/png;base64,@@FILE:a/cgold_22.png@@",⏎
+"a/cgold_23.png":"data:image/png;base64,@@FILE:a/cgold_23.png@@",⏎
+"a/cgold_24.png":"data:image/png;base64,@@FILE:a/cgold_24.png@@",⏎
+"a/cgold_25.png":"data:image/png;base64,@@FILE:a/cgold_25.png@@",⏎
+"a/cgold_26.png":"data:image/png;base64,@@FILE:a/cgold_26.png@@",⏎
+"a/cgold_27.png":"data:image/png;base64,@@FILE:a/cgold_27.png@@",⏎
+"a/cgold_28.png":"data:image/png;base64,@@FILE:a/cgold_28.png@@",⏎
+"a/cgold_29.png":"data:image/png;base64,@@FILE:a/cgold_29.png@@",⏎
+"a/cgold_30.png":"data:image/png;base64,@@FILE:a/cgold_30.png@@",⏎
+"a/cgold_31.png":"data:image/png;base64,@@FILE:a/cgold_31.png@@",⏎
+"a/cgold_32.png":"data:image/png;base64,@@FILE:a/cgold_32.png@@",⏎
+"a/cgold_33.png":"data:image/png;base64,@@FILE:a/cgold_33.png@@",⏎
+"a/cgold_34.png":"data:image/png;base64,@@FILE:a/cgold_34.png@@",⏎
+"a/cgold_35.png":"data:image/png;base64,@@FILE:a/cgold_35.png@@",⏎
+"a/cgold_36.png":"data:image/png;base64,@@FILE:a/cgold_36.png@@",⏎
+"a/cgold_37.png":"data:image/png;base64,@@FILE:a/cgold_37.png@@",⏎
+"a/cgold_38.png":"data:image/png;base64,@@FILE:a/cgold_38.png@@",⏎
+"a/cgold_39.png":"data:image/png;base64,@@FILE:a/cgold_39.png@@",⏎
+"a/cgold_40.png":"data:image/png;base64,@@FILE:a/cgold_40.png@@",⏎
+"a/cgold_41.png":"data:image/png;base64,@@FILE:a/cgold_41.png@@",⏎
+"a/cgold_42.png":"data:image/png;base64,@@FILE:a/cgold_42.png@@",⏎
+"a/cgold_43.png":"data:image/png;base64,@@FILE:a/cgold_43.png@@",⏎
+"a/cgold_44.png":"data:image/png;base64,@@FILE:a/cgold_44.png@@",⏎
+"a/cnum_18.png":"data:image/png;base64,@@FILE:a/cnum_18.png@@",⏎
+"a/cnum_19.png":"data:image/png;base64,@@FILE:a/cnum_19.png@@",⏎
+"a/cnum_20.png":"data:image/png;base64,@@FILE:a/cnum_20.png@@",⏎
+"a/cnum_21.png":"data:image/png;base64,@@FILE:a/cnum_21.png@@",⏎
+"a/cnum_22.png":"data:image/png;base64,@@FILE:a/cnum_22.png@@",⏎
+"a/cnum_23.png":"data:image/png;base64,@@FILE:a/cnum_23.png@@",⏎
+"a/cnum_24.png":"data:image/png;base64,@@FILE:a/cnum_24.png@@",⏎
+"a/cnum_25.png":"data:image/png;base64,@@FILE:a/cnum_25.png@@",⏎
+"a/cnum_26.png":"data:image/png;base64,@@FILE:a/cnum_26.png@@",⏎
+"a/cnum_27.png":"data:image/png;base64,@@FILE:a/cnum_27.png@@",⏎
+"a/cnum_28.png":"data:image/png;base64,@@FILE:a/cnum_28.png@@",⏎
+"a/cnum_29.png":"data:image/png;base64,@@FILE:a/cnum_29.png@@",⏎
+"a/cnum_30.png":"data:image/png;base64,@@FILE:a/cnum_30.png@@",⏎
+"a/cnum_31.png":"data:image/png;base64,@@FILE:a/cnum_31.png@@",⏎
+"a/cnum_32.png":"data:image/png;base64,@@FILE:a/cnum_32.png@@",⏎
+"a/cnum_33.png":"data:image/png;base64,@@FILE:a/cnum_33.png@@",⏎
+"a/cnum_34.png":"data:image/png;base64,@@FILE:a/cnum_34.png@@",⏎
+"a/cnum_35.png":"data:image/png;base64,@@FILE:a/cnum_35.png@@",⏎
+"a/cnum_36.png":"data:image/png;base64,@@FILE:a/cnum_36.png@@",⏎
+"a/cnum_37.png":"data:image/png;base64,@@FILE:a/cnum_37.png@@",⏎
+"a/cnum_38.png":"data:image/png;base64,@@FILE:a/cnum_38.png@@",⏎
+"a/cnum_39.png":"data:image/png;base64,@@FILE:a/cnum_39.png@@",⏎
+"a/cnum_40.png":"data:image/png;base64,@@FILE:a/cnum_40.png@@",⏎
+"a/cnum_41.png":"data:image/png;base64,@@FILE:a/cnum_41.png@@",⏎
+"a/cnum_42.png":"data:image/png;base64,@@FILE:a/cnum_42.png@@",⏎
+"a/cnum_43.png":"data:image/png;base64,@@FILE:a/cnum_43.png@@",⏎
+"a/cnum_44.png":"data:image/png;base64,@@FILE:a/cnum_44.png@@",⏎
+"a/cp_label_0.png":"data:image/png;base64,@@FILE:a/cp_label_0.png@@",⏎
+"a/cp_label_10.png":"data:image/png;base64,@@FILE:a/cp_label_10.png@@",⏎
+"a/cp_label_20.png":"data:image/png;base64,@@FILE:a/cp_label_20.png@@",⏎
+"a/cp_label_30.png":"data:image/png;base64,@@FILE:a/cp_label_30.png@@",⏎
+"a/cp_label_40.png":"data:image/png;base64,@@FILE:a/cp_label_40.png@@",⏎
+"a/cp_label_50.png":"data:image/png;base64,@@FILE:a/cp_label_50.png@@",⏎
+"a/cp_label_60.png":"data:image/png;base64,@@FILE:a/cp_label_60.png@@",⏎
+"a/cp_label_70.png":"data:image/png;base64,@@FILE:a/cp_label_70.png@@",⏎
+"a/cpn_0.png":"data:image/png;base64,@@FILE:a/cpn_0.png@@",⏎
+"a/cpn_10.png":"data:image/png;base64,@@FILE:a/cpn_10.png@@",⏎
+"a/cpn_20.png":"data:image/png;base64,@@FILE:a/cpn_20.png@@",⏎
+"a/cpn_30.png":"data:image/png;base64,@@FILE:a/cpn_30.png@@",⏎
+"a/cpn_40.png":"data:image/png;base64,@@FILE:a/cpn_40.png@@",⏎
+"a/cpn_50.png":"data:image/png;base64,@@FILE:a/cpn_50.png@@",⏎
+"a/cpn_60.png":"data:image/png;base64,@@FILE:a/cpn_60.png@@",⏎
+"a/cpn_70.png":"data:image/png;base64,@@FILE:a/cpn_70.png@@",⏎
+"a/crate_0.webp":"data:image/webp;base64,@@FILE:a/crate_0.webp@@",⏎
+"a/crate_1.webp":"data:image/webp;base64,@@FILE:a/crate_1.webp@@",⏎
+"a/crate_3.webp":"data:image/webp;base64,@@FILE:a/crate_3.webp@@",⏎
+"a/crate_4.webp":"data:image/webp;base64,@@FILE:a/crate_4.webp@@",⏎
+"a/crate_5.webp":"data:image/webp;base64,@@FILE:a/crate_5.webp@@",⏎
+"a/cseason.webp":"data:image/webp;base64,@@FILE:a/cseason.webp@@",⏎
+"a/dot.png":"data:image/png;base64,@@FILE:a/dot.png@@",⏎
+"a/dotn.png":"data:image/png;base64,@@FILE:a/dotn.png@@",⏎
+"a/flourish_g.png":"data:image/png;base64,@@FILE:a/flourish_g.png@@",⏎
+"a/header.webp":"data:image/webp;base64,@@FILE:a/header.webp@@",⏎
+"a/logo_0.webp":"data:image/webp;base64,@@FILE:a/logo_0.webp@@",⏎
+"a/logo_1.webp":"data:image/webp;base64,@@FILE:a/logo_1.webp@@",⏎
+"a/logo_2.webp":"data:image/webp;base64,@@FILE:a/logo_2.webp@@",⏎
+"a/logo_3.webp":"data:image/webp;base64,@@FILE:a/logo_3.webp@@",⏎
+"a/logo_4.webp":"data:image/webp;base64,@@FILE:a/logo_4.webp@@",⏎
+"a/logo_5.webp":"data:image/webp;base64,@@FILE:a/logo_5.webp@@",⏎
+"a/logog_0.png":"data:image/png;base64,@@FILE:a/logog_0.png@@",⏎
+"a/logog_1.png":"data:image/png;base64,@@FILE:a/logog_1.png@@",⏎
+"a/logog_2.png":"data:image/png;base64,@@FILE:a/logog_2.png@@",⏎
+"a/logog_3.png":"data:image/png;base64,@@FILE:a/logog_3.png@@",⏎
+"a/logog_4.png":"data:image/png;base64,@@FILE:a/logog_4.png@@",⏎
+"a/logog_5.png":"data:image/png;base64,@@FILE:a/logog_5.png@@",⏎
+"a/logos_0.png":"data:image/png;base64,@@FILE:a/logos_0.png@@",⏎
+"a/logos_1.png":"data:image/png;base64,@@FILE:a/logos_1.png@@",⏎
+"a/logos_2.png":"data:image/png;base64,@@FILE:a/logos_2.png@@",⏎
+"a/logos_3.png":"data:image/png;base64,@@FILE:a/logos_3.png@@",⏎
+"a/logos_4.png":"data:image/png;base64,@@FILE:a/logos_4.png@@",⏎
+"a/logos_5.png":"data:image/png;base64,@@FILE:a/logos_5.png@@",⏎
+"a/mark_18.png":"data:image/png;base64,@@FILE:a/mark_18.png@@",⏎
+"a/mark_19.png":"data:image/png;base64,@@FILE:a/mark_19.png@@",⏎
+"a/mark_20.png":"data:image/png;base64,@@FILE:a/mark_20.png@@",⏎
+"a/mark_21.png":"data:image/png;base64,@@FILE:a/mark_21.png@@",⏎
+"a/mark_22.png":"data:image/png;base64,@@FILE:a/mark_22.png@@",⏎
+"a/mark_23.png":"data:image/png;base64,@@FILE:a/mark_23.png@@",⏎
+"a/mark_24.png":"data:image/png;base64,@@FILE:a/mark_24.png@@",⏎
+"a/mark_25.png":"data:image/png;base64,@@FILE:a/mark_25.png@@",⏎
+"a/mark_26.png":"data:image/png;base64,@@FILE:a/mark_26.png@@",⏎
+"a/mark_27.png":"data:image/png;base64,@@FILE:a/mark_27.png@@",⏎
+"a/mark_28.png":"data:image/png;base64,@@FILE:a/mark_28.png@@",⏎
+"a/mark_29.png":"data:image/png;base64,@@FILE:a/mark_29.png@@",⏎
+"a/mark_30.png":"data:image/png;base64,@@FILE:a/mark_30.png@@",⏎
+"a/mark_31.png":"data:image/png;base64,@@FILE:a/mark_31.png@@",⏎
+"a/mark_32.png":"data:image/png;base64,@@FILE:a/mark_32.png@@",⏎
+"a/mark_33.png":"data:image/png;base64,@@FILE:a/mark_33.png@@",⏎
+"a/mark_34.png":"data:image/png;base64,@@FILE:a/mark_34.png@@",⏎
+"a/mark_35.png":"data:image/png;base64,@@FILE:a/mark_35.png@@",⏎
+"a/mark_36.png":"data:image/png;base64,@@FILE:a/mark_36.png@@",⏎
+"a/mark_37.png":"data:image/png;base64,@@FILE:a/mark_37.png@@",⏎
+"a/mark_38.png":"data:image/png;base64,@@FILE:a/mark_38.png@@",⏎
+"a/mark_39.png":"data:image/png;base64,@@FILE:a/mark_39.png@@",⏎
+"a/mark_40.png":"data:image/png;base64,@@FILE:a/mark_40.png@@",⏎
+"a/mark_41.png":"data:image/png;base64,@@FILE:a/mark_41.png@@",⏎
+"a/mark_42.png":"data:image/png;base64,@@FILE:a/mark_42.png@@",⏎
+"a/mark_43.png":"data:image/png;base64,@@FILE:a/mark_43.png@@",⏎
+"a/mark_44.png":"data:image/png;base64,@@FILE:a/mark_44.png@@",⏎
+"a/markg_18.png":"data:image/png;base64,@@FILE:a/markg_18.png@@",⏎
+"a/markg_19.png":"data:image/png;base64,@@FILE:a/markg_19.png@@",⏎
+"a/markg_20.png":"data:image/png;base64,@@FILE:a/markg_20.png@@",⏎
+"a/markg_21.png":"data:image/png;base64,@@FILE:a/markg_21.png@@",⏎
+"a/markg_22.png":"data:image/png;base64,@@FILE:a/markg_22.png@@",⏎
+"a/markg_23.png":"data:image/png;base64,@@FILE:a/markg_23.png@@",⏎
+"a/markg_24.png":"data:image/png;base64,@@FILE:a/markg_24.png@@",⏎
+"a/markg_25.png":"data:image/png;base64,@@FILE:a/markg_25.png@@",⏎
+"a/markg_26.png":"data:image/png;base64,@@FILE:a/markg_26.png@@",⏎
+"a/markg_27.png":"data:image/png;base64,@@FILE:a/markg_27.png@@",⏎
+"a/markg_28.png":"data:image/png;base64,@@FILE:a/markg_28.png@@",⏎
+"a/markg_29.png":"data:image/png;base64,@@FILE:a/markg_29.png@@",⏎
+"a/markg_30.png":"data:image/png;base64,@@FILE:a/markg_30.png@@",⏎
+"a/markg_31.png":"data:image/png;base64,@@FILE:a/markg_31.png@@",⏎
+"a/markg_32.png":"data:image/png;base64,@@FILE:a/markg_32.png@@",⏎
+"a/markg_33.png":"data:image/png;base64,@@FILE:a/markg_33.png@@",⏎
+"a/markg_34.png":"data:image/png;base64,@@FILE:a/markg_34.png@@",⏎
+"a/markg_35.png":"data:image/png;base64,@@FILE:a/markg_35.png@@",⏎
+"a/markg_36.png":"data:image/png;base64,@@FILE:a/markg_36.png@@",⏎
+"a/markg_37.png":"data:image/png;base64,@@FILE:a/markg_37.png@@",⏎
+"a/markg_38.png":"data:image/png;base64,@@FILE:a/markg_38.png@@",⏎
+"a/markg_39.png":"data:image/png;base64,@@FILE:a/markg_39.png@@",⏎
+"a/markg_40.png":"data:image/png;base64,@@FILE:a/markg_40.png@@",⏎
+"a/markg_41.png":"data:image/png;base64,@@FILE:a/markg_41.png@@",⏎
+"a/markg_42.png":"data:image/png;base64,@@FILE:a/markg_42.png@@",⏎
+"a/markg_43.png":"data:image/png;base64,@@FILE:a/markg_43.png@@",⏎
+"a/markg_44.png":"data:image/png;base64,@@FILE:a/markg_44.png@@",⏎
+"a/markgb_18.png":"data:image/png;base64,@@FILE:a/markgb_18.png@@",⏎
+"a/markgb_19.png":"data:image/png;base64,@@FILE:a/markgb_19.png@@",⏎
+"a/markgb_20.png":"data:image/png;base64,@@FILE:a/markgb_20.png@@",⏎
+"a/markgb_21.png":"data:image/png;base64,@@FILE:a/markgb_21.png@@",⏎
+"a/markgb_22.png":"data:image/png;base64,@@FILE:a/markgb_22.png@@",⏎
+"a/markgb_23.png":"data:image/png;base64,@@FILE:a/markgb_23.png@@",⏎
+"a/markgb_24.png":"data:image/png;base64,@@FILE:a/markgb_24.png@@",⏎
+"a/markgb_25.png":"data:image/png;base64,@@FILE:a/markgb_25.png@@",⏎
+"a/markgb_26.png":"data:image/png;base64,@@FILE:a/markgb_26.png@@",⏎
+"a/markgb_27.png":"data:image/png;base64,@@FILE:a/markgb_27.png@@",⏎
+"a/markgb_28.png":"data:image/png;base64,@@FILE:a/markgb_28.png@@",⏎
+"a/markgb_29.png":"data:image/png;base64,@@FILE:a/markgb_29.png@@",⏎
+"a/markgb_30.png":"data:image/png;base64,@@FILE:a/markgb_30.png@@",⏎
+"a/markgb_31.png":"data:image/png;base64,@@FILE:a/markgb_31.png@@",⏎
+"a/markgb_32.png":"data:image/png;base64,@@FILE:a/markgb_32.png@@",⏎
+"a/markgb_33.png":"data:image/png;base64,@@FILE:a/markgb_33.png@@",⏎
+"a/markgb_34.png":"data:image/png;base64,@@FILE:a/markgb_34.png@@",⏎
+"a/markgb_35.png":"data:image/png;base64,@@FILE:a/markgb_35.png@@",⏎
+"a/markgb_36.png":"data:image/png;base64,@@FILE:a/markgb_36.png@@",⏎
+"a/markgb_37.png":"data:image/png;base64,@@FILE:a/markgb_37.png@@",⏎
+"a/markgb_38.png":"data:image/png;base64,@@FILE:a/markgb_38.png@@",⏎
+"a/markgb_39.png":"data:image/png;base64,@@FILE:a/markgb_39.png@@",⏎
+"a/markgb_40.png":"data:image/png;base64,@@FILE:a/markgb_40.png@@",⏎
+"a/markgb_41.png":"data:image/png;base64,@@FILE:a/markgb_41.png@@",⏎
+"a/markgb_42.png":"data:image/png;base64,@@FILE:a/markgb_42.png@@",⏎
+"a/markgb_43.png":"data:image/png;base64,@@FILE:a/markgb_43.png@@",⏎
+"a/markgb_44.png":"data:image/png;base64,@@FILE:a/markgb_44.png@@",⏎
+"a/markgp_18.png":"data:image/png;base64,@@FILE:a/markgp_18.png@@",⏎
+"a/markgp_19.png":"data:image/png;base64,@@FILE:a/markgp_19.png@@",⏎
+"a/markgp_20.png":"data:image/png;base64,@@FILE:a/markgp_20.png@@",⏎
+"a/markgp_21.png":"data:image/png;base64,@@FILE:a/markgp_21.png@@",⏎
+"a/markgp_22.png":"data:image/png;base64,@@FILE:a/markgp_22.png@@",⏎
+"a/markgp_23.png":"data:image/png;base64,@@FILE:a/markgp_23.png@@",⏎
+"a/markgp_24.png":"data:image/png;base64,@@FILE:a/markgp_24.png@@",⏎
+"a/markgp_25.png":"data:image/png;base64,@@FILE:a/markgp_25.png@@",⏎
+"a/markgp_26.png":"data:image/png;base64,@@FILE:a/markgp_26.png@@",⏎
+"a/markgp_27.png":"data:image/png;base64,@@FILE:a/markgp_27.png@@",⏎
+"a/markgp_28.png":"data:image/png;base64,@@FILE:a/markgp_28.png@@",⏎
+"a/markgp_29.png":"data:image/png;base64,@@FILE:a/markgp_29.png@@",⏎
+"a/markgp_30.png":"data:image/png;base64,@@FILE:a/markgp_30.png@@",⏎
+"a/markgp_31.png":"data:image/png;base64,@@FILE:a/markgp_31.png@@",⏎
+"a/markgp_32.png":"data:image/png;base64,@@FILE:a/markgp_32.png@@",⏎
+"a/markgp_33.png":"data:image/png;base64,@@FILE:a/markgp_33.png@@",⏎
+"a/markgp_34.png":"data:image/png;base64,@@FILE:a/markgp_34.png@@",⏎
+"a/markgp_35.png":"data:image/png;base64,@@FILE:a/markgp_35.png@@",⏎
+"a/markgp_36.png":"data:image/png;base64,@@FILE:a/markgp_36.png@@",⏎
+"a/markgp_37.png":"data:image/png;base64,@@FILE:a/markgp_37.png@@",⏎
+"a/markgp_38.png":"data:image/png;base64,@@FILE:a/markgp_38.png@@",⏎
+"a/markgp_39.png":"data:image/png;base64,@@FILE:a/markgp_39.png@@",⏎
+"a/markgp_40.png":"data:image/png;base64,@@FILE:a/markgp_40.png@@",⏎
+"a/markgp_41.png":"data:image/png;base64,@@FILE:a/markgp_41.png@@",⏎
+"a/markgp_42.png":"data:image/png;base64,@@FILE:a/markgp_42.png@@",⏎
+"a/markgp_43.png":"data:image/png;base64,@@FILE:a/markgp_43.png@@",⏎
+"a/markgp_44.png":"data:image/png;base64,@@FILE:a/markgp_44.png@@",⏎
+"a/markn_18.png":"data:image/png;base64,@@FILE:a/markn_18.png@@",⏎
+"a/markn_19.png":"data:image/png;base64,@@FILE:a/markn_19.png@@",⏎
+"a/markn_20.png":"data:image/png;base64,@@FILE:a/markn_20.png@@",⏎
+"a/markn_21.png":"data:image/png;base64,@@FILE:a/markn_21.png@@",⏎
+"a/markn_22.png":"data:image/png;base64,@@FILE:a/markn_22.png@@",⏎
+"a/markn_23.png":"data:image/png;base64,@@FILE:a/markn_23.png@@",⏎
+"a/markn_24.png":"data:image/png;base64,@@FILE:a/markn_24.png@@",⏎
+"a/markn_25.png":"data:image/png;base64,@@FILE:a/markn_25.png@@",⏎
+"a/markn_26.png":"data:image/png;base64,@@FILE:a/markn_26.png@@",⏎
+"a/markn_27.png":"data:image/png;base64,@@FILE:a/markn_27.png@@",⏎
+"a/markn_28.png":"data:image/png;base64,@@FILE:a/markn_28.png@@",⏎
+"a/markn_29.png":"data:image/png;base64,@@FILE:a/markn_29.png@@",⏎
+"a/markn_30.png":"data:image/png;base64,@@FILE:a/markn_30.png@@",⏎
+"a/markn_31.png":"data:image/png;base64,@@FILE:a/markn_31.png@@",⏎
+"a/markn_32.png":"data:image/png;base64,@@FILE:a/markn_32.png@@",⏎
+"a/markn_33.png":"data:image/png;base64,@@FILE:a/markn_33.png@@",⏎
+"a/markn_34.png":"data:image/png;base64,@@FILE:a/markn_34.png@@",⏎
+"a/markn_35.png":"data:image/png;base64,@@FILE:a/markn_35.png@@",⏎
+"a/markn_36.png":"data:image/png;base64,@@FILE:a/markn_36.png@@",⏎
+"a/markn_37.png":"data:image/png;base64,@@FILE:a/markn_37.png@@",⏎
+"a/markn_38.png":"data:image/png;base64,@@FILE:a/markn_38.png@@",⏎
+"a/markn_39.png":"data:image/png;base64,@@FILE:a/markn_39.png@@",⏎
+"a/markn_40.png":"data:image/png;base64,@@FILE:a/markn_40.png@@",⏎
+"a/markn_41.png":"data:image/png;base64,@@FILE:a/markn_41.png@@",⏎
+"a/markn_42.png":"data:image/png;base64,@@FILE:a/markn_42.png@@",⏎
+"a/markn_43.png":"data:image/png;base64,@@FILE:a/markn_43.png@@",⏎
+"a/markn_44.png":"data:image/png;base64,@@FILE:a/markn_44.png@@",⏎
+"a/name_0.png":"data:image/png;base64,@@FILE:a/name_0.png@@",⏎
+"a/name_1.png":"data:image/png;base64,@@FILE:a/name_1.png@@",⏎
+"a/name_2.png":"data:image/png;base64,@@FILE:a/name_2.png@@",⏎
+"a/name_3.png":"data:image/png;base64,@@FILE:a/name_3.png@@",⏎
+"a/name_4.png":"data:image/png;base64,@@FILE:a/name_4.png@@",⏎
+"a/name_5.png":"data:image/png;base64,@@FILE:a/name_5.png@@",⏎
+"a/num_18.png":"data:image/png;base64,@@FILE:a/num_18.png@@",⏎
+"a/num_19.png":"data:image/png;base64,@@FILE:a/num_19.png@@",⏎
+"a/num_20.png":"data:image/png;base64,@@FILE:a/num_20.png@@",⏎
+"a/num_21.png":"data:image/png;base64,@@FILE:a/num_21.png@@",⏎
+"a/num_22.png":"data:image/png;base64,@@FILE:a/num_22.png@@",⏎
+"a/num_23.png":"data:image/png;base64,@@FILE:a/num_23.png@@",⏎
+"a/num_24.png":"data:image/png;base64,@@FILE:a/num_24.png@@",⏎
+"a/num_25.png":"data:image/png;base64,@@FILE:a/num_25.png@@",⏎
+"a/num_26.png":"data:image/png;base64,@@FILE:a/num_26.png@@",⏎
+"a/num_27.png":"data:image/png;base64,@@FILE:a/num_27.png@@",⏎
+"a/num_28.png":"data:image/png;base64,@@FILE:a/num_28.png@@",⏎
+"a/num_29.png":"data:image/png;base64,@@FILE:a/num_29.png@@",⏎
+"a/num_30.png":"data:image/png;base64,@@FILE:a/num_30.png@@",⏎
+"a/num_31.png":"data:image/png;base64,@@FILE:a/num_31.png@@",⏎
+"a/num_32.png":"data:image/png;base64,@@FILE:a/num_32.png@@",⏎
+"a/num_33.png":"data:image/png;base64,@@FILE:a/num_33.png@@",⏎
+"a/num_34.png":"data:image/png;base64,@@FILE:a/num_34.png@@",⏎
+"a/num_35.png":"data:image/png;base64,@@FILE:a/num_35.png@@",⏎
+"a/num_36.png":"data:image/png;base64,@@FILE:a/num_36.png@@",⏎
+"a/num_37.png":"data:image/png;base64,@@FILE:a/num_37.png@@",⏎
+"a/num_38.png":"data:image/png;base64,@@FILE:a/num_38.png@@",⏎
+"a/num_39.png":"data:image/png;base64,@@FILE:a/num_39.png@@",⏎
+"a/num_40.png":"data:image/png;base64,@@FILE:a/num_40.png@@",⏎
+"a/num_41.png":"data:image/png;base64,@@FILE:a/num_41.png@@",⏎
+"a/num_42.png":"data:image/png;base64,@@FILE:a/num_42.png@@",⏎
+"a/num_43.png":"data:image/png;base64,@@FILE:a/num_43.png@@",⏎
+"a/num_44.png":"data:image/png;base64,@@FILE:a/num_44.png@@",⏎
+"a/numg_18.png":"data:image/png;base64,@@FILE:a/numg_18.png@@",⏎
+"a/numg_19.png":"data:image/png;base64,@@FILE:a/numg_19.png@@",⏎
+"a/numg_20.png":"data:image/png;base64,@@FILE:a/numg_20.png@@",⏎
+"a/numg_21.png":"data:image/png;base64,@@FILE:a/numg_21.png@@",⏎
+"a/numg_22.png":"data:image/png;base64,@@FILE:a/numg_22.png@@",⏎
+"a/numg_23.png":"data:image/png;base64,@@FILE:a/numg_23.png@@",⏎
+"a/numg_24.png":"data:image/png;base64,@@FILE:a/numg_24.png@@",⏎
+"a/numg_25.png":"data:image/png;base64,@@FILE:a/numg_25.png@@",⏎
+"a/numg_26.png":"data:image/png;base64,@@FILE:a/numg_26.png@@",⏎
+"a/numg_27.png":"data:image/png;base64,@@FILE:a/numg_27.png@@",⏎
+"a/numg_28.png":"data:image/png;base64,@@FILE:a/numg_28.png@@",⏎
+"a/numg_29.png":"data:image/png;base64,@@FILE:a/numg_29.png@@",⏎
+"a/numg_30.png":"data:image/png;base64,@@FILE:a/numg_30.png@@",⏎
+"a/numg_31.png":"data:image/png;base64,@@FILE:a/numg_31.png@@",⏎
+"a/numg_32.png":"data:image/png;base64,@@FILE:a/numg_32.png@@",⏎
+"a/numg_33.png":"data:image/png;base64,@@FILE:a/numg_33.png@@",⏎
+"a/numg_34.png":"data:image/png;base64,@@FILE:a/numg_34.png@@",⏎
+"a/numg_35.png":"data:image/png;base64,@@FILE:a/numg_35.png@@",⏎
+"a/numg_36.png":"data:image/png;base64,@@FILE:a/numg_36.png@@",⏎
+"a/numg_37.png":"data:image/png;base64,@@FILE:a/numg_37.png@@",⏎
+"a/numg_38.png":"data:image/png;base64,@@FILE:a/numg_38.png@@",⏎
+"a/numg_39.png":"data:image/png;base64,@@FILE:a/numg_39.png@@",⏎
+"a/numg_40.png":"data:image/png;base64,@@FILE:a/numg_40.png@@",⏎
+"a/numg_41.png":"data:image/png;base64,@@FILE:a/numg_41.png@@",⏎
+"a/numg_42.png":"data:image/png;base64,@@FILE:a/numg_42.png@@",⏎
+"a/numg_43.png":"data:image/png;base64,@@FILE:a/numg_43.png@@",⏎
+"a/numg_44.png":"data:image/png;base64,@@FILE:a/numg_44.png@@",⏎
+"a/plate_gold.webp":"data:image/webp;base64,@@FILE:a/plate_gold.webp@@",⏎
+"a/plate_lead.webp":"data:image/webp;base64,@@FILE:a/plate_lead.webp@@",⏎
+"a/tick.png":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAECAYAAACOXx+WAAAAwElEQVR42j2MwU3EQBAEq2dv17bkBAiJOPhzufBGxHIPcoEETnht7TSPM/SnpJaq9Hm7Pde5XWtra61N8zx5ajOXWjVPjdomL8tCRLBtG7139d7pvXvfd/Xe2bbNx3F87/vPR6T8YlhFIGQIEESEFcUlAGCMIdsCOzOxrcw05+x8Oo58DUVZQQgIoZBsoxAAMujPeYgQwX9ojGE7gbTke2T6rSi+kBRFNkQpJUECE3E5Q9YDgzGss3/+lp33Uur7L6cGcowdXYI6AAAAAElFTkSuQmCC","a/floor_wrap.webp":"data:image/webp;base64,@@FILE:a/floor_wrap.webp@@",⏎
+"a/overlay.png":"data:image/png;base64,@@FILE:a/overlay.png@@",⏎
+"a/s5_5.webp":"data:image/webp;base64,@@FILE:a/s5_5.webp@@",⏎
+"a/cgrad.webp":"data:image/webp;base64,@@FILE:a/cgrad.webp@@",⏎
+"a/s4_6.webp":"data:image/webp;base64,@@FILE:a/s4_6.webp@@",⏎
+"a/s5_8.webp":"data:image/webp;base64,@@FILE:a/s5_8.webp@@",⏎
+"a/widget.webp":"data:image/webp;base64,@@FILE:a/widget.webp@@",⏎
+"a/s5_9.webp":"data:image/webp;base64,@@FILE:a/s5_9.webp@@",⏎
+"a/s4_1.webp":"data:image/webp;base64,@@FILE:a/s4_1.webp@@",⏎
+"a/spot.webp":"data:image/webp;base64,@@FILE:a/spot.webp@@",⏎
+"a/s4_3.webp":"data:image/webp;base64,@@FILE:a/s4_3.webp@@",⏎
+"a/s2_9.webp":"data:image/webp;base64,@@FILE:a/s2_9.webp@@",⏎
+"a/s4_2.webp":"data:image/webp;base64,@@FILE:a/s4_2.webp@@",⏎
+"a/s4_7.webp":"data:image/webp;base64,@@FILE:a/s4_7.webp@@",⏎
+"a/s5_4.webp":"data:image/webp;base64,@@FILE:a/s5_4.webp@@",⏎
+"a/s0_3.webp":"data:image/webp;base64,@@FILE:a/s0_3.webp@@",⏎
+"a/s5_2.webp":"data:image/webp;base64,@@FILE:a/s5_2.webp@@",⏎
+"a/s5_1.webp":"data:image/webp;base64,@@FILE:a/s5_1.webp@@",⏎
+"a/s3_4.webp":"data:image/webp;base64,@@FILE:a/s3_4.webp@@",⏎
+"a/s5_7.webp":"data:image/webp;base64,@@FILE:a/s5_7.webp@@",⏎
+"a/s3_1.webp":"data:image/webp;base64,@@FILE:a/s3_1.webp@@",⏎
+"a/s0_5.webp":"data:image/webp;base64,@@FILE:a/s0_5.webp@@",⏎
+"a/s3_6.webp":"data:image/webp;base64,@@FILE:a/s3_6.webp@@",⏎
+"a/s3_7.webp":"data:image/webp;base64,@@FILE:a/s3_7.webp@@",⏎
+"a/s2_7.webp":"data:image/webp;base64,@@FILE:a/s2_7.webp@@",⏎
+"a/s4_5.webp":"data:image/webp;base64,@@FILE:a/s4_5.webp@@",⏎
+"a/s0_6.webp":"data:image/webp;base64,@@FILE:a/s0_6.webp@@",⏎
+"a/s4_8.webp":"data:image/webp;base64,@@FILE:a/s4_8.webp@@",⏎
+"a/s1_2.webp":"data:image/webp;base64,@@FILE:a/s1_2.webp@@",⏎
+"a/s0_7.webp":"data:image/webp;base64,@@FILE:a/s0_7.webp@@",⏎
+"a/s3_2.webp":"data:image/webp;base64,@@FILE:a/s3_2.webp@@",⏎
+"a/s3_8.webp":"data:image/webp;base64,@@FILE:a/s3_8.webp@@",⏎
+"a/s4_9.webp":"data:image/webp;base64,@@FILE:a/s4_9.webp@@",⏎
+"a/s0_8.webp":"data:image/webp;base64,@@FILE:a/s0_8.webp@@",⏎
+"a/s2_8.webp":"data:image/webp;base64,@@FILE:a/s2_8.webp@@",⏎
+"a/s1_7.webp":"data:image/webp;base64,@@FILE:a/s1_7.webp@@",⏎
+"a/s2_3.webp":"data:image/webp;base64,@@FILE:a/s2_3.webp@@",⏎
+"a/s1_9.webp":"data:image/webp;base64,@@FILE:a/s1_9.webp@@",⏎
+"a/s0_1.webp":"data:image/webp;base64,@@FILE:a/s0_1.webp@@",⏎
+"a/s3_9.webp":"data:image/webp;base64,@@FILE:a/s3_9.webp@@",⏎
+"a/head_5.webp":"data:image/webp;base64,@@FILE:a/head_5.webp@@",⏎
+"a/head_1.webp":"data:image/webp;base64,@@FILE:a/head_1.webp@@",⏎
+"a/s2_6.webp":"data:image/webp;base64,@@FILE:a/s2_6.webp@@",⏎
+"a/s1_1.webp":"data:image/webp;base64,@@FILE:a/s1_1.webp@@",⏎
+"a/s1_3.webp":"data:image/webp;base64,@@FILE:a/s1_3.webp@@",⏎
+"a/s2_4.webp":"data:image/webp;base64,@@FILE:a/s2_4.webp@@",⏎
+"a/s2_2.webp":"data:image/webp;base64,@@FILE:a/s2_2.webp@@",⏎
+"a/s0_9.webp":"data:image/webp;base64,@@FILE:a/s0_9.webp@@",⏎
+"a/s1_6.webp":"data:image/webp;base64,@@FILE:a/s1_6.webp@@",⏎
+"a/s0_2.webp":"data:image/webp;base64,@@FILE:a/s0_2.webp@@",⏎
+"a/s1_8.webp":"data:image/webp;base64,@@FILE:a/s1_8.webp@@",⏎
+"a/s4_4.webp":"data:image/webp;base64,@@FILE:a/s4_4.webp@@",⏎
+"a/s1_5.webp":"data:image/webp;base64,@@FILE:a/s1_5.webp@@",⏎
+"a/head_3.webp":"data:image/webp;base64,@@FILE:a/head_3.webp@@",⏎
+"a/head_2.webp":"data:image/webp;base64,@@FILE:a/head_2.webp@@",⏎
+"a/s2_5.webp":"data:image/webp;base64,@@FILE:a/s2_5.webp@@",⏎
+"a/head_4.webp":"data:image/webp;base64,@@FILE:a/head_4.webp@@",⏎
+"a/s3_5.webp":"data:image/webp;base64,@@FILE:a/s3_5.webp@@",⏎
+"a/s3_3.webp":"data:image/webp;base64,@@FILE:a/s3_3.webp@@",⏎
+"a/s0_4.webp":"data:image/webp;base64,@@FILE:a/s0_4.webp@@",⏎
+"a/s5_3.webp":"data:image/webp;base64,@@FILE:a/s5_3.webp@@",⏎
+"a/s5_6.webp":"data:image/webp;base64,@@FILE:a/s5_6.webp@@",⏎
+"a/head_0.webp":"data:image/webp;base64,@@FILE:a/head_0.webp@@",⏎
+"a/s2_1.webp":"data:image/webp;base64,@@FILE:a/s2_1.webp@@",⏎
+"a/ctop_3.webp":"data:image/webp;base64,@@FILE:a/ctop_3.webp@@",⏎
+"a/ctop_5.webp":"data:image/webp;base64,@@FILE:a/ctop_5.webp@@",⏎
+"a/ctop_2.webp":"data:image/webp;base64,@@FILE:a/ctop_2.webp@@",⏎
+"a/ctop_0.webp":"data:image/webp;base64,@@FILE:a/ctop_0.webp@@",⏎
+"a/ctop_1.webp":"data:image/webp;base64,@@FILE:a/ctop_1.webp@@",⏎
+"a/ctop_4.webp":"data:image/webp;base64,@@FILE:a/ctop_4.webp@@",⏎
+"a/s1_4.webp":"data:image/webp;base64,@@FILE:a/s1_4.webp@@",⏎
+"a/crate_2.webp":"data:image/webp;base64,@@FILE:a/crate_2.webp@@"};function R(p){return window.__A[p]||p}</script>
+<title>Зростання Їдолів · чистовик · прожектор лідера</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Oranienbaum&display=swap">
+<style>
+/* Layout: phone mock 1:1 with the Figma frame on the left, a quiet control panel on the right; stacks on phones. */
+:root{
+  --bg:#0A0613;
+  --surface:#140B26;
+  --surface-2:#1C1035;
+  --line:rgba(207,188,255,.16);
+  --fg:#F2EDFF;
+  --muted:#ADA0D2;
+  --accent:#CFBCFF;
+  --accent-ink:#1B0737;
+  --pink:#FDB2FF;
+  --font-display:"Oranienbaum","PF Expo",Georgia,serif;
+  --font-text:"Manrope","Silpo Text",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:dark;
+}
+html,body{min-height:100%}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-text);font-size:14px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px;
+  background-image:radial-gradient(120% 70% at 30% 0%,#1F0A4A 0%,transparent 60%);}
+.stage{display:flex;gap:40px;justify-content:center;align-items:flex-start;flex-wrap:wrap;max-width:1100px;margin:0 auto}
+.phone-wrap{position:relative;flex:0 0 auto}
+.phone{position:absolute;left:0;top:0;width:393px;height:852px;transform-origin:0 0;border-radius:47px;overflow:hidden;
+  background:#000;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 30px 80px -20px rgba(80,30,200,.45);touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.phone img{position:absolute;display:block;max-width:none;pointer-events:none;-webkit-user-drag:none}
+.phone img[hidden]{display:none}
+.layer{position:absolute;left:0;top:0;width:0;height:0}
+#world,#ruler{will-change:transform}
+.idol{position:absolute;top:0;width:289px;height:0}
+.forming{position:absolute;left:0;top:0;width:289px;height:0;transition:opacity .5s ease}
+.forming.off{opacity:0}
+.grow{position:absolute;overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 24px),transparent);mask-image:linear-gradient(to bottom,#000 calc(100% - 24px),transparent)}
+.grow .glow{position:absolute;left:0;top:0;mix-blend-mode:screen;-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+.ray{position:absolute;filter:blur(2.5px);animation:rayFlick 2.8s ease-in-out infinite}
+.pool{position:absolute;width:264px;height:34px;border-radius:50%;filter:blur(3px);animation:poolPulse 2.4s ease-in-out infinite}
+.ring{position:absolute;width:324px;height:94px;overflow:visible}
+.ring .r-glow{animation:ringPulse 2.4s ease-in-out infinite}
+.forming.flash .ring,.forming.flash .pool{animation:ringFlash .7s ease-out 1}
+.sp{position:absolute;overflow:visible;animation:twinkle var(--d,2.2s) ease-in-out var(--dl,0s) infinite}
+.sp .rays{transform-box:fill-box;transform-origin:center;animation:rayStretch var(--d,2.2s) ease-in-out var(--dl,0s) infinite}
+.sp .diag{transform-box:fill-box;transform-origin:center;animation:diagSpin calc(var(--d,2.2s)*1.6) ease-in-out var(--dl,0s) infinite}
+.sp .glare{transform-box:fill-box;transform-origin:center;animation:glare var(--d,2.2s) ease-in-out var(--dl,0s) infinite}
+.sp.dot{animation:floatUp var(--d,3s) ease-in-out var(--dl,0s) infinite}
+.forming.flash .sp{animation:burst .7s ease-out 1}
+@keyframes ringPulse{0%,100%{opacity:.62}50%{opacity:1}}
+@keyframes poolPulse{0%,100%{opacity:.78}50%{opacity:1}}
+@keyframes rayFlick{0%,100%{opacity:var(--o)}45%{opacity:calc(var(--o)*1.5)}70%{opacity:calc(var(--o)*.7)}}
+@keyframes ringFlash{0%{transform:scale(1);filter:brightness(1)}35%{transform:scale(1.12);filter:brightness(2.2)}100%{transform:scale(1);filter:brightness(1)}}
+@keyframes twinkle{0%,100%{opacity:calc(var(--o,1)*.3);transform:scale(.55)}50%{opacity:var(--o,1);transform:scale(1)}}
+@keyframes rayStretch{0%,100%{transform:scaleY(.62)}50%{transform:scaleY(1.12)}}
+@keyframes diagSpin{0%,100%{transform:rotate(-14deg);opacity:.35}50%{transform:rotate(14deg);opacity:1}}
+@keyframes glare{0%,100%{transform:scaleX(.25);opacity:.2}50%{transform:scaleX(1.25);opacity:1}}
+@keyframes floatUp{0%{opacity:0;transform:translateY(8px) scale(.7)}30%{opacity:1}100%{opacity:0;transform:translateY(-30px) scale(1)}}
+@keyframes burst{0%{transform:scale(.6);opacity:.4}40%{transform:scale(1.5);opacity:1}100%{transform:scale(1);opacity:.8}}
+.floorglow{position:absolute;left:-65.5px;top:-45px;width:420px;height:90px;border-radius:50%;mix-blend-mode:screen;animation:poolPulse 2.4s ease-in-out infinite}
+.phone:not(.floor) .floorglow{display:none}
+.lake,.meniscus{position:absolute;left:-35.5px;top:-40px;width:360px;height:80px;overflow:visible}
+.phone.floor .floorglow{left:-65.5px;top:-55px;width:420px;height:110px}
+.phone:not(.floor) .lake,.phone:not(.floor) .meniscus{display:none}
+.phone.floor .ring,.phone.floor .pool{display:none}
+.lake .rp{transform-box:fill-box;transform-origin:center;animation:ripple 4.2s cubic-bezier(.25,.6,.4,1) infinite}
+.lake .shim{animation:poolPulse 2.4s ease-in-out infinite}
+.meniscus{animation:poolPulse 2.4s ease-in-out infinite}
+.forming.flash .lake,.forming.flash .meniscus{animation:ringFlash .7s ease-out 1}
+@keyframes ripple{0%{transform:scale(.78);opacity:0}30%{opacity:1}100%{transform:scale(1.12);opacity:0}}
+.phone{--fc:207,188,255}
+.fill{position:absolute;display:none;pointer-events:none}
+.phone.simple.fill-band .fillband,.phone.simple.fill-bar .fillbar,.phone.simple.fill-bar .fillcap{display:block}
+.fillband{left:0;width:40px;background:linear-gradient(to right,rgba(var(--fc),.92) 0,rgba(var(--fc),.42) 28%,rgba(var(--fc),.12) 62%,rgba(var(--fc),0) 100%);-webkit-mask-image:linear-gradient(to bottom,#000 0,rgba(0,0,0,.78) 160px,rgba(0,0,0,.48) 100%);mask-image:linear-gradient(to bottom,#000 0,rgba(0,0,0,.78) 160px,rgba(0,0,0,.48) 100%)}
+.fillband::before{content:"";position:absolute;left:0;right:0;top:-1px;height:2px;background:linear-gradient(to right,#fff,rgba(255,255,255,0));box-shadow:0 0 6px rgba(var(--fc),.9)}
+.fillband::after{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,#fff,rgba(var(--fc),1) 40px,rgba(var(--fc),.75));box-shadow:0 0 10px 2px rgba(var(--fc),.85)}
+.fillbar{left:0;width:4px;border-radius:0 2px 2px 0;background:linear-gradient(to top,rgba(var(--fc),.2),rgba(var(--fc),.95) 85%,#fff);box-shadow:0 0 10px rgba(var(--fc),.7)}
+.fillcap{left:-3px;width:10px;height:10px;margin-top:-5px;border-radius:50%;background:#fff;box-shadow:0 0 6px 2px rgba(var(--fc),.9)}
+#ruler img,.mile{transition:opacity .45s ease-out}
+.phone.simple #ruler img{transition:opacity .45s ease-out,width .35s}
+.mile{position:absolute;width:22px;height:22px;display:none;opacity:0;transition:opacity .4s;pointer-events:none}
+.phone.simple.fill-band.acc-stars .mile{display:block}
+.mile.on{opacity:1}
+.mile .sp{animation-name:mileTw}
+@keyframes mileTw{0%,100%{opacity:.7;transform:scale(.8)}50%{opacity:1;transform:scale(1.05)}}
+.motes{position:absolute;left:0;top:0;width:40px;height:220px;overflow:hidden;display:none}
+.phone.acc-motes .motes{display:block}
+.mote{position:absolute;bottom:0;border-radius:50%;background:#fff;box-shadow:0 0 4px 1px rgba(var(--fc),.95),0 0 10px rgba(var(--fc),.6);animation:moteUp var(--d) linear var(--dl) infinite}
+@keyframes moteUp{0%{transform:translateY(0);opacity:0}15%{opacity:1}80%{opacity:.85}100%{transform:translateY(-205px);opacity:0}}
+.phone.simple.fill-band.acc-long #ruler img.tk.long{width:20px!important}
+.phone.simple.fill-ticks #ruler img{opacity:.3;transition:opacity .25s,filter .25s}
+.phone.simple.fill-ticks #ruler img.lit{opacity:1;filter:drop-shadow(0 0 3px rgba(var(--fc),.95)) drop-shadow(0 0 7px rgba(var(--fc),.55))}
+/* leader: medallion at the top of the ruler, dimension bracket, golden mark on the leader's own screen */
+.lead-av{position:absolute;left:14px;padding:0;border:0;border-radius:4px;background:transparent;cursor:pointer;transition:opacity .35s,transform .35s,visibility 0s linear 0s;-webkit-tap-highlight-color:transparent}
+/* a logo that goes away (its cult is now on screen, it is the leader, or it meets a mark) fades out first and only then stops taking taps */
+/* «Лінійка з цифрами» (Figma 13551:396889): ruler at x 4, decade numbers next to the dots, logos 29×24 at x 33,
+   the corner reads [tip] 48 [emblem], the new silver mark component (77×28 at x -4) */
+/* «Зала культу» (Figma 13606:426980): the same page as the competition hall in the cult's colours. Static layers exported
+   from the six frames; the idol, ruler, marks, logos and the leader corner are the live ones, 135 px lower. --ht: 0 cult hall … 1 competition */
+.cl{position:absolute;pointer-events:none}
+.c-clogo{left:15px;top:-17.2px;width:40px;height:34px;filter:drop-shadow(0 0 5px rgba(255,205,110,.35))}
+.c-cnum{left:53px;top:-13px;width:60px;height:26px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.45))}
+.phone .cl-hit{position:absolute;border:0;padding:0;background:transparent;cursor:pointer;-webkit-tap-highlight-color:transparent;border-radius:12px}
+.phone .cl-hit:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.phone .hp{position:absolute;left:0;top:0;width:394px;height:345px;pointer-events:none;will-change:transform,opacity}
+.phone .cp{left:0;top:0;width:393px;height:312.5px;will-change:transform,opacity}
+#ctopCard{transform-origin:196px 118px}
+/* both titles share one slot: the old one rolls up out of it while the new one rolls in from below, like a drum */
+#titleBand{position:absolute;left:82px;top:60px;width:238px;height:52px;overflow:hidden;pointer-events:none}
+#cseason{transform-origin:85px 19px}
+#hShine{-webkit-mask-image:url(data:image/webp;base64,@@FILE:a/header.webp@@);mask-image:url(data:image/webp;base64,@@FILE:a/header.webp@@);-webkit-mask-size:394px 345px;mask-size:394px 345px;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  clip-path:inset(60px 74px 233px 82px);background:linear-gradient(100deg,rgba(255,236,190,0) 42%,rgba(255,226,150,.95) 50%,rgba(255,236,190,0) 58%) no-repeat;background-size:300% 100%;opacity:0}
+#wipeRing{mix-blend-mode:screen;visibility:hidden}
+/* the chest's flash: a white-hot core in rich gold (not a washed-out yellow) and a four-ray glint, added light */
+#flare{left:63px;top:200px;width:260px;height:260px;border-radius:50%;mix-blend-mode:screen;opacity:0;
+  background:radial-gradient(circle,#fffaf0 0 5%,rgba(255,236,190,.98) 10%,rgba(255,198,77,.9) 20%,rgba(245,166,35,.6) 33%,rgba(214,120,20,.28) 48%,rgba(190,90,10,0) 68%)}
+#flareRays{left:-7px;top:180px;width:400px;height:300px;mix-blend-mode:screen;opacity:0;
+  background:linear-gradient(90deg,rgba(255,190,70,0) 8%,rgba(255,214,120,.85) 46%,#fff8e6 50%,rgba(255,214,120,.85) 54%,rgba(255,190,70,0) 92%) center/100% 3px no-repeat,
+    linear-gradient(0deg,rgba(255,190,70,0) 12%,rgba(255,214,120,.8) 46%,#fff8e6 50%,rgba(255,214,120,.8) 54%,rgba(255,190,70,0) 88%) center/3px 100% no-repeat,
+    radial-gradient(closest-side,rgba(255,206,100,.35),rgba(255,206,100,0)) center/120px 120px no-repeat}
+#burst svg{position:absolute;left:0;top:0;width:var(--s);height:var(--s);margin:calc(var(--s) / -2) 0 0 calc(var(--s) / -2);overflow:visible;filter:drop-shadow(0 0 4px rgba(255,220,150,.95))}
+#cgold{position:absolute;left:-15px;width:114px;height:47px;pointer-events:none;opacity:0}
+.cpn{position:absolute;width:44px;height:22px;pointer-events:none;transition:opacity .45s ease-out}
+.phone .cpn{display:none}
+.phone.ruler-num .cpn{display:block}
+.phone.ruler-num .c-num{left:20px;top:-11.5px;width:26px;height:23px}
+.phone.ruler-num .c-logo{left:42px}
+.lead-av.stk img{backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.lead-av.off{visibility:hidden;pointer-events:none;transition:opacity .35s,transform .35s,visibility 0s linear .35s}
+.lead-av img{position:absolute!important;left:-3.73px;top:-3.73px;width:35.47px;height:30.8px;opacity:.85;filter:drop-shadow(0 3px 6px rgba(0,0,0,.28))}   /* 28×23.3 box (2 px smaller than Figma's 30×25) + the export's margin */
+.lead-av:focus-visible{outline:2px solid #fff;outline-offset:2px}
+#leaderLight{position:absolute;left:0;top:0;width:1000px;height:852px;pointer-events:none;opacity:0}
+#leaderLight svg{opacity:var(--beamA,1)}
+.phone.light-top .au-spot{display:none!important}                /* статичну пляму замінює живий прожектор */
+.phone:not(.light-top) #leaderLight{display:none}
+.alpha-row{display:flex;align-items:center;gap:12px;margin:4px 0 2px}
+.alpha-row input{flex:1;accent-color:#CFBCFF}
+.alpha-row output{min-width:44px;text-align:right;font-variant-numeric:tabular-nums}
+#leadLayer{position:absolute;left:0;top:0;width:393px;height:852px;pointer-events:none}
+.rdot{position:absolute;width:4px;height:4px;border-radius:50%;background:linear-gradient(to bottom,#fff,#b5b5b5);transition:opacity .45s ease-out;pointer-events:none}
+.lsign{position:absolute;left:0;width:0;height:0;transition:opacity .35s}
+.lplate{position:absolute;left:0;top:-34px;width:72px;height:68px;overflow:hidden;pointer-events:none;-webkit-mask-image:linear-gradient(to right,#000 61px,transparent 70px);mask-image:linear-gradient(to right,#000 61px,transparent 70px)}
+.lplate img{position:absolute!important;left:-24.2px;top:13.25px;width:127.5px;height:51px;max-width:none}
+.medal{position:absolute;left:54px;top:-15px;width:30px;height:30px;border:0;padding:0;border-radius:50%;background:transparent;cursor:pointer;pointer-events:auto;transition:opacity .35s}
+.medal .m-face{position:absolute;inset:0;border-radius:50%;overflow:hidden;box-shadow:0 0 0 1.5px #F7D57E,0 0 0 2.5px rgba(122,78,14,.45),0 0 8px 2px rgba(255,205,110,.4),0 2px 6px rgba(0,0,0,.45)}
+.medal .m-face img{position:absolute!important;left:-9%;top:-9%;width:118%;height:118%;max-width:none}
+.medal:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.lsign .llogo{position:absolute;display:none;pointer-events:none;filter:drop-shadow(0 0 6px rgba(255,205,110,.55)) drop-shadow(0 2px 3px rgba(0,0,0,.5))}
+.lgold,.lglogo{position:absolute;display:none;pointer-events:none}
+.lgold{left:-23.2px;top:-23.33px;width:96.7px;height:48.5px}
+.lglogo{filter:drop-shadow(0 1px 1px rgba(30,15,0,.75)) drop-shadow(0 0 4px rgba(255,205,110,.35))}
+.phone.sign-top .lsign .medal,.phone.sign-end .lsign .medal,.phone.sign-pin .lsign .medal{opacity:0;pointer-events:none}
+.phone.sign-top .lsign .llogo,.phone.sign-end .lsign .llogo,.phone.sign-pin .lsign .llogo{display:block}
+.phone.sign-pin .lplate{width:84px;-webkit-mask-image:linear-gradient(to right,#000 78px,transparent 81px);mask-image:linear-gradient(to right,#000 78px,transparent 81px)}
+.phone.sign-pin .lsign .llogo{filter:drop-shadow(0 0 4px rgba(255,205,110,.45)) drop-shadow(0 1px 2px rgba(0,0,0,.5))}
+.phone.sign-end .lplate{-webkit-mask-image:linear-gradient(to right,#000 52px,transparent 58px);mask-image:linear-gradient(to right,#000 52px,transparent 58px)}
+
+/* free-standing leader signs: flag / medallion on a chain / record line (+ gold number in Nyght Serif) */
+.fx{position:absolute;pointer-events:none}
+.phone .fx{display:none}
+.phone.sign-flag .fx.v-flag,.phone.sign-chain .fx.v-chain,.phone.sign-line .fx.v-line,
+.phone.sign-flag .fx.v-num,.phone.sign-chain .fx.v-num,.phone.sign-line .fx.v-num,
+.phone.sign-flag .fx.v-emb,.phone.sign-line .fx.v-emb,
+.phone.sign-tick .fx.v-tick,.phone.sign-tick .fx.v-num,.phone.sign-tick .fx.v-emb,
+.phone.sign-plate .fx.v-plate,.phone.sign-plate .fx.v-num,.phone.sign-plate .fx.v-emb{display:block}
+.p-plate{left:-24.2px;top:-20.75px;width:120.5px;height:51px}
+.phone.sign-flag .lplate,.phone.sign-chain .lplate,.phone.sign-line .lplate,.phone.sign-tick .lplate,.phone.sign-plate .lplate{display:none}
+.phone.sign-flag .lsign .medal,.phone.sign-line .lsign .medal,.phone.sign-tick .lsign .medal,.phone.sign-plate .lsign .medal{opacity:0;pointer-events:none}
+.phone.sign-plate .v-num{filter:drop-shadow(0 1px 1px rgba(20,10,0,.8))}
+.phone.sign-plate .v-emb{filter:drop-shadow(0 1px 1px rgba(20,10,0,.8)) drop-shadow(0 0 3px rgba(255,205,110,.35))}
+.t-tick{left:14px;top:-1px;width:12px;height:2px;border-radius:1px;background:linear-gradient(to right,#FFF6D8,#F2C860);box-shadow:0 0 5px 1px rgba(255,205,110,.7)}
+.phone.sign-chain .lsign .medal{left:56px;top:-15px}
+.f-pole{left:9px;top:-31px;width:2px;height:32px;border-radius:1px;background:linear-gradient(to bottom,#FFF3C4,#E9B44C 45%,#9C6A16);box-shadow:0 0 4px rgba(255,205,110,.5)}
+.f-ball{left:7px;top:-36px;width:6px;height:6px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFFBE6,#F2C860 55%,#A8761A);box-shadow:0 0 4px rgba(255,205,110,.6)}
+.f-cloth{left:11px;top:-31px;width:46px;height:24px;overflow:visible;filter:drop-shadow(0 2px 3px rgba(0,0,0,.45));transform-origin:0 50%;animation:flagWave 3.6s ease-in-out infinite}
+@keyframes flagWave{0%,100%{transform:skewY(0) scaleX(1)}50%{transform:skewY(-2.5deg) scaleX(.97)}}
+.c-tick{left:14px;top:-1px;width:12px;height:2px;border-radius:1px;background:linear-gradient(to right,#FFF3C4,#E9B44C);box-shadow:0 0 4px rgba(255,205,110,.55)}
+.c-chain{left:19px;top:-4px;width:38px;height:8px;overflow:visible;filter:drop-shadow(0 1px 1px rgba(0,0,0,.5))}
+.r-line{left:10px;top:-1px;width:92px;height:2px;border-radius:1px 0 0 1px;background:linear-gradient(to right,#FFF3C4 0,#F2C860 40%,rgba(242,200,96,.55) 62%,rgba(242,200,96,.18) 82%,rgba(242,200,96,0) 100%);filter:drop-shadow(0 0 2.5px rgba(255,200,95,.7))}   /* glow follows the line's own fade, so the right end melts into the background */
+.phone .fx.r-cap{display:none!important}
+.v-emb{filter:drop-shadow(0 0 4px rgba(255,205,110,.45)) drop-shadow(0 1px 2px rgba(0,0,0,.55))}
+.v-num{filter:drop-shadow(0 1px 2px rgba(0,0,0,.65)) drop-shadow(0 0 5px rgba(255,200,95,.25))}
+@media (prefers-reduced-motion:reduce){.f-cloth{animation:none}}
+/* leader's idol: warm halo, soft rays and floating bokeh behind the head, glints on it */
+.aura,.glint{position:absolute;width:0;height:0;pointer-events:none;display:none}
+.idol.is-lead .aura,.idol.is-lead .glint{display:block}
+.au-glow{position:absolute;left:calc(var(--w) * -1.1);top:calc(var(--h) * -1.65);width:calc(var(--w) * 2.2);height:calc(var(--h) * 3.1);border-radius:50%;background:radial-gradient(closest-side,rgba(255,204,140,.62),rgba(255,170,90,.42) 32%,rgba(242,128,72,.2) 56%,rgba(200,90,90,.07) 78%,rgba(200,90,90,0));animation:auPulse 3.6s ease-in-out infinite}
+@keyframes auPulse{0%,100%{opacity:.78;transform:scale(.97)}50%{opacity:1;transform:scale(1.04)}}
+.au-rays{position:absolute;left:calc(var(--w) * -1.15);top:calc(var(--h) * -2.1);width:calc(var(--w) * 2.3);height:calc(var(--h) * 2.6);transform-origin:50% 100%;
+  background:repeating-conic-gradient(from -90deg at 50% 100%,rgba(255,214,160,0) 0deg 2.2deg,rgba(255,214,160,.13) 4.2deg,rgba(255,214,160,0) 6.2deg 9deg);filter:blur(1.5px);
+  -webkit-mask-image:radial-gradient(ellipse 50% 100% at 50% 100%,#000 25%,rgba(0,0,0,.5) 55%,transparent 82%);mask-image:radial-gradient(ellipse 50% 100% at 50% 100%,#000 25%,rgba(0,0,0,.5) 55%,transparent 82%);
+  animation:auRays 7s ease-in-out infinite}
+@keyframes auRays{0%,100%{transform:rotate(-2.5deg);opacity:.7}50%{transform:rotate(2.5deg);opacity:1}}
+.au-orb{position:absolute;width:var(--s);height:var(--s);margin:calc(var(--s) / -2) 0 0 calc(var(--s) / -2);border-radius:50%;
+  background:radial-gradient(circle,#fff 0 5%,rgba(255,246,222,.95) 9%,rgba(255,216,165,.5) 22%,rgba(255,192,135,.18) 44%,rgba(255,190,130,0) 70%);
+  animation:auOrb var(--d) ease-in-out var(--dl) infinite}
+.au-orb.ring{background:radial-gradient(circle,#fff 0 4%,rgba(255,246,222,.9) 7%,rgba(255,216,165,.35) 16%,rgba(255,200,150,.12) 40%,rgba(255,200,150,.06) 62%,rgba(255,200,150,0) 70%);box-shadow:inset 0 0 0 1px rgba(255,230,205,.2)}
+@keyframes auOrb{0%,100%{transform:translateY(0) scale(.86);opacity:.45}50%{transform:translateY(calc(var(--fy) * -1px)) scale(1.06);opacity:1}}
+.gl-spk{position:absolute;width:var(--s);height:var(--s);margin:calc(var(--s) / -2) 0 0 calc(var(--s) / -2);overflow:visible;opacity:0;filter:drop-shadow(0 0 3px rgba(255,226,160,.95));animation:glTw var(--d) ease-in-out var(--dl) infinite}
+@keyframes glTw{0%,100%{opacity:0;transform:scale(.2) rotate(0)}45%{opacity:1;transform:scale(1) rotate(30deg)}70%{opacity:.25;transform:scale(.5) rotate(55deg)}}
+.au-orb,.au-glow,.au-rays{display:none}   /* the leader now has only the spotlight: no bokeh, halo or rays */
+.phone .idol.is-lead .glint{display:none}   /* nor the sparkles on the head */
+/* spotlight on the leader (PNG from the leader_light Lottie, 393×852 screen overlay): it belongs to the leader's idol and
+   sits where the screen frame is when that idol is centred; fades in and out with the leadership, breathes slowly */
+.phone .au-spot{position:absolute;left:-58.5px;width:393px;height:852px;opacity:0;pointer-events:none;transition:opacity .6s ease;
+  transform-origin:50% 0}
+.phone .idol.is-lead .au-spot{opacity:var(--ht,1);animation:spotBreath 6s ease-in-out infinite}
+@keyframes spotBreath{0%,100%{filter:brightness(1);transform:scaleX(1)}50%{filter:brightness(.82);transform:scaleX(1.035)}}
+@media (prefers-reduced-motion: reduce){.au-glow,.au-rays,.au-orb,.gl-spk{animation:none}.gl-spk{opacity:.8}.phone .idol.is-lead .au-spot{animation:none}}
+#mark{transition:filter .4s}
+/* the leader's own mark: bright gold (same as the record line), slow glow, a light sweep and sparks flying off it */
+@keyframes markGlow{0%,100%{filter:drop-shadow(0 0 0 rgba(255,205,110,0))}50%{filter:drop-shadow(0 0 5px rgba(255,205,110,.5))}}
+#markFx{position:absolute;left:-24.2px;width:127.5px;height:51px;pointer-events:none;display:none}
+.phone.mine-lead #markFx{display:block}
+#markFx .shine{display:none;position:absolute;inset:0;-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;background:linear-gradient(105deg,rgba(255,248,220,0) 42%,rgba(255,248,220,.9) 50%,rgba(255,248,220,0) 58%) no-repeat;background-size:300% 100%;mix-blend-mode:screen;animation:markShine 4.2s ease-in-out infinite}
+@keyframes markShine{0%{background-position:100% 0}45%,100%{background-position:0% 0}}
+#markFx .mspk{position:absolute;width:var(--s);height:var(--s);margin:calc(var(--s) / -2) 0 0 calc(var(--s) / -2);opacity:0;overflow:visible;filter:drop-shadow(0 0 2px rgba(255,214,120,.95));animation:mspk var(--d) ease-out var(--del) infinite}
+@keyframes mspk{0%{opacity:0;transform:translate(0,0) scale(.2) rotate(0deg)}18%{opacity:1;transform:translate(calc(var(--dx) * .2),calc(var(--dy) * .2)) scale(1) rotate(20deg)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.3) rotate(80deg)}}
+@media (prefers-reduced-motion: reduce){.phone.mine-lead #mark{animation:none;filter:drop-shadow(0 0 5px rgba(255,205,110,.55))}#markFx{display:none!important}}
+.lead-hidden{opacity:0!important}
+#modeSeg,#fillSeg,#accWrap,#rulerWrap,#signWrap{display:none!important}
+/* checkpoint variant, as in the Figma frame «До вибору культу» (13440:366920): ruler at x 8, labels «10 / дм» 12 px,
+   silver logos in 27×22 boxes at x 33, leader sign from x 8 */
+.rlabel{position:absolute;width:67px;height:30px;pointer-events:none;transition:opacity .45s ease-out}
+.phone .rlabel{display:none}   /* .phone img would otherwise show them */
+.phone.ruler-cp .rlabel{display:block}
+.phone.ruler-cp .rdot{display:none}
+.phone.ruler-cp #ruler .tk{margin-left:-6px}
+.phone.ruler-cp .lsign{margin-left:-2px}
+/* the leader sign on the ruler is a button too: tap it to fly to the leader, like the silver logos */
+.lhit{position:absolute;left:6px;padding:0;border:0;border-radius:6px;background:transparent;cursor:pointer;pointer-events:auto;-webkit-tap-highlight-color:transparent}
+.lhit:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.lead-hidden .lhit{pointer-events:none;visibility:hidden}
+.phone.sign-top .lhit,.phone.sign-end .lhit,.phone.sign-pin .lhit{display:none}
+/* «куточок» (Figma 13449:376057): the leader's gold mark peeks in from the left edge with the gold logo and «48 дм» beside it;
+   on the leader's own screen it slides out to the full mark, logo and text fade, the flourish appears */
+.phone.sign-corner .fx.v-corner{display:block}
+.phone.sign-corner .lplate{display:none}
+.phone.sign-corner .lsign .medal{opacity:0;pointer-events:none}
+.c-slide{left:0;top:0;width:0;height:0;will-change:transform}
+.phone .c-slide img{position:absolute}
+.c-plate{left:-24.2px;top:-25.25px;width:127.5px;height:61px}
+.c-flour{left:58.82px;top:-10px;width:41px;height:24px;opacity:0}
+.c-logo{left:17px;top:-17.2px;width:40px;height:34px;filter:drop-shadow(0 0 5px rgba(255,205,110,.35))}
+.c-num{left:56.5px;top:-13px;width:60px;height:26px;filter:drop-shadow(0 1px 2px rgba(0,0,0,.45))}
+.phone.mine-lead .c-slide{animation:markGlow 2.8s ease-in-out infinite}
+@media (prefers-reduced-motion: reduce){.phone.mine-lead .c-slide{animation:none;filter:drop-shadow(0 0 5px rgba(255,205,110,.55))}}
+.rdt{width:14px;height:16px}
+.crown{position:absolute;left:112.5px;width:64px;height:40px;display:none;pointer-events:none;filter:drop-shadow(0 0 6px rgba(255,200,95,.55)) drop-shadow(0 2px 2px rgba(60,30,0,.45));transform-origin:50% 100%;animation:crownBob 3.2s ease-in-out infinite}
+.crown.on{display:block}
+@keyframes crownBob{0%,100%{transform:translateY(0) rotate(-7deg)}50%{transform:translateY(-3px) rotate(-4deg)}}
+.names{position:absolute;left:117px;top:158px;width:158px;height:44px;overflow:hidden}
+.navbtn{position:absolute;top:166px;width:50px;height:50px;border:0;padding:0;background:transparent;border-radius:50%;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.navbtn::after{content:"";position:absolute;inset:6px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.28),transparent 70%);opacity:0;transition:opacity .15s}
+.navbtn:active::after{opacity:1}
+.navbtn:focus-visible{outline:2px solid var(--accent);outline-offset:-4px}
+#prev{left:71px}#next{left:272px}
+
+.panel{flex:1 1 300px;max-width:410px;min-width:0;display:flex;flex-direction:column;gap:20px;padding-top:8px}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.panel h1{font-family:var(--font-display);font-weight:400;font-size:40px;line-height:1;letter-spacing:-.01em;margin:6px 0 0;text-wrap:balance}
+.panel p{margin:0;color:var(--muted);max-width:62ch}
+.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.list li{border-bottom:1px solid var(--line)}
+.list button{all:unset;box-sizing:border-box;display:grid;grid-template-columns:12px 1fr auto;align-items:center;gap:12px;width:100%;padding:11px 4px;cursor:pointer;border-radius:6px}
+.list button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.list .sw{width:10px;height:10px;border-radius:50%}
+.list .nm{font-size:15px}
+.list .hv{font-variant-numeric:tabular-nums;color:var(--muted);font-size:14px}
+.list li[aria-current="true"] .nm{color:var(--fg);font-weight:600}
+.list li[aria-current="true"] .hv{color:var(--fg)}
+.list li[aria-current="true"] button{background:var(--surface-2)}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+.btn{font:600 14px/1 var(--font-text);border-radius:999px;padding:12px 18px;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--fg)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn:disabled{opacity:.45;cursor:default}
+.btn:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
+.seg{display:inline-flex;flex-wrap:wrap;gap:4px;padding:4px;border-radius:999px;background:var(--surface);border:1px solid var(--line);align-self:flex-start}
+.seg button{font:600 13px/1 var(--font-text);color:var(--muted);background:transparent;border:0;border-radius:999px;padding:10px 14px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.seg button:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
+.seg[hidden]{display:none}
+#fillSeg{margin-top:-10px}
+#fillSeg button,#accSeg button{padding:8px 12px;font-size:12.5px}
+#signWrap{display:flex;flex-direction:column;gap:8px}
+#signSeg button{padding:8px 12px;font-size:12.5px}
+#accWrap{display:flex;flex-direction:column;gap:8px;margin-top:-6px}
+#accWrap[hidden]{display:none}
+.seglabel{font-size:12px;color:var(--muted)}
+.note{font-size:12.5px;color:var(--muted);border-left:2px solid var(--line);padding-left:12px;border-radius:0}
+.note b{color:var(--fg);font-weight:600}
+@media (max-width:760px){.stage{gap:28px}.panel{max-width:440px;flex-basis:100%}}
+@media (prefers-reduced-motion:reduce){.crown,.mote,.lake .rp,.lake .shim,.meniscus,.floorglow,.ray,.pool,.ring .r-glow,.sp,.sp .rays,.sp .diag,.sp .glare{animation:none!important}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs id="defs">
+    <linearGradient id="gGlare" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+    <linearGradient id="gBack" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="94"><stop offset="0" stop-color="#fff"/><stop offset=".44" stop-color="#fff"/><stop offset=".5" stop-color="#000"/><stop offset="1" stop-color="#000"/></linearGradient>
+    <linearGradient id="gFront" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="94"><stop offset="0" stop-color="#000"/><stop offset=".44" stop-color="#000"/><stop offset=".5" stop-color="#fff"/><stop offset="1" stop-color="#fff"/></linearGradient>
+    <mask id="mBack" maskUnits="userSpaceOnUse" x="0" y="0" width="324" height="94"><rect width="324" height="94" fill="url(#gBack)"/></mask>
+    <mask id="mFront" maskUnits="userSpaceOnUse" x="0" y="0" width="324" height="94"><rect width="324" height="94" fill="url(#gFront)"/></mask>
+    <filter id="fRing" x="-20%" y="-150%" width="140%" height="400%"><feGaussianBlur stdDeviation="4"/></filter>
+    <filter id="fB2" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2"/></filter>
+    <filter id="fB1" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="1.25"/></filter>
+    <radialGradient id="gMspk"><stop offset="0" stop-color="#FFFDF2"/><stop offset=".55" stop-color="#FFE7A0"/><stop offset="1" stop-color="#F2C860"/></radialGradient>
+    <filter id="fCore" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="1.6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+</svg>
+
+<main class="stage">
+  <div class="phone-wrap" id="phoneWrap">
+    <div class="phone" id="phone" role="region" aria-label="Прототип екрана Зали Змагань">
+      <img src="data:image/webp;base64,@@FILE:a/bg.webp@@" alt="" style="left:0;top:0;width:393px;height:852px">
+      <div class="layer" id="floorL">
+        <img id="floor0" class="floor" src="data:image/webp;base64,@@FILE:a/floor_wrap.webp@@" alt="" style="left:-450px;top:-691px;width:3371px;height:1034px">
+      </div>
+      <div class="cl" id="cultBack" style="left:0;top:0;width:393px;height:852px">
+        <img id="cbg" src="data:image/webp;base64,@@FILE:a/cbg_0.webp@@" alt="" style="left:0;top:0;width:393px;height:852px">
+        <img id="cgrad" src="data:image/webp;base64,@@FILE:a/cgrad.webp@@" alt="" style="left:0;top:0;width:393px;height:852px">
+      </div>
+      <div class="layer" id="world"></div>
+      <div id="leaderLight" aria-hidden="true"></div>
+      <div class="layer" id="ruler"></div>
+      <img id="ovl" src="data:image/png;base64,@@FILE:a/overlay.png@@" alt="" style="left:0;top:0;width:392px;height:324px">
+      <img id="mark" src="data:image/png;base64,@@FILE:a/mark_22.png@@" alt="" style="left:-24.2px;width:127.5px;height:61px">
+      <img id="cgold" src="data:image/png;base64,@@FILE:a/cgold_44.png@@" alt="">
+      <div id="leadLayer"></div>
+      <div id="markFx" aria-hidden="true"><div class="shine"></div></div>
+      <div class="cl" id="wipeRing" aria-hidden="true" style="left:0;top:0;width:393px;height:852px"></div>
+      <div class="cl" id="burst" aria-hidden="true" style="left:193px;top:330px;width:0;height:0"></div>
+      <img id="wdg" src="data:image/webp;base64,@@FILE:a/widget.webp@@" alt="" style="left:171.9px;top:589.85px;width:221.5px;height:253px">
+      <img class="hp" id="hBar" src="data:image/webp;base64,@@FILE:a/header.webp@@" alt="" style="clip-path:inset(0 0 285px 0)">
+      <img class="hp" id="hL" src="data:image/webp;base64,@@FILE:a/header.webp@@" alt="" style="clip-path:inset(60px 312px 233px 0)">
+      <img class="hp" id="hR" src="data:image/webp;base64,@@FILE:a/header.webp@@" alt="" style="clip-path:inset(60px 0 233px 316px)">
+      <div id="titleBand" aria-hidden="true">
+        <img id="ctopTitle" src="data:image/webp;base64,@@FILE:a/ctop_0.webp@@" alt="" style="left:-82px;top:-60px;width:393px;height:312.5px;clip-path:inset(60px 73px 200px 82px)">
+        <img id="hTitle" src="data:image/webp;base64,@@FILE:a/header.webp@@" alt="" style="left:-82px;top:-60px;width:394px;height:345px;clip-path:inset(60px 74px 233px 82px)">
+      </div>
+      <div class="hp" id="hShine" aria-hidden="true"></div>
+      <img class="hp" id="hTimer" src="data:image/webp;base64,@@FILE:a/header.webp@@" alt="" style="clip-path:inset(112px 0 203px 0)">
+      <img class="hp" id="hArrL" src="data:image/webp;base64,@@FILE:a/header.webp@@" alt="" style="clip-path:inset(150px 197px 115px 0)">
+      <img class="hp" id="hArrR" src="data:image/webp;base64,@@FILE:a/header.webp@@" alt="" style="clip-path:inset(150px 0 115px 197px)">
+      <div class="names" id="names"></div>
+      <div class="layer" id="contrib"></div>
+      <img class="cl cp" id="ctopBar" src="data:image/webp;base64,@@FILE:a/ctop_0.webp@@" alt="" style="clip-path:inset(0 0 252.5px 0)">
+      <img class="cl cp" id="ctopR" src="data:image/webp;base64,@@FILE:a/ctop_0.webp@@" alt="" style="clip-path:inset(60px 0 196.5px 316px)">
+      <img class="cl cp" id="ctopCard" src="data:image/webp;base64,@@FILE:a/ctop_0.webp@@" alt="" style="clip-path:inset(112px 0 0 0)">
+      <img class="cl" id="cseason" src="data:image/webp;base64,@@FILE:a/cseason.webp@@" alt="" style="left:108px;top:311px;width:170px;height:90px">
+      <div class="cl" id="flare" aria-hidden="true"></div>
+      <div class="cl" id="flareRays" aria-hidden="true"></div>
+      <img class="cl" id="crate" src="data:image/webp;base64,@@FILE:a/crate_0.webp@@" alt="" style="left:32px;top:712px;width:330px;height:115px">
+      <img class="cl" id="cback" src="data:image/webp;base64,@@FILE:a/cback.webp@@" alt="" style="left:0;top:60px;width:72px;height:56px">
+      <button class="cl-hit" id="toComp" type="button" aria-label="До змагання Їдолів" style="left:104px;top:300px;width:178px;height:104px"></button>
+      <button class="cl-hit" id="toCult" type="button" aria-label="Назад, до зали культу" style="left:14px;top:62px;width:60px;height:52px"></button>
+      <button class="navbtn" id="prev" type="button" aria-label="Попередній культ"></button>
+      <button class="navbtn" id="next" type="button" aria-label="Наступний культ"></button>
+    </div>
+  </div>
+
+  <aside class="panel" aria-label="Керування прототипом">
+    <div>
+      <div class="eyebrow">Чистовий прототип · Зала Змагань</div>
+      <h1>Зала культу і Зала Змагань</h1>
+    </div>
+    <div class="seg" id="modeSeg" role="group" aria-label="Логіка росту">
+      <button type="button" id="mStone" aria-pressed="true">Ріст із камінця</button>
+      <button type="button" id="mFloor" aria-pressed="false">Ріст із підлоги</button>
+      <button type="button" id="mSimple" aria-pressed="false">Проста + заливка</button>
+    </div>
+    <div class="seg" id="fillSeg" role="group" aria-label="Стиль заливки лінійки" hidden>
+      <button type="button" data-fill="none" aria-pressed="true">Без заливки</button>
+      <button type="button" data-fill="band" aria-pressed="false">Рідина</button>
+      <button type="button" data-fill="bar" aria-pressed="false">Стовпчик</button>
+    </div>
+    <div id="accWrap" hidden>
+      <div class="seglabel" id="accLabel">Як показати досягнуту висоту (можна кілька)</div>
+      <div class="seg" id="accSeg" role="group" aria-labelledby="accLabel">
+        <button type="button" data-acc="stars" aria-pressed="true">Зорі</button>
+        <button type="button" data-acc="fog" aria-pressed="true">Туман</button>
+        <button type="button" data-acc="motes" aria-pressed="false">Іскри</button>
+        <button type="button" data-acc="long" aria-pressed="false">Довші поділки</button>
+      </div>
+    </div>
+    <div id="numWrap">
+      <div class="seglabel" id="numLabel">Лінійка</div>
+      <div class="seg" id="numSeg" role="group" aria-labelledby="numLabel">
+        <button type="button" data-num="0" aria-pressed="true">Без цифр</button>
+        <button type="button" data-num="1" aria-pressed="false">З цифрами (Figma)</button>
+      </div>
+    </div>
+    <div id="hallWrap">
+      <div class="seglabel" id="hallLabel">Екран</div>
+      <div class="seg" id="hallSeg" role="group" aria-labelledby="hallLabel">
+        <button type="button" data-hall="0" aria-pressed="true">Зала культу</button>
+        <button type="button" data-hall="1" aria-pressed="false">Зала Змагань</button>
+      </div>
+    </div>
+    <div id="myWrap">
+      <div class="seglabel" id="myLabel">Мій культ</div>
+      <div class="seg" id="mySeg" role="group" aria-labelledby="myLabel">
+        <button type="button" data-my="2" aria-pressed="true">Бурбоністи</button>
+        <button type="button" data-my="3" aria-pressed="false">Томатисти</button>
+        <button type="button" data-my="0" aria-pressed="false">Лососянці</button>
+        <button type="button" data-my="5" aria-pressed="false">Багетоністи</button>
+        <button type="button" data-my="4" aria-pressed="false">Піцаносці</button>
+        <button type="button" data-my="1" aria-pressed="false">Карамеліти</button>
+      </div>
+    </div>
+    <div id="scWrap">
+      <div class="seglabel" id="scLabel">Приклад висот</div>
+      <div class="seg" id="scSeg" role="group" aria-labelledby="scLabel">
+        <button type="button" data-sc="now" aria-pressed="true">Розпал змагань</button>
+        <button type="button" data-sc="start" aria-pressed="false">Початок змагань</button>
+      </div>
+    </div>
+    <div id="leadWrap" hidden>
+      <div class="seglabel" id="leadLabel">Хто лідер (приклад)</div>
+      <div class="seg" id="leadSeg" role="group" aria-labelledby="leadLabel">
+        <button type="button" data-lead="1" aria-pressed="true">Карамеліти</button>
+        <button type="button" data-lead="0" aria-pressed="false">Лососянці</button>
+        <button type="button" data-lead="2" aria-pressed="false">Бурбоністи</button>
+        <button type="button" data-lead="5" aria-pressed="false">Багетоністи</button>
+      </div>
+    </div>
+    <div id="lightWrap">
+      <div class="seglabel" id="lightLabel">Сяйво лідера</div>
+      <div class="seg" id="lightSeg" role="group" aria-labelledby="lightLabel">
+        <button type="button" data-light="top" aria-pressed="true">Прожектор</button>
+        <button type="button" data-light="old" aria-pressed="false">Статична пляма (було)</button>
+      </div>
+    </div>
+    <div id="lightAlphaWrap">
+      <div class="seglabel">Прозорість світла</div>
+      <div class="alpha-row"><input type="range" id="beamA" min="0" max="100" step="5" value="100" aria-label="Прозорість світла"><output id="beamAv">100%</output></div>
+      <div class="seglabel">Прозорість туману</div>
+      <div class="alpha-row"><input type="range" id="fogA" min="0" max="200" step="5" value="135" aria-label="Прозорість туману"><output id="fogAv">135%</output></div>
+      <div class="seglabel">Швидкість туману</div>
+      <div class="alpha-row"><input type="range" id="fogV" min="20" max="180" step="5" value="100" aria-label="Швидкість туману"><output id="fogVv">1,0×</output></div>
+    </div>
+    <div id="rulerWrap">
+      <div class="seglabel" id="rulerLabel">Лінійка</div>
+      <div class="seg" id="rulerSeg" role="group" aria-labelledby="rulerLabel">
+        <button type="button" data-ruler="plain" aria-pressed="true">Без чекпоінтів</button>
+        <button type="button" data-ruler="cp" aria-pressed="false">Чекпоінти (як у Figma)</button>
+      </div>
+    </div>
+    <div id="signWrap">
+      <div class="seglabel" id="signLabel">Знак лідера на лінійці</div>
+      <div class="seg" id="signSeg" role="group" aria-labelledby="signLabel">
+        <button type="button" data-sign="plate" aria-pressed="false">Золота мітка</button>
+        <button type="button" data-sign="tick" aria-pressed="false">Золота поділка</button>
+        <button type="button" data-sign="flag" aria-pressed="false">Прапор</button>
+        <button type="button" data-sign="chain" aria-pressed="false">Медальйон на ланцюжку</button>
+        <button type="button" data-sign="line" aria-pressed="true">Рекордна риска</button>
+        <button type="button" data-sign="pin" aria-pressed="false">Емблема на стрілці</button>
+      </div>
+    </div>
+    <p id="intro">Гортайте Їдолів стрілками на екрані, свайпом або клавішами ← →. Мітка стоїть на місці, а камера підводить до неї верх камінця, що росте.</p>
+    <ul class="list" id="list"></ul>
+    <div class="actions">
+      <button class="btn primary" id="grow" type="button">+2 дм поточному Їдолу</button>
+      <button class="btn" id="reset" type="button">Скинути висоти</button>
+    </div>
+    <p class="note" id="note"><b>Лінійка:</b> 1 дм = 14,3 px, як крок камінців, поділки кожні 2 дм. Голова Їдола займає 10 дм, тому на рівні верху камінця лінійка показує повну висоту Їдола.</p>
+  </aside>
+</main>
+
+<script>
+(() => {
+  const S = 14.3;            // px per decimetre (stone step 143 px = 10 dm)
+  const CX = 203;            // screen x of the idol centre (as in the Figma frame)
+  const RX = 132, RY = 17;   // formation ring
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const CULTS = [
+    { name:'Лососянці',  cx:257.8,  color:'#97A1FF', h:44, head:[0,-7.1,289,189],     sw:253, nm:[115,30,20.3,9.86],   cb:128 },
+    { name:'Карамеліти', cx:649,    color:'#DA8FCD', h:24, head:[-9.24,0,307.5,200],  sw:253, nm:[133.5,32,11.34,9.86], cb:129 },
+    { name:'Бурбоністи', cx:1039,   color:'#B69EF8', h:38, head:[0,-21,289,240],      sw:253, nm:[128.5,34,13.88,7.82], cb:126 },
+    { name:'Томатисти',  cx:1430.8, color:'#F58888', h:30, head:[0,0,289,180.5],      sw:253, nm:[122,24,17.11,10.61],  cb:132.5 },
+    { name:'Піцаносці',  cx:1821.8, color:'#EAB853', h:18, head:[0,-12.92,289,198],   sw:253, nm:[114.5,30,20.74,9.86], cb:130 },
+    { name:'Багетоністи',cx:2213,   color:'#EA9B53', h:38, head:[0,0,289,185.5],      sw:254, nm:[139,25,8.66,9.86],    cb:127 },
+  ];
+  // example heights: Бурбоністи and Багетоністи share 38 dm (their logos share one slot on the ruler and take turns)
+  const START = CULTS.map(c => c.h);
+  // the hall is arranged by height: the tallest stands first, then down the ranks (equal heights keep their usual order).
+  // SLOT_CX are the six fixed places on the floor; ORD[slot] = cult, SLOT[cult] = slot. The carousel position p counts slots.
+  const SLOT_CX = CULTS.map(c => c.cx);
+  let ORD = [], SLOT = [];
+  function arrange(hs) {
+    ORD = CULTS.map((c, i) => i).sort((a, b) => hs[b] - hs[a] || a - b);
+    ORD.forEach((ci, s) => { SLOT[ci] = s; CULTS[ci].cx = SLOT_CX[s]; });
+  }
+  arrange(START);
+  // height examples: the competition in full swing (as above) and its very start, when every idol is within 4 dm of the others:
+  // Карамеліти lead by just 2 dm, three cults share 20 dm and two share 18 dm (their logos take turns on the ruler)
+  const SCEN = { now: START.slice(), start: [22, 20, 20, 18, 20, 18] };
+  let scen = 'now';
+  const HEAD_ART = [8, 51, 60.5, 9.5, 18.5, 53.5];
+  // centre and size of each head's artwork inside its image box (css px): [cx, cy, w, h]
+  const HEAD_BOX = [[155.3,95.8,182.5,176.5],[153.8,114.8,271.5,128.5],[136,114.8,189,173.5],[144,93,178,168],[147.8,105.3,191.5,174.5],[144,115.3,227,124.5]];   // where each head's artwork starts (px from the head image top, measured at the centre)
+  const N = CULTS.length;
+  const RAYS = [[-96,8,90,.5],[-52,12,130,.35],[6,10,150,.3],[58,14,120,.35],[100,8,85,.5]];
+  const STARS = [[-122,-2,16,1],[118,4,12,.9],[-96,-46,9,.8],[104,-70,8,.7],[-108,-98,6,.6],[70,-118,6,.5],[30,12,8,.9],[-30,-140,5,.4]];
+  const DOTS = [[-70,-24,3],[88,-30,3],[-118,-62,2.5],[122,-44,2.5],[50,-90,2],[-60,-110,2]];
+
+  const $ = id => document.getElementById(id);
+  const world = $('world'), ruler = $('ruler'), mark = $('mark'), namesEl = $('names'), contribEl = $('contrib');
+  const rgb = hex => [1,3,5].map(i => parseInt(hex.slice(i,i+2),16)).join(',');
+  const el = (tag, cls, css) => { const e = document.createElement(tag); if (cls) e.className = cls; if (css) e.style.cssText = css; return e; };
+  const NS = 'http://www.w3.org/2000/svg';
+  const stoneSrc = (i,k) => R(`a/s${i}_${k}.webp`);
+
+  // ---------- SVG pieces
+  const ellipsePath = (cx,cy,rx,ry) => `M${cx-rx} ${cy}a${rx} ${ry} 0 1 0 ${2*rx} 0a${rx} ${ry} 0 1 0 ${-2*rx} 0Z`;
+  const band = (k) => ellipsePath(162,47,RX,RY) + ellipsePath(162,47,RX*k,RY*k);
+  const star = (cx,cy,w,h,k) => `M${cx} ${cy-h/2}Q${cx+k} ${cy-k} ${cx+w/2} ${cy}Q${cx+k} ${cy+k} ${cx} ${cy+h/2}Q${cx-k} ${cy+k} ${cx-w/2} ${cy}Q${cx-k} ${cy-k} ${cx} ${cy-h/2}Z`;
+  const diag = (cx,cy,a,k) => `M${cx+a} ${cy-a}Q${cx+k} ${cy} ${cx+a} ${cy+a}Q${cx} ${cy+k} ${cx-a} ${cy+a}Q${cx-k} ${cy} ${cx-a} ${cy-a}Q${cx} ${cy-k} ${cx+a} ${cy-a}Z`;
+  const mixWhite = (hex,t) => { const c=[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)); return `rgb(${c.map(v=>Math.round(255+(v-255)*t)).join(',')})`; };
+  const mixDark = (hex,t) => { const c=[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)); return `rgb(${c.map(v=>Math.round(v*(1-t))).join(',')})`; };
+
+  // glossy gold crown for the leader (brand: precious metal, a cult-coloured gem)
+  let crownN = 0;
+  function crownSvg(c, w, h) {
+    const id = 'cr' + (crownN++);
+    const s = document.createElementNS(NS,'svg');
+    s.setAttribute('viewBox','0 0 64 40'); s.setAttribute('aria-hidden','true');
+    s.style.width = w + 'px'; s.style.height = h + 'px';
+    s.innerHTML = `<defs>
+        <linearGradient id="${id}g" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#FFF6C8"/><stop offset=".38" stop-color="#F4C653"/><stop offset=".75" stop-color="#C98F22"/><stop offset="1" stop-color="#8F5D10"/></linearGradient>
+        <linearGradient id="${id}b" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#FFE38A"/><stop offset=".5" stop-color="#D9A132"/><stop offset="1" stop-color="#8A5A0E"/></linearGradient>
+        <radialGradient id="${id}p" cx=".35" cy=".3" r=".75"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".45" stop-color="#FFE7A0"/><stop offset="1" stop-color="#C4881E"/></radialGradient>
+      </defs>
+      <path d="M8 30 L5 11 L19 21 L32 5 L45 21 L59 11 L56 30 Z" fill="url(#${id}g)" stroke="#7A4E0E" stroke-opacity=".55" stroke-width=".8" stroke-linejoin="round"/>
+      <path d="M11 27 L9.5 16 L19 23.5 L32 9.5 L45 23.5 L54.5 16 L53 27" fill="none" stroke="#FFF7D6" stroke-opacity=".55" stroke-width=".8" stroke-linejoin="round"/>
+      <circle cx="5" cy="10" r="3.3" fill="url(#${id}p)"/><circle cx="32" cy="4.2" r="3.6" fill="url(#${id}p)"/><circle cx="59" cy="10" r="3.3" fill="url(#${id}p)"/>
+      <rect x="6.5" y="28" width="51" height="9" rx="2.5" fill="url(#${id}b)" stroke="#7A4E0E" stroke-opacity=".5" stroke-width=".7"/>
+      <rect x="9" y="29.2" width="46" height="1.2" rx=".6" fill="#FFF3C4" opacity=".7"/>
+      <ellipse cx="32" cy="32.6" rx="4.2" ry="3.1" fill="${c.color}" stroke="#7A4E0E" stroke-opacity=".5" stroke-width=".5"/>
+      <ellipse cx="30.8" cy="31.6" rx="1.5" ry=".9" fill="#fff" opacity=".85"/>
+      <circle cx="18" cy="32.6" r="1.8" fill="#fff" opacity=".9"/><circle cx="46" cy="32.6" r="1.8" fill="#fff" opacity=".9"/>
+      <path d="M32 18.5 L33.2 23 L32 27.5 L30.8 23 Z" fill="${c.color}" opacity=".9"/>
+      <path d="M48 2 Q48.5 5.5 52 6 Q48.5 6.5 48 10 Q47.5 6.5 44 6 Q47.5 5.5 48 2 Z" fill="#fff"/>`;
+    return s;
+  }
+
+  // floor portal "Озеро світла": an opaque disc of light, the floor never shows through it
+  function lakeSvg(c, i) {
+    const s = document.createElementNS(NS,'svg');
+    s.setAttribute('class','lake'); s.setAttribute('viewBox','0 0 360 80'); s.setAttribute('aria-hidden','true');
+    // waves are soft gradient bands (no outlines): each one is a ring of light that swells outward and fades
+    const rp = d => `<ellipse class="rp" style="animation-delay:${d}s" cx="180" cy="40" rx="150" ry="30" fill="url(#rg${i})"/>`;
+    s.innerHTML = `<defs>
+        <radialGradient id="lk${i}"><stop offset="0" stop-color="#fff"/><stop offset=".5" stop-color="${mixWhite(c.color,.3)}"/><stop offset=".78" stop-color="${mixWhite(c.color,.75)}"/><stop offset=".93" stop-color="${c.color}"/><stop offset="1" stop-color="${mixWhite(c.color,.35)}"/></radialGradient>
+        <radialGradient id="ls${i}"><stop offset="0" stop-color="#fff" stop-opacity=".8"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <radialGradient id="rg${i}"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".62" stop-color="#fff" stop-opacity="0"/><stop offset=".8" stop-color="#fff" stop-opacity=".55"/><stop offset=".9" stop-color="${mixWhite(c.color,.45)}" stop-opacity=".3"/><stop offset="1" stop-color="${mixWhite(c.color,.45)}" stop-opacity="0"/></radialGradient>
+        <clipPath id="lc${i}"><ellipse cx="180" cy="40" rx="150" ry="30"/></clipPath>
+      </defs>
+      <ellipse cx="180" cy="40" rx="158" ry="36" fill="${c.color}" opacity=".85" filter="url(#fB2)"/>
+      <ellipse cx="180" cy="40" rx="150" ry="30" fill="url(#lk${i})"/>
+      <g clip-path="url(#lc${i})">
+        <ellipse class="shim" cx="160" cy="52" rx="95" ry="13" fill="url(#ls${i})"/>
+        ${rp(0)}${rp(-1.4)}${rp(-2.8)}
+      </g>`;
+    return s;
+  }
+  function meniscusSvg(c) {
+    const s = document.createElementNS(NS,'svg');
+    s.setAttribute('class','meniscus'); s.setAttribute('viewBox','0 0 360 80'); s.setAttribute('aria-hidden','true');
+    s.innerHTML = `<path d="M52 40A128 17 0 0 0 308 40" fill="none" stroke="${c.color}" stroke-width="9" opacity=".9" filter="url(#fB2)"/>
+      <path d="M52 40A128 17 0 0 0 308 40" fill="none" stroke="#fff" stroke-width="2.5" opacity=".9" filter="url(#fB1)"/>`;
+    return s;
+  }
+
+  const defs = $('defs');
+  CULTS.forEach((c,i) => {
+    defs.insertAdjacentHTML('beforeend',
+      `<radialGradient id="oZ${i}"><stop offset="0" stop-color="${c.color}" stop-opacity=".6"/><stop offset=".35" stop-color="${c.color}" stop-opacity=".22"/><stop offset="1" stop-color="${c.color}" stop-opacity="0"/></radialGradient>
+       <radialGradient id="oI${i}"><stop offset="0" stop-color="${c.color}" stop-opacity=".65"/><stop offset=".4" stop-color="${c.color}" stop-opacity=".2"/><stop offset="1" stop-color="${c.color}" stop-opacity="0"/></radialGradient>
+       <radialGradient id="oM${i}"><stop offset="0" stop-color="${c.color}" stop-opacity=".8"/><stop offset=".45" stop-color="${c.color}" stop-opacity=".25"/><stop offset="1" stop-color="${c.color}" stop-opacity="0"/></radialGradient>`);
+  });
+
+  function ringSvg(c, front) {
+    const s = document.createElementNS(NS,'svg');
+    s.setAttribute('class','ring'); s.setAttribute('viewBox','0 0 324 94'); s.setAttribute('aria-hidden','true');
+    s.innerHTML = `<g mask="url(#${front?'mFront':'mBack'})">
+      <path class="r-glow" d="${band(.78)}" fill-rule="evenodd" fill="${c.color}" opacity=".9" filter="url(#fRing)"/>
+      <path d="${band(.955)}" fill-rule="evenodd" fill="${mixWhite(c.color,.35)}"/>
+      <path d="${band(.978)}" fill-rule="evenodd" fill="#fff" opacity=".9"/></g>`;
+    return s;
+  }
+  function sparkle(i, kind, size) {
+    const s = document.createElementNS(NS,'svg');
+    s.setAttribute('class', 'sp' + (kind==='M' ? ' dot' : ''));
+    s.setAttribute('aria-hidden','true');
+    if (kind === 'Z') {
+      s.setAttribute('viewBox','0 0 48 48');
+      s.innerHTML = `<circle cx="24" cy="24" r="24" fill="url(#oZ${i})"/>
+        <rect class="glare" x="-8" y="23.5" width="64" height="1" fill="url(#gGlare)"/>
+        <g class="rays"><path d="${star(24,24,18,46,.7)}" fill="${CULTS[i].color}" opacity=".9" filter="url(#fB2)"/><path d="${star(24,24,16,46,.7)}" fill="#fff"/></g>
+        <path class="diag" d="${diag(24,24,7.5,.6)}" fill="#fff" opacity=".6"/>
+        <circle cx="24" cy="24" r="2.5" fill="#fff" filter="url(#fCore)"/>`;
+    } else if (kind === 'I') {
+      s.setAttribute('viewBox','0 0 24 24');
+      s.innerHTML = `<circle cx="12" cy="12" r="12" fill="url(#oI${i})"/>
+        <g class="rays"><path d="${star(12,12,9,20,.45)}" fill="${CULTS[i].color}" opacity=".9" filter="url(#fB1)"/><path d="${star(12,12,8,20,.45)}" fill="#fff"/></g>
+        <circle cx="12" cy="12" r="1.5" fill="#fff" filter="url(#fCore)"/>`;
+    } else {
+      s.setAttribute('viewBox','0 0 16 16');
+      s.innerHTML = `<circle cx="8" cy="8" r="8" fill="url(#oM${i})"/><circle cx="8" cy="8" r="1.5" fill="#fff" filter="url(#fCore)"/>`;
+    }
+    s.style.width = s.style.height = size + 'px';
+    return s;
+  }
+
+  // ---------- idols
+  const idols = CULTS.map((c,i) => {
+    const box = el('div','idol',`left:${c.cx-144.5}px`);
+    const head = el('img','',`left:${c.head[0]}px;width:${c.head[2]}px;height:${c.head[3]}px`);
+    head.src = R(`a/head_${i}.webp`); head.alt = '';
+    // "First on top": DOM order goes from the bottom stone up, so every upper element covers the one below it.
+    const stones = [];
+    for (let k = 1; k <= 9; k++) {
+      const s = el('img','',`left:18px;top:${-156-(k-1)*143}px;width:${c.sw}px;height:156px`);
+      s.alt = ''; s.dataset.k = k; s.hidden = true;
+      stones[k] = s; box.appendChild(s);
+    }
+    const f = el('div','forming');
+    f.appendChild(el('div','floorglow',`background:radial-gradient(closest-side,rgba(${rgb(c.color)},.5),rgba(${rgb(c.color)},.16) 60%,rgba(${rgb(c.color)},0))`));
+    f.appendChild(lakeSvg(c, i));
+    const back = ringSvg(c,false); back.style.left = (144.5-162)+'px'; back.style.top = '-47px';
+    f.appendChild(back);
+    RAYS.forEach(([dx,w,h,o]) => {
+      const r = el('div','ray',`left:${144.5+dx-w/2}px;top:${-h}px;width:${w}px;height:${h}px;--o:${o};opacity:${o};background:linear-gradient(to bottom,rgba(${rgb(c.color)},0),rgba(${rgb(c.color)},.55))`);
+      f.appendChild(r);
+    });
+    const grow = el('div','grow',`left:18px;width:${c.sw}px`);
+    const gImg = el('img','',`left:0;top:0;width:${c.sw}px;height:156px`); gImg.alt = '';
+    const glow = el('div','glow',`width:${c.sw}px;height:156px`);
+    grow.append(gImg, glow); f.appendChild(grow);
+    const pool = el('div','pool',`left:${144.5-RX}px;top:${-RY}px;background:linear-gradient(to bottom,rgba(${rgb(c.color)},0),rgba(${rgb(c.color)},.25) 50%,rgba(${rgb(c.color)},.85))`);
+    f.appendChild(pool);
+    const front = ringSvg(c,true); front.style.left = (144.5-162)+'px'; front.style.top = '-47px';
+    f.appendChild(front);
+    f.appendChild(meniscusSvg(c));
+    const spk = el('div','forming sparks');
+    let n = 0;
+    STARS.forEach(([dx,dy,sz,o]) => {
+      const big = sz >= 11.5, size = big ? sz*2.3 : sz*2.4;
+      const sp = sparkle(i, big ? 'Z' : 'I', size);
+      sp.style.left = (144.5+dx-size/2)+'px'; sp.style.top = (dy-size/2)+'px';
+      sp.style.setProperty('--o', o); sp.style.setProperty('--d', (1.8 + (n*0.37)%1.4).toFixed(2)+'s'); sp.style.setProperty('--dl', (-(n*0.53)%2).toFixed(2)+'s');
+      spk.appendChild(sp); n++;
+    });
+    DOTS.forEach(([dx,dy,r]) => {
+      const size = r*2*3.5, sp = sparkle(i,'M',size);
+      sp.style.left = (144.5+dx-size/2)+'px'; sp.style.top = (dy-size/2)+'px';
+      sp.style.setProperty('--d', (2.6 + (n*0.41)%1.2).toFixed(2)+'s'); sp.style.setProperty('--dl', (-(n*0.61)%3).toFixed(2)+'s');
+      spk.appendChild(sp); n++;
+    });
+    const crown = crownSvg(c, 64, 40); crown.setAttribute('class', 'crown');
+    const [hx, hy, hw, hh] = HEAD_BOX[i];
+    const aura = el('div','aura',`left:${c.head[0] + hx}px;--w:${hw}px;--h:${hh}px`);
+    aura.append(el('div','au-rays'), el('div','au-glow'));
+    // bokeh: [x, y] in head widths/heights from the centre, size px, float px, duration s, ring
+    [[-.78,-.62,22,7,5.2,1],[-.55,.05,12,5,4.4,0],[-.92,.35,16,6,6.1,0],[-.3,-.95,14,6,5.6,0],[.08,-1.12,20,8,6.4,1],[.42,-.9,13,5,4.8,0],
+     [.8,-.55,24,7,5.9,1],[.98,.08,12,5,4.6,0],[.66,.42,17,6,6.6,0],[-.62,-.98,10,4,4.2,0],[.3,.62,11,4,5.1,0],[-1.08,-.2,13,5,5.4,0]]
+      .forEach(([x, y, sz, fy, d, ring], k) => {
+        const o = el('div', 'au-orb' + (ring ? ' ring' : ''), `left:${(x * hw).toFixed(1)}px;top:${(y * hh).toFixed(1)}px;--s:${(sz * (ring ? 2.3 : 1.9)).toFixed(1)}px;--fy:${fy};--d:${d}s;--dl:${(-k * .73 % 4).toFixed(2)}s`);
+        aura.appendChild(o);
+      });
+    const glint = el('div','glint',`left:${c.head[0] + hx}px`);
+    [[-.4,-.22,11,2.4],[.36,-.3,9,2.9],[.06,-.44,12,3.3],[-.2,.36,8,2.6],[.44,.18,10,3.1],[-.46,.12,7,2.2]].forEach(([x, y, sz, d], k) => {
+      const g = document.createElementNS(NS, 'svg'); g.setAttribute('class', 'gl-spk'); g.setAttribute('viewBox', '0 0 24 24');
+      g.innerHTML = '<path d="M12 0C12.9 8.2 15.8 11.1 24 12C15.8 12.9 12.9 15.8 12 24C11.1 15.8 8.2 12.9 0 12C8.2 11.1 11.1 8.2 12 0Z" fill="url(#gMspk)"/>';
+      g.style.cssText = `left:${(x * hw).toFixed(1)}px;top:${(y * hh).toFixed(1)}px;--s:${sz}px;--d:${d}s;--dl:${(k * .61 % 2.4).toFixed(2)}s`;
+      glint.appendChild(g);
+    });
+    box.prepend(aura);
+    const spot = el('img', 'au-spot'); spot.src = R('a/spot.webp'); spot.alt = '';
+    box.prepend(spot);   // behind the halo, the stones and the head
+    box.append(f, head, glint, crown, spk);
+    world.appendChild(box);
+    return { box, head, stones, f, spk, crown, grow, gImg, glow, aura, glint, spot, k: -1 };
+  });
+
+  function layoutIdol(i, H) {
+    const c = CULTS[i], d = idols[i];
+    const col = H - 10;                         // stone column height in dm
+    let K = Math.floor(col / 10 + 1e-6), frac = col / 10 - K;
+    if (frac < 1e-4) frac = 0;
+    if (mode === 'simple') { K = Math.min(9, Math.max(1, Math.ceil(col / 10 - 1e-6))); frac = 0; }  // stela shows the next full decade
+    const lift = 143 * frac;
+    const forming = frac > 0 && K < 9;
+    const L = forming ? lift : 0;
+    let seam;
+    if (mode !== 'floor') {
+      // the newest stone grows out of the top of the column, under the head
+      const T = -156 - (K-1) * 143;             // top of the last full stone
+      for (let k = 1; k <= K; k++) d.stones[k].style.top = (-156 - (k-1) * 143) + 'px';
+      d.head.style.top = (T - L - 167 + c.head[1]) + 'px';
+      d.aura.style.top = d.glint.style.top = (T - L - 167 + c.head[1] + HEAD_BOX[i][1]) + 'px';
+      // the spotlight's frame top = screen top when this idol is centred (its stela top sits on the mark line)
+      if (mode === 'simple') d.spot.style.top = (-S * decade(H) - markFor(H)) + 'px';
+      d.crown.style.top = (T - L - 167 + c.head[1] + HEAD_ART[i] + 12 - 40) + 'px';
+      seam = T + 13;
+    } else {
+      // floor: stone 1 sits under the head, the newest stone K+1 rises out of the portal and lifts the column
+      for (let k = 1; k <= K; k++) d.stones[k].style.top = (-156 - L - (K-k) * 143) + 'px';
+      d.head.style.top = (-156 - L - (K-1) * 143 - 167 + c.head[1]) + 'px';
+      d.aura.style.top = d.glint.style.top = (-156 - L - (K-1) * 143 - 167 + c.head[1] + HEAD_BOX[i][1]) + 'px';
+      d.crown.style.top = (-156 - L - (K-1) * 143 - 167 + c.head[1] + HEAD_ART[i] + 12 - 40) + 'px';
+      seam = 0;
+    }
+    for (let k = 1; k <= 9; k++) {
+      const show = k <= K;
+      if (d.stones[k].hidden === show) { d.stones[k].hidden = !show; if (show && !d.stones[k].src) d.stones[k].src = stoneSrc(i,k); }
+    }
+    d.f.classList.toggle('off', !forming);
+    d.spk.classList.toggle('off', !forming);
+    if (!forming) return;
+    if (d.k !== K) {
+      d.k = K;
+      const src = stoneSrc(i, K+1);
+      d.gImg.src = src;
+      d.glow.style.webkitMaskImage = d.glow.style.maskImage = `url(${src})`;
+    }
+    d.f.style.top = d.spk.style.top = seam + 'px';
+    const fl = mode === 'floor', cc = rgb(c.color);
+    const yc = 13 + lift;                         // waterline / seam inside the clip
+    const hc = fl ? yc + 20 : lift + 25;
+    d.grow.style.top = (-lift - 13) + 'px';
+    d.grow.style.height = hc + 'px';
+    if (fl) {
+      // the stone is cut along the lower arc of its own cross-section, so it reads as rising out of the lake
+      const m = `linear-gradient(to bottom,#000 ${yc-1.5}px,transparent ${yc+1.5}px),radial-gradient(126px 16px at ${c.sw/2}px ${yc}px,#000 82%,transparent 100%)`;
+      d.grow.style.webkitMaskImage = d.grow.style.maskImage = m;
+      const gh = Math.min(80, Math.round(yc * .6));
+      d.glow.style.background = `linear-gradient(to bottom,rgba(${cc},0) 0,rgba(${cc},0) ${yc-gh}px,rgba(${cc},.75) ${yc}px,rgba(${cc},.75) 100%)`;
+    } else {
+      d.grow.style.webkitMaskImage = d.grow.style.maskImage = '';
+      const gh = Math.min(64, Math.round((lift + 13) / 2));
+      const y0 = hc - gh - 12;
+      d.glow.style.background = `linear-gradient(to bottom,rgba(${cc},0) 0,rgba(${cc},0) ${y0}px,rgba(${cc},.55) ${hc}px,rgba(${cc},.55) 100%)`;
+    }
+  }
+
+  // ---------- ruler
+  const yW = v => 130 - S * v;
+  // ruler fill for the "simple" tab: three styles, only one visible at a time
+  const fillBand = el('div','fill fillband'), fillBar = el('div','fill fillbar'), fillCap = el('div','fill fillcap');
+  ruler.append(fillBand, fillBar);
+  // accent "Іскри": motes rising through the edge glow towards the mark
+  const motes = el('div','motes'); fillBand.appendChild(motes);
+  for (let k = 0; k < 9; k++) motes.appendChild(el('div','mote',`left:${3 + (k*7) % 26}px;width:${2 + k % 3}px;height:${2 + k % 3}px;--d:${(2.6 + (k*0.43) % 1.6).toFixed(2)}s;--dl:${(-(k*0.71) % 3).toFixed(2)}s`));
+  const rulerMarks = [], miles = [];
+  for (let v = 0; v <= 70; v += 2) {
+    // no numbers on the ruler itself; decades keep their dot (as in the original labels), the only figures live in the marks
+    const dec = v % 10 === 0;
+    let t;
+    // as in Figma 13449:376078: ruler at x 6, ticks 10×2, decade dots in a 10×12 frame (dot centre 11, yW)
+    if (dec) { t = el('img','rdt',`left:4px;top:${yW(v)-8}px`); t.src = R('a/dot.png'); t.alt = ''; }
+    else { t = el('img','tk',`left:6px;top:${yW(v)-1}px;width:10px;height:2px`); t.src = R('a/tick.png'); t.alt = ''; }
+    ruler.appendChild(t); rulerMarks.push({ el: t, v, tk: true, dec });
+  }
+  for (let v = 0; v <= 70; v += 10) {
+    const l = el('img','rlabel',`left:8px;top:${(yW(v) - 15.5).toFixed(1)}px`); l.src = R(`a/cp_label_${v}.png`); l.alt = '';   // its dot (2, 14.5) sits on the decade
+    ruler.appendChild(l); rulerMarks.push({ el: l, v, tk: false, label: true });
+    // numbers tab: Nyght Serif 14 (exported from Figma), text box 53×16 at x 18 centred on the decade dot, 72 %
+    const n = el('img','cpn',`left:18px;top:${(yW(v) - 10).toFixed(1)}px`); n.src = R(`a/cpn_${v}.png`); n.alt = '';
+    ruler.appendChild(n); rulerMarks.push({ el: n, v, tk: false, num: true });
+  }
+  // accent "Зорі": the bullet of every reached decade turns into a small brand star
+  for (let v = 10; v <= 70; v += 10) {
+    const m = el('div','mile',`left:-1px;top:${yW(v)-11}px`);
+    m.innerHTML = `<svg class="sp" viewBox="0 0 24 24" aria-hidden="true" style="left:0;top:0;width:22px;height:22px;--o:1;--d:${(2.2 + v/50).toFixed(2)}s;--dl:${(-v/23).toFixed(2)}s">
+      <circle cx="12" cy="12" r="12" fill="url(#oCur)"/>
+      <g class="rays"><path d="${star(12,12,13,24,1.5)}" style="fill:rgb(var(--fc))" opacity=".95" filter="url(#fB1)"/><path d="${star(12,12,11,23,1.25)}" fill="#fff"/></g>
+      <path class="diag" d="${diag(12,12,4.2,.9)}" fill="#fff" opacity=".7"/>
+      <circle cx="12" cy="12" r="2" fill="#fff" filter="url(#fCore)"/></svg>`;
+    ruler.appendChild(m); miles.push({ el: m, v });
+  }
+  ruler.appendChild(fillCap);
+  // gold cult logos: natural sizes of the exported images, fitted into a box of height h and max width maxW
+  const LOGO_WH = [[134,96],[150,81],[101,96],[104,96],[86,96],[150,65]];
+  // silver ruler logos, exactly as in the Figma frame «Культ лідер / До вибору культу» (component «Лого культів», 30×25 box at x 10)
+  const SILVER_SIZE = [[25.9,20.4],[29.7,13.1],[21.3,22.9],[22.2,21.9],[20.9,23.1],[28.5,14.0]];
+  function logoBox(i, h, maxW) { let w = LOGO_WH[i][0] * h / LOGO_WH[i][1]; if (w > maxW) { h = h * maxW / w; w = maxW; } return [+w.toFixed(1), +h.toFixed(1)]; }
+  const avatars = CULTS.map((c,i) => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'lead-av'; b.setAttribute('aria-label', c.name);
+    const im = document.createElement('img'); im.src = R(`a/logos_${i}.png`); im.alt = '';   // silver version of the cult logo (Figma 13449:376224…)
+    const [w, h] = SILVER_SIZE[i];
+    b.style.width = w + 'px'; b.style.height = h + 'px'; b.style.marginTop = (-h/2) + 'px';
+    b.append(im); b.addEventListener('click', e => { e.stopPropagation(); goTo(i); });
+    b.addEventListener('pointerdown', e => e.stopPropagation()); b.addEventListener('pointerup', e => e.stopPropagation());
+    ruler.appendChild(b); return b;
+  });
+  defs.insertAdjacentHTML('beforeend', '<radialGradient id="oCur"><stop offset="0" stop-opacity=".7"/><stop offset=".4" stop-opacity=".22"/><stop offset="1" stop-opacity="0"/></radialGradient>');
+  const curStops = [...$('oCur').querySelectorAll('stop')];
+  function setCultColor(i) {
+    phone.style.setProperty('--fc', rgb(CULTS[i].color));
+    curStops.forEach(s => s.setAttribute('stop-color', CULTS[i].color));
+  }
+
+  // ---------- names & followers
+  const nameImgs = CULTS.map((c,i) => { const im = el('img','',`width:${c.nm[0]}px;height:${c.nm[1]}px;top:${c.nm[3]}px`); im.src = R(`a/name_${i}.png`); im.alt = ''; namesEl.appendChild(im); return im; });
+  // followers row: «Послідовники:» stays put, only the number cross-fades; the row stays centred as the number width changes
+  const CB_LABEL_W = 81;
+  const cbLabel = el('img','',`top:197.4px;width:${CB_LABEL_W}px;height:18px`); cbLabel.src = R('a/cb_label.png'); cbLabel.alt = ''; contribEl.appendChild(cbLabel);
+  const cbImgs = CULTS.map((c,i) => { const im = el('img','',`top:197.4px;width:${c.cb - CB_LABEL_W}px;height:18px`); im.src = R(`a/cb_num_${i}.png`); im.alt = ''; contribEl.appendChild(im); return im; });
+  function renderFollowers(p) {
+    const n = CULTS.length, q = ((p % n) + n) % n, s0 = Math.floor(q) % n, i0 = ORD[s0], i1 = ORD[(s0 + 1) % n], f = q - Math.floor(q);
+    const w = CULTS[i0].cb * (1 - f) + CULTS[i1].cb * f, left = 194.1 - w / 2;
+    cbLabel.style.left = left.toFixed(2) + 'px';
+    cbImgs.forEach((im, i) => {
+      const si = SLOT[i], t = Math.max(0, 1 - Math.abs(si - q - n * Math.round((si - q) / n)));
+      im.style.left = (left + CB_LABEL_W).toFixed(2) + 'px';
+      im.style.opacity = (t * t * (3 - 2 * t)).toFixed(3);
+    });
+  }
+  namesEl.setAttribute('aria-live','polite');
+
+  // ---------- marks (preload)
+  let numRuler = false;   // «Лінійка з цифрами» tab: off by default, only the panel switch turns it on
+  // hallT: 0 = Зала культу (my cult, its colours, everything 135 px lower), 1 = Зала Змагань; the transition runs between them
+  let hallT = 0, myCult = 2;
+  const CULT_K = [2, 5, 0, 1, 4, 3];   // cult index -> Figma frame (Бурбоністи, Томатисти, Лососянці, Багетоністи, Піцаносці, Карамеліти)
+  const HALL_DY = 135;                 // Figma: head top at y 413 in the cult hall, 278 in the competition hall
+  // one silver mark everywhere: the Figma «мітка» component (92×50) in both halls and both ruler tabs. The older 127.5×61 export
+  // (shorter plate, text 7 px further left) used to swap in halfway through the hall switch and made the mark jump sideways.
+  const useNewMark = () => true;
+  const markSrc = v => R(`a/${useNewMark() ? 'markn' : 'mark'}_${Math.max(18, Math.min(44, v))}.png`);
+  for (let v = 18; v <= 44; v++) { const im = new Image(); im.src = R(`a/cgold_${v}.png`); }
+  for (let v = 18; v <= 44; v++) for (const s of [R(`a/markn_${v}.png`), R(`a/cnum_${v}.png`)]) { const im = new Image(); im.src = s; }
+  // the silver mark element: old export 127.5×61 canvas (plate centre 25.75 from its top) or the new component 92×50 (centre 20)
+  // cult hall: «мітка» at x 0; numbers tab: at x -4; otherwise the older 127.5×61 export
+  let markBoxKey = '';
+  function placeMarkBox() {
+    const [l, w, h] = useNewMark() ? [numRuler ? -12 - 4 * hallT : -12, 92, 50] : [-24.2, 127.5, 61];
+    const key = l.toFixed(2) + w;
+    if (key === markBoxKey) return; markBoxKey = key;
+    mark.style.left = l.toFixed(2) + 'px'; mark.style.width = w + 'px'; mark.style.height = h + 'px';
+  }
+  const markGold = v => R(`a/markg_${Math.max(18, Math.min(44, v))}.png`);   // same gold gradient map as the leader plate
+  // one shared style (tools/markstyle.py) for the Карамеліти mark, the leader's own mark and the leader plate:
+  // body = --karamelity-background-main, rim = candy-wrapper red, digits + emblem = caramel
+  const markStyled = v => R(`a/markc_${Math.max(18, Math.min(44, v))}.png`);
+  // the leader's own mark (and Карамеліти's): the exact gold of the record-line sign (tools/markstyle.py gold)
+  const markLead = v => R(`a/markgb_${Math.max(18, Math.min(44, v))}.png`);
+  for (let v = 18; v <= 44; v++) for (const s of [R(`a/markgp_${v}.png`), R(`a/numg_${v}.png`)]) { const im = new Image(); im.src = s; }
+  for (let i = 0; i < 6; i++) { const im = new Image(); im.src = R(`a/logog_${i}.png`); }
+  const markFx = $('markFx'), markShine = markFx.querySelector('.shine');
+  // sparks: [x, y, size, drift x, drift y, duration s, delay s] in the mark's own box (127.5 × 51)
+  [[12,7,8,-6,-16,2.6,0],[34,5.5,6,0,-18,3,.9],[58,8,9,4,-15,2.4,1.7],[67,20,7,14,-6,2.8,.4],[96,15,6,8,-14,3.2,2.2],[118,21,8,16,-4,2.6,1.2],[40,35,6,-2,14,3.4,2.8],[20,34,7,-10,12,3,1.5]]
+    .forEach(([x, y, sz, dx, dy, d, del]) => {
+      const e = document.createElementNS(NS, 'svg'); e.setAttribute('class', 'mspk'); e.setAttribute('viewBox', '0 0 24 24');
+      e.innerHTML = '<path d="M12 0C12.9 8.2 15.8 11.1 24 12C15.8 12.9 12.9 15.8 12 24C11.1 15.8 8.2 12.9 0 12C8.2 11.1 11.1 8.2 12 0Z" fill="url(#gMspk)"/>';
+      e.style.cssText = `left:${x}px;top:${y}px;--s:${sz}px;--dx:${dx}px;--dy:${dy}px;--d:${d}s;--del:${del}s`;
+      markFx.appendChild(e);
+    });
+  for (let v = 18; v <= 44; v++) { const im = new Image(); im.src = markSrc(v); }
+  // ---------- growth logic modes (camera is identical; mark and ruler zero differ)
+  const MODES = {
+    stone: {
+      intro: 'Гортайте Їдолів стрілками на екрані, свайпом або клавішами ← →. Мітка стоїть на місці, а камера підводить до неї верх Їдола; камінець, що росте, формується під головою.',
+      note: '<b>Лінійка:</b> 0 дм на рівні основи стели, 1 дм = 14,3 px, як крок камінців. Кожен камінь і голова займають по 10 дм, тож мітка на рівні верху Їдола показує його повну висоту.' },
+    floor: {
+      intro: 'Гортайте Їдолів стрілками на екрані, свайпом або клавішами ← →. Новий камінь виходить із порталу на підлозі й підіймає стелу, а камера тримає верх Їдола біля мітки.',
+      note: '<b>Лінійка:</b> 1 дм = 14,3 px, поділки кожні 2 дм, нуль біля підлоги. Під головою завжди 1-й камінь, нові виходять знизу. У Їдолів від 32 дм портал ховається за нижній край екрана.' },
+    simple: {
+      intro: 'Прототип відкривається на Залі культу: «→ До змагання Їдолів →» під скринею веде в Залу Змагань на твій культ, стрілка «назад» у ній повертає до зали свого культу. Тап по лого культу чи по мітці лідера в Залі культу теж веде в змагання, одразу до цього культу. У Залі Змагань гортайте Їдолів стрілками, свайпом або клавішами ← →. Стела додає камінець лише на повних 10 дм, а мітка рухається кожні 2 дм.',
+      note: '<b>Лінійка:</b> 0 дм завжди на основі стели. Голови стоять на двох статичних висотах: для Їдолів до 20 дм і для вищих. Стела показує наступну повну десятку, тож мітка в межах десятка стоїть на 0–8 дм нижче верху голови.' },
+  };
+  let mode = 'stone';
+  function applyOrder() {
+    idols.forEach(d => {
+      const st = d.stones.slice(1);
+      if (mode !== 'floor') d.box.append(...st, d.f, d.head, d.glint, d.crown, d.spk);
+      else d.box.append(d.f, ...st.reverse(), d.head, d.glint, d.crown, d.spk);
+    });
+  }
+
+  // ---------- state
+  // the current example: whose idol is the tallest. The chosen cult swaps heights with Карамеліти (42 дм), the rest stay as they are
+  let base = START.slice();
+  const heights = START.slice();
+  // opens on Бурбоністи, as the Figma frame «До вибору культу» (13449:376057): the leader shows as the gold corner mark
+  let idx = 2, p = SLOT[2], camY = 0, anim = null, growing = false, hv = START[2], markY = 369;
+  // simple tab: two static mark positions (centre y), as in the Figma frames: up to 20 dm and above 20 dm
+  // static mark positions (centre y). Simple tab: low for idols up to 20 dm (the stela base stays on screen), high above 20 dm.
+  // Heads sit at fixed heights: nominal head top at HEAD_HIGH for idols above 20 dm (all tabs), at HEAD_LOW for 20 dm stelas in the simple tab.
+  // The mark is static at the nominal head top, so on full decades 0 dm lands exactly on the stela base.
+  const HEAD_HIGH = 315, HEAD_LOW = 456;   // raised after the quest plaque was removed
+  const markFor = H => mode === 'simple' && H <= 20 ? HEAD_LOW : HEAD_HIGH;
+  const decade = H => 10 + 10 * Math.min(9, Math.max(1, Math.ceil((H - 10) / 10 - 1e-6)));
+  // same framing in every tab; the simple tab anchors the camera to the stela's decade instead of the exact height
+  // world y 0 = base of every stela = 0 dm on the ruler; the camera brings the idol's height to the mark
+  const camFor = H => mode === 'simple' ? markFor(H) + S * decade(H) : HEAD_HIGH + S * H;
+  const FLOOR_UP = 110, FLOOR_LO = HEAD_HIGH + S * 30, FLOOR_HI = HEAD_HIGH + S * 40;   // floor lift for idols whose stela base is on screen
+  // ---------- endless carousel: after Багетоністи comes Лососянці again (and back)
+  // p runs freely; every idol is drawn at the copy of its slot nearest to p, the floor exists in three copies
+  const SPAN = (SLOT_CX[N-1] - SLOT_CX[0]) / (N - 1), PER = N * SPAN;        // one full lap of the hall
+  const wrapI = q => ((Math.round(q) % N) + N) % N;
+  const wrapD = d => d - N * Math.round(d / N);                               // shortest signed distance on the circle
+  const xAt = q => { const k = Math.floor(q / N), r = q - k * N, i = Math.floor(r), t = r - i;
+    const a = SLOT_CX[i], b = i + 1 < N ? SLOT_CX[i+1] : SLOT_CX[0] + PER; return k * PER + a + (b - a) * t; };
+  // floor: three copies one lap apart; each owns the stretch between the gaps Багетоністи|Лососянці and hands over with a short cross-fade
+  const SEAM = (SLOT_CX[N-1] + SLOT_CX[0] + PER) / 2, FADE = 60;
+  const floor0 = $('floor0'), floorL = $('floorL');
+  const floors = [-1, 0, 1].map(k => { if (!k) return { k, el: floor0 };
+    const f = floor0.cloneNode(); f.removeAttribute('id'); f.style.left = (-450 + k * PER).toFixed(2) + 'px';
+    if (k > 0) floor0.before(f); else floor0.after(f);    // left copy on top of the right one
+    return { k, el: f }; });
+  const idolShift = new Array(N).fill(0);
+  function renderLoop(X) {
+    const raw = floors.map(({ k }) => smooth(SEAM - PER + k * PER - FADE, SEAM - PER + k * PER + FADE, X) * (1 - smooth(SEAM + k * PER - FADE, SEAM + k * PER + FADE, X)));
+    floors.forEach((f, j) => {
+      const left = j > 0 ? raw[j - 1] : 0;                 // the copy underneath stays opaque while the one above fades
+      const o = raw[j] <= 0 ? 0 : left > 0 ? 1 : raw[j];
+      f.el.style.opacity = o.toFixed(3); f.el.style.visibility = o > 0 ? 'visible' : 'hidden';   // under the cult background, revealed by the wipe
+    });
+    idols.forEach((d, i) => { const m = Math.round((p - SLOT[i]) / N); if (m !== idolShift[i]) { idolShift[i] = m; d.box.style.transform = m ? `translateX(${(m * PER).toFixed(2)}px)` : ''; } });
+  }
+  let lastMark = -1;
+
+  function render() {
+    const X = xAt(p);
+    // the cult hall shows the same scene 135 px lower (Figma: head top at y 413). Idols up to 20 dm (Піцаносці) already stand low
+    // in the competition hall (HEAD_LOW), so in the cult hall they keep exactly that place: the same distance from the screen bottom.
+    // The two cases blend over 20…22 dm so growth and transitions stay smooth.
+    const kLow = mode === 'simple' ? 1 - Math.min(1, Math.max(0, (hv - 20) / 2)) : 0;
+    const camR = camY + HALL_DY * (1 - kLow) * (1 - hallT);
+    world.style.transform = `translate3d(${(CX - X).toFixed(2)}px,${camR.toFixed(2)}px,0)`;
+    // Idols up to 30 dm show their stela base on screen (low framing, camera ≈ 744); there the floor rises by FLOOR_UP so the
+    // bases stand deeper on the checkerboard instead of hanging near the horizon. Tall idols (camera ≥ 887) keep the floor as it was.
+    const kF = mode === 'simple' ? Math.min(1, Math.max(0, (FLOOR_HI - camY) / (FLOOR_HI - FLOOR_LO))) : 0;
+    floorL.style.transform = `translate3d(${(CX - X).toFixed(2)}px,${(camR - (window.__FU ?? FLOOR_UP) * kF).toFixed(2)}px,0)`;
+    renderLoop(X);
+    applyHall();
+    // simple tab: the ruler scrolls under the static mark; other tabs: the ruler moves with the world
+    // ruler 0 always sits on the stela base; in the simple tab the mark follows the idol height along the ruler
+    const rulerT = camR - 130;
+    if (mode === 'simple') markY = camR - S * hv;
+    rulerX = numRuler ? -2 * hallT : 0;   // ruler at x 6 in the cult hall, at x 4 in the numbers tab
+    ruler.style.transform = `translate3d(${rulerX.toFixed(2)}px,${rulerT.toFixed(2)}px,0)`;
+    placeMarkBox(); sizeAvatars();
+    nameImgs.forEach((im,i) => { im.style.left = ((115.4-117) + wrapD(SLOT[i] - p) * 156 + CULTS[i].nm[2]).toFixed(2) + 'px'; });
+    renderFollowers(p);
+    let v;
+    if (mode === 'simple') {
+      const top = yW(hv), h = Math.max(0, S * hv);
+      fillBand.style.top = fillBar.style.top = fillCap.style.top = top.toFixed(2) + 'px';
+      fillBand.style.height = fillBar.style.height = h.toFixed(2) + 'px';
+      if (phone.classList.contains('fill-ticks')) rulerMarks.forEach(r => r.el.classList.toggle('lit', r.v <= hv + .01));
+      const band = phone.classList.contains('fill-band');
+      const fog = band && phone.classList.contains('acc-fog'), longOn = band && phone.classList.contains('acc-long');
+      rulerMarks.forEach(r => { if (r.tk) r.el.classList.toggle('long', longOn && r.v <= hv + .01); });
+      miles.forEach(m => m.el.classList.toggle('on', m.v <= hv + .01));
+    }
+    mark.style.top = (markY - (useNewMark() ? 20 : 25.75)).toFixed(2) + 'px';   // marks from Figma: 127.5×61 canvas, plate (80×26) centred 0.5 px above markY
+    markFx.style.top = (markY - 20.75).toFixed(2) + 'px';
+    v = mode === 'simple' ? Math.round(hv) : Math.round((camY - markY) / S);
+    const curH = mode === 'simple' ? hv : (camY - markY) / S;
+    const hsNow = liveHeights(curH), topHL = Math.max(...hsNow), leadNow = leaderOf(hsNow);
+    const medY = signY(leadNow, rulerT, topHL, markY, proxOf(leadNow));
+    const avs = avatarLayout(hsNow, leadNow, rulerT, markY, medY);
+    // clearance around the mark: a label or tick that meets the mark fades out and returns once the mark moves on
+    const mc = markY;
+    const sm = mode === 'simple', ticksMode = sm && phone.classList.contains('fill-ticks'), cpMode = phone.classList.contains('ruler-cp');
+    const fogOn = sm && phone.classList.contains('fill-band') && phone.classList.contains('acc-fog');
+    rulerMarks.forEach(r => {
+      let o = 1;
+      if (ticksMode) o = r.v <= hv + .01 ? 1 : .3;
+      else if (fogOn && r.v > hv + .01) o = Math.max(.14, 1 - (r.v - hv) / 9);
+      const d = Math.abs(rulerT + yW(r.v) - mc);
+      if (r.num) {
+        const sy = rulerT + yW(r.v);
+        o *= .72 * smooth(20, 26, d) * hallT;   // the 28 px mark covers the number column; the cult hall has no numbers
+        for (const a of avs) if (!a.shift) o *= 1 - a.o * (1 - smooth(10, 16, Math.abs(yW(r.v) - a.y)));   // a logo on the same line wins
+        if (medY !== null) o *= smooth(19, 24, Math.abs(sy - medY));
+      }
+      else if (r.label) { const dzm = rulerT + yW(r.v) - mc;   // a checkpoint label (dot -12 … +16 px) steps aside from the 26 px mark
+        o *= smooth(3, 7, Math.max(-14 - (dzm + 12), (dzm - 12) - 14)); }
+      else o *= r.tk ? smooth(13, 24, d) : smooth(20, 64, d);
+      if (medY !== null && !r.num) { const z = SIGN_ZONE[signKind] || SIGN_ZONE.pin, dz = rulerT + yW(r.v) - medY;   // and for the leader sign
+        const lo = r.label ? -12 : 0, hi = r.label ? 12 : 0;
+        o *= smooth(0, 6, Math.max(z[0] - (dz + hi), (dz + lo) - z[1])); }
+      // the ruler goes dark above the leader: above its height, and above the leader corner wherever it is pinned (down to 15 %)
+      let dim = r.v > topHL + .01 ? Math.max(.12, 1 - (r.v - topHL) / 5) : 1;
+      if (medY !== null) dim = Math.min(dim, 1 - .85 * smooth(10, 22, medY - (rulerT + yW(r.v))));
+      // ruler masks (screen space): numbers tab 7 % at y 209 → 100 % at y 460; cult hall (Figma 13603:425232) 0 at y 292 → 100 % at y 355
+      { const sy = rulerT + yW(r.v), cl = (a, b) => Math.min(1, Math.max(0, (sy - a) / (b - a)));
+        const comp = numRuler ? .07 + .93 * cl(209, 460) : 1;
+        dim = Math.min(dim, comp * hallT + cl(292, 355) * (1 - hallT)); }
+      o *= dim;
+      r.el.style.opacity = o >= .999 ? '' : o.toFixed(3);
+    });
+    miles.forEach(m => { const d = Math.abs(rulerT + yW(m.v) - mc), o = smooth(20, 64, d); m.el.style.opacity = sm && m.v <= hv + .01 && o < .999 ? o.toFixed(3) : ''; });
+    lastMark = v;
+    renderLeader(rulerT, mc, curH);
+    renderLight(X);
+  }
+
+  // ---------- leader: a golden plate at the leader's height with the leader's medallion and crown on top of it;
+  // on the leader's own screen the dynamic mark itself turns gold
+  const leadLayer = $('leadLayer'), cgold = $('cgold');
+  // ---------- the two halls: layer fades and the shared scene
+  // hallU is the transition's own clock (0 cult hall … 1 competition); hallT, which drives the scene, is its eased middle part.
+  // Cult → competition: the quest card folds up into its ornament, the back pill retracts, the title rolls out;
+  // a ring of light bursts from the chest and sweeps the cult colour away (purple hall behind it); the scene rises 135 px;
+  // the new title rolls in and catches a gold glint, timer, arrows and the cult name drop in; the carousel flies to the leader.
+  // Back to the cult hall the same film runs in reverse: fly home first, then the light closes into the chest.
+  let hallU = 0;
+  const HP = Object.fromEntries(['cultBack', 'wipeRing', 'burst', 'ctopBar', 'ctopR', 'ctopTitle', 'ctopCard', 'cseason', 'crate', 'cback',
+    'hBar', 'hL', 'hR', 'hTitle', 'hShine', 'hTimer', 'hArrL', 'hArrR', 'ovl', 'wdg', 'names', 'contrib', 'flare', 'flareRays'].map(id => [id, $(id)]));
+  const BURST = [0, 1, 2, 3, 4, 5, 6, 7].map(k => {
+    const e = document.createElementNS(NS, 'svg'); e.setAttribute('viewBox', '0 0 24 24');
+    e.innerHTML = '<path d="M12 0C12.9 8.2 15.8 11.1 24 12C15.8 12.9 12.9 15.8 12 24C11.1 15.8 8.2 12.9 0 12C8.2 11.1 11.1 8.2 12 0Z" fill="url(#gMspk)"/>';
+    e.style.setProperty('--s', (8 + (k % 3) * 4) + 'px'); HP.burst.appendChild(e);
+    return { e, a: (k / 8) * Math.PI * 2 + (k % 2 ? .25 : -.15), r: 120 + (k * 37) % 90 };
+  });
+  const hallTOf = u => ease(Math.min(1, Math.max(0, (u - .1) / .55)));
+  function setHallU(u) { hallU = u; hallT = hallTOf(u); }
+  let hallKey = '';
+  function put(e, o, tf, filt) {
+    e.style.opacity = o >= .999 ? '' : o.toFixed(3); e.style.visibility = o <= .002 ? 'hidden' : '';
+    e.style.transform = tf || ''; e.style.filter = filt || '';
+  }
+  function applyHall() {
+    const u = hallU, key = u.toFixed(4);
+    if (key === hallKey) return; hallKey = key;
+    const sg = (a, b) => Math.min(1, Math.max(0, (u - a) / (b - a)));
+    const eo = x => 1 - Math.pow(1 - x, 3), ei = x => x * x * x;
+    // the cult colours give way to the purple hall: a plain cross-fade (no wipe, no flash: calm and easy to build)
+    const w = ease(sg(.12, .7)), back = HP.cultBack;
+    back.style.webkitMaskImage = back.style.maskImage = '';
+    put(back, 1 - w);
+    HP.wipeRing.style.visibility = 'hidden'; HP.burst.style.visibility = 'hidden';
+    put(HP.flare, 0); put(HP.flareRays, 0);
+    // the chest block simply fades out with a slight lift
+    const ch = eo(sg(0, .3));
+    put(HP.cseason, 1 - ch, `translateY(${(-10 * ch).toFixed(2)}px)`);
+    // quest card folds up into its top ornament
+    const f = sg(0, .32);
+    put(HP.ctopCard, 1 - smooth(.55, 1, f), `perspective(900px) rotateX(${(88 * ei(f)).toFixed(2)}deg) translateY(${(-8 * f).toFixed(2)}px)`, f > 0 ? `brightness(${(1 + .5 * f).toFixed(2)})` : '');
+    // cult title rolls up and out, the competition title rolls in from below and catches a glint
+    const tx = ease(sg(.1, .42));
+    put(HP.ctopTitle, 1, `translateY(${(-46 * tx).toFixed(2)}px)`);
+    put(HP.hTitle, 1, `translateY(${(46 * (1 - tx)).toFixed(2)}px)`);
+    HP.hShine.style.opacity = '0';
+    // status bar and the «i» swap in place (identical); the back pill retracts to the left
+    put(HP.ctopBar, 1 - sg(.5, .52)); put(HP.hBar, sg(.25, .5));
+    // the «i» moves 7 px from its cult-hall spot to the competition one while the two copies cross over: one icon, never two
+    const ix = ease(sg(.2, .45));
+    put(HP.ctopR, 1 - ix, `translateX(${(-7 * ix).toFixed(2)}px)`); put(HP.hR, ix, `translateX(${(7 * (1 - ix)).toFixed(2)}px)`);
+    const cv = eo(sg(.1, .28));
+    put(HP.hL, cv, `translateX(${(-12 * (1 - cv)).toFixed(2)}px)`);
+    const pl = eo(sg(0, .26));
+    put(HP.cback, 1 - sg(.15, .26), `translateX(${(-84 * pl).toFixed(2)}px)`);
+    // the rating plaque sinks away; the competition widget rises in
+    const rs = ei(sg(0, .3));
+    put(HP.crate, 1 - sg(.05, .3), `translateY(${(60 * rs).toFixed(2)}px)`);
+    const wd = eo(sg(.55, .85));
+    put(HP.wdg, wd, `translateY(${(40 * (1 - wd)).toFixed(2)}px)`);
+    // timer, arrows, the cult name and followers drop in one after another
+    const tm = eo(sg(.42, .66)), ar = eo(sg(.5, .8)), nm = eo(sg(.48, .78));
+    put(HP.hTimer, tm, `translateY(${(-10 * (1 - tm)).toFixed(2)}px)`);
+    put(HP.hArrL, ar, `translateX(${(-40 * (1 - ar)).toFixed(2)}px)`);
+    put(HP.hArrR, ar, `translateX(${(40 * (1 - ar)).toFixed(2)}px)`);
+    put(HP.names, nm, `translateY(${(14 * (1 - nm)).toFixed(2)}px)`, nm < 1 ? `blur(${(3 * (1 - nm)).toFixed(2)}px)` : '');
+    put(HP.contrib, nm, `translateY(${(14 * (1 - nm)).toFixed(2)}px)`);
+    put(HP.ovl, sg(.3, .7));
+    phone.style.setProperty('--ht', hallT.toFixed(3));
+    $('toComp').style.display = u < .5 ? '' : 'none';
+    $('toCult').style.display = u >= .5 ? '' : 'none';
+    $('prev').style.display = $('next').style.display = u >= .5 ? '' : 'none';
+  }
+  function setCultImages() {
+    const k = CULT_K[myCult];
+    $('cbg').src = R(`a/cbg_${k}.webp`); $('crate').src = R(`a/crate_${k}.webp`);
+    for (const id of ['ctopBar', 'ctopR', 'ctopTitle', 'ctopCard']) $(id).src = R(`a/ctop_${k}.webp`);
+  }
+  function setHallButtons(on) { document.querySelectorAll('#hallSeg button').forEach(x => x.setAttribute('aria-pressed', String((x.dataset.hall === '1') === on))); }
+  // Зала культу → Зала Змагань opens on my own cult (or on a cult tapped on the ruler); back always lands on my own cult.
+  function switchHall(toComp, target) {
+    if (growing) return;
+    const u0 = hallU, u1 = toComp ? 1 : 0;
+    const compI = toComp ? ((target === undefined ? myCult : target) % N + N) % N : idx;   // the hall opens on my own cult (a tapped logo opens that cult)
+    // the two ends of the film: my cult (cult hall) and compI (competition); the carousel runs in the last two thirds
+    const d = wrapD(SLOT[toComp ? compI : myCult] - p);
+    const pCult = toComp ? p : p + d, pComp = toComp ? p + d : p;
+    const camC = camFor(heights[myCult]), camP = camFor(heights[compI]), hC = heights[myCult], hP = heights[compI];
+    const cw = u => ease(Math.min(1, Math.max(0, (u - .35) / .65)));
+    idx = toComp ? compI : myCult; updateList(); setCultColor(idx); setHallButtons(toComp);
+    const dur = (1450 + Math.max(0, Math.abs(d) - 1) * 110) * Math.abs(u1 - u0);
+    animate(dur, (e, t) => { const u = u0 + (u1 - u0) * t, k = cw(u); setHallU(u);
+        p = pCult + (pComp - pCult) * k; camY = camC + (camP - camC) * k; hv = hC + (hP - hC) * k; },
+      () => { p = ((Math.round(toComp ? pComp : pCult) % N) + N) % N; setHallU(u1); render(); });
+  }
+  const lsign = el('div','lsign'), lplate = el('div','lplate');
+  const lmark = document.createElement('img'); lmark.alt = ''; lplate.appendChild(lmark);
+  const medal = document.createElement('button'); medal.type = 'button'; medal.className = 'medal';
+  const medalImg = document.createElement('img'); medalImg.alt = '';
+  const medalFace = el('span','m-face'); medalFace.appendChild(medalImg);   // image enlarged inside the circle so the baked-in silver rim is cut off
+  medal.append(medalFace);
+  medal.addEventListener('click', e => { e.stopPropagation(); goTo(lastLeader); });
+  medal.addEventListener('pointerdown', e => e.stopPropagation()); medal.addEventListener('pointerup', e => e.stopPropagation());
+  const llogo = document.createElement('img'); llogo.className = 'llogo'; llogo.alt = '';
+  const lgold = document.createElement('img'); lgold.className = 'lgold'; lgold.src = R('a/plate_gold.webp'); lgold.alt = '';
+  const lglogo = document.createElement('img'); lglogo.className = 'lglogo'; lglogo.alt = '';
+  // free-standing signs
+  const fx = (tag, cls) => { const e = tag === 'svg' ? document.createElementNS(NS,'svg') : document.createElement(tag); e.setAttribute('class', 'fx ' + cls); if (tag === 'img') e.alt = ''; return e; };
+  const fPole = fx('div','v-flag f-pole'), fBall = fx('div','v-flag f-ball');
+  const fCloth = fx('svg','v-flag f-cloth'); fCloth.setAttribute('viewBox','0 0 46 24'); fCloth.setAttribute('aria-hidden','true');
+  fCloth.innerHTML = `<defs><linearGradient id="gFlagB" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#5A3A0C"/><stop offset=".55" stop-color="#3A2306"/><stop offset="1" stop-color="#241403"/></linearGradient>
+      <linearGradient id="gFlagE" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#FFF3C4"/><stop offset=".5" stop-color="#F2C860"/><stop offset="1" stop-color="#B07A1C"/></linearGradient></defs>
+    <path d="M0 1 C14 -1.5 30 3.5 46 1 L37.5 12 L46 23 C30 20.5 14 25.5 0 23 Z" fill="url(#gFlagB)" stroke="url(#gFlagE)" stroke-width="1.3" stroke-linejoin="round"/>
+    <path d="M2.5 3.6 C15 1.6 29 5.6 41.5 3.6" fill="none" stroke="#FFF3C4" stroke-opacity=".35" stroke-width=".7"/>`;
+  const cTick = fx('div','v-chain c-tick');
+  const cChain = fx('svg','v-chain c-chain'); cChain.setAttribute('viewBox','0 0 38 8'); cChain.setAttribute('aria-hidden','true');
+  cChain.innerHTML = `<defs><linearGradient id="gChain" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#FFF3C4"/><stop offset=".5" stop-color="#E9B44C"/><stop offset="1" stop-color="#9C6A16"/></linearGradient></defs>
+    <g fill="none" stroke="url(#gChain)" stroke-width="1.3">
+      <ellipse cx="3.5" cy="4" rx="3" ry="2.3"/><ellipse cx="14" cy="4" rx="3" ry="2.3"/><ellipse cx="24.5" cy="4" rx="3" ry="2.3"/></g>
+    <g stroke="url(#gChain)" stroke-width="2.2" stroke-linecap="round"><path d="M7.4 4H10.1"/><path d="M17.9 4H20.6"/><path d="M28.4 4H37.5"/></g>`;
+  const rLine = fx('div','v-line r-line'), rCap = fx('div','v-line r-cap'), tTick = fx('div','v-tick t-tick');
+  const pPlate = fx('img','v-plate p-plate'); pPlate.src = R('a/plate_lead.webp');
+  const lemb = fx('img','v-emb'), lnum = fx('img','v-num');
+  const lhit = document.createElement('button'); lhit.type = 'button'; lhit.className = 'lhit';
+  lhit.addEventListener('click', e => { e.stopPropagation(); goTo(lastLeader); });   // from the cult hall goTo goes over to the competition
+  lhit.addEventListener('pointerdown', e => e.stopPropagation()); lhit.addEventListener('pointerup', e => e.stopPropagation());
+  // corner sign: the gold mark (plate + flourish) slides as one piece; the gold logo and «NN дм» beside it stay and fade
+  const cSlide = fx('div','v-corner c-slide');
+  const cPlate = document.createElement('img'); cPlate.className = 'c-plate'; cPlate.alt = '';
+  const cFlour = document.createElement('img'); cFlour.className = 'c-flour'; cFlour.alt = ''; cFlour.src = R('a/flourish_g.png');
+  cSlide.append(cPlate, cFlour);
+  const cLogo = fx('img','v-corner c-logo'), cNum = fx('img','v-corner c-num');
+  const ccLogo = fx('img','v-corner c-clogo'), ccNum = fx('img','v-corner c-cnum');   // the cult hall corner (Figma 13530:386840)
+  lsign.append(lplate, pPlate, tTick, rLine, rCap, cTick, cChain, fPole, fCloth, fBall, medal, llogo, lemb, lnum, cSlide, cLogo, cNum, ccLogo, ccNum, lhit);
+  leadLayer.append(lsign);
+  let lastLeader = -1, lastLeadVal = -1, lastKind = '';
+  // compact logo on the leader plate: perched on its top edge above "дм", or closing its right end in place of the arrow
+  function placeLogo() {
+    if (lastLeader < 0) return;
+    // gold plate with the cult logo inside: logo centred in the plate body (screen x 0..54), inner height ~19 px
+    const [gw, gh] = logoBox(lastLeader, 20, 40);
+    lglogo.src = R(`a/logo_${lastLeader}.webp`);
+    lglogo.style.cssText = `left:${(31 - gw/2).toFixed(1)}px;top:${(-gh/2 - .3).toFixed(1)}px;width:${gw}px;height:${gh}px`;
+    const top = phone.classList.contains('sign-top'), pin = phone.classList.contains('sign-pin');
+    // pin: the gold mark keeps its number; the arrow line ends in the cult emblem instead of the flourish
+    const [w, h] = top ? logoBox(lastLeader, 22, 30) : pin ? logoBox(lastLeader, 18, 26) : logoBox(lastLeader, 22, 27);
+    llogo.style.cssText = top
+      ? `left:${(46 - w/2).toFixed(1)}px;top:${(-10 - h).toFixed(1)}px;width:${w}px;height:${h}px`
+      : pin ? `left:78px;top:${(-h/2 - .5).toFixed(1)}px;width:${w}px;height:${h}px`
+      : `left:52px;top:${(-h/2).toFixed(1)}px;width:${w}px;height:${h}px`;
+  }
+  let signKind = 'corner';
+  const CORNER_SLIDE = 54;   // Figma: gold mark frame at x -54 in the corner, at x 0 on the leader's own screen
+  // how close the leader's own screen is: 0 elsewhere, 1 on it (drives the corner mark sliding out).
+  // When the leader changes in place (growth, example switch) the value glides over 450 ms instead of jumping.
+  let proxL = -1, proxShown = 0, proxFrom = 0, proxT0 = -1, proxRaf = 0;
+  function proxOf(L) {
+    let pr = 1 - smooth(0, .85, Math.abs(wrapD(SLOT[L] - p)));
+    if (L !== proxL) { if (proxL >= 0 && !reduce) { proxFrom = proxShown; proxT0 = performance.now(); kickProx(); } proxL = L; }
+    if (proxT0 >= 0) { const t = (performance.now() - proxT0) / 450; if (t >= 1) proxT0 = -1; else pr = proxFrom + (pr - proxFrom) * ease(t); }
+    return proxShown = pr;
+  }
+  function kickProx() {
+    if (proxRaf) return;
+    const f = () => { proxRaf = 0; if (proxT0 < 0) return; if (!anim) render(); if (proxT0 >= 0) proxRaf = requestAnimationFrame(f); };
+    proxRaf = requestAnimationFrame(f);
+  }
+  // sign centre on screen; the corner sign glides from its pinned spot to the leader's own mark as that screen comes in
+  function signY(L, rulerT, HL, mc, pr) {
+    const tY = rulerT + yW(HL);
+    if (signKind !== 'corner') return L === idx ? null : leaderY(tY, mc);
+    // cult hall: the corner is a fixed leader badge at the Figma spot (y 341), unless my own idol leads (then it is my gold mark)
+    // cult hall: the leader at its true height when that is below the Figma spot (y 341), never on the mark; never on the
+    // «→ До змагання Їдолів →» row (y ~350…418): there it waits at the Figma spot
+    let cy = Math.min(Math.max(tY, CULT_PIN), mc - 30); if (cy > CULT_PIN && cy < 418) cy = CULT_PIN;
+    const comp = leaderY(tY, mc) * (1 - pr) + (tY - .5) * pr, cult = L === idx ? tY - .5 : cy;
+    return comp * hallT + cult * (1 - hallT);
+  }
+  // generated by tools/markstyle.py: digits' right edge per height (css px from the anchor), body centre, emblem visual offsets
+  const NUM_LEFT = 9.8;   // every mark's digits start here (css px from the ruler's left edge): main mark, gold plate, record line
+  const PLATE_EXT = 28, PLATE_BODY_C = -0.25, LOGO_VDY = [-0.005, -0.086, 0, -0.005, -0.005, -0.008];
+  const NUMW = {18:36.5,19:37.5,20:41.5,21:36.5,22:39.5,23:40,24:40.5,25:40,26:40.5,27:39.5,28:40,29:40.5,30:41.5,31:36.5,32:39.5,33:39.5,34:40.5,35:39.5,36:40.5,37:39,38:39.5,39:40.5,40:42.5,41:37.5,42:41,43:41,44:41.5};
+  function placeFree(v) {
+    if (lastLeader < 0) return;
+    if (signKind === 'corner') {
+      const k = Math.max(18, Math.min(44, v));
+      cPlate.src = R(`a/markgp_${k}.png`); cNum.src = numRuler ? R(`a/cnum_${k}.png`) : R(`a/numg_${k}.png`); cLogo.src = ccLogo.src = R(`a/logog_${lastLeader}.png`);
+      ccNum.src = R(`a/numg_${k}.png`);
+      return;
+    }
+    const nw = NUMW[v] || 40, nh = 13.5;
+    const c = signKind === 'plate' ? 'c' : '';   // the default plate uses the shared mark style; other sign variants stay gold
+    lnum.src = R(`a/num${c}_${Math.max(18, Math.min(44, v))}.png`);
+    lemb.src = R(`a/logo${c}_${lastLeader}.webp`);
+    if (signKind === 'flag') {
+      const [w, h] = logoBox(lastLeader, 13, 21);
+      lemb.style.cssText = `left:${(30 - w/2).toFixed(1)}px;top:${(-19 - h/2).toFixed(1)}px;width:${w}px;height:${h}px`;
+      lnum.style.cssText = `left:15px;top:3px;width:${nw}px;height:${nh}px`;
+      lemb.style.animation = 'flagWave 3.6s ease-in-out infinite'; lemb.style.transformOrigin = '-19px 50%';
+    } else if (signKind === 'line') {
+      // as in Figma: emblem centred in a 30 px slot at x 10..40 (centre -15.5 above the line), digits from x 45
+      const [w, h] = logoBox(lastLeader, 16, 29);
+      lemb.style.cssText = `left:${(25 - w / 2).toFixed(1)}px;top:${(-15.5 - h / 2).toFixed(1)}px;width:${w}px;height:${h}px`;
+      lnum.style.cssText = `left:44.5px;top:-21.5px;width:${nw}px;height:${nh}px`;   // glyphs: x 45, y -21 … -9
+    } else if (signKind === 'plate') {
+      // the plate is the main mark itself, its body 28 px longer: the digits keep their distance to the tip (as in the mark),
+      // the cult emblem takes the added 28 px in front of them, centred on the body by its visible mass
+      const [w, h] = logoBox(lastLeader, 15, 21);
+      lnum.style.cssText = `left:${(-24.2 + PLATE_EXT).toFixed(1)}px;top:-20.75px;width:127.5px;height:51px`;
+      const l = NUM_LEFT;
+      lemb.style.cssText = `left:${(l + PLATE_EXT - 5.5 - w).toFixed(1)}px;top:${(PLATE_BODY_C - h / 2 - LOGO_VDY[lastLeader] * h).toFixed(2)}px;width:${w}px;height:${h}px`;
+    } else if (signKind === 'tick') {
+      const [w, h] = logoBox(lastLeader, 16, 24);
+      lemb.style.cssText = `left:25px;top:${(-h/2).toFixed(1)}px;width:${w}px;height:${h}px`;
+      lnum.style.cssText = `left:${(25 + w + 5).toFixed(1)}px;top:${(-nh/2 - .5).toFixed(1)}px;width:${nw}px;height:${nh}px`;
+    } else if (signKind === 'chain') {
+      lnum.style.cssText = `left:9px;top:${(-5 - nh).toFixed(1)}px;width:${nw}px;height:${nh}px`;
+    }
+  }
+  // vertical zone (relative to the sign's line) where ruler ticks/dots step aside
+  const SIGN_ZONE = { flag: [-38, 19], chain: [-21, 6], line: [-27, 6], pin: [-16, 16], tick: [-9, 9], plate: [-16, 16], corner: [-13, 13] };
+  // plate centre on screen: the leader's true height, pinned under the cult name when higher, never on top of the dynamic mark
+  const CORNER_PIN = 232;   // highest line of the leader corner, right under the cult name (Figma: 257)
+  // numbers tab: as in Figma 13551:396889 (frame top 228); cult hall: Figma frame y 328, so its line is at 341
+  const cornerPin = () => (numRuler ? 241 : CORNER_PIN) * hallT + 341 * (1 - hallT);
+  const CULT_PIN = 341;
+  function leaderY(trueY, mc) { return Math.min(Math.max(trueY, signKind === 'corner' ? cornerPin() : 262), mc - (signKind === 'flag' ? 33 : 30)); }
+  function liveHeights(cur) { return heights.map((h,i) => i === idx && growing ? cur : h); }
+  function leaderOf(hs) { let b = 0; hs.forEach((h,i) => { if (h > hs[b] + 1e-6) b = i; }); return b; }
+  // other cults' logos on the ruler: height, horizontal nudge when two collide, and how visible each one is
+  function avatarLayout(hs, L, rulerT, mc, ly) {
+    const order = hs.map((h,i) => i).filter(i => i !== idx && i !== L).sort((a,b) => hs[a] - hs[b]);
+    let prevY = -1e9, shift = 0, grp = -1, prevH = -1e9; const out = [];
+    order.forEach(i => {
+      const y = yW(hs[i]), same = Math.abs(hs[i] - prevH) < .01;   // exactly the same height: same slot, a stack
+      if (!same) { shift = Math.abs(y - prevY) < 25 ? shift + 32 : 0; prevY = y; grp++; }
+      prevH = hs[i];
+      const sy = rulerT + y, d = Math.abs(sy - mc);
+      let o = (shift ? 1 : smooth(14, 32, d)) * smooth(225 + 95 * (1 - hallT), 262 + 93 * (1 - hallT), sy);
+      // near the leader sign: the corner (28 px plate) and a logo (23 px) only touch closer than ~26 px, so hide just then
+      if (ly !== null) o *= signKind === 'corner' ? smooth(26.5, 28, Math.abs(sy - ly)) : smooth(30, 46, Math.abs(sy - ly));
+      out.push({ i, y, shift, o, grp });
+    });
+    return out;
+  }
+  // tap area of the leader sign: the sign's own vertical zone, wide enough for emblem, digits and the line
+  const HIT_W = { line: 96, plate: 104, flag: 64, chain: 64, tick: 80, corner: 104 };
+  function placeHit() {
+    const z = SIGN_ZONE[signKind] || SIGN_ZONE.pin, w = HIT_W[signKind] || 80;
+    lhit.style.cssText = `top:${z[0] - 2}px;width:${w}px;height:${z[1] - z[0] + 4}px`;
+    lhit.setAttribute('aria-label', `Лідер: ${CULTS[lastLeader].name}, ${heights[lastLeader]} дм`);
+  }
+  // silver logos as in Figma 13449:376057: 30×25 boxes at x 22, right of the ruler (ticks stay visible next to them)
+  let avKey = '', rulerX = 0;
+  function sizeAvatars() {
+    // numbers tab: 29×24 boxes at x 33 (Figma 13551:396889); otherwise 28×23.3 at x 23. The export has a margin of 4/30 of the box.
+    // cult hall (Figma 13603:425361…): 29×24 at x 20, the whole set slides to the competition position during the transition
+    const [cw, ch, cx] = numRuler ? [29, 24, 33] : [28, 23.33, 23], t = hallT;
+    const w = 29 + (cw - 29) * t, h = 24 + (ch - 24) * t, x = 20 + (cx - 20) * t - rulerX, k = w / 30;
+    const key = [w, h, x].map(v => v.toFixed(2)).join();
+    if (key === avKey) return; avKey = key;
+    avatars.forEach(b => {
+      b.style.width = w.toFixed(2) + 'px'; b.style.height = h.toFixed(2) + 'px'; b.style.marginTop = (-h / 2).toFixed(2) + 'px'; b.style.left = x.toFixed(2) + 'px';
+      const im = b.firstChild; im.style.left = im.style.top = (-4 * k).toFixed(2) + 'px'; im.style.width = (38 * k).toFixed(2) + 'px'; im.style.height = (33 * k).toFixed(2) + 'px';
+    });
+  }
+  let stackPhase = 0, stackOn = false, stackSwap = false, flipping = false;
+  // coin spin around the vertical axis: the shown logo turns edge-on (0 → 90°), the turn passes to the next cult,
+  // and its logo turns in from the other side (-90° → 0)
+  const SPIN = 'perspective(140px) rotateY';
+  function flipStacks() {
+    if (!stackOn || flipping) return;
+    const shown = () => avatars.filter(a => a.classList.contains('stk') && a.dataset.front === '1' && !a.classList.contains('off'));
+    const swap = () => { stackPhase++; stackSwap = true; render(); stackSwap = false; };
+    const out = shown();
+    if (reduce || !out.length) { swap(); return; }
+    flipping = true;
+    const outAnims = out.map(a => a.animate([{ transform: `${a.style.transform} ${SPIN}(0deg)` }, { transform: `${a.style.transform} ${SPIN}(90deg)` }],
+      { duration: 280, easing: 'cubic-bezier(.55,0,1,.45)', fill: 'forwards' }));
+    setTimeout(() => {
+      swap();
+      outAnims.forEach(an => an.cancel());
+      shown().forEach(a => a.animate([{ transform: `${a.style.transform} ${SPIN}(-90deg)` }, { transform: `${a.style.transform} ${SPIN}(0deg)` }],
+        { duration: 380, easing: 'cubic-bezier(0,.55,.45,1)' }));
+      flipping = false;
+    }, 280);
+  }
+  setInterval(flipStacks, 2400);
+  function renderLeader(rulerT, mc, cur) {
+    const hs = liveHeights(cur), L = leaderOf(hs), HL = hs[L], mine = idx === L;
+    if (L !== lastLeader) {
+      medalImg.src = R(`a/av_${L}.webp`); medal.setAttribute('aria-label', `Лідер: ${CULTS[L].name}, ${heights[L]} дм`);
+      lastLeader = L; llogo.src = R(`a/logo_${L}.webp`); placeLogo(); lastLeadVal = -1; updateList();
+      idols.forEach((d, j) => d.box.classList.toggle('is-lead', j === L));
+    }
+    phone.classList.toggle('mine-lead', mine);
+    if (signKind === 'corner') {
+      // the main mark always stays silver; on the leader's screen the gold corner mark slides out over it
+      const pr = proxShown, ms = markSrc(lastMark);
+      if (mark.getAttribute('src') !== ms) mark.src = ms;
+      const y = signY(L, rulerT, HL, mc, pr);
+      lsign.style.top = y.toFixed(2) + 'px';
+      lsign.classList.remove('lead-hidden');
+      const v = Math.round(HL); if (v !== lastLeadVal || signKind !== lastKind) { lastLeadVal = v; lastKind = signKind; placeFree(v); placeHit(); }
+      cSlide.style.transform = `translateX(${(-(numRuler ? 53 : CORNER_SLIDE) * (1 - pr)).toFixed(2)}px)`;
+      const fo = 1 - smooth(0, .5, pr);
+      const slideT = `translateX(${(14 * (1 - fo)).toFixed(2)}px)`;
+      // the leader's number only when the corner is pinned: while the leader's height is on the visible part of the ruler
+      // (from the screen bottom up to the cult switcher; in the cult hall up to the «→ До змагання Їдолів →» row) the corner
+      // stands right at it and the ruler itself tells the height, so only the gold tip and the emblem are left
+      const tY = rulerT + yW(HL), pinC = numRuler ? 241 : CORNER_PIN;
+      const nf = smooth(-4, 4, pinC - tY) * hallT + smooth(-4, 4, 418 - tY) * (1 - hallT);
+      cLogo.style.opacity = (fo * hallT).toFixed(3);
+      cLogo.style.transform = `translateX(${(14 * (1 - fo) - (numRuler ? 22 * (1 - nf) : 0)).toFixed(2)}px)`;   // numbers tab: the emblem takes the number's place
+      cNum.style.opacity = (fo * hallT * nf * (numRuler ? .8 : 1)).toFixed(3); cNum.style.transform = slideT;
+      ccLogo.style.opacity = (fo * (1 - hallT)).toFixed(3); ccNum.style.opacity = (fo * (1 - hallT) * nf).toFixed(3);
+      ccLogo.style.transform = ccNum.style.transform = slideT;
+      // my own cult leads: in the cult hall its mark is the Figma gold mark (13606:427927), in the competition hall the slid-out corner
+      cSlide.style.opacity = mine ? hallT.toFixed(3) : '';
+      const go = mine ? 1 - hallT : 0;
+      cgold.style.opacity = go.toFixed(3);
+      if (go > 0) { const gs = R(`a/cgold_${Math.max(18, Math.min(44, lastMark))}.png`); if (cgold.getAttribute('src') !== gs) cgold.src = gs; cgold.style.top = (mc - 21).toFixed(2) + 'px'; }
+      cFlour.style.opacity = smooth(.55, 1, pr).toFixed(3);
+      mark.style.opacity = (1 - smooth(.35, .9, pr)).toFixed(3);
+      markFx.style.opacity = (smooth(.6, 1, pr) * hallT).toFixed(3);
+      lhit.style.visibility = pr > .5 ? 'hidden' : '';
+    } else {
+    mark.style.opacity = ''; markFx.style.opacity = '';
+    const ms = (mine ? markLead : markSrc)(lastMark);   // the leader's own mark is gold, every other cult's is silver
+    if (mark.getAttribute('src') !== ms) { mark.src = ms; markShine.style.webkitMaskImage = markShine.style.maskImage = `url(${ms})`; }
+    lsign.classList.toggle('lead-hidden', mine);
+    }
+    if (!mine && signKind !== 'corner') {
+      const y = leaderY(rulerT + yW(HL), mc);
+      lsign.style.top = y.toFixed(2) + 'px';
+      const v = Math.round(HL); if (v !== lastLeadVal || signKind !== lastKind) { lastLeadVal = v; lastKind = signKind; lmark.src = markGold(v); placeFree(v); placeHit(); }
+    }
+    // the other cults: small, quiet avatars on the ruler; nudged apart when heights collide
+    const ly = signY(L, rulerT, HL, mc, proxShown);
+    // cults on the same height share one slot and take turns in it: every 2.4 s the logo spins round like a coin
+    // (flipStacks) and the other cult's logo comes out on its other side, so it reads as «these are level»
+    const lay = avatarLayout(hs, L, rulerT, mc, ly), size = {};
+    lay.forEach(r => { size[r.grp] = (size[r.grp] || 0) + 1; });
+    const seen = {};
+    stackOn = false;
+    lay.forEach(({ i, y, shift, o, grp }) => {
+      const a = avatars[i], n = size[grp], pos = seen[grp] = (seen[grp] === undefined ? 0 : seen[grp] + 1);
+      let tf = shift ? `translateX(${shift}px)` : '', z = '';
+      if (n > 1) {
+        stackOn = true;
+        const front = ((pos - stackPhase) % n + n) % n === 0;   // only the cult whose turn it is shows; the others wait unseen
+        if (!front) o = 0;
+        a.dataset.front = front ? '1' : '0';
+        if (stackSwap) a.style.transition = 'none';              // the swap happens edge-on, mid-spin: no fade
+      } else a.dataset.front = '';
+      a.classList.toggle('stk', n > 1);
+      a.style.top = y.toFixed(2) + 'px';
+      a.style.transform = tf;
+      a.style.zIndex = z;
+      a.style.opacity = o.toFixed(3);
+      a.classList.toggle('off', o < .02);
+      if (stackSwap && n > 1) { void a.offsetWidth; a.style.transition = ''; }
+    });
+    // the current cult's and the leader's logos are not on the ruler: they fade out (CSS transition) instead of vanishing
+    for (const j of [idx, L]) { avatars[j].style.opacity = '0'; avatars[j].classList.add('off'); }
+  }
+
+  const smooth = (a, b, x) => { if (x <= a) return 0; if (x >= b) return 1; const t = (x - a) / (b - a); return t * t * (3 - 2 * t); };
+  const ease = t => t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
+  function animate(dur, step, done) {
+    if (anim) cancelAnimationFrame(anim.raf);
+    if (reduce) dur = 0;
+    const t0 = performance.now();
+    anim = { raf: 0 };
+    const tick = now => {
+      const t = dur ? Math.min(1, (now - t0) / dur) : 1;
+      step(ease(t), t);
+      render();
+      if (t < 1) anim.raf = requestAnimationFrame(tick); else { anim = null; done && done(); }
+    };
+    anim.raf = requestAnimationFrame(tick);
+  }
+
+  // dir: +1 / -1 for the arrows and swipes (always one step that way, through the last|first gap if needed);
+  // no dir (list, avatars, leader medal): the shorter way round the circle. target is a cult; p moves in slots.
+  function goTo(target, dir) {
+    if (growing) return;
+    if (hallT < .5) { switchHall(true, target); return; }
+    target = ((target % N) + N) % N;
+    const p0 = p, c0 = camY, c1 = camFor(heights[target]), h0 = hv, h1 = heights[target], m0 = markY, m1 = markFor(heights[target]);
+    let d = wrapD(SLOT[target] - p0);
+    if (dir > 0 && d < 0) d += N;
+    if (dir < 0 && d > 0) d -= N;
+    const p1 = p0 + d, dist = Math.abs(d);
+    idx = target; updateList();
+    setCultColor(target);
+    animate(520 + Math.max(0, dist - 1) * 140, e => { p = p0 + d * e; camY = c0 + (c1 - c0) * e; hv = h0 + (h1 - h0) * e; markY = m0 + (m1 - m0) * e; },
+      () => { p = ((Math.round(p1) % N) + N) % N; render(); });   // back to the home lap; every copy looks the same
+  }
+  // one place left or right in the hall (arrows, keys, swipes)
+  const step = k => { if (hallT < .5) return; goTo(ORD[((SLOT[idx] + k) % N + N) % N], k); };   // no carousel in the cult hall
+
+  function grow() {
+    if (growing || anim) return;
+    const i = idx, h0 = heights[i];
+    if (h0 >= 44) return;
+    const h1 = h0 + 2, completes = h1 % 10 === 0;
+    growing = true; $('grow').disabled = true;
+    if (mode === 'simple') {
+      // no stone animation: the stela switches instantly, the mark and the fill glide up
+      layoutIdol(i, h1);
+      const c0 = camY, c1 = camFor(h1);
+      const m0 = markY, m1 = markFor(h1);
+      animate(900, e => { hv = h0 + (h1 - h0) * e; camY = c0 + (c1 - c0) * e; markY = m0 + (m1 - m0) * e; }, () => { heights[i] = h1; hv = h1; growing = false; updateList(); });
+      return;
+    }
+    const end = completes ? h1 - 1e-3 : h1;
+    animate(1100, e => { const H = h0 + (end - h0) * e; layoutIdol(i, H); camY = camFor(H); }, () => {
+      const finish = () => { heights[i] = h1; layoutIdol(i, h1); camY = camFor(h1); render(); growing = false; updateList(); };
+      if (completes && !reduce) { const fx = [idols[i].f, idols[i].spk]; fx.forEach(e => e.classList.add('flash')); setTimeout(() => { fx.forEach(e => e.classList.remove('flash')); finish(); }, 700); }
+      else finish();
+    });
+  }
+
+  // ---------- panel
+  const list = $('list');
+  CULTS.forEach((c,i) => {
+    const li = document.createElement('li');
+    li.innerHTML = `<button type="button"><span class="sw" style="background:${c.color}"></span><span class="nm">${c.name}</span><span class="hv" id="hv${i}"></span></button>`;
+    li.querySelector('button').addEventListener('click', () => goTo(i));
+    list.appendChild(li);
+  });
+  function placeIdols() { idols.forEach((d, i) => { d.box.style.left = (CULTS[i].cx - 144.5) + 'px'; }); }
+  function sortList() { ORD.forEach(ci => list.appendChild($('hv' + ci).closest('li'))); }
+  function updateList() {
+    CULTS.forEach((c, i) => { $('hv'+i).closest('li').setAttribute('aria-current', i === idx ? 'true' : 'false'); $('hv'+i).textContent = heights[i] + ' дм' + (i === lastLeader ? ' · лідер' : ''); });
+    $('grow').disabled = growing || heights[idx] >= 44;
+    $('grow').textContent = heights[idx] >= 44 ? 'Максимум прототипу 44 дм' : '+2 дм поточному Їдолу';
+  }
+
+  function setMode(m, force) {
+    if (!MODES[m] || (!force && (m === mode || growing || anim))) return;
+    mode = m;
+    phone.classList.toggle('floor', m === 'floor');
+    phone.classList.toggle('simple', m === 'simple');
+    hv = heights[idx]; markY = markFor(hv);
+    applyOrder();
+    CULTS.forEach((c,i) => layoutIdol(i, heights[i]));
+    $('mStone').setAttribute('aria-pressed', String(m === 'stone'));
+    $('mFloor').setAttribute('aria-pressed', String(m === 'floor'));
+    $('mSimple').setAttribute('aria-pressed', String(m === 'simple'));
+    $('fillSeg').hidden = m !== 'simple';
+    $('accWrap').hidden = !(m === 'simple' && phone.classList.contains('fill-band'));
+    if (m !== 'simple') rulerMarks.forEach(r => r.el.classList.remove('long'));
+    $('intro').textContent = MODES[m].intro;
+    $('note').innerHTML = MODES[m].note;
+    const h = '#' + m;
+    if (location.hash !== h && !(force && !location.hash)) { try { history.replaceState(null, '', h); } catch (e) { location.hash = m; } }
+    lastMark = -1;
+    const c0 = camY, c1 = camFor(heights[idx]);
+    if (force || Math.abs(c1 - c0) < .5) { camY = c1; render(); }
+    else animate(450, e => { camY = c0 + (c1 - c0) * e; });
+  }
+  $('mStone').addEventListener('click', () => setMode('stone'));
+  $('mFloor').addEventListener('click', () => setMode('floor'));
+  $('mSimple').addEventListener('click', () => setMode('simple'));
+
+
+  $('prev').addEventListener('click', () => step(-1));
+  $('next').addEventListener('click', () => step(1));
+  $('grow').addEventListener('click', grow);
+  // example switcher: make another cult the tallest and fly to it; the leader sign, gold mark and head glow follow by themselves
+  document.querySelectorAll('#rulerSeg button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('#rulerSeg button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    phone.classList.toggle('ruler-cp', b.dataset.ruler === 'cp');
+    sizeAvatars();
+    render();
+  }));
+  document.querySelectorAll('#leadSeg button').forEach(b => b.addEventListener('click', () => {
+    if (growing) return;
+    const L = +b.dataset.lead;
+    document.querySelectorAll('#leadSeg button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    const S0 = SCEN[scen]; base = S0.slice(); [base[1], base[L]] = [S0[L], S0[1]];
+    base.forEach((h, i) => { heights[i] = h; layoutIdol(i, h); });
+    arrange(base); placeIdols(); p = SLOT[idx]; sortList();
+    updateList();
+    if (hallT < .5) { const c0 = camY, c1 = camFor(heights[idx]), h0 = hv, h1 = heights[idx]; animate(450, e => { camY = c0 + (c1 - c0) * e; hv = h0 + (h1 - h0) * e; }); }
+    else goTo(L);
+  }));
+  // switch the height example in place: the hall re-ranks itself, the camera settles on the same cult
+  document.querySelectorAll('#scSeg button').forEach(b => b.addEventListener('click', () => {
+    if (growing || anim || b.dataset.sc === scen) return;
+    scen = b.dataset.sc;
+    document.querySelectorAll('#scSeg button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    document.querySelectorAll('#leadSeg button').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.lead === '1')));
+    base = SCEN[scen].slice();
+    base.forEach((h, i) => { heights[i] = h; layoutIdol(i, h); });
+    arrange(base); placeIdols(); p = SLOT[idx]; sortList(); updateList();
+    const c0 = camY, c1 = camFor(heights[idx]), h0 = hv, h1 = heights[idx];
+    animate(450, e => { camY = c0 + (c1 - c0) * e; hv = h0 + (h1 - h0) * e; });
+  }));
+  $('reset').addEventListener('click', () => {
+    if (growing) return;
+    base.forEach((h,i) => { heights[i] = h; layoutIdol(i, h); });
+    const c0 = camY, c1 = camFor(heights[idx]), h0 = hv, h1 = heights[idx], m0 = markY, m1 = markFor(h1);
+    animate(400, e => { camY = c0 + (c1 - c0) * e; hv = h0 + (h1 - h0) * e; markY = m0 + (m1 - m0) * e; });
+    updateList();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.target.closest && e.target.closest('input,textarea')) return;
+    if (e.key === 'ArrowLeft') { step(-1); e.preventDefault(); }
+    if (e.key === 'ArrowRight') { step(1); e.preventDefault(); }
+  });
+  const phone = $('phone');
+  function setFill(s) {
+    ['none','band','bar','ticks'].forEach(k => phone.classList.toggle('fill-' + k, k === s));
+    document.querySelectorAll('#fillSeg button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.fill === s)));
+    if (s !== 'ticks') rulerMarks.forEach(r => r.el.classList.remove('lit'));
+    $('accWrap').hidden = !(mode === 'simple' && s === 'band');
+    render();
+  }
+  document.querySelectorAll('#fillSeg button').forEach(b => b.addEventListener('click', () => setFill(b.dataset.fill)));
+  document.querySelectorAll('#signSeg button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('#signSeg button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    ['top','end','pin','flag','chain','line','tick','plate'].forEach(k => phone.classList.toggle('sign-' + k, b.dataset.sign === k));
+    signKind = b.dataset.sign; render();
+    placeLogo();
+  }));
+  document.querySelectorAll('#accSeg button').forEach(b => b.addEventListener('click', () => {
+    const on = b.getAttribute('aria-pressed') !== 'true';
+    b.setAttribute('aria-pressed', String(on));
+    phone.classList.toggle('acc-' + b.dataset.acc, on);
+    render();
+  }));
+  let sx = null, sy = null;
+  phone.addEventListener('pointerdown', e => { sx = e.clientX; sy = e.clientY; });
+  phone.addEventListener('pointerup', e => {
+    if (sx === null) return;
+    const dx = e.clientX - sx, dy = e.clientY - sy; sx = null;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.3) step(dx < 0 ? 1 : -1);
+  });
+
+  // ---------- fit the phone to the viewport
+  const wrap = $('phoneWrap');
+  function fit() {
+    const vw = document.documentElement.clientWidth - 32;
+    const vh = window.innerHeight - 48;
+    let s = Math.min(1, vw / 393);
+    if (window.innerWidth > 760) s = Math.min(s, Math.max(.62, vh / 852));
+    phone.style.transform = `scale(${s})`;
+    wrap.style.width = (393 * s) + 'px'; wrap.style.height = (852 * s) + 'px';
+  }
+  addEventListener('resize', fit); fit();
+
+  // ---------- прожектор лідера (Lottie 1000×852, маркери appear / loop)
+  // Стоїть на місці екрана. Ідол-лідер доїхав -> пауза -> прожектор наводиться (з того боку, звідки ідол приїхав).
+  // Відходимо -> гасне. Видно лише в Залі Змагань (як і пляма колеги: прозорість = hallT).
+  const LIGHT_CX = 500, SCREEN_CX = 196.5, AIM_DELAY = 100, OFF_MS = 260;
+  const lightEl = $('leaderLight');
+  lightEl.style.transformOrigin = `${LIGHT_CX}px 0`;
+  let MK = {}, anim0 = null, lightState = 'off', lightTimer = 0, cameFrom = 1;
+  const FOG_MIX = 0.675, FOG_REF = 0.5;   // у файлі зашито 135%; повзунок рахує від 50% = 100%
+  let fogA = 1.35, fogV = 1;
+  function applySpeed(d) {               // швидкість туману: цикл коротший/довший, туман за цикл — рівно одна плитка
+    if (fogV === 1) return;
+    const ap = d.markers.find(m => m.cm === 'appear'), lp = d.markers.find(m => m.cm === 'loop');
+    const INTRO = ap.tm + ap.dr, OP0 = d.op, L0 = OP0 - INTRO, L1 = L0 / fogV, OP1 = INTRO + L1;
+    const remap = t => t <= INTRO ? t : INTRO + (t - INTRO) * L1 / L0;
+    const walk = o => {
+      if (!o || typeof o !== 'object') return;
+      if (Array.isArray(o)) { o.forEach(walk); return; }
+      if (o.a === 1 && Array.isArray(o.k)) o.k.forEach(kf => { if (typeof kf.t === 'number') kf.t = remap(kf.t); });
+      Object.values(o).forEach(walk);
+    };
+    const fix = ls => ls.forEach(l => {
+      if (/^fog\d$/.test(l.nm)) {
+        const k = l.ks.p.k, x0 = k[0].s[0], v = (k[1].s[0] - x0) / (k[1].t - k[0].t);
+        k[1].t = OP1; k[1].s = [x0 + v * fogV * OP1, k[1].s[1], k[1].s[2] || 0];
+      } else walk(l.ks);
+      if (l.op >= OP0 - 1e-3) l.op = OP1;
+    });
+    fix(d.layers); (d.assets || []).forEach(a => a.layers && fix(a.layers));
+    d.op = OP1; lp.dr = L1;
+  }
+  function prepLight() {
+    const d = JSON.parse(JSON.stringify(window.__LEADER_LIGHT));
+    applySpeed(d);
+    const f = Math.min(1, FOG_REF * fogA);
+    d.layers.forEach(l => {
+      const k = l.ks && l.ks.o && l.ks.o.k;
+      if (!Array.isArray(k)) return;
+      if (l.nm === 'beam_in_fog') k.forEach(kf => { kf.s = [kf.s[0] / FOG_MIX * f]; });
+      else if (l.nm === 'beam') k.forEach(kf => { kf.s = [kf.s[0] / (1 - 0.5 * FOG_MIX) * (1 - 0.5 * f)]; });
+    });
+    return d;
+  }
+  function loadLight() {
+    if (!window.lottie) return;
+    if (anim0) anim0.destroy();
+    const d = prepLight();
+    MK = Object.fromEntries(d.markers.map(m => [m.cm, [m.tm, m.tm + m.dr]]));
+    anim0 = lottie.loadAnimation({ container: lightEl, renderer: 'svg', loop: false, autoplay: false, animationData: d });
+    anim0.addEventListener('complete', () => { if (lightState === 'on') { anim0.loop = true; anim0.playSegments(MK.loop, true); } });
+  }
+  loadLight();
+  // за ідолом і камінням: усередині шару світу, одразу під ідолами; світ їде з камерою — обгортка зсувається назад.
+  // Один Lottie: затемнення шапки (#ovl) лежить під світлом, тож верх променя ніщо не притемнює.
+  const lightHost = el('div', '', 'position:absolute;left:0;top:0;width:0;height:0;pointer-events:none');
+  world.insertBefore(lightHost, world.querySelector('.idol'));
+  lightHost.append($('ovl'), lightEl);
+  function pinLight() {
+    const m = /translate3d\(([-\d.]+)px,\s*([-\d.]+)px/.exec(world.style.transform || '');
+    lightHost.style.transform = m ? `translate3d(${-m[1]}px,${-m[2]}px,0)` : '';
+    const sv = lightEl.firstElementChild;                  // лише в Залі Змагань: прозорість × hallT
+    if (sv) sv.style.opacity = `calc(var(--beamA,1) * ${hallT.toFixed(3)})`;
+  }
+  // ---------- Лососянці: живий Rive замість картинки голови (артборд BigFish 512×512; 0,52 px на одиницю, зсув 18, −42)
+  const FISH = 0, FISH_S = 0.52, FISH_DX = 18, FISH_DY = -42, FISH_GLOW_MS = 200;
+  let fishVM = null, lightOnAt = 0;
+  if (window.rive && window.__FISH_RIV) {
+    const d = idols[FISH], sz = 512 * FISH_S;
+    const cv = el('canvas', 'rive-head', `position:absolute;left:${CULTS[FISH].head[0] + FISH_DX}px;width:${sz}px;height:${sz}px;pointer-events:auto`);
+    cv.width = cv.height = Math.round(sz * Math.min(3, devicePixelRatio || 1));
+    const place = () => {
+      cv.style.top = (parseFloat(d.head.style.top) + FISH_DY) + 'px';
+      if (cv.previousElementSibling !== d.head) d.head.after(cv);
+    };
+    place();
+    new MutationObserver(place).observe(d.head, { attributes: true, attributeFilter: ['style'] });
+    new MutationObserver(() => { if (cv.previousElementSibling !== d.head) d.head.after(cv); }).observe(d.box, { childList: true });
+    rive.RuntimeLoader.setWasmUrl(URL.createObjectURL(new Blob([Uint8Array.from(atob(window.__RIVE_WASM), c => c.charCodeAt(0))], {type: 'application/wasm'})));   // рушій лежить поруч зі сторінкою
+    const bin = Uint8Array.from(atob(window.__FISH_RIV), ch => ch.charCodeAt(0)).buffer;
+    const fr = new rive.Rive({ buffer: bin, canvas: cv, artboard: 'BigFish', stateMachines: 'State Machine 1', autoplay: true, autoBind: true, isTouchScrollEnabled: true,
+      onLoad: () => { fr.resizeDrawingSurfaceToCanvas(); fishVM = fr.viewModelInstance; fishVM.boolean('characterLay').value = true; d.head.style.visibility = 'hidden'; },
+      onLoadError: e => { console.warn('fish.riv', e); cv.remove(); } });
+    window.__fishRive = fr;
+  }
+  (function fishGlowLoop() {             // isGlowing: прожектор навівся на рибу-лідера в Залі Змагань
+    if (fishVM) {
+      const want = lightState === 'on' && lastLeader === FISH && idx === FISH && hallT > .99 &&
+        phone.classList.contains('light-top') && performance.now() - lightOnAt > FISH_GLOW_MS;
+      const pr = fishVM.boolean('isGlowing');
+      if (pr.value !== want) pr.value = want;
+    }
+    requestAnimationFrame(fishGlowLoop);
+  })();
+  function lightOnNow() {
+    if (!anim0) return;
+    lightOnAt = performance.now(); lightState = 'on';
+    lightEl.style.transform = `translate3d(${SCREEN_CX - LIGHT_CX}px,0,0) scaleX(${cameFrom})`;   // файл наводиться зліва
+    lightEl.style.transition = 'none'; lightEl.style.opacity = '1';
+    anim0.loop = false; anim0.playSegments(MK.appear, true);
+  }
+  function lightOff() {
+    clearTimeout(lightTimer);
+    if (lightState === 'off') return;
+    lightState = 'off';
+    lightEl.style.transition = `opacity ${OFF_MS}ms ease-out`; lightEl.style.opacity = '0';
+    lightTimer = setTimeout(() => { if (lightState === 'off' && anim0) anim0.stop(); }, OFF_MS + 50);
+  }
+  let lastOff = NaN, rlCalls = 0;
+  function renderLight(X) {
+    rlCalls++;
+    try { pinLight(); } catch (e) {}
+    if (lastLeader < 0) return;
+    const L = lastLeader;
+    const off = CULTS[L].cx + idolShift[L] * PER - X;          // наскільки ідол-лідер зсунутий від центру
+    lastOff = off;
+    if (Math.abs(off) > 1) cameFrom = off < 0 ? 1 : -1;
+    if (idx !== L || hallT < .99) { lightOff(); return; }      // прожектор — лише в Залі Змагань; у неї заходимо — наводиться
+    if (lightState === 'off' && Math.abs(off) < 0.5) {
+      lightState = 'wait';
+      lightTimer = setTimeout(() => { if (lightState === 'wait' && idx === lastLeader) lightOnNow(); }, AIM_DELAY);
+    }
+  }
+  document.querySelectorAll('#lightSeg button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('#lightSeg button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    phone.classList.toggle('light-top', b.dataset.light === 'top');
+    if (b.dataset.light === 'top' && idx === lastLeader) { lightOff(); lightState = 'off'; render(); }
+  }));
+  { const inp = $('beamA'), out = $('beamAv');
+    inp.addEventListener('input', () => { phone.style.setProperty('--beamA', inp.value / 100); out.textContent = inp.value + '%'; }); }
+  function refreshFog() {
+    const wasOn = lightState === 'on', L = MK.loop;
+    const fr = anim0 ? anim0.currentFrame + (anim0.firstFrame || 0) : 0;
+    const frac = Math.min(1, Math.max(0, (fr - L[0]) / (L[1] - L[0])));
+    loadLight();
+    if (wasOn) { anim0.loop = true; anim0.playSegments(MK.loop, true); anim0.goToAndPlay(frac * (MK.loop[1] - MK.loop[0]), true); }
+  }
+  { const inp = $('fogA'), out = $('fogAv');
+    inp.addEventListener('input', () => { out.textContent = inp.value + '%'; });
+    inp.addEventListener('change', () => { fogA = inp.value / 100; refreshFog(); }); }
+  { const inp = $('fogV'), out = $('fogVv');
+    inp.addEventListener('input', () => { out.textContent = (inp.value / 100).toFixed(1).replace('.', ',') + '×'; });
+    inp.addEventListener('change', () => { fogV = inp.value / 100; refreshFog(); }); }
+  phone.classList.add('light-top');
+  window.__lightDbg = () => ({ lightState, lastLeader, idx, hallT, fishVM: !!fishVM, lastOff, rlCalls, anim0: !!anim0, mk: JSON.stringify(MK), onFor: performance.now() - lightOnAt });
+
+  // ---------- init
+  setCultColor(idx);
+  phone.classList.add('fill-none', 'acc-stars', 'acc-fog', 'sign-corner');
+  placeMarkBox();
+  document.querySelectorAll('#numSeg button').forEach(b => b.addEventListener('click', () => {
+    const on = b.dataset.num === '1';
+    if (on === numRuler) return;
+    document.querySelectorAll('#numSeg button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    numRuler = on; phone.classList.toggle('ruler-num', on);
+    placeMarkBox(); sizeAvatars(); lastLeadVal = -1; render();
+  }));
+  $('toComp').addEventListener('click', e => { e.stopPropagation(); switchHall(true); });
+  $('toCult').addEventListener('click', e => { e.stopPropagation(); switchHall(false); });
+  for (const id of ['toComp', 'toCult']) { $(id).addEventListener('pointerdown', e => e.stopPropagation()); $(id).addEventListener('pointerup', e => e.stopPropagation()); }
+  document.querySelectorAll('#hallSeg button').forEach(b => b.addEventListener('click', () => { const on = b.dataset.hall === '1'; if ((hallT >= .5) !== on) switchHall(on); }));
+  document.querySelectorAll('#mySeg button').forEach(b => b.addEventListener('click', () => {
+    if (growing || anim) return;
+    myCult = +b.dataset.my;
+    document.querySelectorAll('#mySeg button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    setCultImages();
+    if (hallT < .5) { idx = myCult; p = SLOT[idx]; hv = heights[idx]; camY = camFor(hv); setCultColor(idx); updateList(); lastMark = -1; render(); }
+  }));
+  setCultImages();
+  idx = myCult; p = SLOT[idx]; hv = heights[idx];
+  sizeAvatars();
+  camY = camFor(heights[idx]);
+  const hashMode = location.hash.slice(1);
+  setMode('simple', true);   // чистовик: лише рішення «Проста + заливка» (без заливки)
+  sortList(); updateList(); render();
+  // warm the cache for growth
+  setTimeout(() => CULTS.forEach((c,i) => { for (let k = 1; k <= 9; k++) { const im = new Image(); im.src = stoneSrc(i,k); } }), 1200);
+})();
+</script>
+
+</body></html>
