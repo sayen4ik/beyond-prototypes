@@ -1,8 +1,12 @@
-# Після кожного злиття в main збирає всі прототипи й сторінку-розвідник і публікує їх на GitHub Pages.
+# Збирає сайт і публікує його на GitHub Pages: після злиття в main, після видалення гілки
+# і після пушу в будь-яку іншу гілку (тоді його запускає branch-push.yml). Завжди працює з коду main.
+#   main               -> https://sayen4ik.github.io/beyond-prototypes/
+#   кожна інша гілка   -> https://sayen4ik.github.io/beyond-prototypes/branches/<гілка, де / замінено на ->/
 name: pages
 on:
   push:
     branches: [main]
+  delete:
   workflow_dispatch:
 permissions:
   contents: read
@@ -19,7 +23,24 @@ jobs:
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - run: python3 tools/proto.py build
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Зібрати main
+        run: python3 tools/proto.py build
+      - name: Зібрати всі інші гілки в site/branches/
+        run: |
+          for ref in $(git for-each-ref --format='%(refname:short)' refs/remotes/origin | grep -v -e '^origin$' -e '^origin/HEAD$' -e '^origin/main$'); do
+            b="${ref#origin/}"; slug="${b//\//-}"
+            echo "== $b -> branches/$slug/"
+            git worktree add -q "/tmp/wt-$slug" "$ref" || continue
+            if (cd "/tmp/wt-$slug" && python3 tools/proto.py build); then
+              mkdir -p site/branches && cp -r "/tmp/wt-$slug/site" "site/branches/$slug"
+            else
+              echo "::warning::гілка $b не зібралась"
+            fi
+            git worktree remove --force "/tmp/wt-$slug"
+          done
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site

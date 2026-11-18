@@ -1,0 +1,15 @@
+# Пуш у будь-яку гілку, крім main, -> перезібрати сайт (pages.yml з main), щоб оновилась версія цієї гілки
+# на https://sayen4ik.github.io/beyond-prototypes/branches/<гілка, де / замінено на ->/
+name: branch-push
+on:
+  push:
+    branches-ignore: [main]
+permissions:
+  actions: write
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run pages.yml --repo "${{ github.repository }}" --ref main
