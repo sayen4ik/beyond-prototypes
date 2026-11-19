@@ -50,6 +50,20 @@
 .fly-wrap .big-scroll{width:100%}
 .fly-wrap .fly-glow{position:absolute;inset:0;border-radius:999px;background:linear-gradient(#fff,#ececec);box-shadow:0 0 6px #fff,0 0 18px rgba(255,255,255,.95),0 0 36px rgba(255,255,255,.6)}
 .hs-load.plain i{display:none}
+/* стан конверта: доручення Батата відкрите, але не вирішене — з конверта стирчить срібний сувій з бататною печаткою */
+.hs-mail .mb-scroll{position:absolute;left:10px;top:-13px;width:11px;height:24px;border-radius:3px;background:linear-gradient(90deg,#9a9a9a,#f4f4f4 45%,#bdbdbd);box-shadow:inset 0 0 0 1px #777;transform:rotate(-14deg);transform-origin:50% 100%;opacity:0;z-index:0}
+.hs-mail .mb-scroll i{position:absolute;left:50%;top:5px;width:7px;height:7px;margin-left:-3.5px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f2b48f,#c8775a 55%,#8e4a35)}
+.hs-mail .mb-body,.hs-mail .mb-flap{z-index:1}
+.hs-mail .dot{z-index:3}   /* булька завжди поверх конверта */
+.hs-mail.pending .mb-scroll{opacity:1}
+/* лист Їдола: Чайка визирає з лівого краю під банкою «Забобонуси» (віддзеркалена, дзьобом у екран) */
+.intro.hs .peek{left:0;right:auto;top:206px;width:160px;height:110px}
+.intro.hs .peek img{left:-122px;right:auto;width:121px;height:auto;transform:none;transform-origin:15% 65%}   /* півот за Танчиною розміткою: трохи за краєм екрана, у товщі шиї */   /* з лівого краю під банкою; шия догенерована й заходить за край на 33px; масштаб як у Чайки на барі */
+.drop-env{position:absolute;z-index:7;pointer-events:none}
+.hs-feather{position:absolute;width:16px;height:40px;z-index:7;pointer-events:none;filter:drop-shadow(0 1px 2px rgba(0,0,0,.4))}
+.fly-wrap .big-env{width:100%;height:100%}
+.fly-wrap .fly-glow.env{border-radius:10px}
+.big-env .peek{display:none}   /* маленький аркушик-заглушка більше не потрібен — виходить справжній лист */
 </style></head><body>
 <script>window.__A={"a/chaika_calm_nobar.webp":"data:image/webp;base64,@@FILE:a/chaika_calm_nobar.webp@@",
 "a/chaika_batat_nobar.webp":"data:image/webp;base64,@@FILE:a/chaika_batat_nobar.webp@@",
@@ -67,7 +81,11 @@
 "a/chaika_land_2.webp":"data:image/webp;base64,@@FILE:a/chaika_land_2.webp@@",
 "a/chaika_land_3.webp":"data:image/webp;base64,@@FILE:a/chaika_land_3.webp@@",
 "a/chaika_land_4.webp":"data:image/webp;base64,@@FILE:a/chaika_land_4.webp@@",
-"a/chaika_doze_scroll.webp":"data:image/webp;base64,@@FILE:a/chaika_doze_scroll.webp@@"};function R(p){return window.__A[p]||p}</script>
+"a/chaika_doze_scroll.webp":"data:image/webp;base64,@@FILE:a/chaika_doze_scroll.webp@@",
+"a/chaika_open.webp":"data:image/webp;base64,@@FILE:a/chaika_open.webp@@",
+"a/chaika_head_1.webp":"data:image/webp;base64,@@FILE:a/chaika_head_1.webp@@",
+"a/chaika_head_2.webp":"data:image/webp;base64,@@FILE:a/chaika_head_2.webp@@",
+"a/chaika_head_3.webp":"data:image/webp;base64,@@FILE:a/chaika_head_3.webp@@"};function R(p){return window.__A[p]||p}</script>
 <title>Пошта Чайки</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -731,7 +749,7 @@ body{background:var(--k5);color:var(--k1)}
     <div class="hs-row">
       <span class="hs-exit">‹ Вийти</span>
       <span class="hs-icons">
-        <button class="hs-ico hs-mail" id="mailIcon" aria-label="Пошта"><i class="mb-body"></i><i class="mb-flap"></i><b class="dot"></b></button>
+        <button class="hs-ico hs-mail" id="mailIcon" aria-label="Пошта"><i class="mb-scroll"><i></i></i><i class="mb-body"></i><i class="mb-flap"></i><b class="dot"></b></button>
         <span class="hs-ico">ID</span><span class="hs-ico">⚙</span>
       </span>
     </div>
@@ -1113,17 +1131,17 @@ async function openLetter(id, srcEl){
       flyFrom(env, fromRect, {dur:460});
       await wait(380);
     } else {
-      flyFrom(env, fromRect, {dur:480});
-      await wait(560); sfx.paper(); env.classList.add('open');
-      await wait(460); env.classList.add('rise');
-      await wait(480);
+      const fast = S.fastOpen; S.fastOpen = false;
+      flyFrom(env, fromRect, {dur: fast ? 1 : 480});
+      await wait(fast ? 60 : 560); sfx.paper(); env.classList.add('open');
+      await wait(420);   /* без аркушика-заглушки: з конверта одразу виходить сам лист */
     }
     /* the letter comes out but its bottom stays tucked in the envelope */
     const c = $('#card'); c.hidden = false;
     const envH = env.offsetHeight, h = c.offsetHeight;
     env.style.setProperty('--down', `${Math.max(0, (h - envH) / 2 + 10)}px`);
     env.classList.add('settled');
-    c.animate([{transform:'translate(-50%, 45%) scale(.94)', opacity:.4},{transform:'translate(-50%, 0)', opacity:1}], {duration:520*M, easing:'cubic-bezier(.2,.8,.2,1)'});
+    c.animate([{transform:'translate(-50%, 55%)'},{transform:'translate(-50%, 0)'}], {duration:560*M, easing:'cubic-bezier(.2,.8,.2,1)'});
   }
   else if(l.type === 'note'){
     openRoot.innerHTML = `<article class="card note-card" id="card"><p>${l.text}</p><p class="sign">— Ч.</p><i class="paw"><i></i></i></article>`;
@@ -1298,10 +1316,10 @@ const sfxReal = (() => {
 const sfx = SOUND ? sfxReal : {quack(){}, paper(){}, crack(){}, thud(){}};
 
 /* ---------- demo controls ---------- */
-$('#btnReset').addEventListener('click', () => { if(S.busy) return; S.letters = structuredClone(INIT); S.order = null; S.view='new'; S.seenPerch = false; S.viewed = false; S.batatIgnored = false; S.idolPeeked = false; render(); showIntro(); });
+$('#btnReset').addEventListener('click', () => { if(S.busy) return; S.letters = structuredClone(INIT); S.order = null; S.view='new'; S.seenPerch = false; S.viewed = false; S.batatIgnored = false; S.idolPeeked = false; S.featherDone = false; render(); showIntro(); });
 $('#btnEmpty').addEventListener('click', () => { if(S.busy) return; S.order = null; S.letters.forEach(l => { l.read = true; if(l.type==='scroll' && !l.declined) l.accepted = true; }); S.view='new'; S.viewed = true; render(); showIntro(); });
-$('#btnService').addEventListener('click', () => { if(S.busy) return; S.letters = structuredClone(INIT); S.letters.forEach(l => { if(l.type==='scroll' || l.from==='idol'){ l.read = true; if(l.type==='scroll') l.accepted = true; } }); S.order = null; S.view='new'; S.seenPerch = false; S.viewed = false; S.batatIgnored = false; S.idolPeeked = false; render(); showIntro(); });
-$('#btnExpire').addEventListener('click', () => { if(S.busy) return; const sc = S.letters.find(l => l.type==='scroll' && !l.read); if(!sc) return; sc.read = true; sc.expired = true; S.idolPeeked = true; S.order = null; render(); showIntro(); });
+$('#btnService').addEventListener('click', () => { if(S.busy) return; S.letters = structuredClone(INIT); S.letters.forEach(l => { if(l.type==='scroll' || l.from==='idol'){ l.read = true; if(l.type==='scroll') l.accepted = true; } }); S.order = null; S.view='new'; S.seenPerch = false; S.viewed = false; S.batatIgnored = false; S.idolPeeked = false; S.featherDone = false; render(); showIntro(); });
+$('#btnExpire').addEventListener('click', () => { if(S.busy) return; const sc = S.letters.find(l => l.type==='scroll' && !l.read); if(!sc) return; sc.read = true; sc.expired = true; S.idolPeeked = true; S.featherDone = true; S.order = null; render(); showIntro(); });
 
 /* ---------- Homespace: where Чайка sits, and the entry transition ---------- */
 const intro = $('#intro'), perch = $('#perch'), mailIcon = $('#mailIcon');
@@ -1312,6 +1330,8 @@ intro.appendChild(perch); intro.style.setProperty('--hsbg', `url(${R('a/homespac
    'idol'   — новий лист від Їдола: Чайка визирає з-за краю, кричить, ховається й лишає бульку;
    'dot'    — є щось непереглянуте: металевий конверт із булькою;
    'clear'  — усе переглянуто: конверт без бульки. */
+/* доручення відкрили, але ще не вирішили (не прийняли, не відхилили, термін не минув) */
+const pendingOrder = () => S.letters.find(l => l.type === 'scroll' && !l.accepted && !l.declined && !l.expired);
 function hsState(){
   const unread = S.letters.filter(l => !l.read);
   if(!S.viewed && unread.some(l => l.type === 'scroll')) return S.batatIgnored ? 'doze' : 'batat';
@@ -1320,19 +1340,70 @@ function hsState(){
   return 'dot';
 }
 const peekEl = $('#peek'), awayEl = $('#away'), loadEl = $('#hsLoad');
+$('#phone').appendChild(loadEl);   // лоадер поверх усього телефона, а не всередині Хоумспейсу (інакше ховався разом з ним)
+/* лист від Їдола: Чайка визирає з лівого краю під банкою «Забобонуси», відкриває дзьоб, конверт випадає,
+   стає бліком, блік летить у конверт угорі, Чайка ховається за край */
+const ENV_IN_BEAK = [.533, .379, .467, .411];   // картинка тепер вища (шия не обрізана знизу)   // конверт у картинці голови: x, y, ширина, висота (частки)
 async function peek(){
   S.busy = true;
-  const img = peekEl.querySelector('img'), cry = peekEl.querySelector('.peek-cry');
+  const wait = ms => new Promise(r => setTimeout(r, ms*M));
+  const img = peekEl.querySelector('img');
+  img.src = R('a/chaika_head_1.webp');
   peekEl.hidden = false;
-  await new Promise(r => setTimeout(r, 350*M));
-  await img.animate([{right:'-150px', transform:'rotate(0)'},{right:'-48px', transform:'rotate(-10deg)'}], {duration:280*M, easing:'cubic-bezier(.3,1.3,.5,1)', fill:'forwards'}).finished;
-  cry.animate([{opacity:0, transform:'scale(.6)'},{opacity:1, transform:'scale(1.15)', offset:.3},{opacity:1, transform:'scale(1)', offset:.8},{opacity:0, transform:'scale(1)'}], {duration:700*M, fill:'forwards'});
-  await img.animate([{transform:'rotate(-10deg)'},{transform:'rotate(-16deg) translateY(-3px)', offset:.2},{transform:'rotate(-8deg)', offset:.4},{transform:'rotate(-15deg) translateY(-3px)', offset:.6},{transform:'rotate(-10deg)'}], {duration:650*M, fill:'forwards'}).finished;
-  await img.animate([{right:'-48px', transform:'rotate(-10deg)'},{right:'-160px', transform:'rotate(0)'}], {duration:240*M, easing:'ease-in', fill:'forwards'}).finished;
-  peekEl.hidden = true; [img, cry].forEach(e => e.getAnimations().forEach(x => x.cancel()));
+  await wait(350);
+  await img.animate([{left:'-122px'},{left:'-30px'}], {duration:300*M, easing:'cubic-bezier(.2,.9,.3,1)', fill:'forwards'}).finished;
+  await wait(260);
+  // відкрила дзьоб — конверт одразу вилітає до іконки
+  const ir = intro.getBoundingClientRect(), r = img.getBoundingClientRect();
+  const ex = r.left - ir.left + r.width * ENV_IN_BEAK[0], ey = r.top - ir.top + r.height * ENV_IN_BEAK[1];
+  const ew = r.width * ENV_IN_BEAK[2], eh = r.height * ENV_IN_BEAK[3];
+  img.src = R('a/chaika_head_2.webp');
+  const env = document.createElement('img'); env.src = R('a/envelope.webp'); env.alt = ''; env.className = 'drop-env';
+  Object.assign(env.style, {left:ex+'px', top:ey+'px', width:ew+'px', height:eh+'px'});
+  intro.appendChild(env);
+  const mr = mailIcon.getBoundingClientRect();
+  const tx = mr.left - ir.left + mr.width/2 - (ex + ew/2), ty = mr.top - ir.top + mr.height/2 - (ey + eh/2);
+  // блік у тій самій точці, летить тим самим шляхом; конверт по дорозі стискається й тане, а блік проступає
+  const g = document.createElement('div'); g.className = 'glint';
+  g.innerHTML = '<svg viewBox="-10 -10 20 20" width="100%" height="100%"><path d="M0-10C.8-2 2-.8 10 0C2 .8.8 2 0 10C-.8 2-2 .8-10 0C-2-.8-.8-2 0-10Z" fill="#fff"/></svg>';
+  Object.assign(g.style, {left:(ex + ew/2 - 17)+'px', top:(ey + eh/2 - 17)+'px'});
+  intro.appendChild(g);
+  const D = 900*M, ease = 'ease-in-out';
+  const at = (k, extra) => `translate(${tx*k}px,${ty*k}px) ${extra}`;
+  /* голова: передала лист → закрила дзьоб → знову відкрила й крикнула (смик головою) → сховалась за край */
+  for(let i = 2; i <= 3; i++){ const pre = new Image(); pre.src = R(`a/chaika_head_${i}.webp`); }
+  const head = (async () => {
+    /* дзьоб лишається відкритим: передала лист і крикнула (смик головою від шиї), потім сховалась */
+    await wait(260);
+    await img.animate([{transform:'none'},{transform:'rotate(-9deg)', offset:.3},{transform:'rotate(-5deg)', offset:.7},{transform:'none'}], {duration:380*M, easing:'ease-out'}).finished;
+    await img.animate([{left:'-30px'},{left:'-122px'}], {duration:280*M, easing:'ease-in', fill:'forwards'}).finished;
+  })();
+  env.animate([
+    {transform:at(0,'rotate(-8deg) scale(1)'), opacity:1},
+    {transform:at(.3,'rotate(4deg) scale(.55)'), opacity:.9, offset:.3},
+    {transform:at(.5,'rotate(10deg) scale(.25)'), opacity:0, offset:.5},
+    {transform:at(1,'scale(.1)'), opacity:0}
+  ], {duration:D, easing:ease, fill:'forwards'}).finished.then(() => env.remove());
+  await g.animate([
+    {transform:at(0,'scale(.2) rotate(0)'), opacity:0},
+    {transform:at(.3,'scale(.9) rotate(80deg)'), opacity:.8, offset:.3},
+    {transform:at(.5,'scale(1.1) rotate(140deg)'), opacity:1, offset:.5},
+    {transform:at(.9,'scale(.6) rotate(260deg)'), opacity:.9, offset:.9},
+    {transform:at(1,'scale(.2) rotate(300deg)'), opacity:0}
+  ], {duration:D, easing:ease, fill:'forwards'}).finished;
+  g.remove();
+  await head;
+  peekEl.hidden = true; img.getAnimations().forEach(x => x.cancel()); img.src = R('a/chaika_head_1.webp');
   mailIcon.classList.add('unseen');
-  mailIcon.animate([{transform:'scale(1)'},{transform:'scale(1.18)', offset:.4},{transform:'scale(1)'}], {duration:360*M});
-  S.idolPeeked = true;
+  mailIcon.animate([
+    {transform:'none'},
+    {transform:'translateY(-6px) scale(1.12,1.12)', offset:.3},
+    {transform:'translateY(0) scale(1.28,.88)', offset:.55},
+    {transform:'scale(.95,1.06)', offset:.78},
+    {transform:'none'}
+  ], {duration:560*M, easing:'ease-out'});
+  S.idolPeeked = true; S.featherDone = true;
+  S.brought = S.letters.find(l => l.from === 'idol' && !l.read)?.id || null;   // цей лист щойно принесла Чайка
   S.busy = false;
 }
 async function showIntro(){
@@ -1343,6 +1414,10 @@ async function showIntro(){
   peekEl.hidden = true;
   mailIcon.classList.remove('gone');
   mailIcon.classList.toggle('unseen', st !== 'clear' && st !== 'idol');
+  const pend = st !== 'batat' && st !== 'doze' && !!pendingOrder();
+  const wasPend = mailIcon.classList.contains('pending');
+  mailIcon.classList.toggle('pending', pend);
+  if(pend && !wasPend) mailIcon.querySelector('.mb-scroll').animate([{transform:'translateY(9px) rotate(-14deg)', opacity:0},{transform:'translateY(-2px) rotate(-14deg)', opacity:1, offset:.7},{transform:'rotate(-14deg)'}], {duration:420*M, delay:250*M, easing:'ease-out', fill:'backwards'});
   if(st === 'batat' || st === 'doze'){
     /* повернулись, а доручення не відкрите: Чайка вже спить, переходу не показуємо */
     perch.classList.remove('calm','batat','doze'); perch.classList.add(st);
@@ -1355,6 +1430,59 @@ async function showIntro(){
   S.seenPerch = false;
   perch.hidden = true; perch.classList.remove('calm','batat','doze'); perch.getAnimations().forEach(a => a.cancel());
   if(st === 'idol') peek();
+  else if(st === 'dot' && !S.featherDone){ mailIcon.classList.remove('unseen'); featherDrop(); }
+}
+/* щось сервісне: зверху падає пір'їнка Чайки, стає бліком і летить у конверт */
+async function featherDrop(){
+  S.busy = true;
+  const wait = ms => new Promise(r => setTimeout(r, ms*M));
+  await wait(400);
+  const f = document.createElement('div'); f.className = 'hs-feather';
+  f.innerHTML = '<svg viewBox="0 0 24 60" width="100%" height="100%"><defs><linearGradient id="fg" x1="0" x2="1"><stop offset="0" stop-color="#9c9c9c"/><stop offset=".5" stop-color="#f5f5f5"/><stop offset="1" stop-color="#b8b8b8"/></linearGradient></defs><path d="M12 2C3 14 2 32 9 48l3 10 3-10c7-16 6-34-3-46Z" fill="url(#fg)" stroke="#777" stroke-width=".8"/><path d="M12 6v52" stroke="#777" stroke-width="1"/></svg>';
+  const ir = intro.getBoundingClientRect();
+  const mr0 = mailIcon.getBoundingClientRect();
+  const x0 = mr0.left - ir.left + mr0.width/2 - 28, y0 = -50;   // під конвертом, подалі від банки «Забобонуси»
+  Object.assign(f.style, {left:x0+'px', top:y0+'px'});
+  intro.appendChild(f);
+  // падає зигзагом, як листочок з дерева: лежить майже горизонтально, ковзає вбік то вліво, то вправо,
+  // на кожному повороті пригальмовує й нахиляється в бік руху
+  const Z = [            // x, y, нахил — прямі відрізки зигзагу без пригальмовувань на поворотах
+    [0,   0,   90],
+    [34,  48,  72],
+    [2,   96, 108],
+    [32, 144,  74],
+    [10, 190, 100]
+  ];
+  await f.animate(Z.map(([x, y, r], i) => ({transform:`translate(${x}px,${y}px) rotate(${r}deg)`, offset:i/(Z.length-1)})),
+    {duration:2300*M, easing:'linear', fill:'forwards'}).finished;
+  // сама пір'їнка летить до конверта й по дорозі тане в блік, а блік проступає на її місці
+  const fr = f.getBoundingClientRect(), mr = mailIcon.getBoundingClientRect();
+  const cx = fr.left - ir.left + fr.width/2, cy = fr.top - ir.top + fr.height/2;
+  const tx = mr.left - ir.left + mr.width/2 - cx, ty = mr.top - ir.top + mr.height/2 - cy;
+  const g = document.createElement('div'); g.className = 'glint';
+  g.innerHTML = '<svg viewBox="-10 -10 20 20" width="100%" height="100%"><path d="M0-10C.8-2 2-.8 10 0C2 .8.8 2 0 10C-.8 2-2 .8-10 0C-2-.8-.8-2 0-10Z" fill="#fff"/></svg>';
+  Object.assign(g.style, {left:(cx - 17)+'px', top:(cy - 17)+'px'});
+  intro.appendChild(g);
+  const base = 'translate(10px,190px) rotate(100deg)', D = 800*M;
+  f.animate([
+    {transform:`${base}`, opacity:1},
+    {transform:`translate(${10 + tx*.3}px,${190 + ty*.3}px) rotate(160deg) scale(.6)`, opacity:.8, offset:.3},
+    {transform:`translate(${10 + tx*.5}px,${190 + ty*.5}px) rotate(220deg) scale(.25)`, opacity:0, offset:.5},
+    {transform:`translate(${10 + tx}px,${190 + ty}px) scale(.1)`, opacity:0}
+  ], {duration:D, easing:'ease-in-out', fill:'forwards'}).finished.then(() => f.remove());
+  const at = (k, extra) => `translate(${tx*k}px,${ty*k}px) ${extra}`;
+  await g.animate([
+    {transform:at(0,'scale(.2) rotate(0)'), opacity:0},
+    {transform:at(.3,'scale(.9) rotate(80deg)'), opacity:.8, offset:.3},
+    {transform:at(.5,'scale(1.05) rotate(140deg)'), opacity:1, offset:.5},
+    {transform:at(.9,'scale(.6) rotate(260deg)'), opacity:.9, offset:.9},
+    {transform:at(1,'scale(.2) rotate(300deg)'), opacity:0}
+  ], {duration:D, easing:'ease-in-out', fill:'forwards'}).finished;
+  g.remove();
+  mailIcon.classList.add('unseen');
+  mailIcon.animate([{transform:'none'},{transform:'translateY(-4px) scale(1.08)', offset:.4},{transform:'none'}], {duration:360*M, easing:'ease-out'});
+  S.featherDone = true;
+  S.busy = false;
 }
 /* доручення Батата: Чайка швидко прилітає з далечіні рівно з-за прогрес-бару й сідає на нього.
    Летить «з глибини», тож росте з крихітної до повного розміру; малюється завжди поверх бару (у Rive вона буде вище всього). */
@@ -1404,9 +1532,9 @@ async function flyIn(){
   ], {duration:560*M, easing:'ease-out'});
   S.busy = false;
 }
-async function glintToIcon(){
+async function glintToIcon(fromX, fromY){
   const ir = intro.getBoundingClientRect(), pr = perch.getBoundingClientRect(), mr = mailIcon.getBoundingClientRect();
-  const sx = pr.left - ir.left + pr.width * .2, sy = pr.top - ir.top + pr.height * .31;     // сувій у дзьобі
+  const sx = fromX ?? pr.left - ir.left + pr.width * .2, sy = fromY ?? pr.top - ir.top + pr.height * .31;     // звідки летить: сувій у дзьобі або випалий конверт
   const ex = mr.left - ir.left + mr.width/2, ey = mr.top - ir.top + mr.height/2;           // конверт угорі
   const star = '<svg viewBox="-10 -10 20 20" width="100%" height="100%"><path d="M0-10C.8-2 2-.8 10 0C2 .8.8 2 0 10C-.8 2-2 .8-10 0C-2-.8-.8-2 0-10Z" fill="#fff"/></svg>';
   const make = (cls, size) => { const g = document.createElement('div'); g.className = 'glint ' + cls; g.innerHTML = star;
@@ -1590,12 +1718,50 @@ async function scrollToMail(order){
   await loadEl.animate([{opacity:1},{opacity:0}], {duration:320*M, fill:'forwards'}).finished;
   loadEl.hidden = true; loadEl.classList.remove('plain'); loadEl.getAnimations().forEach(a => a.cancel());
 }
+/* тап по конверту вгорі, коли Чайка щойно принесла лист: лоадера немає — конверт-іконка засвічується, вилітає й росте,
+   у польоті стає великим закритим конвертом пошти (він і є «лоадер»: закритий, поки під ним вантажиться розділ), а потім відкривається */
+async function envToMail(letter){
+  const ph = $('#phone').getBoundingClientRect(), ic = mailIcon.getBoundingClientRect();
+  const s = SENDERS[letter.from];
+  const W = 275, H = 185, L = (ph.width - W)/2, T = ph.height*(406.5/844) - H/2;      // де стоїть закритий великий конверт
+  const fly = document.createElement('div'); fly.className = 'fly-wrap';
+  fly.innerHTML = `<div class="big-env s-${s.seal}"><i class="back"></i><div class="peek"></div><i class="pocket"></i><span class="addr"><b>${s.name}</b><small>${letter.date}</small></span><i class="flap"></i><b class="seal">${s.glyph}</b></div>`;
+  const s0 = ic.width / W, dx = (ic.left - ph.left + ic.width/2) - (L + W/2), dy = (ic.top - ph.top + ic.height/2) - (T + H/2);
+  const start = `translate(${dx}px,${dy}px) scale(${s0})`;
+  // одразу стиснутий у іконку й невидимий — щоб великий конверт не з'являвся в центрі до польоту
+  Object.assign(fly.style, {left:L+'px', top:T+'px', width:W+'px', height:H+'px', transform:start, opacity:0});
+  $('#phone').appendChild(fly);
+  await mailIcon.animate([{transform:'none'},{transform:'translateY(-4px) scale(1.08)', offset:.5},{transform:'none'}], {duration:200*M}).finished;
+  // 1) з іконки виринає конверт — просто конверт, без світіння (лист менш важливий, ніж сувій Батата)
+  await fly.animate([{transform:start, opacity:0},{transform:start, opacity:1}], {duration:140*M, easing:'ease-out', fill:'forwards'}).finished;
+  // 2) летить і росте до центру; екран темніє
+  loadEl.classList.add('plain'); loadEl.hidden = false;
+  loadEl.animate([{opacity:0},{opacity:1}], {duration:420*M, fill:'forwards'});
+  const D = 620*M;
+  await fly.animate([
+    {transform:start},
+    {transform:`translate(${dx*.5}px,${dy*.5 + 20}px) scale(${s0 + (1-s0)*.45}) rotate(4deg)`, offset:.45},
+    {transform:'none'}
+  ], {duration:D, easing:'cubic-bezier(.45,0,.3,1)', fill:'forwards'}).finished;
+  // 3) під ним уже розділ; справжній конверт відкривається рівно на цьому місці
+  intro.hidden = true; intro.getAnimations().forEach(a => a.cancel());
+  render();
+  fly.style.transform = 'none'; fly.style.opacity = 1;
+  S.busy = false;
+  S.fastOpen = true;            // долетів — відкривається одразу, без паузи
+  openLetter(letter.id, fly);
+  requestAnimationFrame(() => fly.remove());   // справжній конверт уже на тому самому місці й такий самий — літаючий просто прибираємо
+  await loadEl.animate([{opacity:1},{opacity:0}], {duration:320*M, fill:'forwards'}).finished;
+  loadEl.hidden = true; loadEl.classList.remove('plain'); loadEl.getAnimations().forEach(a => a.cancel());
+}
 async function enterMail(el){
   if(S.busy) return; S.busy = true;
   S.order = null;
   S.viewed = true;
   const fresh = S.letters.find(l => l.type === 'scroll' && !l.read);
   if(el === perch && fresh) return scrollToMail(fresh);
+  const brought0 = el === mailIcon && !pendingOrder() && S.brought && S.letters.find(l => l.id === S.brought && !l.read && l.type === 'envelope');
+  if(brought0){ S.brought = null; return envToMail(brought0); }
   /* ХС → коротка анімація → лоадер → розділ: тап-пульс, екран темніє, три крапки, розділ проявляється */
   await el.animate([{transform:'none'},{transform:'translateY(-6px) scale(1.06)', offset:.5},{transform:'scale(.97)'}],{duration:200*M, easing:'ease-in-out'}).finished;
   loadEl.hidden = false;
@@ -1608,7 +1774,10 @@ async function enterMail(el){
   loadEl.hidden = true; loadEl.getAnimations().forEach(a => a.cancel());
   S.busy = false;
   /* доручення Батата одразу на передньому плані: лишається зламати печатку й вирішити */
-  const order = S.letters.find(l => l.type === 'scroll' && !l.read);
+  /* одразу відкриваємо: невирішене доручення Батата, або лист, який Чайка щойно принесла */
+  const brought = S.brought && S.letters.find(l => l.id === S.brought && !l.read);
+  const order = pendingOrder() || brought;
+  S.brought = null;
   const row = order && pilesEl.querySelector(`[data-row="${order.id}"] .obj`);
   if(row){ await new Promise(r => setTimeout(r, 120*M)); openLetter(order.id, row); }
 }
@@ -1616,7 +1785,7 @@ perch.addEventListener('click', () => enterMail(perch));
 mailIcon.addEventListener('click', () => enterMail(mailIcon));
 document.querySelector('.top .back').addEventListener('click', () => { if(!S.busy) showIntro(); });
 $('#btnIntro').addEventListener('click', () => { if(!S.busy) showIntro(); });
-$('#btnNoBatat').addEventListener('click', () => { if(S.busy) return; S.letters = structuredClone(INIT); S.letters.forEach(l => { if(l.type==='scroll'){ l.read = true; l.accepted = true; } }); S.order = null; S.view='new'; S.seenPerch = false; S.viewed = false; S.batatIgnored = false; S.idolPeeked = false; render(); showIntro(); });
+$('#btnNoBatat').addEventListener('click', () => { if(S.busy) return; S.letters = structuredClone(INIT); S.letters.forEach(l => { if(l.type==='scroll'){ l.read = true; l.accepted = true; } }); S.order = null; S.view='new'; S.seenPerch = false; S.viewed = false; S.batatIgnored = false; S.idolPeeked = false; S.featherDone = false; render(); showIntro(); });
 
 render();
 showIntro();
