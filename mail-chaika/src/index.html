@@ -16,6 +16,40 @@
 .hs-load i{width:8px;height:8px;border-radius:50%;background:var(--k5);animation:ld .6s ease-in-out infinite alternate}
 .hs-load i:nth-child(2){animation-delay:.15s}.hs-load i:nth-child(3){animation-delay:.3s}
 @keyframes ld{from{opacity:.25;transform:translateY(2px)}to{opacity:1;transform:translateY(-2px)}}
+/* --- без прильоту: Чайка визирає з правого краю, конверт угорі є завжди (Slack 18.11, сесія 18.11) --- */
+.perch.batat,.perch.doze{right:-96px}
+.perch .pcry{position:absolute;left:-58px;top:6px;font:700 13px/1 var(--mono);letter-spacing:.06em;color:var(--k1);opacity:0;pointer-events:none}
+.press .decline{font:400 11px/1 var(--mono);color:var(--k3);text-decoration:underline;text-underline-offset:3px;padding:6px 10px;margin-top:2px}
+.press .decline:hover{color:var(--k1)}
+.imprint.declined{transform:translateX(-50%) rotate(8deg)}
+/* --- справжній Хоумспейс чорно-білим фоном; кольорова лише Чайка (координати зі скріна 786×1704, ×0.496) --- */
+.intro.hs{background:linear-gradient(rgba(230,225,215,.2),rgba(230,225,215,.2)),var(--hsbg) 0 0/100% 100% no-repeat,#e6e1d7}  /* скрін на 80% непрозорості */
+.intro.hs > .hs-mid,.intro.hs > .hs-name,.intro.hs > .hs-plate,.intro.hs > .hs-lvl{visibility:hidden}
+.intro.hs .hs-exit,.intro.hs .hs-icons > span.hs-ico,.intro.hs .hs-bar{visibility:hidden}
+.intro.hs .hs-mail{position:absolute;left:206px;top:74px;width:34px;height:28px;color:#e6e1d7}
+.intro.hs .hs-mail .mb-body,.intro.hs .hs-mail .mb-flap{border-color:#d9d4ca;background:#4a4a4a}
+.intro.hs .hs-mail .dot{background:#f6f4ee;box-shadow:0 0 0 2px #2a2a2a}
+.intro.hs > .perch{position:absolute;right:46px;bottom:213px;z-index:5}
+.intro.hs > .perch.doze{width:112px;height:91px;right:38px;bottom:213px}
+/* сонна Чайка дихає: ледь помітний скейл від лапок */
+.intro.hs > .perch.doze .pc-doze{transform-origin:50% 100%;animation:breathe 3.4s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(1,1)}45%{transform:scale(1.015,1.035)}}
+/* наша оригінальна Чайка без сумки, у дзьобі срібний сувій */
+.intro.hs > .perch.batat{width:120px;height:99px;right:34px}
+/* поки без «звукових» написів — лише графіка */
+.perch .pcry,.peek .peek-cry{display:none!important}
+.intro.hs .hs-arches{position:absolute;left:0;right:0;top:675px;height:140px;margin:0}
+.intro.hs .hs-arches span{position:absolute;top:0;height:140px;width:72px;border:0;border-radius:0;background:none;color:transparent;padding:0}
+.intro.hs .hs-arches span:nth-child(1){left:66px}.intro.hs .hs-arches span:nth-child(2){left:159px}.intro.hs .hs-arches span:nth-child(3){left:252px}
+.intro.hs .peek{top:70px}
+.intro.hs .peek-cry,.intro.hs .perch .pcry{color:#f6f4ee;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.glint{position:absolute;width:34px;height:34px;z-index:7;pointer-events:none;filter:drop-shadow(0 0 3px #fff) drop-shadow(0 0 8px #fff) drop-shadow(0 0 16px rgba(255,255,255,.9))}
+.glint.trail{width:20px;height:20px}
+.glint svg{display:block}
+.fly-wrap{position:absolute;z-index:46;pointer-events:none;transform-origin:50% 50%}
+.fly-wrap .big-scroll{width:100%}
+.fly-wrap .fly-glow{position:absolute;inset:0;border-radius:999px;background:linear-gradient(#fff,#ececec);box-shadow:0 0 6px #fff,0 0 18px rgba(255,255,255,.95),0 0 36px rgba(255,255,255,.6)}
+.hs-load.plain i{display:none}
 </style></head><body>
 <script>window.__A={"a/chaika_calm_nobar.webp":"data:image/webp;base64,@@FILE:a/chaika_calm_nobar.webp@@",
 "a/chaika_batat_nobar.webp":"data:image/webp;base64,@@FILE:a/chaika_batat_nobar.webp@@",
@@ -24,7 +58,16 @@
 "a/chaika_side2.webp":"data:image/webp;base64,@@FILE:a/chaika_side2.webp@@",
 "a/chaika_side3.webp":"data:image/webp;base64,@@FILE:a/chaika_side3.webp@@",
 "a/envelope.webp":"data:image/webp;base64,@@FILE:a/envelope.webp@@",
-"a/chaika_doze_nobar.webp":"data:image/webp;base64,@@FILE:a/chaika_doze_nobar.webp@@"};function R(p){return window.__A[p]||p}</script>
+"a/chaika_doze_nobar.webp":"data:image/webp;base64,@@FILE:a/chaika_doze_nobar.webp@@",
+"a/homespace_bw.webp":"data:image/webp;base64,@@FILE:a/homespace_bw.webp@@",
+"a/chaika_scroll.webp":"data:image/webp;base64,@@FILE:a/chaika_scroll.webp@@",
+"a/chaika_envelope.webp":"data:image/webp;base64,@@FILE:a/chaika_envelope.webp@@",
+"a/chaika_fly_scroll.webp":"data:image/webp;base64,@@FILE:a/chaika_fly_scroll.webp@@",
+"a/chaika_land_1.webp":"data:image/webp;base64,@@FILE:a/chaika_land_1.webp@@",
+"a/chaika_land_2.webp":"data:image/webp;base64,@@FILE:a/chaika_land_2.webp@@",
+"a/chaika_land_3.webp":"data:image/webp;base64,@@FILE:a/chaika_land_3.webp@@",
+"a/chaika_land_4.webp":"data:image/webp;base64,@@FILE:a/chaika_land_4.webp@@",
+"a/chaika_doze_scroll.webp":"data:image/webp;base64,@@FILE:a/chaika_doze_scroll.webp@@"};function R(p){return window.__A[p]||p}</script>
 <title>Пошта Чайки</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -702,7 +745,7 @@ body{background:var(--k5);color:var(--k1)}
     <div class="hs-barwrap">
       <div class="hs-bar"><i></i></div>
       <button class="perch calm" id="perch" aria-label="Чайка з поштою">
-        <img class="pc pc-calm" src="" data-src="a/chaika_calm_nobar.webp" alt=""><img class="pc pc-batat" src="" data-src="a/chaika_batat_nobar.webp" alt=""><img class="pc pc-doze" src="" data-src="a/chaika_doze_nobar.webp" alt="">
+        <img class="pc pc-calm" src="" data-src="a/chaika_calm_nobar.webp" alt=""><img class="pc pc-batat" src="" data-src="a/chaika_land_4.webp" alt=""><img class="pc pc-doze" src="" data-src="a/chaika_doze_scroll.webp" alt=""><b class="pcry">КРІ-І!</b>
         <span class="bag"><i class="mb-body"></i><i class="mb-flap"></i></span>
         <svg class="gull2" viewBox="0 0 100 100" aria-hidden="true">
           <g class="g-wing-up back"><ellipse cx="44" cy="40" rx="9" ry="24" /></g>
@@ -719,7 +762,7 @@ body{background:var(--k5);color:var(--k1)}
       </button>
     </div>
     <div class="hs-arches"><span>Дорадник</span><span>Парк</span><span>Гардеробна</span></div>
-    <div class="peek" id="peek" hidden><img src="" data-src="a/chaika_calm_nobar.webp" alt=""><b class="peek-cry">КРІ-І!</b></div>
+    <div class="peek" id="peek" hidden><img src="" data-src="a/chaika_envelope.webp" alt=""><b class="peek-cry">КРІ-І!</b></div>
     <div class="away" id="away" hidden></div>
     <div class="hs-load" id="hsLoad" hidden><i></i><i></i><i></i></div>
   </div>
@@ -733,7 +776,7 @@ body{background:var(--k5);color:var(--k1)}
   <button id="btnService">3 · Щось непереглянуте</button>
   <button id="btnEmpty">4 · Усе переглянуто</button>
 </div>
-<p class="cap">Прототип: графіка умовна. Кнопки знизу вмикають 4 стани Хоумспейсу. Тапни двері (Дорадник, Парк, Гардеробна) — гість піде грати й повернеться, не зайшовши в пошту: з дорученням Батата Чайка задрімає. Тапни Чайку або конверт угорі — підеш у пошту; повернешся — Чайка відлетить, а булька згасне.</p>
+<p class="cap">Прототип: графіка умовна. Кнопки знизу вмикають 4 стани Хоумспейсу. Конверт угорі є завжди, булька на ньому — є непереглянуте. Тапни двері (Дорадник, Парк, Гардеробна) — гість піде грати й повернеться, не зайшовши в пошту: з дорученням Батата Чайка задрімає. Тапни Чайку або конверт — підеш у пошту, а доручення Батата одразу відкриється: зламай печатку, потім прийми (притисни й тримай) або відхили.</p>
 
 <script>document.addEventListener("DOMContentLoaded",()=>document.querySelectorAll("img[data-src]").forEach(i=>i.src=R(i.dataset.src)));</script>
 <script>
@@ -1098,15 +1141,16 @@ function scrollInner(l){
     ${l.lines.map(t=>`<p>${t}</p>`).join('')}
     <hr class="rule"><p class="sigline">ТОВ «СІЛЬПО-ПОТОЙБІЧЧЯ»<br>${l.date} · ${l.title}</p>
     <div class="press">
-      <button class="stamp" id="stamp" aria-label="Притисни й тримай, щоб прийняти доручення" ${accepted?'disabled style="opacity:.35"':''}></button>
-      <div class="ps" id="ps">${accepted ? l.ps : 'P.S. Притисни печатку й потримай. Батат не любить поспіху. — Ч.'}</div>
+      <button class="stamp" id="stamp" aria-label="Притисни й тримай, щоб прийняти доручення" ${accepted||l.declined?'disabled style="opacity:.35"':''}></button>
+      <div class="ps" id="ps">${accepted ? l.ps : l.declined ? 'P.S. Відхилено. Батат запамʼятав. — Ч.' : 'P.S. Притисни печатку й потримай. Батат не любить поспіху. — Ч.'}</div>
+      ${accepted || l.declined ? '' : '<button class="decline" id="decline">Відхилити доручення</button>'}
     </div>
-    ${accepted ? '<div class="imprint">ДОРУЧЕННЯ<br>ПРИЙНЯТО</div>' : ''}
+    ${accepted ? '<div class="imprint">ДОРУЧЕННЯ<br>ПРИЙНЯТО</div>' : l.declined ? '<div class="imprint declined">ДОРУЧЕННЯ<br>ВІДХИЛЕНО</div>' : ''}
   </div>`;
 }
 async function openScroll(l, fromRect){
   const phoneH = $('#phone').clientHeight;
-  const H = Math.min(540, phoneH - 220);
+  const H = Math.min(600, phoneH - 220);
   openRoot.innerHTML = `<div class="big-scroll" id="bigScroll">
       <i class="rod"></i><div class="paper">${scrollInner(l)}</div><i class="rod"></i>
       <i class="ribbon"></i><button class="wax" id="wax" aria-label="Зламати печатку"><span class="half h1"></span><span class="half h2"></span></button>
@@ -1130,7 +1174,15 @@ async function openScroll(l, fromRect){
 function unroll(bs){ bs.style.setProperty('--h', bs.dataset.h + 'px'); bs.classList.add('unrolled'); sfx.paper(); }
 
 function bindStamp(l){
-  const st = $('#stamp'); if(!st || l.accepted) return;
+  const dc = $('#decline');
+  if(dc) dc.addEventListener('click', e => {
+    e.stopPropagation(); if(l.accepted || l.declined) return;
+    l.declined = true; dc.remove();
+    const st0 = $('#stamp'); st0.disabled = true; st0.style.opacity = .35;
+    $('#ps').textContent = 'P.S. Відхилено. Батат запамʼятав. — Ч.';
+    st0.closest('.in').insertAdjacentHTML('beforeend', '<div class="imprint declined new">ДОРУЧЕННЯ<br>ВІДХИЛЕНО</div>');
+  });
+  const st = $('#stamp'); if(!st || l.accepted || l.declined) return;
   let t0 = 0, raf = 0;
   const tick = now => {
     const p = Math.min(1, (now - t0) / (900*M || 1));
@@ -1141,7 +1193,7 @@ function bindStamp(l){
   const start = e => { e.preventDefault(); st.setPointerCapture?.(e.pointerId); st.classList.add('held'); t0 = performance.now(); raf = requestAnimationFrame(tick); };
   const stop = () => { cancelAnimationFrame(raf); st.classList.remove('held'); if(!l.accepted) st.style.setProperty('--p', 0); };
   const done = () => {
-    cancelAnimationFrame(raf); l.accepted = true; sfx.thud();
+    cancelAnimationFrame(raf); l.accepted = true; sfx.thud(); $('#decline')?.remove();
     st.classList.remove('held'); st.disabled = true; st.style.opacity = .35;
     $('#ps').textContent = 'P.S. Прийнято. Я засікла час. — Ч.';
     st.closest('.in').insertAdjacentHTML('beforeend', '<div class="imprint new">ДОРУЧЕННЯ<br>ПРИЙНЯТО</div>');
@@ -1246,12 +1298,13 @@ const sfx = SOUND ? sfxReal : {quack(){}, paper(){}, crack(){}, thud(){}};
 
 /* ---------- demo controls ---------- */
 $('#btnReset').addEventListener('click', () => { if(S.busy) return; S.letters = structuredClone(INIT); S.order = null; S.view='new'; S.seenPerch = false; S.viewed = false; S.batatIgnored = false; S.idolPeeked = false; render(); showIntro(); });
-$('#btnEmpty').addEventListener('click', () => { if(S.busy) return; S.order = null; S.letters.forEach(l => { l.read = true; if(l.type==='scroll') l.accepted = true; }); S.view='new'; S.viewed = true; render(); showIntro(); });
+$('#btnEmpty').addEventListener('click', () => { if(S.busy) return; S.order = null; S.letters.forEach(l => { l.read = true; if(l.type==='scroll' && !l.declined) l.accepted = true; }); S.view='new'; S.viewed = true; render(); showIntro(); });
 $('#btnService').addEventListener('click', () => { if(S.busy) return; S.letters = structuredClone(INIT); S.letters.forEach(l => { if(l.type==='scroll' || l.from==='idol'){ l.read = true; if(l.type==='scroll') l.accepted = true; } }); S.order = null; S.view='new'; S.seenPerch = false; S.viewed = false; S.batatIgnored = false; S.idolPeeked = false; render(); showIntro(); });
 $('#btnExpire').addEventListener('click', () => { if(S.busy) return; const sc = S.letters.find(l => l.type==='scroll' && !l.read); if(!sc) return; sc.read = true; sc.expired = true; S.idolPeeked = true; S.order = null; render(); showIntro(); });
 
 /* ---------- Homespace: where Чайка sits, and the entry transition ---------- */
 const intro = $('#intro'), perch = $('#perch'), mailIcon = $('#mailIcon');
+intro.appendChild(perch); intro.style.setProperty('--hsbg', `url(${R('a/homespace_bw.webp')})`);
 /* Стан Хоумспейсу:
    'batat'  — є доручення від Батата: Чайка сидить на барі й кричить;
    'doze'   — те саме, але гість уже повертався й не відкрив: Чайка дрімає;
@@ -1286,31 +1339,124 @@ async function showIntro(){
   const st = hsState();
   intro.hidden = false;
   [perch, mailIcon, ...perch.querySelectorAll('*'), ...mailIcon.querySelectorAll('*')].forEach(e => e.getAnimations().forEach(a => a.cancel()));
-  perch.classList.remove('calm','batat','doze');
   peekEl.hidden = true;
+  mailIcon.classList.remove('gone');
+  mailIcon.classList.toggle('unseen', st !== 'clear' && st !== 'idol');
   if(st === 'batat' || st === 'doze'){
-    mailIcon.classList.add('gone');
-    perch.hidden = false; perch.classList.add(st);
-    if(!S.seenPerch) arrive();
+    /* повернулись, а доручення не відкрите: Чайка вже спить, переходу не показуємо */
+    perch.classList.remove('calm','batat','doze'); perch.classList.add(st);
+    perch.hidden = false;
+    if(!S.seenPerch && st === 'batat'){ mailIcon.classList.remove('unseen'); flyIn(); }
     S.seenPerch = true;
     return;
   }
-  mailIcon.classList.remove('gone');
-  mailIcon.classList.toggle('unseen', st === 'dot');
-  if(S.seenPerch){
-    S.seenPerch = false;
-    if(S.viewed){
-      /* гість побачив лист: Чайка злітає з бару й лишає сумку-іконку вгорі */
-      perch.hidden = false; perch.classList.add('calm');
-      mailIcon.classList.add('gone');
-      S.busy = true;
-      await new Promise(r => setTimeout(r, 450*M));
-      await depart();
-    }
-    /* термін доручення минув: Чайки просто немає, без відльоту */
-  }
-  perch.hidden = true;
+  /* гість побачив доручення (або минув термін): Чайки просто вже немає, відльоту не показуємо */
+  S.seenPerch = false;
+  perch.hidden = true; perch.classList.remove('calm','batat','doze'); perch.getAnimations().forEach(a => a.cancel());
   if(st === 'idol') peek();
+}
+/* доручення Батата: Чайка швидко прилітає з далечіні рівно з-за прогрес-бару й сідає на нього.
+   Летить «з глибини», тож росте з крихітної до повного розміру; малюється завжди поверх бару (у Rive вона буде вище всього). */
+/* послідовність посадки (кадри з однієї генерації, однаковий масштаб): 1 летить на нас, 2 розвертається, 3 сідає, 4 стоїть */
+const LAND = [null, [504,264], [391,296], [353,299], [368,303]];
+function landFrame(i, lift = 0){
+  const ph = $('#phone').getBoundingClientRect(), fl = $('#flyer'), img = fl.querySelector('img');
+  const pr = perch.getBoundingClientRect();
+  const k = pr.width / LAND[4][0];                       // масштаб кадру 4 = Чайка на барі
+  const W = LAND[i][0] * k, H = LAND[i][1] * k;
+  const cx = pr.left - ph.left + pr.width/2, bottom = pr.top + pr.height - ph.top - lift;
+  img.src = R(`a/chaika_land_${i}.webp`);
+  Object.assign(fl.style, {left:(cx - W/2)+'px', top:(bottom - H)+'px', width:W+'px', height:H+'px', transformOrigin:'50% 100%'});
+  return fl;
+}
+const nextFrame = () => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+/* доручення Батата: Чайка швидко прилітає з далечіні рівно з-за прогрес-бару, розвертається й сідає на нього */
+async function flyIn(){
+  S.busy = true;
+  perch.style.visibility = 'hidden';
+  await new Promise(r => requestAnimationFrame(r));
+  for(let i = 1; i <= 4; i++){ const pre = new Image(); pre.src = R(`a/chaika_land_${i}.webp`); }
+  const fl = landFrame(1, 26); fl.hidden = false;
+  await fl.animate([
+    {transform:'translateY(14px) scale(.05)', opacity:0},
+    {transform:'translateY(-4px) scale(.18)', opacity:1, offset:.25},
+    {transform:'translateY(-10px) scale(.5)', offset:.6},
+    {transform:'translateY(-2px) scale(.96)', offset:.88},
+    {transform:'none'}
+  ], {duration:460*M, easing:'cubic-bezier(.55,0,.7,1)', fill:'forwards'}).finished;
+  fl.getAnimations().forEach(a => a.cancel());
+  landFrame(2, 8); await new Promise(r => setTimeout(r, 45*M));
+  landFrame(3, 0); await new Promise(r => setTimeout(r, 45*M));
+  fl.hidden = true;
+  perch.style.visibility = '';
+  await perch.animate([{transform:'scaleY(.93)'},{transform:'scaleY(1.03)', offset:.5},{transform:'none'}], {duration:240*M, easing:'ease-out'}).finished;
+  /* Чайка сіла, пауза → на сувої спалахує блік → блік летить угору й пірнає в конверт → конверт підскакує, стає пузатішим, загоряється булька */
+  await new Promise(r => setTimeout(r, 300*M));
+  await glintToIcon();
+  mailIcon.classList.add('unseen');
+  mailIcon.animate([
+    {transform:'none'},
+    {transform:'translateY(-6px) scale(1.12,1.12)', offset:.3},
+    {transform:'translateY(0) scale(1.28,.88)', offset:.55},
+    {transform:'scale(.95,1.06)', offset:.78},
+    {transform:'none'}
+  ], {duration:560*M, easing:'ease-out'});
+  S.busy = false;
+}
+async function glintToIcon(){
+  const ir = intro.getBoundingClientRect(), pr = perch.getBoundingClientRect(), mr = mailIcon.getBoundingClientRect();
+  const sx = pr.left - ir.left + pr.width * .2, sy = pr.top - ir.top + pr.height * .31;     // сувій у дзьобі
+  const ex = mr.left - ir.left + mr.width/2, ey = mr.top - ir.top + mr.height/2;           // конверт угорі
+  const star = '<svg viewBox="-10 -10 20 20" width="100%" height="100%"><path d="M0-10C.8-2 2-.8 10 0C2 .8.8 2 0 10C-.8 2-2 .8-10 0C-2-.8-.8-2 0-10Z" fill="#fff"/></svg>';
+  const make = (cls, size) => { const g = document.createElement('div'); g.className = 'glint ' + cls; g.innerHTML = star;
+    Object.assign(g.style, {left:(sx - size/2)+'px', top:(sy - size/2)+'px'}); intro.appendChild(g); return g; };
+  const g = make('', 34);
+  // 1) спалах на сувої
+  await g.animate([{transform:'scale(0) rotate(0)', opacity:0},{transform:'scale(1.6) rotate(45deg)', opacity:1, offset:.45},{transform:'scale(1) rotate(90deg)', opacity:1}], {duration:340*M, easing:'ease-out', fill:'forwards'}).finished;
+  // 2) летить угору дугою, за ним тягнеться слід із двох менших бліків, і гасне вже в конверті
+  const dx = ex - sx, dy = ey - sy;
+  const path = (s0, rot, o = 1) => [
+    {transform:`translate(0,0) scale(${s0}) rotate(${rot}deg)`, opacity:o},
+    {transform:`translate(${dx*.45}px,${dy*.45}px) scale(${s0*.85}) rotate(${rot+90}deg)`, opacity:o, offset:.45},
+    {transform:`translate(${dx*.85}px,${dy*.85}px) scale(${s0*.6}) rotate(${rot+180}deg)`, opacity:.9*o, offset:.85},
+    {transform:`translate(${dx}px,${dy}px) scale(${s0*.2}) rotate(${rot+230}deg)`, opacity:0}];
+  const trail = [make('trail', 20), make('trail', 20)];
+  const run = [g.animate(path(1, 90), {duration:950*M, easing:'ease-in-out', fill:'forwards'})];
+  trail.forEach((t, i) => { t.style.opacity = 0; run.push(t.animate(path(.8 - i*.2, 30*i, .7 - i*.25), {duration:950*M, delay:(90 + i*90)*M, easing:'ease-in-out', fill:'forwards'})); });
+  await run[0].finished;
+  await new Promise(r => setTimeout(r, 140*M));
+  [g, ...trail].forEach(e => e.remove());
+}
+/* кінець: розвертається назад до нас і відлітає в далечінь */
+async function flyOff(){
+  const fl = landFrame(3, 0);
+  fl.hidden = false; perch.style.visibility = 'hidden';
+  await new Promise(r => setTimeout(r, 45*M));
+  landFrame(2, 8); await new Promise(r => setTimeout(r, 45*M));
+  landFrame(1, 26);
+  await fl.animate([
+    {transform:'none', opacity:1},
+    {transform:'translateY(-10px) scale(.6)', offset:.4, opacity:1},
+    {transform:'translateY(4px) scale(.05)', opacity:0}
+  ], {duration:380*M, easing:'cubic-bezier(.3,0,.45,1)', fill:'forwards'}).finished;
+  fl.hidden = true; fl.getAnimations().forEach(a => a.cancel());
+  perch.style.visibility = '';
+}
+/* гість повернувся, а доручення не відкрите: Чайка ще мить стоїть з відкритими очима й задрімує на тому самому місці */
+async function fallAsleep(r){
+  S.busy = true;
+  const ph = $('#phone').getBoundingClientRect();
+  const ghost = document.createElement('img'); ghost.src = R('a/chaika_land_4.webp'); ghost.alt = '';
+  Object.assign(ghost.style, {position:'absolute', left:(r.left - ph.left)+'px', top:(r.top - ph.top)+'px', width:r.width+'px', height:'auto', zIndex:6, pointerEvents:'none'});
+  intro.appendChild(ghost);
+  perch.style.opacity = '0';
+  await new Promise(res => setTimeout(res, 650*M));
+  await Promise.all([
+    ghost.animate([{opacity:1},{opacity:0}], {duration:520*M, easing:'ease-in-out', fill:'forwards'}).finished,
+    perch.animate([{opacity:0},{opacity:1}], {duration:520*M, easing:'ease-in-out', fill:'forwards'}).finished
+  ]);
+  perch.style.opacity = ''; perch.getAnimations().forEach(a => a.cancel()); ghost.remove();
+  S.busy = false;
 }
 /* гість пішов грати (тап по дверях) і повернувся, не зайшовши в пошту */
 document.querySelectorAll('.hs-arches span').forEach(sp => sp.addEventListener('click', async () => {
@@ -1405,10 +1551,50 @@ async function depart(){
   flyer.hidden = true; anim.cancel(); perch.style.visibility = ''; perch.hidden = true;
   S.busy = false;
 }
+/* тап по Чайці з дорученням: сувій у дзьобі засвічується, вилітає, росте — і сам стає сувоєм у пошті (імітація безшовного переходу) */
+const SCROLL_IN_BEAK = {batat:[0, .27, .34, .13], doze:[.17, .42, .26, .12]};   // x, y, w, h — частки картинки Чайки
+async function scrollToMail(order){
+  const ph = $('#phone').getBoundingClientRect(), pr = perch.getBoundingClientRect();
+  const f = SCROLL_IN_BEAK[perch.classList.contains('doze') ? 'doze' : 'batat'];
+  const r0 = {x: pr.left - ph.left + pr.width*f[0], y: pr.top - ph.top + pr.height*f[1], w: pr.width*f[2], h: pr.height*f[3]};
+  /* літаючий сувій уже в кінцевому місці й розмірі (320×36, як згорнутий сувій у пошті); на старті він стиснутий у дзьоб */
+  const W = 320, H = 36, L = (ph.width - W)/2, T = ph.height*0.482 - H/2;
+  const fly = document.createElement('div'); fly.className = 'fly-wrap';
+  fly.innerHTML = '<div class="big-scroll"><i class="rod"></i><div class="paper"></div><i class="rod"></i><i class="ribbon"></i><span class="wax"><span class="half h1"></span><span class="half h2"></span></span></div><i class="fly-glow"></i>';
+  Object.assign(fly.style, {left:L+'px', top:T+'px', width:W+'px', height:H+'px'});
+  $('#phone').appendChild(fly);
+  const s0 = r0.w / W, dx = (r0.x + r0.w/2) - (L + W/2), dy = (r0.y + r0.h/2) - (T + H/2);
+  const start = `translate(${dx}px,${dy}px) scale(${s0},${s0*2.4})`;
+  const body = fly.querySelector('.big-scroll'), glow = fly.querySelector('.fly-glow');
+  body.style.opacity = 0;
+  // 1) сувій у дзьобі засвічується
+  await fly.animate([{transform:start, opacity:0},{transform:start, opacity:1}], {duration:220*M, easing:'ease-out', fill:'forwards'}).finished;
+  // 2) вилітає й росте, світіння поступово гасне, а з нього проступає справжній сувій; екран темніє
+  loadEl.classList.add('plain'); loadEl.hidden = false;
+  loadEl.animate([{opacity:0},{opacity:1}], {duration:420*M, fill:'forwards'});
+  const D = 620*M;
+  glow.animate([{opacity:1},{opacity:1, offset:.2},{opacity:0, offset:.75},{opacity:0}], {duration:D, fill:'forwards'});
+  body.animate([{opacity:0},{opacity:0, offset:.2},{opacity:1, offset:.7},{opacity:1}], {duration:D, fill:'forwards'});
+  await fly.animate([
+    {transform:start, opacity:1},
+    {transform:`translate(${dx*.55}px,${dy*.45 - 30}px) scale(${s0 + (1-s0)*.4},${s0*2.4 + (1-s0*2.4)*.4}) rotate(-5deg)`, offset:.45},
+    {transform:'none', opacity:1}
+  ], {duration:D, easing:'cubic-bezier(.45,0,.3,1)', fill:'forwards'}).finished;
+  // 3) під ним уже розділ; справжній сувій відкривається рівно на цьому місці, а літаючий тихо зникає
+  intro.hidden = true; intro.getAnimations().forEach(a => a.cancel());
+  render();
+  S.busy = false;
+  openLetter(order.id, fly);
+  fly.animate([{opacity:1},{opacity:0}], {duration:180*M, delay:60*M, fill:'forwards'}).finished.then(() => fly.remove());
+  await loadEl.animate([{opacity:1},{opacity:0}], {duration:320*M, fill:'forwards'}).finished;
+  loadEl.hidden = true; loadEl.classList.remove('plain'); loadEl.getAnimations().forEach(a => a.cancel());
+}
 async function enterMail(el){
   if(S.busy) return; S.busy = true;
   S.order = null;
   S.viewed = true;
+  const fresh = S.letters.find(l => l.type === 'scroll' && !l.read);
+  if(el === perch && fresh) return scrollToMail(fresh);
   /* ХС → коротка анімація → лоадер → розділ: тап-пульс, екран темніє, три крапки, розділ проявляється */
   await el.animate([{transform:'none'},{transform:'translateY(-6px) scale(1.06)', offset:.5},{transform:'scale(.97)'}],{duration:200*M, easing:'ease-in-out'}).finished;
   loadEl.hidden = false;
@@ -1420,6 +1606,10 @@ async function enterMail(el){
   await loadEl.animate([{opacity:1},{opacity:0}], {duration:260*M, fill:'forwards'}).finished;
   loadEl.hidden = true; loadEl.getAnimations().forEach(a => a.cancel());
   S.busy = false;
+  /* доручення Батата одразу на передньому плані: лишається зламати печатку й вирішити */
+  const order = S.letters.find(l => l.type === 'scroll' && !l.read);
+  const row = order && pilesEl.querySelector(`[data-row="${order.id}"] .obj`);
+  if(row){ await new Promise(r => setTimeout(r, 120*M)); openLetter(order.id, row); }
 }
 perch.addEventListener('click', () => enterMail(perch));
 mailIcon.addEventListener('click', () => enterMail(mailIcon));
