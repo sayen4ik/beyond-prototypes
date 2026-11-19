@@ -1538,13 +1538,15 @@ async function morphToIcon(src, cx, cy, base){
   const D = 950*M, at = (k, x) => `translate(${tx*k}px,${ty*k}px) ${x}`;
   src.animate([
     {transform:`${base}`, opacity:1},
-    {transform:`translate(${tx*.3}px,${ty*.3}px) ${base} scale(.55)`, opacity:.9, offset:.3},
-    {transform:`translate(${tx*.5}px,${ty*.5}px) ${base} scale(.25)`, opacity:0, offset:.5},
+    {transform:`translate(${tx*.15}px,${ty*.15}px) ${base} scale(.8)`, opacity:1, offset:.15},
+    {transform:`translate(${tx*.3}px,${ty*.3}px) ${base} scale(.45)`, opacity:.6, offset:.3},
+    {transform:`translate(${tx*.45}px,${ty*.45}px) ${base} scale(.2)`, opacity:0, offset:.45},
     {transform:`translate(${tx}px,${ty}px) ${base} scale(.1)`, opacity:0}
   ], {duration:D, easing:'ease-in-out', fill:'forwards'}).finished.then(() => src.remove());
   const path = (s0, rot, o) => [
-    {transform:at(0,`scale(${s0*.2}) rotate(${rot}deg)`), opacity:0},
-    {transform:at(.3,`scale(${s0*.9}) rotate(${rot+80}deg)`), opacity:.8*o, offset:.3},
+    {transform:at(0,`scale(${s0*.3}) rotate(${rot}deg)`), opacity:0},
+    {transform:at(.15,`scale(${s0*.8}) rotate(${rot+40}deg)`), opacity:.85*o, offset:.15},
+    {transform:at(.3,`scale(${s0*.95}) rotate(${rot+80}deg)`), opacity:o, offset:.3},
     {transform:at(.5,`scale(${s0}) rotate(${rot+140}deg)`), opacity:o, offset:.5},
     {transform:at(.85,`scale(${s0*.6}) rotate(${rot+240}deg)`), opacity:.9*o, offset:.85},
     {transform:at(1,`scale(${s0*.2}) rotate(${rot+300}deg)`), opacity:0}];
