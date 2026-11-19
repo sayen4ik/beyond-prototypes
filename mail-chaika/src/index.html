@@ -100,7 +100,9 @@
 "a/chaika_open.webp":"data:image/webp;base64,@@FILE:a/chaika_open.webp@@",
 "a/chaika_head_1.webp":"data:image/webp;base64,@@FILE:a/chaika_head_1.webp@@",
 "a/chaika_head_2.webp":"data:image/webp;base64,@@FILE:a/chaika_head_2.webp@@",
-"a/chaika_head_3.webp":"data:image/webp;base64,@@FILE:a/chaika_head_3.webp@@"};function R(p){return window.__A[p]||p}</script>
+"a/chaika_head_3.webp":"data:image/webp;base64,@@FILE:a/chaika_head_3.webp@@",
+"a/chaika_headT_2.webp":"data:image/webp;base64,@@FILE:a/chaika_headT_2.webp@@",
+"a/chaika_headT_3.webp":"data:image/webp;base64,@@FILE:a/chaika_headT_3.webp@@"};function R(p){return window.__A[p]||p}</script>
 <title>Пошта Чайки</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -755,6 +757,18 @@ body{background:var(--k5);color:var(--k1)}
   body{flex-direction:row;justify-content:center;align-items:flex-start;gap:40px;min-height:100vh;box-sizing:border-box}
   .side{flex:0 0 320px;width:320px;position:sticky;top:16px;padding-top:8px}
 }
+/* іконка вгорі у формі листа */
+.hs-mail .mb-env{position:absolute;inset:0;width:100%;height:100%;z-index:1;overflow:visible}
+.hs-mail .mb-env rect{fill:#4a4a4a;stroke:#d9d4ca;stroke-width:1.6}
+.hs-mail .mb-env polyline{fill:none;stroke:#d9d4ca;stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round}
+.intro.hs .hs-mail{width:34px}
+.side .demo .seg button.sub.on{color:var(--k1);border-color:var(--k1)}
+/* кнопка випадку і її варіанти — в одному прямокутнику */
+.side .demo .seg{border:1px solid var(--k4);border-radius:10px;padding:4px 6px 6px;gap:4px;box-sizing:border-box}
+.side .demo .seg-main button{border:0;padding:8px 6px}
+.side .demo .seg .subs{padding-left:0;gap:2px;flex-wrap:wrap}
+.side .demo .seg button.sub{border:0;flex:0 0 auto;padding:4px 6px;color:var(--k3);text-align:left}
+.side .demo .seg button.sub.on{color:var(--k1);border:0;text-decoration:underline;text-underline-offset:3px}
 </style>
 
 <div class="phone" id="phone">
@@ -786,7 +800,7 @@ body{background:var(--k5);color:var(--k1)}
     <div class="hs-row">
       <span class="hs-exit">‹ Вийти</span>
       <span class="hs-icons">
-        <button class="hs-ico hs-mail" id="mailIcon" aria-label="Пошта"><i class="mb-scroll"><i></i></i><i class="mb-body"></i><i class="mb-flap"></i><b class="dot"></b></button>
+        <button class="hs-ico hs-mail" id="mailIcon" aria-label="Пошта"><i class="mb-scroll"><i></i></i><svg class="mb-env" viewBox="0 0 34 28" aria-hidden="true"><rect x="1.5" y="5" width="31" height="20.5" rx="2.5"/><polyline points="2,6 17,17 32,6"/></svg><b class="dot"></b></button>
         <span class="hs-ico">ID</span><span class="hs-ico">⚙</span>
       </span>
     </div>
@@ -829,9 +843,9 @@ body{background:var(--k5);color:var(--k1)}
 <div class="demo">
   <div class="demo-group">
     <span class="demo-lbl">Що прийшло</span>
-    <span class="seg"><span class="seg-main"><button id="btnReset">1 · Доручення Батата</button><button id="btnSubs" class="more" aria-label="Показати стани доручення" aria-expanded="false">▾</button></span><span class="subs" hidden><button id="btnDoze" class="sub" title="Гість пішов в інший розділ і повернувся, не відкривши: Чайка спить зі сувоєм">спить</button><button id="btnPending" class="sub" title="Сувій відкрили, але не прийняли й не відхилили: з конверта стирчить сувій">не вирішено</button><button id="btnExpire" class="sub" title="Чайка з дорученням зникає, на конверті лишається булька">термін минув</button></span></span>
-    <button id="btnNoBatat">2 · Лист Їдола</button>
-    <button id="btnService">3 · Щось сервісне</button>
+    <button id="btnReset">1 · Доручення Батата</button>
+    <span class="seg"><span class="seg-main"><button id="btnNoBatat">2 · Лист Їдола</button></span><span class="subs" id="idolSubs"><button class="sub on" data-v="A" title="Голова визирає з лівого краю під банкою, лист стає бліком">А · збоку</button><button class="sub" data-v="B" title="Голова звисає зверху й кидає лист у конверт, без бліку">Б · зверху</button></span></span>
+    <span class="seg"><span class="seg-main"><button id="btnService">3 · Щось сервісне</button></span><span class="subs" id="svcSubs"><button class="sub on" data-v="A" title="Згори падає пір'їнка Чайки, стає бліком і влітає в конверт">А · пір'їнка</button><button class="sub" data-v="B" title="Згори просто падає лист і пірнає в конверт">Б · лист падає</button></span></span>
   </div>
 </div>
 <p class="cap">Прототип: графіка умовна. Починаємо з порожнього Хоумспейсу. «Що прийшло» — три випадки за важливістю: 1 доручення Батата, 2 лист Їдола, 3 щось сервісне. Тапни двері — гість піде грати й повернеться, не зайшовши в пошту: з дорученням Батата Чайка задрімає. Тапни Чайку або конверт — підеш у пошту.</p>
@@ -1361,10 +1375,26 @@ $('#btnReset').addEventListener('click', () => { if(S.busy) return; S.letters = 
 $('#btnEmpty')?.addEventListener('click', () => { if(S.busy) return; S.order = null; S.letters.forEach(l => { l.read = true; if(l.type==='scroll' && !l.declined) l.accepted = true; }); S.view='new'; S.viewed = true; render(); showIntro(); });
 $('#btnService').addEventListener('click', () => { if(S.busy) return; S.letters = structuredClone(INIT); S.letters.forEach(l => { if(l.type==='scroll' || l.from==='idol'){ l.read = true; if(l.type==='scroll') l.accepted = true; } }); S.order = null; S.view='new'; S.seenPerch = false; S.viewed = false; S.batatIgnored = false; S.idolPeeked = false; S.featherDone = false; render(); showIntro(); });
 /* маленька стрілочка біля «1 · Доручення Батата» розгортає/згортає його стани (це для нас, не для гостя) */
-$('#btnSubs').addEventListener('click', () => {
-  const subs = document.querySelector('.demo .subs'), b = $('#btnSubs');
+document.querySelectorAll('.demo button.more').forEach(b => b.addEventListener('click', () => {
+  const subs = b.closest('.seg').querySelector('.subs');
   subs.hidden = !subs.hidden; b.setAttribute('aria-expanded', String(!subs.hidden));
-});
+}));
+/* варіанти випадку 3: вибраний підсвічений і програється кнопкою «3» */
+S.svcVar = 'A';
+document.querySelectorAll('#svcSubs .sub').forEach(b => b.addEventListener('click', () => {
+  if(S.busy) return;
+  S.svcVar = b.dataset.v;
+  document.querySelectorAll('#svcSubs .sub').forEach(x => x.classList.toggle('on', x === b));
+  $('#btnService').click();
+}));
+/* варіанти випадку 2 */
+S.idolVar = 'A';
+document.querySelectorAll('#idolSubs .sub').forEach(b => b.addEventListener('click', () => {
+  if(S.busy) return;
+  S.idolVar = b.dataset.v;
+  document.querySelectorAll('#idolSubs .sub').forEach(x => x.classList.toggle('on', x === b));
+  $('#btnNoBatat').click();
+}));
 /* стани доручення Батата — кожен вмикається одразу, з будь-якого місця */
 function batatScene(mod){
   if(S.busy) return;
@@ -1375,9 +1405,9 @@ function batatScene(mod){
   mod(sc);
   render(); showIntro();
 }
-$('#btnDoze').addEventListener('click', () => batatScene(() => { S.seenPerch = true; S.batatIgnored = true; }));        // уже спить на барі
-$('#btnPending').addEventListener('click', () => batatScene(sc => { sc.read = true; S.viewed = true; }));               // відкрили, не вирішили
-$('#btnExpire').addEventListener('click', () => batatScene(sc => { sc.read = true; sc.expired = true; }));              // термін минув
+$('#btnDoze')?.addEventListener('click', () => batatScene(() => { S.seenPerch = true; S.batatIgnored = true; }));        // уже спить на барі
+$('#btnPending')?.addEventListener('click', () => batatScene(sc => { sc.read = true; S.viewed = true; }));               // відкрили, не вирішили
+$('#btnExpire')?.addEventListener('click', () => batatScene(sc => { sc.read = true; sc.expired = true; }));              // термін минув
 
 /* ---------- Homespace: where Чайка sits, and the entry transition ---------- */
 const intro = $('#intro'), perch = $('#perch'), mailIcon = $('#mailIcon');
@@ -1444,7 +1474,69 @@ async function peek(){
   S.brought = S.letters.find(l => l.from === 'idol' && !l.read)?.id || null;   // цей лист щойно принесла Чайка
   S.busy = false;
 }
+/* лист від Їдола, варіант Б: голова Чайки звисає згори біля конверта й кидає в нього лист — без бліку.
+   Та сама голова й масштаб, що й збоку, лише повернута шиєю вгору; шия догенерована довшою (headT), щоб її кінець
+   завжди був далеко за верхнім краєм. Лист у дзьобі висить горизонтально відносно екрана, а не повертається з головою. */
+const TOP_ROT = 62, TOP_PIV = [130, -10];   // кут голови і де стоїть півот (у px Хоумспейсу)
+async function peekTop(){
+  S.busy = true;
+  const wait = ms => new Promise(r => setTimeout(r, ms*M));
+  const W = 121 * 721/551, H = W * 406/721;          // той самий масштаб голови, що й збоку
+  const PX = 252.65/721, PY = 231.4/406;             // півот у товщі шиї, як у боковому варіанті
+  const BX = .855 * W, BY = .29 * H;                 // кінчик дзьоба в картинці
+  const EW = 56, EH = EW * 230/343;
+  const box = document.createElement('div'); box.className = 'peek-top';
+  Object.assign(box.style, {position:'absolute', zIndex:6, pointerEvents:'none', width:W+'px', height:H+'px',
+    left:(TOP_PIV[0] - W*PX)+'px', top:(TOP_PIV[1] - H*PY)+'px', transformOrigin:`${PX*100}% ${PY*100}%`});
+  const env = document.createElement('img'); env.src = R('a/envelope.webp'); env.alt = '';
+  Object.assign(env.style, {position:'absolute', width:EW+'px', height:EH+'px', left:(BX - EW/2)+'px', top:(BY - 7)+'px', transformOrigin:'50% 7px'});
+  const img = document.createElement('img'); img.src = R('a/chaika_headT_3.webp'); img.alt = '';
+  Object.assign(img.style, {position:'absolute', inset:0, width:'100%', height:'100%'});
+  box.append(env, img);                              // лист за головою: кінчик дзьоба лежить на ньому
+  { const pre = new Image(); pre.src = R('a/chaika_headT_2.webp'); }
+  box.style.transform = `translateY(-150px) rotate(${TOP_ROT+14}deg)`;   // одразу в стартовій позі за краєм — інакше до початку руху видно шматок шиї
+  env.style.transform = `rotate(${-(TOP_ROT+14)}deg)`;
+  intro.appendChild(box);
+  /* рух голови і протиповорот листа з тих самих поз — лист весь час горизонтальний */
+  const move = (poses, opt) => {
+    box.animate(poses.map(([dy, r, o]) => ({transform:`translateY(${dy}px) rotate(${r}deg)`, ...(o != null ? {offset:o} : {})})), opt);
+    return env.animate(poses.map(([dy, r, o]) => ({transform:`rotate(${-r}deg)`, ...(o != null ? {offset:o} : {})})), opt).finished;
+  };
+  await wait(350);
+  await move([[-150, TOP_ROT+14], [4, TOP_ROT-3, .75], [0, TOP_ROT]], {duration:400*M, easing:'cubic-bezier(.2,.8,.3,1)', fill:'forwards'});
+  await wait(1100);   // тримає лист довше, щоб гість встиг її помітити
+  // замах — і кидок: дзьоб розкривається, лист летить у конверт
+  const R1 = TOP_ROT + 12, D1 = -6;
+  await move([[0, TOP_ROT], [D1, R1]], {duration:160*M, easing:'ease-out', fill:'forwards'});
+  const ang = R1 * Math.PI/180, lx = BX - W*PX, ly = BY - H*PY;
+  const bx = TOP_PIV[0] + lx*Math.cos(ang) - ly*Math.sin(ang), by = TOP_PIV[1] + D1 + lx*Math.sin(ang) + ly*Math.cos(ang);
+  env.remove();
+  img.src = R('a/chaika_headT_2.webp');
+  box.animate([{transform:`translateY(${D1}px) rotate(${R1}deg)`},{transform:`translateY(2px) rotate(${TOP_ROT-10}deg)`, offset:.35},{transform:`rotate(${TOP_ROT}deg)`}], {duration:420*M, easing:'ease-out', fill:'forwards'});
+  const fly = document.createElement('img'); fly.src = R('a/envelope.webp'); fly.alt = ''; fly.className = 'drop-env';
+  Object.assign(fly.style, {left:(bx - EW/2)+'px', top:(by - 7)+'px', width:EW+'px', height:EH+'px'});
+  intro.appendChild(fly);
+  const ir = intro.getBoundingClientRect(), mr = mailIcon.getBoundingClientRect();
+  const tx = mr.left - ir.left + mr.width/2 - bx, ty = mr.top - ir.top + mr.height/2 - (by - 7 + EH/2);
+  await fly.animate([
+    {transform:'translate(0,0) rotate(0deg) scale(1)'},
+    {transform:`translate(${tx*.45}px,${ty*.2 - 14}px) rotate(-10deg) scale(.75)`, offset:.45},
+    {transform:`translate(${tx}px,${ty}px) rotate(0deg) scale(.42)`, opacity:1, offset:.85},
+    {transform:`translate(${tx}px,${ty+1}px) scale(.15)`, opacity:0}
+  ], {duration:520*M, easing:'cubic-bezier(.4,0,.6,1)', fill:'forwards'}).finished;
+  fly.remove();
+  mailIcon.classList.add('unseen');
+  mailIcon.animate([{transform:'none'},{transform:'translateY(2px) scale(1.12,.88)', offset:.35},{transform:'translateY(-2px) scale(.96,1.05)', offset:.7},{transform:'none'}], {duration:380*M, easing:'ease-out'});
+  await wait(200);
+  img.src = R('a/chaika_headT_3.webp');
+  await box.animate([{transform:`rotate(${TOP_ROT}deg)`},{transform:`translateY(-160px) rotate(${TOP_ROT+14}deg)`}], {duration:300*M, easing:'ease-in', fill:'forwards'}).finished;
+  box.remove();
+  S.idolPeeked = true; S.featherDone = true;
+  S.brought = S.letters.find(l => l.from === 'idol' && !l.read)?.id || null;
+  S.busy = false;
+}
 async function showIntro(){
+  intro.querySelectorAll('.peek-top').forEach(e => e.remove());
   sheet.hidden = true; S.current = null;
   const st = hsState();
   intro.hidden = false;
@@ -1467,8 +1559,31 @@ async function showIntro(){
   /* гість побачив доручення (або минув термін): Чайки просто вже немає, відльоту не показуємо */
   S.seenPerch = false;
   perch.hidden = true; perch.classList.remove('calm','batat','doze'); perch.getAnimations().forEach(a => a.cancel());
-  if(st === 'idol') peek();
-  else if(st === 'dot' && !S.featherDone){ mailIcon.classList.remove('unseen'); featherDrop(); }
+  if(st === 'idol') (S.idolVar === 'B' ? peekTop : peek)();
+  else if(st === 'dot' && !S.featherDone){ mailIcon.classList.remove('unseen'); (S.svcVar === 'B' ? letterDrop : featherDrop)(); }
+}
+/* щось сервісне, варіант Б: згори просто падає маленький лист і пірнає в конверт (без бліку) */
+async function letterDrop(){
+  S.busy = true;
+  await new Promise(r => setTimeout(r, 400*M));
+  const ir = intro.getBoundingClientRect(), mr = mailIcon.getBoundingClientRect();
+  const W = 30, H = 20, cx = mr.left - ir.left + mr.width/2, cy = mr.top - ir.top + mr.height/2;
+  const e = document.createElement('img'); e.src = R('a/envelope.webp'); e.alt = ''; e.className = 'drop-env';
+  Object.assign(e.style, {left:(cx - W/2)+'px', top:(cy - H/2)+'px', width:W+'px', height:H+'px'});
+  intro.appendChild(e);
+  const fall = cy + 40;   // стартує над верхнім краєм екрана
+  await e.animate([
+    {transform:`translateY(${-fall}px) rotate(-8deg)`},
+    {transform:`translateY(${-fall*.55}px) rotate(6deg)`, offset:.4},
+    {transform:`translateY(${-fall*.18}px) rotate(-4deg)`, offset:.75},
+    {transform:'translateY(0) rotate(0) scale(1)', opacity:1, offset:.9},
+    {transform:'translateY(2px) scale(.3)', opacity:0}
+  ], {duration:900*M, easing:'cubic-bezier(.45,0,.75,.6)', fill:'forwards'}).finished;
+  e.remove();
+  mailIcon.classList.add('unseen');
+  mailIcon.animate([{transform:'none'},{transform:'translateY(2px) scale(1.1,.9)', offset:.35},{transform:'translateY(-2px) scale(.97,1.04)', offset:.7},{transform:'none'}], {duration:380*M, easing:'ease-out'});
+  S.featherDone = true;
+  S.busy = false;
 }
 /* щось сервісне: зверху падає пір'їнка Чайки, стає бліком і летить у конверт */
 async function featherDrop(){
