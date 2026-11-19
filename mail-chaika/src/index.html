@@ -843,9 +843,9 @@ body{background:var(--k5);color:var(--k1)}
 <div class="demo">
   <div class="demo-group">
     <span class="demo-lbl">Що прийшло</span>
-    <button id="btnReset">1 · Доручення Батата</button>
+    <span class="seg"><span class="seg-main"><button id="btnReset">1 · Доручення Батата</button></span><span class="subs" id="batatSubs"><button class="sub on" data-v="A" title="Чайка сіла — блік із сувою летить у конверт">А · блік</button><button class="sub" data-v="B" title="Спершу загоряється конверт і розходяться хвильки, потім прилітає Чайка; без бліку">Б · без бліку</button></span></span>
     <span class="seg"><span class="seg-main"><button id="btnNoBatat">2 · Лист Їдола</button></span><span class="subs" id="idolSubs"><button class="sub on" data-v="A" title="Голова визирає з лівого краю під банкою, лист стає бліком">А · збоку</button><button class="sub" data-v="B" title="Голова звисає зверху й кидає лист у конверт, без бліку">Б · зверху</button></span></span>
-    <span class="seg"><span class="seg-main"><button id="btnService">3 · Щось сервісне</button></span><span class="subs" id="svcSubs"><button class="sub on" data-v="A" title="Згори падає пір'їнка Чайки, стає бліком і влітає в конверт">А · пір'їнка</button><button class="sub" data-v="B" title="Згори просто падає лист і пірнає в конверт">Б · лист падає</button></span></span>
+    <span class="seg"><span class="seg-main"><button id="btnService">3 · Щось сервісне</button></span><span class="subs" id="svcSubs"><button class="sub on" data-v="A" title="Згори падає пір'їнка Чайки, стає бліком і влітає в конверт">А · пір'їнка</button><button class="sub" data-v="B" title="Згори падає лист у конверт, від нього розходяться хвильки">Б · лист падає</button></span></span>
   </div>
 </div>
 <p class="cap">Прототип: графіка умовна. Починаємо з порожнього Хоумспейсу. «Що прийшло» — три випадки за важливістю: 1 доручення Батата, 2 лист Їдола, 3 щось сервісне. Тапни двері — гість піде грати й повернеться, не зайшовши в пошту: з дорученням Батата Чайка задрімає. Тапни Чайку або конверт — підеш у пошту.</p>
@@ -1387,6 +1387,14 @@ document.querySelectorAll('#svcSubs .sub').forEach(b => b.addEventListener('clic
   document.querySelectorAll('#svcSubs .sub').forEach(x => x.classList.toggle('on', x === b));
   $('#btnService').click();
 }));
+/* варіанти випадку 1 */
+S.batatVar = 'A';
+document.querySelectorAll('#batatSubs .sub').forEach(b => b.addEventListener('click', () => {
+  if(S.busy) return;
+  S.batatVar = b.dataset.v;
+  document.querySelectorAll('#batatSubs .sub').forEach(x => x.classList.toggle('on', x === b));
+  $('#btnReset').click();
+}));
 /* варіанти випадку 2 */
 S.idolVar = 'A';
 document.querySelectorAll('#idolSubs .sub').forEach(b => b.addEventListener('click', () => {
@@ -1503,16 +1511,16 @@ async function peekTop(){
     return env.animate(poses.map(([dy, r, o]) => ({transform:`rotate(${-r}deg)`, ...(o != null ? {offset:o} : {})})), opt).finished;
   };
   await wait(350);
-  await move([[-150, TOP_ROT+14], [4, TOP_ROT-3, .75], [0, TOP_ROT]], {duration:400*M, easing:'cubic-bezier(.2,.8,.3,1)', fill:'forwards'});
-  await wait(1100);   // тримає лист довше, щоб гість встиг її помітити
+  await move([[-150, TOP_ROT+14], [4, TOP_ROT-3, .8], [0, TOP_ROT]], {duration:340*M, easing:'cubic-bezier(.3,.7,.4,1)', fill:'forwards'});
+  await wait(150);   // коротка пауза — і одразу кидає
   // замах — і кидок: дзьоб розкривається, лист летить у конверт
   const R1 = TOP_ROT + 12, D1 = -6;
-  await move([[0, TOP_ROT], [D1, R1]], {duration:160*M, easing:'ease-out', fill:'forwards'});
+  await move([[0, TOP_ROT], [D1, R1]], {duration:100*M, easing:'ease-out', fill:'forwards'});
   const ang = R1 * Math.PI/180, lx = BX - W*PX, ly = BY - H*PY;
   const bx = TOP_PIV[0] + lx*Math.cos(ang) - ly*Math.sin(ang), by = TOP_PIV[1] + D1 + lx*Math.sin(ang) + ly*Math.cos(ang);
   env.remove();
   img.src = R('a/chaika_headT_2.webp');
-  box.animate([{transform:`translateY(${D1}px) rotate(${R1}deg)`},{transform:`translateY(2px) rotate(${TOP_ROT-10}deg)`, offset:.35},{transform:`rotate(${TOP_ROT}deg)`}], {duration:420*M, easing:'ease-out', fill:'forwards'});
+  box.animate([{transform:`translateY(${D1}px) rotate(${R1}deg)`},{transform:`translateY(2px) rotate(${TOP_ROT-10}deg)`, offset:.35},{transform:`rotate(${TOP_ROT}deg)`}], {duration:300*M, easing:'ease-out', fill:'forwards'});
   const fly = document.createElement('img'); fly.src = R('a/envelope.webp'); fly.alt = ''; fly.className = 'drop-env';
   Object.assign(fly.style, {left:(bx - EW/2)+'px', top:(by - 7)+'px', width:EW+'px', height:EH+'px'});
   intro.appendChild(fly);
@@ -1523,12 +1531,22 @@ async function peekTop(){
     {transform:`translate(${tx*.45}px,${ty*.2 - 14}px) rotate(-10deg) scale(.75)`, offset:.45},
     {transform:`translate(${tx}px,${ty}px) rotate(0deg) scale(.42)`, opacity:1, offset:.85},
     {transform:`translate(${tx}px,${ty+1}px) scale(.15)`, opacity:0}
-  ], {duration:520*M, easing:'cubic-bezier(.4,0,.6,1)', fill:'forwards'}).finished;
+  ], {duration:340*M, easing:'cubic-bezier(.4,0,.6,1)', fill:'forwards'}).finished;
   fly.remove();
   mailIcon.classList.add('unseen');
   mailIcon.animate([{transform:'none'},{transform:'translateY(2px) scale(1.12,.88)', offset:.35},{transform:'translateY(-2px) scale(.96,1.05)', offset:.7},{transform:'none'}], {duration:380*M, easing:'ease-out'});
-  await wait(200);
+  /* кричить довше: дзьоб відкритий, голова кілька разів смикається від шиї */
+  const T = TOP_ROT;
+  await box.animate([
+    {transform:`rotate(${T}deg)`},
+    {transform:`translateY(-3px) rotate(${T-7}deg)`, offset:.18},
+    {transform:`rotate(${T-2}deg)`, offset:.36},
+    {transform:`translateY(-3px) rotate(${T-7}deg)`, offset:.54},
+    {transform:`rotate(${T-2}deg)`, offset:.72},
+    {transform:`rotate(${T}deg)`}
+  ], {duration:900*M, easing:'ease-in-out', fill:'forwards'}).finished;
   img.src = R('a/chaika_headT_3.webp');
+  await wait(120);
   await box.animate([{transform:`rotate(${TOP_ROT}deg)`},{transform:`translateY(-160px) rotate(${TOP_ROT+14}deg)`}], {duration:300*M, easing:'ease-in', fill:'forwards'}).finished;
   box.remove();
   S.idolPeeked = true; S.featherDone = true;
@@ -1536,6 +1554,7 @@ async function peekTop(){
   S.busy = false;
 }
 async function showIntro(){
+  intro.querySelectorAll('.hs-ripple').forEach(e => e.remove());
   intro.querySelectorAll('.peek-top').forEach(e => e.remove());
   sheet.hidden = true; S.current = null;
   const st = hsState();
@@ -1562,6 +1581,18 @@ async function showIntro(){
   if(st === 'idol') (S.idolVar === 'B' ? peekTop : peek)();
   else if(st === 'dot' && !S.featherDone){ mailIcon.classList.remove('unseen'); (S.svcVar === 'B' ? letterDrop : featherDrop)(); }
 }
+/* від конверта розходяться невеликі хвильки по колу */
+function iconRipples(){
+  const ir = intro.getBoundingClientRect(), mr = mailIcon.getBoundingClientRect();
+  const cx = mr.left - ir.left + mr.width/2, cy = mr.top - ir.top + mr.height/2;
+  return Promise.all([0, 1].map(i => {   // спокійні: колір той самий, але розходяться недалеко й повільно
+    const r = document.createElement('div'); r.className = 'hs-ripple';
+    Object.assign(r.style, {position:'absolute', left:(cx - 16)+'px', top:(cy - 16)+'px', width:'32px', height:'32px', borderRadius:'50%',
+      border:'1.5px solid rgba(246,244,238,.85)', pointerEvents:'none', zIndex:7, opacity:0});
+    intro.appendChild(r);
+    return r.animate([{transform:'scale(.85)', opacity:0},{transform:'scale(1)', opacity:.9, offset:.2},{transform:'scale(1.5)', opacity:0}], {duration:1300*M, delay:i*320*M, easing:'ease-out'}).finished.then(() => r.remove());
+  }));
+}
 /* щось сервісне, варіант Б: згори просто падає маленький лист і пірнає в конверт (без бліку) */
 async function letterDrop(){
   S.busy = true;
@@ -1582,6 +1613,8 @@ async function letterDrop(){
   e.remove();
   mailIcon.classList.add('unseen');
   mailIcon.animate([{transform:'none'},{transform:'translateY(2px) scale(1.1,.9)', offset:.35},{transform:'translateY(-2px) scale(.97,1.04)', offset:.7},{transform:'none'}], {duration:380*M, easing:'ease-out'});
+  /* від конверта розходяться невеликі хвильки по колу */
+  await iconRipples();
   S.featherDone = true;
   S.busy = false;
 }
@@ -1639,6 +1672,14 @@ async function flyIn(){
   perch.style.visibility = 'hidden';
   await new Promise(r => requestAnimationFrame(r));
   for(let i = 1; i <= 4; i++){ const pre = new Image(); pre.src = R(`a/chaika_land_${i}.webp`); }
+  if(S.batatVar === 'B'){
+    /* варіант Б: спершу загоряється конверт і від нього розходяться хвильки, потім прилітає Чайка */
+    await new Promise(r => setTimeout(r, 350*M));
+    mailIcon.classList.add('unseen');
+    mailIcon.querySelector('.dot').animate([{transform:'scale(1)', opacity:0},{transform:'scale(1)', opacity:1}], {duration:400*M, easing:'ease-out'});
+    await iconRipples();
+    await new Promise(r => setTimeout(r, 150*M));
+  }
   const fl = landFrame(1, 26); fl.hidden = false;
   await fl.animate([
     {transform:'translateY(14px) scale(.05)', opacity:0},
@@ -1652,6 +1693,12 @@ async function flyIn(){
   landFrame(3, 0); await new Promise(r => setTimeout(r, 45*M));
   fl.hidden = true;
   perch.style.visibility = '';
+  if(S.batatVar === 'B'){
+    /* варіант Б: крапка вже горить — Чайка просто сідає */
+    await perch.animate([{transform:'scaleY(.93)'},{transform:'scaleY(1.03)', offset:.5},{transform:'none'}], {duration:240*M, easing:'ease-out'}).finished;
+    S.busy = false;
+    return;
+  }
   await perch.animate([{transform:'scaleY(.93)'},{transform:'scaleY(1.03)', offset:.5},{transform:'none'}], {duration:240*M, easing:'ease-out'}).finished;
   /* Чайка сіла, пауза → на сувої спалахує блік → блік летить угору й пірнає в конверт → конверт підскакує, стає пузатішим, загоряється булька */
   await new Promise(r => setTimeout(r, 300*M));
