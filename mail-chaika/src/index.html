@@ -70,6 +70,10 @@
 .demo-lbl{width:100%;text-align:center;font:500 10px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--k3)}
 .demo .seg{display:flex;flex-direction:column;align-items:center;gap:6px;width:100%}
 .demo .seg .subs{display:flex;gap:0}
+.demo .seg .subs[hidden]{display:none}
+.demo .seg-main{display:flex;align-items:center;gap:4px}
+.demo button.more{border:0;padding:4px 6px;font-size:10px;color:var(--k3);line-height:1;transition:transform .2s}
+.demo button.more[aria-expanded="true"]{transform:rotate(180deg)}
 .demo .seg button{white-space:nowrap}
 .demo .seg button.sub{font-size:11px;color:var(--k3);padding:6px 10px;border-radius:0;margin-left:-1px}
 .demo .seg button.sub:first-child{border-radius:999px 0 0 999px;margin-left:0}
@@ -801,7 +805,7 @@ body{background:var(--k5);color:var(--k1)}
 <div class="demo">
   <div class="demo-group">
     <span class="demo-lbl">Що прийшло</span>
-    <span class="seg"><button id="btnReset">1 · Доручення Батата</button><span class="subs"><button id="btnDoze" class="sub" title="Гість пішов в інший розділ і повернувся, не відкривши: Чайка спить зі сувоєм">спить</button><button id="btnPending" class="sub" title="Сувій відкрили, але не прийняли й не відхилили: з конверта стирчить сувій">не вирішено</button><button id="btnExpire" class="sub" title="Чайка з дорученням зникає, на конверті лишається булька">термін минув</button></span></span>
+    <span class="seg"><span class="seg-main"><button id="btnReset">1 · Доручення Батата</button><button id="btnSubs" class="more" aria-label="Показати стани доручення" aria-expanded="false">▾</button></span><span class="subs" hidden><button id="btnDoze" class="sub" title="Гість пішов в інший розділ і повернувся, не відкривши: Чайка спить зі сувоєм">спить</button><button id="btnPending" class="sub" title="Сувій відкрили, але не прийняли й не відхилили: з конверта стирчить сувій">не вирішено</button><button id="btnExpire" class="sub" title="Чайка з дорученням зникає, на конверті лишається булька">термін минув</button></span></span>
     <button id="btnNoBatat">2 · Лист Їдола</button>
     <button id="btnService">3 · Щось сервісне</button>
   </div>
@@ -810,7 +814,7 @@ body{background:var(--k5);color:var(--k1)}
     <button id="btnIntro">На Хоумспейс</button>
   </div>
 </div>
-<p class="cap">Прототип: графіка умовна. Починаємо з порожнього Хоумспейсу. «Що прийшло» — три випадки за важливістю: 1 доручення Батата (і його стани: спить, не вирішено, термін минув), 2 лист Їдола, 3 щось сервісне. Тапни двері — гість піде грати й повернеться, не зайшовши в пошту: з дорученням Батата Чайка задрімає. Тапни Чайку або конверт — підеш у пошту.</p>
+<p class="cap">Прототип: графіка умовна. Починаємо з порожнього Хоумспейсу. «Що прийшло» — три випадки за важливістю: 1 доручення Батата, 2 лист Їдола, 3 щось сервісне. Тапни двері — гість піде грати й повернеться, не зайшовши в пошту: з дорученням Батата Чайка задрімає. Тапни Чайку або конверт — підеш у пошту.</p>
 
 <script>document.addEventListener("DOMContentLoaded",()=>document.querySelectorAll("img[data-src]").forEach(i=>i.src=R(i.dataset.src)));</script>
 <script>
@@ -1334,6 +1338,11 @@ const sfx = SOUND ? sfxReal : {quack(){}, paper(){}, crack(){}, thud(){}};
 $('#btnReset').addEventListener('click', () => { if(S.busy) return; S.letters = structuredClone(INIT); S.order = null; S.view='new'; S.seenPerch = false; S.viewed = false; S.batatIgnored = false; S.idolPeeked = false; S.featherDone = false; render(); showIntro(); });
 $('#btnEmpty').addEventListener('click', () => { if(S.busy) return; S.order = null; S.letters.forEach(l => { l.read = true; if(l.type==='scroll' && !l.declined) l.accepted = true; }); S.view='new'; S.viewed = true; render(); showIntro(); });
 $('#btnService').addEventListener('click', () => { if(S.busy) return; S.letters = structuredClone(INIT); S.letters.forEach(l => { if(l.type==='scroll' || l.from==='idol'){ l.read = true; if(l.type==='scroll') l.accepted = true; } }); S.order = null; S.view='new'; S.seenPerch = false; S.viewed = false; S.batatIgnored = false; S.idolPeeked = false; S.featherDone = false; render(); showIntro(); });
+/* маленька стрілочка біля «1 · Доручення Батата» розгортає/згортає його стани (це для нас, не для гостя) */
+$('#btnSubs').addEventListener('click', () => {
+  const subs = document.querySelector('.demo .subs'), b = $('#btnSubs');
+  subs.hidden = !subs.hidden; b.setAttribute('aria-expanded', String(!subs.hidden));
+});
 /* стани доручення Батата — кожен вмикається одразу, з будь-якого місця */
 function batatScene(mod){
   if(S.busy) return;
@@ -1388,15 +1397,6 @@ async function peek(){
   const env = document.createElement('img'); env.src = R('a/envelope.webp'); env.alt = ''; env.className = 'drop-env';
   Object.assign(env.style, {left:ex+'px', top:ey+'px', width:ew+'px', height:eh+'px'});
   intro.appendChild(env);
-  const mr = mailIcon.getBoundingClientRect();
-  const tx = mr.left - ir.left + mr.width/2 - (ex + ew/2), ty = mr.top - ir.top + mr.height/2 - (ey + eh/2);
-  // блік у тій самій точці, летить тим самим шляхом; конверт по дорозі стискається й тане, а блік проступає
-  const g = document.createElement('div'); g.className = 'glint';
-  g.innerHTML = '<svg viewBox="-10 -10 20 20" width="100%" height="100%"><path d="M0-10C.8-2 2-.8 10 0C2 .8.8 2 0 10C-.8 2-2 .8-10 0C-2-.8-.8-2 0-10Z" fill="#fff"/></svg>';
-  Object.assign(g.style, {left:(ex + ew/2 - 17)+'px', top:(ey + eh/2 - 17)+'px'});
-  intro.appendChild(g);
-  const D = 900*M, ease = 'ease-in-out';
-  const at = (k, extra) => `translate(${tx*k}px,${ty*k}px) ${extra}`;
   /* голова: передала лист → закрила дзьоб → знову відкрила й крикнула (смик головою) → сховалась за край */
   for(let i = 2; i <= 3; i++){ const pre = new Image(); pre.src = R(`a/chaika_head_${i}.webp`); }
   const head = (async () => {
@@ -1405,20 +1405,9 @@ async function peek(){
     await img.animate([{transform:'none'},{transform:'rotate(-9deg)', offset:.3},{transform:'rotate(-5deg)', offset:.7},{transform:'none'}], {duration:380*M, easing:'ease-out'}).finished;
     await img.animate([{left:'-30px'},{left:'-122px'}], {duration:280*M, easing:'ease-in', fill:'forwards'}).finished;
   })();
-  env.animate([
-    {transform:at(0,'rotate(-8deg) scale(1)'), opacity:1},
-    {transform:at(.3,'rotate(4deg) scale(.55)'), opacity:.9, offset:.3},
-    {transform:at(.5,'rotate(10deg) scale(.25)'), opacity:0, offset:.5},
-    {transform:at(1,'scale(.1)'), opacity:0}
-  ], {duration:D, easing:ease, fill:'forwards'}).finished.then(() => env.remove());
-  await g.animate([
-    {transform:at(0,'scale(.2) rotate(0)'), opacity:0},
-    {transform:at(.3,'scale(.9) rotate(80deg)'), opacity:.8, offset:.3},
-    {transform:at(.5,'scale(1.1) rotate(140deg)'), opacity:1, offset:.5},
-    {transform:at(.9,'scale(.6) rotate(260deg)'), opacity:.9, offset:.9},
-    {transform:at(1,'scale(.2) rotate(300deg)'), opacity:0}
-  ], {duration:D, easing:ease, fill:'forwards'}).finished;
-  g.remove();
+  // лист вилітає з дзьоба, стискається й тане рівно там, де спалахує той самий блік, що й у Батата і в пір'їнці, — і блік летить у конверт
+  const ecx = ex + ew/2, ecy = ey + eh/2;
+  await morphToIcon(env, ecx, ecy, 'rotate(-8deg)');
   await head;
   peekEl.hidden = true; img.getAnimations().forEach(x => x.cancel()); img.src = R('a/chaika_head_1.webp');
   mailIcon.classList.add('unseen');
@@ -1482,30 +1471,10 @@ async function featherDrop(){
   ];
   await f.animate(Z.map(([x, y, r], i) => ({transform:`translate(${x}px,${y}px) rotate(${r}deg)`, offset:i/(Z.length-1)})),
     {duration:2300*M, easing:'linear', fill:'forwards'}).finished;
-  // сама пір'їнка летить до конверта й по дорозі тане в блік, а блік проступає на її місці
-  const fr = f.getBoundingClientRect(), mr = mailIcon.getBoundingClientRect();
+  // пір'їнка стискається й тане рівно там, де на її місці спалахує блік (як у Батата: спалах, потім політ зі слідом у конверт)
+  const fr = f.getBoundingClientRect();
   const cx = fr.left - ir.left + fr.width/2, cy = fr.top - ir.top + fr.height/2;
-  const tx = mr.left - ir.left + mr.width/2 - cx, ty = mr.top - ir.top + mr.height/2 - cy;
-  const g = document.createElement('div'); g.className = 'glint';
-  g.innerHTML = '<svg viewBox="-10 -10 20 20" width="100%" height="100%"><path d="M0-10C.8-2 2-.8 10 0C2 .8.8 2 0 10C-.8 2-2 .8-10 0C-2-.8-.8-2 0-10Z" fill="#fff"/></svg>';
-  Object.assign(g.style, {left:(cx - 17)+'px', top:(cy - 17)+'px'});
-  intro.appendChild(g);
-  const base = 'translate(10px,190px) rotate(100deg)', D = 800*M;
-  f.animate([
-    {transform:`${base}`, opacity:1},
-    {transform:`translate(${10 + tx*.3}px,${190 + ty*.3}px) rotate(160deg) scale(.6)`, opacity:.8, offset:.3},
-    {transform:`translate(${10 + tx*.5}px,${190 + ty*.5}px) rotate(220deg) scale(.25)`, opacity:0, offset:.5},
-    {transform:`translate(${10 + tx}px,${190 + ty}px) scale(.1)`, opacity:0}
-  ], {duration:D, easing:'ease-in-out', fill:'forwards'}).finished.then(() => f.remove());
-  const at = (k, extra) => `translate(${tx*k}px,${ty*k}px) ${extra}`;
-  await g.animate([
-    {transform:at(0,'scale(.2) rotate(0)'), opacity:0},
-    {transform:at(.3,'scale(.9) rotate(80deg)'), opacity:.8, offset:.3},
-    {transform:at(.5,'scale(1.05) rotate(140deg)'), opacity:1, offset:.5},
-    {transform:at(.9,'scale(.6) rotate(260deg)'), opacity:.9, offset:.9},
-    {transform:at(1,'scale(.2) rotate(300deg)'), opacity:0}
-  ], {duration:D, easing:'ease-in-out', fill:'forwards'}).finished;
-  g.remove();
+  await morphToIcon(f, cx, cy, 'translate(10px,190px) rotate(100deg)');
   mailIcon.classList.add('unseen');
   mailIcon.animate([{transform:'none'},{transform:'translateY(-4px) scale(1.08)', offset:.4},{transform:'none'}], {duration:360*M, easing:'ease-out'});
   S.featherDone = true;
@@ -1558,6 +1527,33 @@ async function flyIn(){
     {transform:'none'}
   ], {duration:560*M, easing:'ease-out'});
   S.busy = false;
+}
+/* лист / пір'їнка летять до конверта й по дорозі стають тим самим бліком, що й у Батата (той самий розмір, світіння, слід) */
+async function morphToIcon(src, cx, cy, base){
+  const ir = intro.getBoundingClientRect(), mr = mailIcon.getBoundingClientRect();
+  const tx = mr.left - ir.left + mr.width/2 - cx, ty = mr.top - ir.top + mr.height/2 - cy;
+  const star = '<svg viewBox="-10 -10 20 20" width="100%" height="100%"><path d="M0-10C.8-2 2-.8 10 0C2 .8.8 2 0 10C-.8 2-2 .8-10 0C-2-.8-.8-2 0-10Z" fill="#fff"/></svg>';
+  const make = (cls, size) => { const g = document.createElement('div'); g.className = 'glint ' + cls; g.innerHTML = star;
+    Object.assign(g.style, {left:(cx - size/2)+'px', top:(cy - size/2)+'px', opacity:0}); intro.appendChild(g); return g; };
+  const D = 950*M, at = (k, x) => `translate(${tx*k}px,${ty*k}px) ${x}`;
+  src.animate([
+    {transform:`${base}`, opacity:1},
+    {transform:`translate(${tx*.3}px,${ty*.3}px) ${base} scale(.55)`, opacity:.9, offset:.3},
+    {transform:`translate(${tx*.5}px,${ty*.5}px) ${base} scale(.25)`, opacity:0, offset:.5},
+    {transform:`translate(${tx}px,${ty}px) ${base} scale(.1)`, opacity:0}
+  ], {duration:D, easing:'ease-in-out', fill:'forwards'}).finished.then(() => src.remove());
+  const path = (s0, rot, o) => [
+    {transform:at(0,`scale(${s0*.2}) rotate(${rot}deg)`), opacity:0},
+    {transform:at(.3,`scale(${s0*.9}) rotate(${rot+80}deg)`), opacity:.8*o, offset:.3},
+    {transform:at(.5,`scale(${s0}) rotate(${rot+140}deg)`), opacity:o, offset:.5},
+    {transform:at(.85,`scale(${s0*.6}) rotate(${rot+240}deg)`), opacity:.9*o, offset:.85},
+    {transform:at(1,`scale(${s0*.2}) rotate(${rot+300}deg)`), opacity:0}];
+  const g = make('', 34), trail = [make('trail', 20), make('trail', 20)];
+  const run = [g.animate(path(1, 0, 1), {duration:D, easing:'ease-in-out', fill:'forwards'})];
+  trail.forEach((t, i) => run.push(t.animate(path(.8 - i*.2, 30*i, .7 - i*.25), {duration:D, delay:(90 + i*90)*M, easing:'ease-in-out', fill:'forwards'})));
+  await run[0].finished;
+  await new Promise(r => setTimeout(r, 200*M));
+  [g, ...trail].forEach(e => e.remove());
 }
 async function glintToIcon(fromX, fromY){
   const ir = intro.getBoundingClientRect(), pr = perch.getBoundingClientRect(), mr = mailIcon.getBoundingClientRect();
