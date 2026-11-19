@@ -733,6 +733,28 @@ body{background:var(--k5);color:var(--k1)}
 @media (prefers-reduced-motion: reduce){
   .hang,.roll.hot::before,.big-scroll .wax,.gull.doze .zz{animation:none}
 }
+/* панель кнопок: на широкому екрані праворуч від телефона й прибита до верху, на вузькому — під ним.
+   Усе вирівняне по лівому краю, групи із заголовками, кнопки однакової ширини. */
+.side{display:flex;flex-direction:column;align-items:stretch;gap:20px;width:min(340px,100%);text-align:left}
+.side-title{margin:0;font:600 15px/1.3 var(--serif);color:var(--k1)}
+.side .demo{flex-direction:column;align-items:stretch;gap:20px;max-width:none}
+.side .demo-group{display:flex;flex-direction:column;align-items:stretch;gap:6px;padding:0;border:0;border-radius:0}
+.side .demo-lbl{width:auto;text-align:left;margin:0 0 4px;font:500 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--k3)}
+.side .demo button{width:100%;text-align:left;border-radius:10px;padding:10px 12px;font-size:12px}
+.side .demo .seg{flex-direction:column;align-items:stretch;gap:6px;width:100%}
+.side .demo .seg-main{display:flex;gap:6px}
+.side .demo .seg-main #btnReset{flex:1}
+.side .demo button.more{width:38px;flex:0 0 38px;text-align:center;border:1px solid var(--k4);border-radius:10px;padding:0;font-size:11px}
+.side .demo .seg .subs{display:flex;gap:6px;padding-left:14px}
+.side .demo .seg .subs[hidden]{display:none}
+.side .demo .seg .subs::before{content:none}
+.side .demo .seg button.sub{width:auto;flex:1;margin:0;border-radius:8px;padding:7px 8px;font-size:11px;text-align:center}
+.side .demo .seg button.sub:first-child,.side .demo .seg button.sub:last-child{border-radius:8px}
+.side .cap{margin:0;text-align:left;max-width:none;font-size:11px;line-height:1.5}
+@media (min-width:760px){
+  body{flex-direction:row;justify-content:center;align-items:flex-start;gap:40px;min-height:100vh;box-sizing:border-box}
+  .side{flex:0 0 320px;width:320px;position:sticky;top:16px;padding-top:8px}
+}
 </style>
 
 <div class="phone" id="phone">
@@ -802,6 +824,8 @@ body{background:var(--k5);color:var(--k1)}
   </div>
 </div>
 
+<aside class="side">
+<h1 class="side-title">Поштова Чайка · Хоумспейс</h1>
 <div class="demo">
   <div class="demo-group">
     <span class="demo-lbl">Що прийшло</span>
@@ -809,19 +833,17 @@ body{background:var(--k5);color:var(--k1)}
     <button id="btnNoBatat">2 · Лист Їдола</button>
     <button id="btnService">3 · Щось сервісне</button>
   </div>
-  <div class="demo-group plain">
-    <button id="btnEmpty">Порожній Хоумспейс</button>
-    <button id="btnIntro">На Хоумспейс</button>
-  </div>
 </div>
 <p class="cap">Прототип: графіка умовна. Починаємо з порожнього Хоумспейсу. «Що прийшло» — три випадки за важливістю: 1 доручення Батата, 2 лист Їдола, 3 щось сервісне. Тапни двері — гість піде грати й повернеться, не зайшовши в пошту: з дорученням Батата Чайка задрімає. Тапни Чайку або конверт — підеш у пошту.</p>
+</aside>
 
 <script>document.addEventListener("DOMContentLoaded",()=>document.querySelectorAll("img[data-src]").forEach(i=>i.src=R(i.dataset.src)));</script>
 <script>
 /* keep the phone 390×844; shrink it as a whole to fit the window height, never grow above 1 */
 (() => {
   const root = document.documentElement;
-  const fit = () => { const k = Math.min(1, (innerHeight - 110) / 844, (innerWidth - 32) / 390); root.style.setProperty('--fit', Math.max(.4, k).toFixed(3)); };
+  const fit = () => { const wide = innerWidth >= 760;   /* широкий екран: панель праворуч, телефон на всю висоту */
+  const k = Math.min(1, (innerHeight - (wide ? 32 : 110)) / 844, (innerWidth - (wide ? 420 : 32)) / 390); root.style.setProperty('--fit', Math.max(.4, k).toFixed(3)); };
   fit(); addEventListener('resize', fit);
   /* animations work in the phone's own 390×844 pixels, so report element boxes in those units */
   const orig = Element.prototype.getBoundingClientRect;
@@ -1336,7 +1358,7 @@ const sfx = SOUND ? sfxReal : {quack(){}, paper(){}, crack(){}, thud(){}};
 
 /* ---------- demo controls ---------- */
 $('#btnReset').addEventListener('click', () => { if(S.busy) return; S.letters = structuredClone(INIT); S.order = null; S.view='new'; S.seenPerch = false; S.viewed = false; S.batatIgnored = false; S.idolPeeked = false; S.featherDone = false; render(); showIntro(); });
-$('#btnEmpty').addEventListener('click', () => { if(S.busy) return; S.order = null; S.letters.forEach(l => { l.read = true; if(l.type==='scroll' && !l.declined) l.accepted = true; }); S.view='new'; S.viewed = true; render(); showIntro(); });
+$('#btnEmpty')?.addEventListener('click', () => { if(S.busy) return; S.order = null; S.letters.forEach(l => { l.read = true; if(l.type==='scroll' && !l.declined) l.accepted = true; }); S.view='new'; S.viewed = true; render(); showIntro(); });
 $('#btnService').addEventListener('click', () => { if(S.busy) return; S.letters = structuredClone(INIT); S.letters.forEach(l => { if(l.type==='scroll' || l.from==='idol'){ l.read = true; if(l.type==='scroll') l.accepted = true; } }); S.order = null; S.view='new'; S.seenPerch = false; S.viewed = false; S.batatIgnored = false; S.idolPeeked = false; S.featherDone = false; render(); showIntro(); });
 /* маленька стрілочка біля «1 · Доручення Батата» розгортає/згортає його стани (це для нас, не для гостя) */
 $('#btnSubs').addEventListener('click', () => {
@@ -1472,8 +1494,9 @@ async function featherDrop(){
   await f.animate(Z.map(([x, y, r], i) => ({transform:`translate(${x}px,${y}px) rotate(${r}deg)`, offset:i/(Z.length-1)})),
     {duration:2300*M, easing:'linear', fill:'forwards'}).finished;
   // пір'їнка стискається й тане рівно там, де на її місці спалахує блік (як у Батата: спалах, потім політ зі слідом у конверт)
-  const fr = f.getBoundingClientRect();
-  const cx = fr.left - ir.left + fr.width/2, cy = fr.top - ir.top + fr.height/2;
+  // положення міряємо заново саме зараз: за 2 с падіння сторінку могли прокрутити
+  const fr = f.getBoundingClientRect(), ir2 = intro.getBoundingClientRect();
+  const cx = fr.left - ir2.left + fr.width/2, cy = fr.top - ir2.top + fr.height/2;
   await morphToIcon(f, cx, cy, 'translate(10px,190px) rotate(100deg)');
   mailIcon.classList.add('unseen');
   mailIcon.animate([{transform:'none'},{transform:'translateY(-4px) scale(1.08)', offset:.4},{transform:'none'}], {duration:360*M, easing:'ease-out'});
@@ -1811,7 +1834,7 @@ async function enterMail(el){
 perch.addEventListener('click', () => enterMail(perch));
 mailIcon.addEventListener('click', () => enterMail(mailIcon));
 document.querySelector('.top .back').addEventListener('click', () => { if(!S.busy) showIntro(); });
-$('#btnIntro').addEventListener('click', () => { if(!S.busy) showIntro(); });
+$('#btnIntro')?.addEventListener('click', () => { if(!S.busy) showIntro(); });
 $('#btnNoBatat').addEventListener('click', () => { if(S.busy) return; S.letters = structuredClone(INIT); S.letters.forEach(l => { if(l.type==='scroll'){ l.read = true; l.accepted = true; } }); S.order = null; S.view='new'; S.seenPerch = false; S.viewed = false; S.batatIgnored = false; S.idolPeeked = false; S.featherDone = false; render(); showIntro(); });
 
 /* починаємо з порожнього Хоумспейсу */
