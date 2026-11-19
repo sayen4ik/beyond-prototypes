@@ -1550,7 +1550,9 @@ async function morphToIcon(src, cx, cy, base){
     {transform:at(1,`scale(${s0*.2}) rotate(${rot+300}deg)`), opacity:0}];
   const g = make('', 34), trail = [make('trail', 20), make('trail', 20)];
   const run = [g.animate(path(1, 0, 1), {duration:D, easing:'ease-in-out', fill:'forwards'})];
-  trail.forEach((t, i) => run.push(t.animate(path(.8 - i*.2, 30*i, .7 - i*.25), {duration:D, delay:(90 + i*90)*M, easing:'ease-in-out', fill:'forwards'})));
+  /* слід не спалахує на місці старту (там ще летить пір'їнка/лист) — проступає лише коли блік уже відділився */
+  const tpath = (s0, rot, o) => path(s0, rot, o).map((k, j) => j < 2 ? {...k, opacity:0} : k);
+  trail.forEach((t, i) => run.push(t.animate(tpath(.8 - i*.2, 30*i, .7 - i*.25), {duration:D, delay:(90 + i*90)*M, easing:'ease-in-out', fill:'forwards'})));
   await run[0].finished;
   await new Promise(r => setTimeout(r, 200*M));
   [g, ...trail].forEach(e => e.remove());
