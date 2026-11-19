@@ -64,6 +64,17 @@
 .fly-wrap .big-env{width:100%;height:100%}
 .fly-wrap .fly-glow.env{border-radius:10px}
 .big-env .peek{display:none}   /* маленький аркушик-заглушка більше не потрібен — виходить справжній лист */
+.demo{flex-direction:column;align-items:center;gap:10px}
+.demo-group{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;padding:10px 12px;border:1px dashed var(--k4);border-radius:16px}
+.demo-group.plain{border:0;padding:0}
+.demo-lbl{width:100%;text-align:center;font:500 10px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--k3)}
+.demo .seg{display:flex;flex-direction:column;align-items:center;gap:6px;width:100%}
+.demo .seg .subs{display:flex;gap:0}
+.demo .seg button{white-space:nowrap}
+.demo .seg button.sub{font-size:11px;color:var(--k3);padding:6px 10px;border-radius:0;margin-left:-1px}
+.demo .seg button.sub:first-child{border-radius:999px 0 0 999px;margin-left:0}
+.demo .seg button.sub:last-child{border-radius:0 999px 999px 0}
+.demo .seg .subs::before{content:'↳';font:400 12px/26px var(--mono);color:var(--k3);margin-right:6px}
 </style></head><body>
 <script>window.__A={"a/chaika_calm_nobar.webp":"data:image/webp;base64,@@FILE:a/chaika_calm_nobar.webp@@",
 "a/chaika_batat_nobar.webp":"data:image/webp;base64,@@FILE:a/chaika_batat_nobar.webp@@",
@@ -788,14 +799,18 @@ body{background:var(--k5);color:var(--k1)}
 </div>
 
 <div class="demo">
-  <button id="btnIntro">На Хоумспейс</button>
-  <button id="btnReset">1 · Доручення Батата</button>
-  <button id="btnExpire">Термін доручення минув</button>
-  <button id="btnNoBatat">2 · Лист Їдола</button>
-  <button id="btnService">3 · Щось непереглянуте</button>
-  <button id="btnEmpty">4 · Усе переглянуто</button>
+  <div class="demo-group">
+    <span class="demo-lbl">Що прийшло</span>
+    <span class="seg"><button id="btnReset">1 · Доручення Батата</button><span class="subs"><button id="btnDoze" class="sub" title="Гість пішов в інший розділ і повернувся, не відкривши: Чайка спить зі сувоєм">спить</button><button id="btnPending" class="sub" title="Сувій відкрили, але не прийняли й не відхилили: з конверта стирчить сувій">не вирішено</button><button id="btnExpire" class="sub" title="Чайка з дорученням зникає, на конверті лишається булька">термін минув</button></span></span>
+    <button id="btnNoBatat">2 · Лист Їдола</button>
+    <button id="btnService">3 · Щось сервісне</button>
+  </div>
+  <div class="demo-group plain">
+    <button id="btnEmpty">Порожній Хоумспейс</button>
+    <button id="btnIntro">На Хоумспейс</button>
+  </div>
 </div>
-<p class="cap">Прототип: графіка умовна. Кнопки знизу вмикають 4 стани Хоумспейсу. Конверт угорі є завжди, булька на ньому — є непереглянуте. Тапни двері (Дорадник, Парк, Гардеробна) — гість піде грати й повернеться, не зайшовши в пошту: з дорученням Батата Чайка задрімає. Тапни Чайку або конверт — підеш у пошту, а доручення Батата одразу відкриється: зламай печатку, потім прийми (притисни й тримай) або відхили.</p>
+<p class="cap">Прототип: графіка умовна. Починаємо з порожнього Хоумспейсу. «Що прийшло» — три випадки за важливістю: 1 доручення Батата (і його стани: спить, не вирішено, термін минув), 2 лист Їдола, 3 щось сервісне. Тапни двері — гість піде грати й повернеться, не зайшовши в пошту: з дорученням Батата Чайка задрімає. Тапни Чайку або конверт — підеш у пошту.</p>
 
 <script>document.addEventListener("DOMContentLoaded",()=>document.querySelectorAll("img[data-src]").forEach(i=>i.src=R(i.dataset.src)));</script>
 <script>
@@ -1319,7 +1334,19 @@ const sfx = SOUND ? sfxReal : {quack(){}, paper(){}, crack(){}, thud(){}};
 $('#btnReset').addEventListener('click', () => { if(S.busy) return; S.letters = structuredClone(INIT); S.order = null; S.view='new'; S.seenPerch = false; S.viewed = false; S.batatIgnored = false; S.idolPeeked = false; S.featherDone = false; render(); showIntro(); });
 $('#btnEmpty').addEventListener('click', () => { if(S.busy) return; S.order = null; S.letters.forEach(l => { l.read = true; if(l.type==='scroll' && !l.declined) l.accepted = true; }); S.view='new'; S.viewed = true; render(); showIntro(); });
 $('#btnService').addEventListener('click', () => { if(S.busy) return; S.letters = structuredClone(INIT); S.letters.forEach(l => { if(l.type==='scroll' || l.from==='idol'){ l.read = true; if(l.type==='scroll') l.accepted = true; } }); S.order = null; S.view='new'; S.seenPerch = false; S.viewed = false; S.batatIgnored = false; S.idolPeeked = false; S.featherDone = false; render(); showIntro(); });
-$('#btnExpire').addEventListener('click', () => { if(S.busy) return; const sc = S.letters.find(l => l.type==='scroll' && !l.read); if(!sc) return; sc.read = true; sc.expired = true; S.idolPeeked = true; S.featherDone = true; S.order = null; render(); showIntro(); });
+/* стани доручення Батата — кожен вмикається одразу, з будь-якого місця */
+function batatScene(mod){
+  if(S.busy) return;
+  S.letters = structuredClone(INIT); S.order = null; S.view = 'new';
+  S.viewed = false; S.batatIgnored = false; S.seenPerch = false;
+  S.idolPeeked = true; S.featherDone = true;          // лише Батат, без інших сцен
+  const sc = S.letters.find(l => l.type === 'scroll' && !l.read);
+  mod(sc);
+  render(); showIntro();
+}
+$('#btnDoze').addEventListener('click', () => batatScene(() => { S.seenPerch = true; S.batatIgnored = true; }));        // уже спить на барі
+$('#btnPending').addEventListener('click', () => batatScene(sc => { sc.read = true; S.viewed = true; }));               // відкрили, не вирішили
+$('#btnExpire').addEventListener('click', () => batatScene(sc => { sc.read = true; sc.expired = true; }));              // термін минув
 
 /* ---------- Homespace: where Чайка sits, and the entry transition ---------- */
 const intro = $('#intro'), perch = $('#perch'), mailIcon = $('#mailIcon');
@@ -1787,6 +1814,8 @@ document.querySelector('.top .back').addEventListener('click', () => { if(!S.bus
 $('#btnIntro').addEventListener('click', () => { if(!S.busy) showIntro(); });
 $('#btnNoBatat').addEventListener('click', () => { if(S.busy) return; S.letters = structuredClone(INIT); S.letters.forEach(l => { if(l.type==='scroll'){ l.read = true; l.accepted = true; } }); S.order = null; S.view='new'; S.seenPerch = false; S.viewed = false; S.batatIgnored = false; S.idolPeeked = false; S.featherDone = false; render(); showIntro(); });
 
+/* починаємо з порожнього Хоумспейсу */
+S.letters.forEach(l => { l.read = true; if(l.type === 'scroll') l.accepted = true; }); S.viewed = true; S.idolPeeked = true; S.featherDone = true;
 render();
 showIntro();
 </script>
