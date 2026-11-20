@@ -769,13 +769,15 @@ body{background:var(--k5);color:var(--k1)}
 .side .demo .seg .subs{padding-left:0;gap:2px;flex-wrap:wrap}
 .side .demo .seg button.sub{border:0;flex:0 0 auto;padding:4px 6px;color:var(--k3);text-align:left}
 .side .demo .seg button.sub.on{color:var(--k1);border:0;text-decoration:underline;text-underline-offset:3px}
-/* назва випадку — лише підпис; запускається натисканням на А або Б (перемикач-доріжка) */
-.side .demo .seg-main button{pointer-events:none;cursor:default;padding:4px 4px 2px;color:var(--k2);font-size:11px}
-.side .demo .seg .subs{display:flex;flex-wrap:nowrap;gap:0;border:1px solid var(--k4);border-radius:8px;overflow:hidden}
-.side .demo .seg button.sub{flex:1 1 0;min-width:0;text-align:center;padding:7px 4px;white-space:normal;line-height:1.25;border-radius:0;color:var(--k2);background:transparent;text-decoration:none}
-.side .demo .seg button.sub + button.sub{border-left:1px solid var(--k4)}
-.side .demo .seg button.sub:hover{background:var(--k5);color:var(--k1)}
-.side .demo .seg button.sub.on{background:var(--k1);color:var(--k6);text-decoration:none}
+/* назва випадку — лише підпис; кожна версія — кнопка в рамці, тап одразу її запускає; остання запущена — товстіша рамка, без заливки */
+.side .demo .seg-main button{pointer-events:none;cursor:default;padding:6px 4px 4px;color:var(--k2);font-size:11px}
+.side .demo .seg .subs{display:flex;flex-wrap:nowrap;gap:6px;padding:0;border:0}
+.side .demo .seg button.sub{flex:1 1 0;min-width:0;text-align:center;padding:8px 4px;white-space:normal;line-height:1.25;border:1px solid var(--k4);border-radius:8px;background:transparent;color:var(--k2);text-decoration:none}
+.side .demo .seg button.sub{cursor:pointer;transition:background .12s,border-color .12s,transform .08s}
+.side .demo .seg button.sub:hover{border-color:var(--k2);color:var(--k1);background:var(--k6)}
+.side .demo .seg button.sub.on:hover{border-color:var(--k1)}
+.side .demo .seg button.sub:active{transform:scale(.96);background:var(--k4);border-color:var(--k1);color:var(--k1)}
+.side .demo .seg button.sub.on{border:2px solid var(--k1);padding:7px 3px;color:var(--k1);background:transparent;text-decoration:none}
 </style>
 
 <div class="phone" id="phone">
