@@ -18,7 +18,7 @@
 .phone.ar-mode{background:#000 !important}
 .phone.ar-mode .bag-flap,.phone.ar-mode .bag-lip,.phone.ar-mode .bag-shade{display:none !important}
 .phone.ar-mode .status{color:#fff !important}
-.phone.ar-mode .top{height:56px;padding:0 24px;box-sizing:border-box}
+.phone.ar-mode .top{height:56px;padding:0 24px;box-sizing:border-box;z-index:16}   /* апбар над списком, що заходить під нього */
 .phone.ar-mode .top h1{font:600 32px/1.25 var(--ar-title) !important;letter-spacing:0 !important;text-transform:uppercase;color:#fff !important;
   text-shadow:.5px 2px 0 #000 !important;white-space:nowrap;max-width:257px}
 .phone.ar-mode .top .back{left:24px;top:6px;margin:0;width:44px;height:44px;font-size:0 !important;color:transparent !important;
@@ -31,16 +31,16 @@
   display:flex;gap:8px;background:#000;border-top:1px solid var(--ar-w32)}
 .ar-tabs button{flex:1;height:40px;border:1px solid var(--ar-w32);background:transparent;color:var(--ar-w72);cursor:pointer;
   font:500 12px/1 var(--ar-text);letter-spacing:.12em;text-transform:uppercase;transition:background .15s,color .15s,border-color .15s}
-.ar-tabs button:hover{color:#fff;border-color:var(--ar-w72)}
+.ar-tabs button:active{color:#fff;border-color:var(--ar-w72)}
 .ar-tabs button.on{background:#fff;color:#000;border-color:#fff}
 .phone.ar-has-tabs .piles-zone{padding-bottom:120px !important}
 
 /* екран архітектури */
 .ar{position:absolute;left:0;right:0;top:100px;bottom:84px;z-index:14;background:#000;color:#fff;display:flex;flex-direction:column}
 .ar[hidden]{display:none}
-.ar-sum{flex:none;padding:16px 24px 14px;max-height:90px;box-sizing:border-box;overflow:hidden;
+.ar-sum{flex:none;padding:36px 24px 0;max-height:120px;box-sizing:border-box;overflow:hidden;
   transition:max-height .3s ease,padding .3s ease,opacity .2s ease,transform .3s ease}
-.ar-sum.hide{max-height:0;padding-top:0;padding-bottom:0;opacity:0;transform:translateY(-8px);pointer-events:none}
+.ar-sum.hide{max-height:0;padding-top:0;opacity:0;transform:translateY(-8px);pointer-events:none}
 .ar-unread{display:flex;align-items:center;gap:12px;height:56px;padding:0 6px 0 16px;border:1px solid var(--ar-w32);color:#fff}
 .ar-u-num{flex:none;display:flex;height:1em;overflow:hidden;font:600 32px/1 var(--ar-title);font-variant-numeric:tabular-nums}
 .ar-d{display:block;height:1em;overflow:hidden;transition:width .2s}
@@ -49,7 +49,7 @@
 .ar-u-lbl{flex:1;min-width:0;font:400 12px/1.2 var(--ar-serif);letter-spacing:1.2px;color:var(--ar-w72)}
 .ar-u-act{flex:none;display:flex;align-items:center;gap:8px;height:44px;padding:0 14px 0 12px;border:0;border-left:1px solid var(--ar-w32);
   background:transparent;color:#fff;cursor:pointer;font:500 11px/1 var(--ar-text);letter-spacing:.08em;text-transform:uppercase;transition:background .15s,color .15s,opacity .2s}
-.ar-u-act:hover{background:#fff;color:#000}
+.ar-u-act:active{background:#fff;color:#000}
 .ar-unread svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .ar-unread.busy .ar-u-act{pointer-events:none;opacity:.35}
 .ar-unread.done{border-color:rgba(255,255,255,.16);color:var(--ar-w72)}
@@ -60,24 +60,21 @@
 .ar-unread.arrive svg path{stroke-dasharray:40;stroke-dashoffset:40;animation:ar-draw .45s .1s ease-out forwards}
 @keyframes ar-in{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
 @keyframes ar-draw{to{stroke-dashoffset:0}}
-/* прочитання: підсвітка непрочитаного (білий 4%) гасне в такт барабану */
-.ar-card.reading{background:transparent;border-color:rgba(255,255,255,.16);transition:background .35s ease-out,border-color .35s ease-out}
-.ar-card.reading h3,.ar-card.reading p,.ar-card.reading .ar-meta,.ar-card.reading .ar-tag,.ar-card.reading .ar-ava b{transition:color .35s,opacity .35s}
-.ar-card.reading h3{color:rgba(255,255,255,.6)}
-.ar-card.reading p{color:rgba(255,255,255,.44)}
-.ar-card.reading .ar-meta{color:rgba(255,255,255,.4)}
-.ar-card.reading .ar-tag,.ar-card.reading .ar-ava b{opacity:.55}
 @media (prefers-reduced-motion:reduce){.ar-unread.arrive > *,.ar-unread.arrive svg path,.ar-bub.pop{animation:none;stroke-dashoffset:0}}
-.ar-list{flex:1;min-height:0;overflow-y:auto;padding:0 24px 24px;display:flex;flex-direction:column;gap:12px;scrollbar-width:none}
+.ar-list{flex:1;min-height:0;overflow-y:auto;padding:14px 24px 24px;display:flex;flex-direction:column;gap:12px;scrollbar-width:none;--ar-fade:0px;
+  -webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(0,0,0,.08) calc(var(--ar-fade) * .2),rgba(0,0,0,.3) calc(var(--ar-fade) * .45),
+    rgba(0,0,0,.65) calc(var(--ar-fade) * .7),#000 var(--ar-fade),#000 calc(100% - 24px),rgba(0,0,0,.4) calc(100% - 8px),rgba(0,0,0,0) 100%);
+          mask-image:linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(0,0,0,.08) calc(var(--ar-fade) * .2),rgba(0,0,0,.3) calc(var(--ar-fade) * .45),
+    rgba(0,0,0,.65) calc(var(--ar-fade) * .7),#000 var(--ar-fade),#000 calc(100% - 24px),rgba(0,0,0,.4) calc(100% - 8px),rgba(0,0,0,0) 100%)}
 .ar-list::-webkit-scrollbar{display:none}
 .ar-empty{padding:60px 12px;text-align:center;font:400 14px/1.4 var(--ar-serif);letter-spacing:.1em;color:var(--ar-w72)}
 
 /* картка листа — за макетом */
 .ar-card{position:relative;flex:none;display:flex;flex-direction:column;gap:12px;width:100%;padding:24px;box-sizing:border-box;text-align:left;cursor:pointer;
-  background:transparent;color:#fff;border:1px solid var(--ar-w32);border-radius:0;font:inherit;transition:border-color .5s,opacity .2s,background .35s}
-.ar-card:hover{border-color:var(--ar-w72)}
+  background:transparent;color:#fff;border:1px solid var(--ar-w32);border-radius:0;font:inherit;transition:border-color .35s ease-out,background .35s ease-out}
+.ar-card h3,.ar-card p,.ar-card .ar-meta,.ar-card .ar-tag,.ar-card .ar-ava,.ar-card .ar-ava b{transition:color .35s,opacity .35s,border-color .35s}
 /* непрочитане: яскрава обводка + заливка; прочитане: тьмяна обводка, приглушений текст */
-.ar-card.unread{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.88)}
+.ar-card.unread{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.88)}
 .ar-card:not(.unread){border-color:rgba(255,255,255,.16)}
 .ar-card:not(.unread) h3{color:rgba(255,255,255,.6)}
 .ar-card:not(.unread) p{color:rgba(255,255,255,.44)}
@@ -85,7 +82,6 @@
 .ar-card:not(.unread) .ar-tag{opacity:.55}
 .ar-card:not(.unread) .ar-ava{border-color:rgba(217,217,217,.4)}
 .ar-card:not(.unread) .ar-ava b{opacity:.55}
-.ar-card:not(.unread):hover{border-color:var(--ar-w32)}
 .ar-top{display:flex;gap:8px;align-items:flex-start}
 .ar-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px}
 .ar-card h3{margin:0;font:600 28px/1 var(--ar-title);color:#fff;overflow-wrap:break-word}
@@ -100,7 +96,6 @@
 .ar-meta{display:flex;gap:8px;font:400 12px/1.15 var(--ar-text);color:var(--ar-w72)}
 .ar-meta span{flex:1;min-width:0}
 .ar-meta span:last-child{flex:none;text-align:right}
-.ar-meta em{font-style:normal;color:#fff}
 .ar-tags{display:flex;flex-wrap:wrap;gap:6px}
 .ar-tag{padding:4px 7px;border:1px solid #fff;color:#fff;font:500 10px/1 var(--ar-text);letter-spacing:.14em;text-transform:uppercase}
 .ar-tag.t-task{background:#fff;color:#000}
@@ -141,3 +136,55 @@
 .ar-side li{margin:0 0 4px}
 .ar-side b{font-weight:600;color:var(--k1,#111)}
 .ar-side button{margin-top:4px;padding:8px 12px;border:1px solid var(--k1,#111);background:transparent;cursor:pointer;font:500 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase}
+
+/* палець замість курсора (над телефоном): коло, натискання, затискання */
+.phone.ar-touch,.phone.ar-touch *{cursor:none !important;user-select:none;-webkit-user-select:none}
+.ar-finger,.ar-ripple{position:fixed;left:0;top:0;z-index:2147483647;pointer-events:none}
+.ar-finger::before,.ar-finger::after,.ar-ripple::before{content:"";position:absolute;left:-18px;top:-18px;width:36px;height:36px;border-radius:50%;box-sizing:border-box}
+.ar-finger::before{background:rgba(255,255,255,.28);border:1px solid rgba(255,255,255,.75);box-shadow:0 0 0 1px rgba(0,0,0,.35),0 2px 10px rgba(0,0,0,.35);
+  opacity:0;transform:scale(.6);transition:opacity .15s,transform .15s cubic-bezier(.2,.8,.3,1.3),background .1s}
+.ar-finger.on::before{opacity:1;transform:none}
+.ar-finger.down::before{transform:scale(.8);background:rgba(255,255,255,.5);transition-duration:.08s}
+/* затискання: навколо пальця набирається кільце */
+.ar-finger::after{border:2px solid rgba(255,255,255,.9);opacity:0;transform:scale(1.5)}
+.ar-finger.hold::after{animation:ar-hold .35s ease-out forwards}
+@keyframes ar-hold{from{opacity:0;transform:scale(1.6)}to{opacity:1;transform:scale(1.15)}}
+.ar-ripple::before{border:1.5px solid rgba(255,255,255,.7);animation:ar-ripple .45s ease-out forwards}
+@keyframes ar-ripple{from{transform:scale(.8);opacity:1}to{transform:scale(1.9);opacity:0}}
+@media (prefers-reduced-motion:reduce){.ar-ripple{display:none}}
+
+/* мокап пристрою: корпус малюється в arch.js, телефон лежить поверх нього */
+.ar-device{position:absolute;z-index:2;pointer-events:none}
+.ar-device svg{display:block;width:100%;height:100%;overflow:visible}
+.phone.ar-in-device{z-index:1;box-shadow:none !important;border-radius:56px !important;
+  /* overflow:hidden + border-radius у Chrome не обрізає шари з трансформаціями (анімації, гумовий край) —
+     clip-path обрізає завжди */
+  clip-path:inset(0 round 56px)}
+.phone.ar-centered{position:fixed !important;margin:0 !important}
+.side.ar-centered{position:fixed;margin:0;height:100vh;overflow-y:auto;box-sizing:border-box;padding:40px 40px 40px 32px;
+  max-width:none;border-left:1px solid var(--k4,#beb8ad)}
+
+/* статус-бар iOS з макета: картинка 393×60 (@3x), в обох табах; екран 393×852, слот статус-бару 60 px */
+.phone .status{background:var(--ar-status) center top / 393px 60px no-repeat}
+.phone .status > span{visibility:hidden}
+
+/* бічні кнопки: увесь блок 36 px клікабельний, іконка з'являється при наведенні, кнопка трохи вдавлюється при натисканні */
+.ar-device .ar-key{pointer-events:auto;cursor:pointer}
+.ar-device .ar-key .ico{opacity:0;transition:opacity .15s}
+.ar-device .ar-key:hover .ico{opacity:1}
+.ar-device .ar-key .btn{transition:transform .08s}
+.ar-device .ar-key.press .btn{transform:translateX(1.5px)}
+.ar-device .ar-key .on,.ar-device.ar-sound .ar-key .off{display:none}
+.ar-device.ar-sound .ar-key .on{display:inline}
+/* шкала гучності (як iOS): вертикальна капсула біля кнопок */
+.ar-vol{position:absolute;left:10px;top:200px;z-index:40;width:9px;height:150px;border-radius:5px;overflow:hidden;
+  background:rgba(120,120,128,.45);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  opacity:0;transform:translateX(-14px);transition:opacity .2s,transform .25s cubic-bezier(.2,.8,.3,1);pointer-events:none}
+.ar-vol.show{opacity:1;transform:none}
+.ar-vol i{position:absolute;left:0;right:0;bottom:0;background:#fff;transition:height .15s ease-out}
+/* плашка «Звук увімкнено / вимкнено» вгорі */
+.ar-silent{position:absolute;left:50%;top:12px;z-index:40;display:flex;align-items:center;gap:6px;height:36px;padding:0 16px 0 12px;border-radius:18px;
+  background:rgba(28,28,30,.92);color:#fff;font:500 13px/1 -apple-system,system-ui,sans-serif;white-space:nowrap;
+  opacity:0;transform:translate(-50%,-8px) scale(.9);transition:opacity .2s,transform .3s cubic-bezier(.2,.8,.3,1.2);pointer-events:none}
+.ar-silent.show{opacity:1;transform:translate(-50%,0)}
+.ar-silent svg{width:18px;height:18px;fill:#fff}
