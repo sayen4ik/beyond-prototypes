@@ -130,7 +130,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 button:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-radius:8px}
 
 /* phone */
-.phone{position:relative;flex:none;width:390px;height:844px;zoom:var(--fit,1);border-radius:44px;overflow:hidden;
+.phone{position:relative;flex:none;width:393px;height:852px;zoom:var(--fit,1);border-radius:44px;overflow:hidden;
   /* inside of Чайка's open mail bag: violet satin lining with a fine weave */
   background:
     repeating-linear-gradient(45deg, rgba(255,255,255,.028) 0 1px, transparent 1px 4px),
@@ -140,7 +140,7 @@ button:focus-visible{outline:2px solid var(--glow);outline-offset:3px;border-rad
   box-shadow:0 0 0 10px #17121f, 0 0 0 11px #2e2838, 0 30px 80px rgba(0,0,0,.6);
   display:flex;flex-direction:column}
 @media (max-width:440px){ .phone{border-radius:28px;box-shadow:0 0 0 1px #2e2838} }
-.status{height:44px;flex:none;display:flex;justify-content:space-between;align-items:center;padding:0 28px;font:600 15px/1 -apple-system,system-ui,sans-serif;color:#fff}
+.status{height:60px;flex:none;display:flex;justify-content:space-between;align-items:center;padding:0 28px;font:600 15px/1 -apple-system,system-ui,sans-serif;color:#fff}
 .top{flex:none;display:flex;align-items:center;gap:10px;padding:6px 20px 0}
 .back{font-size:28px;line-height:1;color:var(--silver-2);width:32px;height:32px}
 .top h1{font:400 21px/1 var(--serif);letter-spacing:.02em;color:#fff;margin:0}
@@ -861,13 +861,13 @@ body{background:var(--k5);color:var(--k1)}
 
 <script>document.addEventListener("DOMContentLoaded",()=>document.querySelectorAll("img[data-src]").forEach(i=>i.src=R(i.dataset.src)));</script>
 <script>
-/* keep the phone 390×844; shrink it as a whole to fit the window height, never grow above 1 */
+/* keep the phone 393×852; shrink it as a whole to fit the window height, never grow above 1 */
 (() => {
   const root = document.documentElement;
   const fit = () => { const wide = innerWidth >= 760;   /* широкий екран: панель праворуч, телефон на всю висоту */
-  const k = Math.min(1, (innerHeight - (wide ? 32 : 110)) / 844, (innerWidth - (wide ? 420 : 32)) / 390); root.style.setProperty('--fit', Math.max(.4, k).toFixed(3)); };
+  const k = Math.min(1, (innerHeight - (wide ? 32 : 110)) / 852, (innerWidth - (wide ? 420 : 32)) / 393); root.style.setProperty('--fit', Math.max(.4, k).toFixed(3)); };
   fit(); addEventListener('resize', fit);
-  /* animations work in the phone's own 390×844 pixels, so report element boxes in those units */
+  /* animations work in the phone's own 393×852 pixels, so report element boxes in those units */
   const orig = Element.prototype.getBoundingClientRect;
   Element.prototype.getBoundingClientRect = function(){
     const r = orig.call(this), k = parseFloat(getComputedStyle(root).getPropertyValue('--fit')) || 1;
@@ -1944,7 +1944,7 @@ async function scrollToMail(order){
 async function envToMail(letter){
   const ph = $('#phone').getBoundingClientRect(), ic = mailIcon.getBoundingClientRect();
   const s = SENDERS[letter.from];
-  const W = 275, H = 185, L = (ph.width - W)/2, T = ph.height*(406.5/844) - H/2;      // де стоїть закритий великий конверт
+  const W = 275, H = 185, L = (ph.width - W)/2, T = ph.height*(406.5/852) - H/2;      // де стоїть закритий великий конверт
   const fly = document.createElement('div'); fly.className = 'fly-wrap';
   fly.innerHTML = `<div class="big-env s-${s.seal}"><i class="back"></i><div class="peek"></div><i class="pocket"></i><span class="addr"><b>${s.name}</b><small>${letter.date}</small></span><i class="flap"></i><b class="seal">${s.glyph}</b></div>`;
   const s0 = ic.width / W, dx = (ic.left - ph.left + ic.width/2) - (L + W/2), dy = (ic.top - ph.top + ic.height/2) - (T + H/2);
@@ -2017,7 +2017,8 @@ showIntro();
 <!-- Архітектура (Андрій): окремі файли src/arch/, щоб не перетинатися з інтерфейсом -->
 <script>window.__ARCH={"arch/arch.css":"data:text/css;base64,@@FILE:arch/arch.css@@","arch/arch.js":"data:text/javascript;base64,@@FILE:arch/arch.js@@",⏎
 "arch/btn_left.png":"data:image/png;base64,@@FILE:arch/btn_left.png@@",⏎
-"arch/btn_settings.png":"data:image/png;base64,@@FILE:arch/btn_settings.png@@"};
+"arch/btn_settings.png":"data:image/png;base64,@@FILE:arch/btn_settings.png@@",⏎
+"arch/iOS.png":"data:image/png;base64,@@FILE:arch/iOS.png@@"};
 (function(){var l=document.createElement('link');l.rel='stylesheet';l.href=__ARCH["arch/arch.css"];document.head.appendChild(l);
 var s=document.createElement('script');s.src=__ARCH["arch/arch.js"];document.body.appendChild(s);})();</script>
 

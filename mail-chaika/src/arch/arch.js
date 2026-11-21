@@ -91,6 +91,7 @@
   phone.append(ar, tabs);
   const A = window.__ARCH || {};
   if (A['arch/btn_left.png']) phone.style.setProperty('--ar-ico-left', `url("${A['arch/btn_left.png']}")`);
+  if (A['arch/iOS.png']) phone.style.setProperty('--ar-status', `url("${A['arch/iOS.png']}")`);
   if (A['arch/btn_settings.png']) phone.style.setProperty('--ar-ico-gear', `url("${A['arch/btn_settings.png']}")`);
   const gear = document.createElement('button');
   gear.className = 'ar-gear'; gear.setAttribute('aria-label', 'Налаштування');
@@ -253,8 +254,10 @@
     if (y > 24) $sum.classList.add('hide');
     else if (y <= 2) $sum.classList.remove('hide');
   }
+  /* контент м'яко тане, заходячи під апбар: альфа-маска зверху, що наростає з прокруткою (на самому верху її немає) */
+  const syncFade = () => $list.style.setProperty('--ar-fade', Math.min($list.scrollTop, 40) + 'px');
   $list.addEventListener('scroll', () => {
-    syncSum();
+    syncSum(); syncFade();
     if (!scrollRaf) scrollRaf = requestAnimationFrame(checkSeen);
   }, {passive: true});
 
@@ -268,12 +271,13 @@
   }
   document.fonts && document.fonts.ready.then(fitTitle);
 
-  /* список починається рівно під шапкою */
+  /* список починається під шапкою і на OVERLAP px заходить під неї: там і тане альфа-градієнт */
+  const OVERLAP = 20;
   function placeUnderBar() {
     const top = phone.querySelector('.top'); if (!top) return;
     requestAnimationFrame(() => {
       const pr = phone.getBoundingClientRect(), tr = top.getBoundingClientRect();
-      ar.style.top = Math.round(tr.bottom - pr.top) + 'px';
+      ar.style.top = Math.round(tr.bottom - pr.top) - OVERLAP + 'px';   /* список трохи заходить під апбар */
     });
   }
   addEventListener('resize', () => { if (S.tab === 'arch') placeUnderBar(); });
@@ -292,7 +296,7 @@
   /* ---------- події ---------- */
   tabs.addEventListener('click', e => { const b = e.target.closest('button'); if (b) setTab(b.dataset.t); });
 
-  /* «Прочитати всі»: барабан відкручує число до нуля, і в такт йому картки згори вниз втрачають підсвітку */
+  /* «Прочитати всі»: барабан відкручує число до нуля, і в такт йому картки згори вниз стають прочитаними */
   let readingAll = false;
   $sum.addEventListener('click', async e => {
     if (!e.target.closest('.ar-u-act') || readingAll) return;
@@ -303,10 +307,10 @@
     let lit = 0;
     await drumRoll(num, n, 0, 650, v => {
       const gone = n - Math.ceil(v - 0.001);
-      while (lit < gone && lit < cards.length) cards[lit++].classList.add('reading');
+      while (lit < gone && lit < cards.length) cards[lit++].classList.remove('unread');   /* картка гасне через CSS-переходи */
       lbl.textContent = unreadLbl(Math.max(1, Math.round(v)));
     });
-    cards.forEach(c => c.classList.add('reading'));
+    cards.forEach(c => c.classList.remove('unread'));
     S.letters.forEach(l => { l.read = true; });
     save();
     await new Promise(r => setTimeout(r, 180));
@@ -314,7 +318,6 @@
     renderSum(false);
     const done = $sum.querySelector('.ar-unread.done');
     if (done) done.classList.add('arrive');
-    cards.forEach(c => c.classList.remove('unread', 'reading'));
   });
 
   $list.addEventListener('click', e => {
@@ -342,6 +345,240 @@
     try { localStorage.removeItem(KEY); } catch (e) {}
     $list.scrollTop = 0; render(true);
   });
+
+  /* ---------- палець замість курсора ----------
+     Імітуємо мобільний застосунок: над телефоном курсора немає, натомість — коло-подушечка пальця.
+     - торкання: коло стискається, від дотику розходиться слід;
+     - затискання (~0,45 с на місці): навколо набирається кільце;
+     - свайп: тягнеш — список під пальцем гортається, відпускаєш — докочується за інерцією; клік після свайпу не спрацьовує;
+     - наведення всередині телефона нічого не підсвічує (у телефоні немає наведення). */
+  if (matchMedia('(pointer: fine)').matches) {
+    const tip = document.createElement('div');
+    tip.className = 'ar-finger';
+    document.body.append(tip);
+    phone.classList.add('ar-touch');
+
+    /* :hover-правила, що стосуються елементів телефона, перетворюємо на :active (реакція на натискання) */
+    for (const sh of document.styleSheets) {
+      let rules; try { rules = sh.cssRules; } catch (e) { continue; }
+      for (const r of [...rules]) {
+        if (!(r instanceof CSSStyleRule) || !r.selectorText.includes(':hover')) continue;
+        const parts = r.selectorText.split(',').map(sel => {
+          if (!sel.includes(':hover')) return sel;
+          let inPhone = false;
+          try { inPhone = [...document.querySelectorAll(sel.replace(/:hover/g, ''))].some(el => phone.contains(el)); } catch (e) {}
+          return inPhone ? sel.replace(/:hover/g, ':active') : sel;
+        });
+        r.selectorText = parts.join(',');
+      }
+    }
+
+    const place = (el, x, y) => { el.style.transform = `translate(${x}px, ${y}px)`; };
+    const scroller = el => {
+      for (; el && el !== phone; el = el.parentElement) {
+        const cs = getComputedStyle(el);
+        if (/(auto|scroll)/.test(cs.overflowY) && el.scrollHeight > el.clientHeight + 1) return el;
+      }
+      return null;
+    };
+    /* гумовий край, як у iOS: за межею список тягнеться з опором і пружинить назад */
+    const rubber = (x, h) => Math.sign(x) * (1 - 1 / (Math.abs(x) * 0.55 / h + 1)) * h;
+    const stretch = (el, px, ease) => {
+      el.style.transition = ease ? 'transform .45s cubic-bezier(.2,.9,.3,1)' : 'none';
+      el.style.transform = px ? `translateY(${px}px)` : '';
+    };
+    const bounce = (el, px) => {   /* інерція вдарилась у край: невеликий відскок */
+      stretch(el, px, false);
+      requestAnimationFrame(() => requestAnimationFrame(() => stretch(el, 0, true)));
+    };
+    let drag = null, holdT = 0, glide = 0;
+    phone.addEventListener('pointerenter', e => { place(tip, e.clientX, e.clientY); tip.classList.add('on'); });
+    phone.addEventListener('pointerleave', () => { if (!drag) tip.classList.remove('on', 'down', 'hold'); });
+    phone.addEventListener('pointerdown', e => {
+      if (e.button !== 0) return;
+      cancelAnimationFrame(glide);
+      place(tip, e.clientX, e.clientY); tip.classList.add('down');
+      const r = document.createElement('div');
+      r.className = 'ar-ripple'; place(r, e.clientX, e.clientY);
+      document.body.append(r);
+      r.addEventListener('animationend', () => r.remove(), {once: true});
+      const sc = scroller(e.target) || e.target.closest('.ar-list, .piles-zone');
+      drag = {x: e.clientX, y: e.clientY, el: sc, moved: false, last: e.clientY, t: performance.now(), v: 0, over: 0};
+      holdT = setTimeout(() => { if (drag && !drag.moved) tip.classList.add('hold'); }, 450);
+    });
+    addEventListener('pointermove', e => {
+      place(tip, e.clientX, e.clientY);
+      if (!drag) return;
+      const dy = e.clientY - drag.y, dx = e.clientX - drag.x;
+      if (!drag.moved && Math.hypot(dx, dy) > 6) { drag.moved = true; clearTimeout(holdT); tip.classList.remove('hold'); }
+      if (drag.moved && drag.el) {
+        const k = parseFloat(getComputedStyle(phone).zoom) || 1;   /* телефон масштабований під вікно */
+        const step = (e.clientY - drag.last) / k, now = performance.now();
+        const el = drag.el, max = el.scrollHeight - el.clientHeight;
+        if (drag.over) {                       /* уже тягнемо за край: спершу «відпускаємо» гуму */
+          drag.over += step;
+          if (Math.sign(drag.over) !== Math.sign(drag.over - step)) { el.scrollTop -= drag.over; drag.over = 0; }
+        } else {
+          const next = el.scrollTop - step;
+          if (next < 0) { el.scrollTop = 0; drag.over = -next; }
+          else if (next > max) { el.scrollTop = max; drag.over = max - next; }
+          else el.scrollTop = next;
+        }
+        stretch(el, drag.over ? rubber(drag.over, el.clientHeight) : 0, false);
+        drag.v = step / Math.max(1, now - drag.t); drag.last = e.clientY; drag.t = now;
+      }
+    }, {passive: true});
+    addEventListener('pointerup', () => {
+      clearTimeout(holdT);
+      tip.classList.remove('down', 'hold');
+      if (!drag) return;
+      const d = drag; drag = null;
+      if (d.moved) {
+        /* після свайпу клік не спрацьовує */
+        const kill = ev => { ev.stopPropagation(); ev.preventDefault(); };
+        addEventListener('click', kill, {capture: true, once: true});
+        setTimeout(() => removeEventListener('click', kill, true), 60);
+        if (d.el && d.over) stretch(d.el, 0, true);          /* відпустили за краєм — пружинить назад */
+        else if (d.el) {                                      /* інерція */
+          let v = d.v * 16;
+          const roll = () => {
+            if (Math.abs(v) < 0.3) return;
+            const el = d.el, max = el.scrollHeight - el.clientHeight, next = el.scrollTop - v;
+            if (next <= 0 || next >= max) {
+              el.scrollTop = Math.max(0, Math.min(max, next));
+              bounce(el, Math.max(-36, Math.min(36, v * 4)));
+              return;
+            }
+            el.scrollTop = next; v *= 0.94;
+            glide = requestAnimationFrame(roll);
+          };
+          glide = requestAnimationFrame(roll);
+        }
+      }
+    });
+  }
+
+  /* ---------- мокап пристрою ----------
+     Під вьюпортом завжди лежить чорний прямокутник, на 12 px більший з усіх боків, радіус 68,
+     внутрішня тінь 0 0 8px білий 25% (як у Фігмі). Екран має радіус 56 = 68 − 12, тож кути концентричні.
+     Згладжування кутів не робимо. */
+  (() => {
+    const PAD = 12;
+    const W = phone.offsetWidth + PAD * 2, H = phone.offsetHeight + PAD * 2;
+    /* бічні кнопки з макета (Фігма, «Section 1»): ліворуч — вимкнути звук, гучність +/−, праворуч — блокування.
+       Кнопки 4 px завтовшки, виступають за корпус; поруч підписи-іконки (Material Symbols, чорний 72%).
+       Кожна кнопка трохи заходить під корпус, щоб не було щілини на стику. */
+    /* іконки — файли з макета (Material Icons, 24×24) у src/arch/*_24dp_E3E3E3.svg; колір — чорний 72%, як у Фігмі */
+    const ICO = {
+      mute: 'M4.34 2.93L2.93 4.34 7.29 8.7 7 9H3v6h4l5 5v-6.59l4.18 4.18c-.65.49-1.38.88-2.18 1.11v2.06c1.34-.3 2.57-.92 3.61-1.75l2.05 2.05 1.41-1.41L4.34 2.93zM10 15.17L7.83 13H5v-2h2.83l.88-.88L10 11.41v3.76zM19 12c0 .82-.15 1.61-.41 2.34l1.53 1.53c.56-1.17.88-2.48.88-3.87 0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zm-7-8l-1.88 1.88L12 7.76zm4.5 8c0-1.77-1.02-3.29-2.5-4.03v1.79l2.48 2.48c.01-.08.02-.16.02-.24z',
+      sound: 'M3 9v6h4l5 5V4L7 9H3zm7-.17v6.34L7.83 13H5v-2h2.83L10 8.83zM16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77 0-4.28-2.99-7.86-7-8.77z',
+      plus: 'M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z',
+      minus: 'M19 13H5v-2h14v2z'
+    };
+    const ico = (d, y, cls) => `<path${cls ? ` class="${cls}"` : ''} d="${d}" transform="translate(-36 ${y})" fill="rgba(0,0,0,.72)"/>`;
+    /* кнопка 4 px завширшки, впритул до корпусу, скруглена лише назовні (2 px) */
+    const keyL = (y, h) => `M0 ${y}H-2A2 2 0 0 0 -4 ${y + 2}V${y + h - 2}A2 2 0 0 0 -2 ${y + h}H0Z`;
+    const keyR = (y, h) => `M${W} ${y}H${W + 2}A2 2 0 0 1 ${W + 4} ${y + 2}V${y + h - 2}A2 2 0 0 1 ${W + 2} ${y + h}H${W}Z`;
+    /* блок = іконка + кнопка, 36 px завширшки: клікабельний увесь, іконка з'являється лише при наведенні */
+    const key = (k, y, h, icons) => `<g class="ar-key" data-k="${k}">
+        <rect class="hit" x="-36" y="${y}" width="36" height="${h}" fill="transparent"/>
+        <path class="btn" d="${keyL(y, h)}" fill="#000"/>${icons}</g>`;
+    const SIDE = `<g class="ar-side-btns">
+      ${key('mute', 167, 32, ico(ICO.mute, 171, 'ico off') + ico(ICO.sound, 171, 'ico on'))}
+      ${key('up', 229, 64, ico(ICO.plus, 249, 'ico'))}
+      ${key('down', 314, 64, ico(ICO.minus, 334, 'ico'))}
+      <path d="${keyR(275, 103)}" fill="#000"/></g>`;
+    const dev = document.createElement('div');
+    dev.className = 'ar-device';
+    /* Корпус — рамка-кільце ПОВЕРХ екрана: зовнішній контур (радіус 68) мінус екран (радіус 56).
+       Так кути екрана закриваються самим корпусом, і нічого не пробивається, незалежно від браузера
+       (Safari/Chrome по-різному обрізають скруглення з анімаціями та zoom).
+       Світіння — розмита біла смуга по зовнішньому краю, обрізана кільцем. */
+    const w = phone.offsetWidth, h = phone.offsetHeight;
+    /* виріз на 1 px менший за екран: рамка заходить на край екрана, і між ними не просвічує фон (згладжування двох країв) */
+    const I = PAD + 1;
+    const ring = `M68 0H${W - 68}A68 68 0 0 1 ${W} 68V${H - 68}A68 68 0 0 1 ${W - 68} ${H}H68A68 68 0 0 1 0 ${H - 68}V68A68 68 0 0 1 68 0Z
+      M${I + 55} ${I}A55 55 0 0 0 ${I} ${I + 55}V${I + h - 2 - 55}A55 55 0 0 0 ${I + 55} ${I + h - 2}H${I + w - 2 - 55}A55 55 0 0 0 ${I + w - 2} ${I + h - 2 - 55}V${I + 55}A55 55 0 0 0 ${I + w - 2 - 55} ${I}Z`;
+    dev.innerHTML = `<svg viewBox="0 0 ${W} ${H}" aria-hidden="true"><defs>
+        <clipPath id="arDevClip"><path d="${ring}" clip-rule="evenodd"/></clipPath>
+        <filter id="arDevBlur" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="4"/></filter></defs>
+      <path d="${ring}" fill="#000" fill-rule="evenodd"/>
+      <g clip-path="url(#arDevClip)"><rect width="${W}" height="${H}" rx="68" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="16" filter="url(#arDevBlur)"/></g>
+      ${SIDE}</svg>`;
+    document.body.append(dev);
+    /* ---------- звук пристрою ----------
+       10 порогів гучності (0…10) і перемикач «без звуку». Стан доступний іншим частинам прототипу:
+       window.arDevice.volume / .muted, а кожна зміна шле подію 'ar-volume' {volume, muted}.
+       На екрані — як в iOS: вертикальна шкала гучності біля кнопок і плашка «Звук увімкнено / вимкнено» вгорі. */
+    const snd = {volume: 6, muted: true};
+    try { Object.assign(snd, JSON.parse(localStorage.getItem('mc-device') || '{}')); } catch (e) {}
+    window.arDevice = snd;
+    const hud = document.createElement('div');
+    hud.className = 'ar-vol';
+    hud.innerHTML = '<i></i>';
+    const pill = document.createElement('div');
+    pill.className = 'ar-silent';
+    phone.append(hud, pill);
+    let hudT = 0, pillT = 0;
+    const syncSnd = () => {
+      dev.classList.toggle('ar-sound', !snd.muted);
+      hud.firstElementChild.style.height = (snd.muted ? 0 : snd.volume * 10) + '%';
+      try { localStorage.setItem('mc-device', JSON.stringify(snd)); } catch (e) {}
+      document.dispatchEvent(new CustomEvent('ar-volume', {detail: {volume: snd.volume, muted: snd.muted}}));
+    };
+    const showHud = () => { hud.classList.add('show'); clearTimeout(hudT); hudT = setTimeout(() => hud.classList.remove('show'), 1400); };
+    const showPill = () => {
+      pill.innerHTML = `<svg viewBox="0 0 24 24"><path d="${snd.muted ? ICO.mute : ICO.sound}"/></svg>${snd.muted ? 'Звук вимкнено' : 'Звук увімкнено'}`;
+      pill.classList.add('show'); clearTimeout(pillT); pillT = setTimeout(() => pill.classList.remove('show'), 1400);
+    };
+    dev.querySelectorAll('.ar-key').forEach(g => g.addEventListener('pointerdown', e => {
+      e.preventDefault();
+      g.classList.add('press');
+      addEventListener('pointerup', () => g.classList.remove('press'), {once: true});
+      const k = g.dataset.k;
+      if (k === 'mute') { snd.muted = !snd.muted; showPill(); }
+      else {
+        if (snd.muted && k === 'up') snd.muted = false;          /* як на iPhone: гучніше — і звук повертається */
+        snd.volume = Math.max(0, Math.min(10, snd.volume + (k === 'up' ? 1 : -1)));
+        showHud();
+      }
+      syncSnd();
+    }));
+    syncSnd();
+    phone.classList.add('ar-in-device');
+    /* широкий екран: корпус по центру вікна, верхній і лівий край — рівно на піксель; панель праворуч від корпусу.
+       Вузький екран: телефон стоїть, як у Танчиній верстці, корпус просто йде за ним. */
+    const side = document.querySelector('aside.side');
+    const fit = () => {
+      const k = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--fit')) || 1;
+      const FW = W * k, FH = H * k, wide = innerWidth >= 760;
+      phone.classList.toggle('ar-centered', wide);
+      if (side) side.classList.toggle('ar-centered', wide);
+      let left, top;
+      if (wide) {
+        /* екран ділимо на п'ять рівних частин: 3/5 ліворуч — мокап по центру, 2/5 праворуч — описи й деталі */
+        /* робоча ширина не більша за 1920: на ширших екранах усе стоїть по центру */
+        const area = Math.min(innerWidth, 1920), x0 = Math.round((innerWidth - area) / 2);
+        const two = Math.round(area * 3 / 5), split = x0 + two;
+        left = x0 + Math.max(16, Math.round((two - FW) / 2));
+        top = Math.max(0, Math.round((innerHeight - FH) / 2));
+        /* телефон має zoom, тож його власні left/top множаться на масштаб: ділимо */
+        phone.style.left = (left + PAD * k) / k + 'px';
+        phone.style.top = (top + PAD * k) / k + 'px';
+        if (side) Object.assign(side.style, {left: split + 'px', top: '0px', width: x0 + area - split + 'px'});
+      } else {
+        phone.style.left = phone.style.top = '';
+        if (side) side.style.left = side.style.top = side.style.width = '';
+        const r = phone.getBoundingClientRect();   /* у Танчиній версії — в одиницях телефона, тож множимо на масштаб */
+        left = r.left * k - PAD * k + scrollX; top = r.top * k - PAD * k + scrollY;
+      }
+      Object.assign(dev.style, {left: left + 'px', top: top + 'px', width: FW + 'px', height: FH + 'px'});
+    };
+    fit();
+    addEventListener('resize', () => requestAnimationFrame(fit));
+    addEventListener('load', fit);
+    new ResizeObserver(fit).observe(document.body);
+  })();
 
   setTab(S.tab);
 })();
