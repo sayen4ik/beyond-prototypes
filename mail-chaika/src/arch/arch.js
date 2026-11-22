@@ -58,7 +58,7 @@
     {id: 'r-status', type: 'rare', from: 'tbd', day: 'week', date: 'Четвер, 00:00', seen: true, read: false,
       title: 'Ти серед сотні найкращих', lines: ['Тиждень у культі закрито. Статус на наступний тиждень — Послідовник.'],
       items: [['Забобонуси', '+50'], ['Мммм', '+150'], ['Гейм-буст', '×1'], ['Квиток щодня', '+1']]},
-    rw('r-week', 'week', [['Тижневі завдання', [['Геймер: 20 ігор за тиждень', 'Ср, 22:10', {m: 425, z: 75, k: 15}]]]], true, true)
+    rw('r-week', 'week', [['Тижневі завдання', [['Геймер: 20 ігор за тиждень', 'Середа, 22:10', {m: 425, z: 75, k: 15}]]]], true, true)
   ];
   const DAYS = [['today', 'Сьогодні'], ['yesterday', 'Вчора'], ['week', 'Цього тижня'], ['month', 'Цього місяця'], ['older', 'Раніше']];
   const dayOf = l => l.day || 'older';
@@ -153,8 +153,9 @@
     <p><b>Великий Батат</b> — тільки Доручення. <b>Таємний уряд</b> — ми, продукт: звичайні листи.</p>
     <h4>Стани</h4>
     <ul>
-      <li><b>Непереглянуто</b>: червона булька біля відправника. Гасне тільки, коли гість прокрутив список і булька дійшла до верху. Більше не повертається. Від цього залежить «!» у Чайки на Хоумспейсі. На плашці винагород бульки нема.</li>
-      <li><b>Непрочитано</b>: яскрава обводка. Знімається відкриттям листа або «Прочитати всі». Срібляста рамка 4 px — тільки в Доручення Батата.</li>
+      <li><b>Непереглянуто</b>: червона булька в правому верхньому куті плашки. Гасне тільки, коли гість прокрутив список і булька дійшла до верху. Більше не повертається. Від цього залежить «!» у Чайки на Хоумспейсі. На плашці винагород бульки нема.</li>
+      <li><b>Непрочитано</b>: яскрава обводка й легка заливка. Знімається відкриттям листа або «Прочитати всі». Переглянуте й винагороди — тьмяна обводка, тьмяніший заголовок. Срібляста рамка 4 px — тільки в Доручення Батата; поки не прийняте — біжучий рядок «Тільки сьогодні, тільки зараз».</li>
+      <li><b>Відзнака</b> — між винагородою й листом: плашка з нагородами, тег і рядок тексту, відкривається листом.</li>
       <li><b>Лист</b> відкривається модалкою по центру: затемнення, хрестик, дія під карткою.</li>
       <li><b>Доручення</b>: нове → прийнято → виконано → нагороду забрано.</li>
     </ul>
@@ -168,9 +169,14 @@
   /* ---------- рендер ---------- */
   const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
   const byId = id => S.letters.find(l => l.id === id);
-  const avaHtml = (l, bubble) => {
+  /* срібний текст: градієнт + обведення ВСЕРЕДИНУ літер (щоб не товщали).
+     Під низом — та сама літера світлим кольором, згори — градієнт, «з'їдений» фільтром на півпікселя: світлий край лишається всередині */
+  const silver = t => `<b class="ar-silver" data-t="${esc(t)}"><span>${esc(t)}</span></b>`;
+  if (!document.getElementById('arErode')) document.body.insertAdjacentHTML('beforeend',
+    '<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="arErode" x="-5%" y="-5%" width="110%" height="110%"><feMorphology operator="erode" radius="0.6"/></filter></svg>');
+  const avaHtml = l => {
     const s = SENDERS[l.from];
-    return `<span class="ar-ava${s.tbd ? ' tbd' : ''}"><b>${s.ini}</b>${bubble && !l.seen ? '<i class="ar-bub" title="Непереглянуто"></i>' : ''}</span>`;
+    return `<span class="ar-ava${s.tbd ? ' tbd' : ''}">${silver(s.ini)}</span>`;
   };
   const stageName = st => (STAGES.find(x => x[0] === st) || [, ''])[1];
   /* теги над заголовком: тип і етап доручення */
@@ -234,26 +240,46 @@
   }
 
   /* картка листа — за макетом (Figma 96:894): теги, аватар ліворуч, назва й перший рядок. Срібляста рамка 4 px — лише в Доручення Батата */
+  /* булька «непереглянуто» — в одному місці для всіх: правий верхній кут плашки */
+  const bubHtml = l => l.seen ? '' : '<i class="ar-bub" title="Непереглянуто"></i>';
+  /* нове доручення, поки не прийняте: біжить рядок «Тільки сьогодні, тільки зараз» поруч із тегом */
+  const TICK = 'Тільки сьогодні, тільки зараз';
+  const tickHtml = l => l.type === 'task' && l.task.stage === 'new'
+    ? `<span class="ar-tick" aria-label="${TICK}"><span>${Array(6).fill(`<i>${TICK}</i>`).join('')}</span></span>` : '';
   function cardHtml(l) {
-    return `<button class="ar-card t-${l.type}${l.read ? '' : ' unread'}" data-id="${l.id}"><span class="ar-card-in">${tagsHtml(l)}
-        <span class="ar-top">${avaHtml(l, true)}<span class="ar-txt"><h3>${esc(l.title)}</h3><p>${esc(l.lines[0])}</p></span></span>
+    return `<button class="ar-card t-${l.type}${l.read ? '' : ' unread'}" data-id="${l.id}">${bubHtml(l)}<span class="ar-card-in"><span class="ar-tagrow">${tagsHtml(l)}${tickHtml(l)}</span>
+        <span class="ar-top">${avaHtml(l)}<span class="ar-txt"><h3>${esc(l.title)}</h3><p>${esc(l.lines[0])}</p></span></span>
         <span class="ar-meta"><span>${esc(l.date)}</span><span>${esc(SENDERS[l.from].name)}</span></span>
       </span></button>`;
   }
   /* рядок валют: срібні значки + срібні числа (як у макеті) */
   const CUR = {m: 'arch/cur-m.png', z: 'arch/cur-z.png', k: 'arch/cur-k.png', t: 'arch/cur-t.png'};
   const gainRow = g => `<span class="ar-gain">${['m', 'z', 'k', 't', 'b', 'x', 's'].filter(k => g[k]).map(k => CUR[k] && A[CUR[k]]
-      ? `<span><img src="${A[CUR[k]]}" alt="${G[k]}"><b class="ar-silver">+${g[k]}</b></span>`
-      : `<span><b class="ar-silver">${G[k]} ×${g[k]}</b></span>`).join('')}</span>`;
+      ? `<span><img src="${A[CUR[k]]}" alt="${G[k]}">${silver('+' + g[k])}</span>`
+      : `<span>${silver(`${G[k]} ×${g[k]}`)}</span>`).join('')}</span>`;
   /* плашка «Винагороди» за день: назва, підсумок дня значками, час; тап розгортає джерела */
   function rewardsHtml(l) {
     const sum = sumOf(itemsOf(l)), open = S.expanded.has(l.id);
     const when = ({today: 'Сьогодні', yesterday: 'Вчора'}[l.day] ? `${({today: 'Сьогодні', yesterday: 'Вчора'})[l.day]}, ` : '') + l.date;
-    return `<div class="ar-rw${open ? ' open' : ''}" data-id="${l.id}">
+    return `<div class="ar-rw${l.read ? '' : ' unread'}${open ? ' open' : ''}" data-id="${l.id}">
         <button class="ar-rw-head"><b class="ar-rw-title">${esc(l.title)}</b>${gainRow(sum)}
           <span class="ar-meta"><span>${esc(when)}</span><span class="ar-rw-more"><svg viewBox="0 0 24 24" aria-label="Розгорнути"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg></span></span></button>
         <div class="ar-rw-list"><div>${l.parts.map(p => partHtml(p, l.day)).join('')}</div></div>
       </div>`;
+  }
+  /* Відзнака — між плашкою винагород і анонсом, ближче до винагород: та сама плашка й срібні нагороди,
+     але з тегом і рядком тексту, без відправника; тап відкриває лист-модалку */
+  const RARE_ICO = [[/^мммм/i, 'm'], [/^забобон/i, 'z'], [/^келих/i, 'k'], [/^квит/i, 't']];
+  function rareHtml(l) {
+    const chips = l.items.map(([n, v]) => {
+      const k = (RARE_ICO.find(([re]) => re.test(n)) || [])[1];
+      return k && A[CUR[k]] ? `<span><img src="${A[CUR[k]]}" alt="${esc(n)}">${silver(v)}</span>`
+        : `<span>${silver(n + (v === '×1' ? '' : ' ' + v))}</span>`;
+    }).join('');
+    return `<button class="ar-rw ar-rare${l.read ? '' : ' unread'}" data-id="${l.id}"><span class="ar-rw-head">${tagsHtml(l)}
+        <span class="ar-txt"><b class="ar-rw-title">${esc(l.title)}</b><span class="ar-rare-txt">${esc(l.lines[0])}</span></span>
+        <span class="ar-gain">${chips}</span>
+        <span class="ar-meta"><span>${esc(l.date)}</span></span></span>${bubHtml(l)}</button>`;
   }
   /* розгортка: завдання — назви закреслені (виконано); чеки — сума · час; Бондуелі й міні-ігри — одним рядком */
   const MASS = {'Бондуелі': it => {
@@ -262,10 +288,10 @@
       return Object.keys(f).filter(k => c[k]).map(k => `${c[k]} ${plural(c[k], ...f[k])}`).join(', ');
     },
     'Міні-ігри': () => ''};   /* міні-ігри — без переліку, лише кількість і сума */
-  /* дата чека: «22 листопада 2026, 12:16» — день беремо з групи (сьогодні / вчора) */
+  /* дата чека: «22 листопада, 12:16» (як на картках) — день беремо з групи (сьогодні / вчора) */
   const dateOf = (day, time) => {
     const d = new Date(); if (day === 'yesterday') d.setDate(d.getDate() - 1);
-    return `${d.toLocaleDateString('uk-UA', {day: 'numeric', month: 'long', year: 'numeric'}).replace(/\s*р\.?$/, '')}, ${time}`;
+    return `${d.toLocaleDateString('uk-UA', {day: 'numeric', month: 'long'})}, ${time}`;
   };
   function partHtml([name, it], day) {
     let body;
@@ -278,7 +304,7 @@
     if (!S.letters.length) { $list.innerHTML = '<p class="ar-empty">Листів поки немає.<br>Щойно щось прийде — Чайка принесе.</p>'; return; }
     $list.innerHTML = DAYS.map(([d, name]) => {
       const ls = S.letters.filter(l => dayOf(l) === d);
-      return ls.length ? `<h4 class="ar-day">${name}</h4>` + ls.map(l => l.type === 'rewards' ? rewardsHtml(l) : cardHtml(l)).join('') : '';
+      return ls.length ? `<h4 class="ar-day">${name}</h4>` + ls.map(l => l.type === 'rewards' ? rewardsHtml(l) : l.type === 'rare' ? rareHtml(l) : cardHtml(l)).join('') : '';
     }).join('');
   }
 
@@ -303,7 +329,7 @@
         <p class="ar-note">Посилка — це звіт: усе вже нараховано. Від кого вона приходить, ще вирішуємо.</p>`;
     }
     if (l.type === 'announce' && l.cta) acts = `<button class="ar-btn">${esc(l.cta)}</button>`;
-    $paper.innerHTML = `<button class="ar-x" aria-label="Закрити"></button>${tagsHtml(l)}<div class="ar-top"><div class="ar-txt"><h2>${esc(l.title)}</h2></div>${avaHtml(l, false)}</div>
+    $paper.innerHTML = `<button class="ar-x" aria-label="Закрити"></button>${tagsHtml(l)}<div class="ar-top"><div class="ar-txt"><h2>${esc(l.title)}</h2></div>${avaHtml(l)}</div>
       <div class="ar-meta"><span>${esc(l.date)}</span><span>${esc(SENDERS[l.from].name)}</span></div>${body}`;
     $acts.innerHTML = acts;
     if ($open.hidden) { $open.hidden = false; $paper.scrollTop = 0; requestAnimationFrame(() => requestAnimationFrame(() => $open.classList.add('in'))); }
@@ -416,7 +442,7 @@
 
   $list.addEventListener('click', e => {
     const g = e.target.closest('.ar-rw-head');
-    if (g) {   /* група винагород: розгорнути/згорнути на місці, прочитана — щойно розгорнули */
+    if (g && !g.closest('.ar-rare')) {   /* група винагород: розгорнути/згорнути на місці, прочитана — щойно розгорнули */
       const row = g.parentElement, l = byId(row.dataset.id);
       const open = !S.expanded.has(l.id);
       open ? S.expanded.add(l.id) : S.expanded.delete(l.id);
@@ -424,7 +450,7 @@
       if (!l.read) { l.read = true; row.classList.remove('unread'); save(); renderSum(false); }
       return;
     }
-    const c = e.target.closest('.ar-card'); if (!c) return;
+    const c = e.target.closest('.ar-card, .ar-rare'); if (!c) return;
     const l = byId(c.dataset.id);
     l.read = true; S.open = l.id; save(); render(false);
   });

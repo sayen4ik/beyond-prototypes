@@ -72,20 +72,19 @@
 /* картка листа — за макетом (Figma 96:894) */
 .ar-card{position:relative;flex:none;display:block;width:100%;padding:4px;box-sizing:border-box;text-align:left;cursor:pointer;
   background:transparent;color:#fff;border:1px solid transparent;border-radius:0;font:inherit;transition:border-color .35s ease-out,background .35s ease-out}
-.ar-card-in{display:flex;flex-direction:column;gap:12px;padding:20px;background:#000;border:1px solid var(--ar-w32)}
+.ar-card-in{display:flex;flex-direction:column;gap:12px;padding:24px;background:#000;border:1px solid var(--ar-w32)}
 /* Доручення Батата — завжди в сріблястій рамці 4 px (прочитане — тьмяніша). Звичайні листи — без неї:
    непрочитаний — яскрава внутрішня обводка, прочитаний — тьмяна й приглушений текст */
 .ar-card.t-task{background:var(--ar-w32);border-color:var(--ar-w32)}
-.ar-card.t-task:not(.unread){background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.14)}
 .ar-card:not(.t-task){padding:0;border:0}
-.ar-card:not(.t-task).unread .ar-card-in{border-color:var(--ar-w72)}
-.ar-card:not(.t-task):not(.unread) .ar-card-in{border-color:rgba(255,255,255,.16)}
-.ar-card-in .ar-tags{margin-bottom:-4px}
+.ar-card.unread .ar-card-in{border-color:var(--ar-w72);background:#1a1a1a}   /* непрочитане: яскрава обводка + легка заливка (10% білого, непрозора — щоб рамка доручення не просвічувала) */
+.ar-card-in{transition:background .35s,border-color .35s}
+/* усі плашки однаково: 24 px усередині, обводка 32% — переглянуте й винагороди, 72% — непрочитане */
+.ar-card.t-task .ar-card-in{padding:19px}   /* +4 рамка +1 обводка = ті самі 24 */
 .ar-card:not(.unread) .ar-tag{opacity:.55}
 .ar-card h3,.ar-card p,.ar-card .ar-meta,.ar-card .ar-ava,.ar-card .ar-ava b{transition:color .35s,opacity .35s,border-color .35s}
 .ar-card:not(.unread) h3{color:rgba(255,255,255,.6)}
 .ar-card:not(.unread) p{color:rgba(255,255,255,.44)}
-.ar-card:not(.unread) .ar-meta{color:rgba(255,255,255,.4)}
 .ar-card:not(.unread) .ar-ava{border-color:rgba(217,217,217,.4)}
 .ar-card:not(.unread) .ar-ava b{opacity:.55}
 .ar-top{display:flex;gap:8px;align-items:flex-start}
@@ -94,11 +93,23 @@
 .ar-card p{margin:0;font:400 12px/1.25 var(--ar-serif);letter-spacing:1.2px;color:var(--ar-w72)}
 .ar-ava{position:relative;flex:none;width:56px;height:56px;box-sizing:border-box;border:1px solid #d9d9d9;border-radius:50%;display:grid;place-items:center}
 .ar-ava b{font:400 24px/1.15 var(--ar-serif);letter-spacing:1.92px;margin-right:-1.92px}
-/* срібло: градієнт згори вниз + тонке світле обведення */
-.ar-silver,.ar-ava b{background:linear-gradient(#fff,rgba(255,255,255,.5));-webkit-background-clip:text;background-clip:text;color:transparent;
-  -webkit-text-stroke:.5px rgba(255,255,255,.7)}
+/* срібло: градієнт + обведення всередину літер (див. silver() в arch.js) */
+.ar-silver{position:relative;display:inline-block;font-weight:inherit}
+.ar-silver::before{content:attr(data-t);position:absolute;inset:0;color:rgba(255,255,255,.85);white-space:nowrap}
+.ar-silver > span{position:relative;white-space:nowrap;background:linear-gradient(#e6e6e6,#7a7a7a);-webkit-background-clip:text;background-clip:text;color:transparent;filter:url(#arErode)}
 .ar-ava.tbd{border-style:dashed;border-color:var(--ar-w32)}
-.ar-bub{position:absolute;top:-1px;right:-1px;width:12px;height:12px;border-radius:50%;background:#e5302f;box-shadow:0 0 0 3px #000}
+.ar-bub{position:absolute;top:12px;right:12px;z-index:1;width:12px;height:12px;border-radius:50%;background:#e5302f}
+.ar-rw{position:relative}
+/* рядок тегів; у нового доручення — біжучий рядок з альфа-краями */
+.ar-tagrow{display:flex;align-items:center;gap:12px;min-width:0}
+.ar-tick{flex:1;min-width:0;overflow:hidden;margin-right:16px;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 40px),transparent);mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 40px),transparent)}
+.ar-tick > span{display:flex;width:max-content;animation:ar-tick 14s linear infinite}
+.ar-tick i{flex:none;padding-right:24px;font:500 10px/1 var(--ar-text);font-style:normal;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;
+  background:linear-gradient(90deg,rgba(255,255,255,.35),#fff 50%,rgba(255,255,255,.35));-webkit-background-clip:text;background-clip:text;color:transparent}
+.ar-tick i::after{content:"✦";margin-left:24px;opacity:.6}
+@keyframes ar-tick{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.ar-tick > span{animation:none}}
 .ar-bub.pop{animation:ar-pop .28s ease-in forwards}
 @keyframes ar-pop{to{transform:scale(0);opacity:0}}
 .ar-meta{display:flex;gap:8px;font:400 12px/1.15 var(--ar-text);color:var(--ar-w72)}
@@ -214,18 +225,27 @@ html:has(.phone.ar-centered){overscroll-behavior:none}   /* без «гумов�
 
 
 /* ===== історія винагород: секції за днем, групи за джерелом ===== */
+.ar-rare{display:block;width:100%;padding:0;text-align:left;color:#fff;font:inherit;cursor:pointer}
+.ar-rare.unread{border-color:var(--ar-w72);background:#1a1a1a}
+.ar-rare{transition:background .35s,border-color .35s}
+.ar-rare .ar-rw-head{position:relative;box-sizing:border-box}
+.ar-rare .ar-txt{align-self:stretch}
+.ar-rare-txt{font:400 12px/1.25 var(--ar-serif);letter-spacing:1.2px;color:var(--ar-w72)}
+.ar-rw:not(.unread) .ar-rw-title{color:rgba(255,255,255,.6);transition:color .35s}   /* переглянуте — заголовок тьмяніший, як у листів */
+.ar-rare:not(.unread) .ar-rare-txt{color:rgba(255,255,255,.44)}
+.ar-rare:not(.unread) .ar-tag{opacity:.55}
 .ar-day{flex:none;margin:0;padding:0 6px;font:400 14px/1.2 var(--ar-text);color:var(--ar-w72)}
 /* плашка «Винагороди» */
 .ar-rw{flex:none;background:#000;border:1px solid var(--ar-w32)}
-.ar-rw-head{display:flex;flex-direction:column;align-items:flex-start;gap:8px;width:100%;padding:24px 24px 24px;border:0;background:none;color:#fff;text-align:left;cursor:pointer;font:inherit}
+.ar-rw-head{display:flex;flex-direction:column;align-items:flex-start;gap:12px;width:100%;padding:24px;box-sizing:border-box;border:0;background:none;color:#fff;text-align:left;cursor:pointer;font:inherit}
 .ar-rw-head{transition:padding .3s ease}
-.ar-rw.open .ar-rw-head{padding-bottom:8px}
+.ar-rw.open .ar-rw-head{padding-bottom:4px}
 .ar-rw-title{font:600 20px/1 var(--ar-title)}
-.ar-rw-head .ar-meta{align-self:stretch;margin-top:4px;font-size:14px;line-height:1.2}
+.ar-rw-head .ar-meta{align-self:stretch;align-items:center}
 .ar-rw-more{display:flex;align-items:center}
 .ar-rw-more svg{width:24px;height:24px;margin:-5px -4px -5px 0;fill:var(--ar-w72);transition:transform .25s}   /* Material expand_more */
 .ar-rw.open .ar-rw-more svg{transform:rotate(180deg)}
-.ar-gain{display:flex;flex-wrap:wrap;gap:4px 12px;padding:4px 0}
+.ar-gain{display:flex;flex-wrap:wrap;gap:4px 12px}
 .ar-gain > span{display:flex;align-items:center;gap:4px}
 .ar-gain img{width:24px;height:24px;object-fit:contain}
 .ar-gain b{font:400 12px/1.15 var(--ar-serif);letter-spacing:.96px}
@@ -240,5 +260,5 @@ html:has(.phone.ar-centered){overscroll-behavior:none}   /* без «гумов�
 .ar-sec p.ar-done{text-decoration:line-through}
 .ar-check{display:flex;align-items:center;gap:8px}
 .ar-check i{width:4px;height:4px;border-radius:50%;background:var(--ar-w72)}
-.ar-check time{font:400 14px/1 var(--ar-text);letter-spacing:0;color:var(--ar-w72)}
+.ar-check time{font:400 12px/1.15 var(--ar-text);letter-spacing:0;color:var(--ar-w72)}   /* як дата на картках */
 /* рідкісна винагорода — окрема картка, як лист */
