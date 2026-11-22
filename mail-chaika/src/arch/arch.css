@@ -1,10 +1,10 @@
 /* ===== Архітектура (Андрій). Танчин інтерфейс тут не правимо — тільки шапка й таби. ===== */
-@import url("https://fonts.googleapis.com/css2?family=Oranienbaum&family=Old+Standard+TT:wght@400;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap");
+/* шрифти вбудовані через arch.js (@font-face); нижче в змінних — запасні системні */
 
 .phone{
-  --ar-title:"PF Expo","PF Expo SemiBold",Oranienbaum,"Old Standard TT",Georgia,serif;  /* PF Expo SemiBold; Oranienbaum — тимчасова заміна */
-  --ar-serif:"Nyght Serif","NyghtSerif-Rizdvo","Old Standard TT",Georgia,serif;
-  --ar-text:"Silpo Text","IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+  --ar-title:"PF Expo",Georgia,serif;
+  --ar-serif:"Nyght Serif",Georgia,serif;
+  --ar-text:"Silpo Text","Helvetica Neue",Arial,sans-serif;
   --ar-w72:rgba(255,255,255,.72); --ar-w32:rgba(255,255,255,.32);
 }
 
@@ -26,17 +26,17 @@
 .phone.ar-mode .ar-gear{display:block;position:absolute;right:24px;top:6px;width:44px;height:44px;border:0;padding:0;cursor:pointer;
   background:var(--ar-ico-gear) center/contain no-repeat}
 
-/* таби внизу телефона */
-.ar-tabs{position:absolute;left:0;right:0;bottom:0;z-index:15;height:84px;padding:12px 24px 0;box-sizing:border-box;
-  display:flex;gap:8px;background:#000;border-top:1px solid var(--ar-w32)}
-.ar-tabs button{flex:1;height:40px;border:1px solid var(--ar-w32);background:transparent;color:var(--ar-w72);cursor:pointer;
-  font:500 12px/1 var(--ar-text);letter-spacing:.12em;text-transform:uppercase;transition:background .15s,color .15s,border-color .15s}
-.ar-tabs button:active{color:#fff;border-color:var(--ar-w72)}
-.ar-tabs button.on{background:#fff;color:#000;border-color:#fff}
-.phone.ar-has-tabs .piles-zone{padding-bottom:120px !important}
+/* перемикач Інтерфейс / Архітектура — над мокапом, у стилі бічної панелі */
+.ar-tabs{position:fixed;z-index:50;display:flex;gap:8px;padding:8px;box-sizing:border-box;border:1px solid var(--k4,#beb8ad);border-radius:16px;background:var(--k5,#e6e1d7)}
+.ar-tabs button{flex:1;height:44px;padding:0;border:1.5px solid var(--k4,#beb8ad);border-radius:12px;background:transparent;color:var(--k1,#111);cursor:pointer;
+  font:400 14px/1 var(--mono,monospace);transition:border-color .15s}
+.ar-tabs button:hover{border-color:var(--k3,#777)}
+.ar-tabs button.on{border-color:var(--k1,#111);box-shadow:inset 0 0 0 1.5px var(--k1,#111)}   /* товща обводка без зміни розміру — нічого не смикається */
+.ar-tabs.col{flex-direction:column}
+.ar-tabs.col button{flex:none}
 
 /* екран архітектури */
-.ar{position:absolute;left:0;right:0;top:100px;bottom:84px;z-index:14;background:#000;color:#fff;display:flex;flex-direction:column}
+.ar{position:absolute;left:0;right:0;top:100px;bottom:0;z-index:14;background:#000;color:#fff;display:flex;flex-direction:column}
 .ar[hidden]{display:none}
 .ar-sum{flex:none;padding:36px 24px 0;max-height:120px;box-sizing:border-box;overflow:hidden;
   transition:max-height .3s ease,padding .3s ease,opacity .2s ease,transform .3s ease}
@@ -61,7 +61,7 @@
 @keyframes ar-in{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
 @keyframes ar-draw{to{stroke-dashoffset:0}}
 @media (prefers-reduced-motion:reduce){.ar-unread.arrive > *,.ar-unread.arrive svg path,.ar-bub.pop{animation:none;stroke-dashoffset:0}}
-.ar-list{flex:1;min-height:0;overflow-y:auto;padding:14px 24px 24px;display:flex;flex-direction:column;gap:12px;scrollbar-width:none;--ar-fade:0px;
+.ar-list{flex:1;min-height:0;overflow-y:auto;padding:14px 24px 24px;display:flex;flex-direction:column;gap:8px;scrollbar-width:none;--ar-fade:0px;
   -webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(0,0,0,.08) calc(var(--ar-fade) * .2),rgba(0,0,0,.3) calc(var(--ar-fade) * .45),
     rgba(0,0,0,.65) calc(var(--ar-fade) * .7),#000 var(--ar-fade),#000 calc(100% - 24px),rgba(0,0,0,.4) calc(100% - 8px),rgba(0,0,0,0) 100%);
           mask-image:linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(0,0,0,.08) calc(var(--ar-fade) * .2),rgba(0,0,0,.3) calc(var(--ar-fade) * .45),
@@ -69,28 +69,47 @@
 .ar-list::-webkit-scrollbar{display:none}
 .ar-empty{padding:60px 12px;text-align:center;font:400 14px/1.4 var(--ar-serif);letter-spacing:.1em;color:var(--ar-w72)}
 
-/* картка листа — за макетом */
-.ar-card{position:relative;flex:none;display:flex;flex-direction:column;gap:12px;width:100%;padding:24px;box-sizing:border-box;text-align:left;cursor:pointer;
-  background:transparent;color:#fff;border:1px solid var(--ar-w32);border-radius:0;font:inherit;transition:border-color .35s ease-out,background .35s ease-out}
-.ar-card h3,.ar-card p,.ar-card .ar-meta,.ar-card .ar-tag,.ar-card .ar-ava,.ar-card .ar-ava b{transition:color .35s,opacity .35s,border-color .35s}
-/* непрочитане: яскрава обводка + заливка; прочитане: тьмяна обводка, приглушений текст */
-.ar-card.unread{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.88)}
-.ar-card:not(.unread){border-color:rgba(255,255,255,.16)}
+/* картка листа — за макетом (Figma 96:894) */
+.ar-card{position:relative;flex:none;display:block;width:100%;padding:4px;box-sizing:border-box;text-align:left;cursor:pointer;
+  background:transparent;color:#fff;border:1px solid transparent;border-radius:0;font:inherit;transition:border-color .35s ease-out,background .35s ease-out}
+.ar-card-in{display:flex;flex-direction:column;gap:12px;padding:24px;background:#000;border:1px solid var(--ar-w32)}
+/* Доручення Батата — завжди в сріблястій рамці 4 px (прочитане — тьмяніша). Звичайні листи — без неї:
+   непрочитаний — яскрава внутрішня обводка, прочитаний — тьмяна й приглушений текст */
+.ar-card.t-task{background:var(--ar-w32);border-color:var(--ar-w32)}
+.ar-card:not(.t-task){padding:0;border:0}
+.ar-card.unread .ar-card-in{border-color:var(--ar-w72);background:#1a1a1a}   /* непрочитане: яскрава обводка + легка заливка (10% білого, непрозора — щоб рамка доручення не просвічувала) */
+.ar-card-in{transition:background .35s,border-color .35s}
+/* усі плашки однаково: 24 px усередині, обводка 32% — переглянуте й винагороди, 72% — непрочитане */
+.ar-card.t-task .ar-card-in{padding:19px}   /* +4 рамка +1 обводка = ті самі 24 */
+.ar-card:not(.unread) .ar-tag{opacity:.55}
+.ar-card h3,.ar-card p,.ar-card .ar-meta,.ar-card .ar-ava,.ar-card .ar-ava b{transition:color .35s,opacity .35s,border-color .35s}
 .ar-card:not(.unread) h3{color:rgba(255,255,255,.6)}
 .ar-card:not(.unread) p{color:rgba(255,255,255,.44)}
-.ar-card:not(.unread) .ar-meta{color:rgba(255,255,255,.4)}
-.ar-card:not(.unread) .ar-tag{opacity:.55}
 .ar-card:not(.unread) .ar-ava{border-color:rgba(217,217,217,.4)}
 .ar-card:not(.unread) .ar-ava b{opacity:.55}
 .ar-top{display:flex;gap:8px;align-items:flex-start}
 .ar-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px}
-.ar-card h3{margin:0;font:600 28px/1 var(--ar-title);color:#fff;overflow-wrap:break-word}
+.ar-card h3{margin:0;font:600 24px/1 var(--ar-title);color:#fff;overflow-wrap:break-word}
 .ar-card p{margin:0;font:400 12px/1.25 var(--ar-serif);letter-spacing:1.2px;color:var(--ar-w72)}
 .ar-ava{position:relative;flex:none;width:56px;height:56px;box-sizing:border-box;border:1px solid #d9d9d9;border-radius:50%;display:grid;place-items:center}
-.ar-ava b{font:400 24px/1.15 var(--ar-serif);letter-spacing:1.92px;margin-right:-1.92px;
-  background:linear-gradient(#fff,rgba(255,255,255,.5));-webkit-background-clip:text;background-clip:text;color:transparent}
+.ar-ava b{font:400 24px/1.15 var(--ar-serif);letter-spacing:1.92px;margin-right:-1.92px}
+/* срібло: градієнт + обведення всередину літер (див. silver() в arch.js) */
+.ar-silver{position:relative;display:inline-block;font-weight:inherit}
+.ar-silver::before{content:attr(data-t);position:absolute;inset:0;color:rgba(255,255,255,.85);white-space:nowrap}
+.ar-silver > span{position:relative;white-space:nowrap;background:linear-gradient(#e6e6e6,#7a7a7a);-webkit-background-clip:text;background-clip:text;color:transparent;filter:url(#arErode)}
 .ar-ava.tbd{border-style:dashed;border-color:var(--ar-w32)}
-.ar-bub{position:absolute;top:-1px;right:-1px;width:12px;height:12px;border-radius:50%;background:#e5302f;box-shadow:0 0 0 3px #000}
+.ar-bub{position:absolute;top:12px;right:12px;z-index:1;width:12px;height:12px;border-radius:50%;background:#e5302f}
+.ar-rw{position:relative}
+/* рядок тегів; у нового доручення — біжучий рядок з альфа-краями */
+.ar-tagrow{display:flex;align-items:center;gap:12px;min-width:0}
+.ar-tick{flex:1;min-width:0;overflow:hidden;margin-right:16px;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 40px),transparent);mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 40px),transparent)}
+.ar-tick > span{display:flex;width:max-content;animation:ar-tick 14s linear infinite}
+.ar-tick i{flex:none;padding-right:24px;font:500 10px/1 var(--ar-text);font-style:normal;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;
+  background:linear-gradient(90deg,rgba(255,255,255,.35),#fff 50%,rgba(255,255,255,.35));-webkit-background-clip:text;background-clip:text;color:transparent}
+.ar-tick i::after{content:"✦";margin-left:24px;opacity:.6}
+@keyframes ar-tick{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.ar-tick > span{animation:none}}
 .ar-bub.pop{animation:ar-pop .28s ease-in forwards}
 @keyframes ar-pop{to{transform:scale(0);opacity:0}}
 .ar-meta{display:flex;gap:8px;font:400 12px/1.15 var(--ar-text);color:var(--ar-w72)}
@@ -104,10 +123,20 @@
 .ar-tag.st.soft{border-style:dotted}
 
 /* відкритий лист */
-.ar-open{position:absolute;inset:0;z-index:2;background:#000;overflow-y:auto;padding:16px 24px 24px;scrollbar-width:none}
-.ar-open::-webkit-scrollbar{display:none}
-.ar-open[hidden]{display:none}
-.ar-paper{border:1px solid var(--ar-w32);padding:24px}
+.ar-open{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;padding:72px 20px 40px;box-sizing:border-box;
+  background:rgba(0,0,0,.62);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);opacity:0;transition:opacity .22s ease}
+.ar-open.in{opacity:1}
+.ar-open[hidden],.phone:not(.ar-mode) .ar-open{display:none}
+.ar-modal{width:100%;max-height:100%;display:flex;flex-direction:column;gap:16px;transform:translateY(16px) scale(.97);transition:transform .28s cubic-bezier(.2,.8,.2,1)}
+.ar-open.in .ar-modal{transform:none}
+.ar-paper{position:relative;min-height:0;overflow-y:auto;scrollbar-width:none;background:#000;border:1px solid var(--ar-w72);padding:24px}
+.ar-paper::-webkit-scrollbar{display:none}
+.ar-x{position:absolute;top:14px;right:14px;z-index:1;width:36px;height:36px;border:0;background:none;cursor:pointer}
+.ar-x::before,.ar-x::after{content:"";position:absolute;left:8px;right:8px;top:17px;height:2px;background:#fff;transform:rotate(45deg)}
+.ar-x::after{transform:rotate(-45deg)}
+.ar-paper .ar-tags{padding-right:40px}
+.ar-acts:empty{display:none}
+.ar-acts .ar-btn:first-child{margin-top:0}
 .ar-paper .ar-tags{margin-bottom:16px}
 .ar-paper .ar-top{margin-bottom:16px}
 .ar-paper h2{margin:0;font:600 32px/1 var(--ar-title);color:#fff}
@@ -155,6 +184,7 @@
 
 /* мокап пристрою: корпус малюється в arch.js, телефон лежить поверх нього */
 .ar-device{position:absolute;z-index:2;pointer-events:none}
+html:has(.phone.ar-centered){overscroll-behavior:none}   /* без «гумового» відскоку сторінки на Маку */
 .ar-device svg{display:block;width:100%;height:100%;overflow:visible}
 .phone.ar-in-device{z-index:1;box-shadow:none !important;border-radius:56px !important;
   /* overflow:hidden + border-radius у Chrome не обрізає шари з трансформаціями (анімації, гумовий край) —
@@ -173,7 +203,7 @@
 .ar-device .ar-key .ico{opacity:0;transition:opacity .15s}
 .ar-device .ar-key:hover .ico{opacity:1}
 .ar-device .ar-key .btn{transition:transform .08s}
-.ar-device .ar-key.press .btn{transform:translateX(1.5px)}
+.ar-device .ar-key.press .btn{transform:translateX(2.5px)}   /* кнопка заходить під корпус */
 .ar-device .ar-key .on,.ar-device.ar-sound .ar-key .off{display:none}
 .ar-device.ar-sound .ar-key .on{display:inline}
 /* шкала гучності (як iOS): вертикальна капсула біля кнопок */
@@ -188,3 +218,47 @@
   opacity:0;transform:translate(-50%,-8px) scale(.9);transition:opacity .2s,transform .3s cubic-bezier(.2,.8,.3,1.2);pointer-events:none}
 .ar-silent.show{opacity:1;transform:translate(-50%,0)}
 .ar-silent svg{width:18px;height:18px;fill:#fff}
+
+/* ===== типи листів візуально різні =====
+   Анонс — базова картка. Посилка — пунктирна рамка, як пакунок. Доручення — біла плашка-тег. */
+.ar-card p{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+
+/* ===== історія винагород: секції за днем, групи за джерелом ===== */
+.ar-rare{display:block;width:100%;padding:0;text-align:left;color:#fff;font:inherit;cursor:pointer}
+.ar-rare.unread{border-color:var(--ar-w72);background:#1a1a1a}
+.ar-rare{transition:background .35s,border-color .35s}
+.ar-rare .ar-rw-head{position:relative;box-sizing:border-box}
+.ar-rare .ar-txt{align-self:stretch}
+.ar-rare-txt{font:400 12px/1.25 var(--ar-serif);letter-spacing:1.2px;color:var(--ar-w72)}
+.ar-rw:not(.unread) .ar-rw-title{color:rgba(255,255,255,.6);transition:color .35s}   /* переглянуте — заголовок тьмяніший, як у листів */
+.ar-rare:not(.unread) .ar-rare-txt{color:rgba(255,255,255,.44)}
+.ar-rare:not(.unread) .ar-tag{opacity:.55}
+.ar-day{flex:none;margin:0;padding:0 6px;font:400 14px/1.2 var(--ar-text);color:var(--ar-w72)}
+/* плашка «Винагороди» */
+.ar-rw{flex:none;background:#000;border:1px solid var(--ar-w32)}
+.ar-rw-head{display:flex;flex-direction:column;align-items:flex-start;gap:12px;width:100%;padding:24px;box-sizing:border-box;border:0;background:none;color:#fff;text-align:left;cursor:pointer;font:inherit}
+.ar-rw-head{transition:padding .3s ease}
+.ar-rw.open .ar-rw-head{padding-bottom:4px}
+.ar-rw-title{font:600 20px/1 var(--ar-title)}
+.ar-rw-head .ar-meta{align-self:stretch;align-items:center}
+.ar-rw-more{display:flex;align-items:center}
+.ar-rw-more svg{width:24px;height:24px;margin:-5px -4px -5px 0;fill:var(--ar-w72);transition:transform .25s}   /* Material expand_more */
+.ar-rw.open .ar-rw-more svg{transform:rotate(180deg)}
+.ar-gain{display:flex;flex-wrap:wrap;gap:4px 12px}
+.ar-gain > span{display:flex;align-items:center;gap:4px}
+.ar-gain img{width:24px;height:24px;object-fit:contain}
+.ar-gain b{font:400 12px/1.15 var(--ar-serif);letter-spacing:.96px}
+.ar-rw-list{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}
+.ar-rw.open .ar-rw-list{grid-template-rows:1fr}
+.ar-rw-list > div{overflow:hidden;min-height:0;padding:0 24px}
+.ar-rw-list > div > .ar-sec:last-child{padding-bottom:24px}
+.ar-sec{display:flex;flex-direction:column;gap:8px}
+.ar-line{display:block;height:1px;margin:4px 0 8px;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.2) 50%,rgba(255,255,255,0))}
+.ar-sec small{font:400 14px/1.2 var(--ar-text);color:var(--ar-w72)}
+.ar-sec p{margin:0;font:400 12px/1.25 var(--ar-serif);letter-spacing:1.2px;color:#fff}
+.ar-sec p.ar-done{text-decoration:line-through}
+.ar-check{display:flex;align-items:center;gap:8px}
+.ar-check i{width:4px;height:4px;border-radius:50%;background:var(--ar-w72)}
+.ar-check time{font:400 12px/1.15 var(--ar-text);letter-spacing:0;color:var(--ar-w72)}   /* як дата на картках */
+/* рідкісна винагорода — окрема картка, як лист */
