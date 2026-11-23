@@ -207,18 +207,24 @@
     });
     close(0); return html;
   };
-  const decBtn = document.createElement('button');
-  decBtn.className = 'ar-btn2 ar-dec'; decBtn.innerHTML = 'Рішення по логіці<small></small>';
-  foot.append(decBtn);
-  let decMd = '';
-  if (A['arch/ARKHITEKTURA.md']) fetch(A['arch/ARKHITEKTURA.md']).then(r => r.text()).then(t => {
-    decMd = t; const d = (t.match(/^Оновлено:\s*(.+)$/m) || [])[1];
-    if (d) decBtn.querySelector('small').textContent = 'оновлено ' + d;
-  });
-  decBtn.addEventListener('click', () => {
-    doc.querySelector('.ar-doc-body').innerHTML = decMd ? md(decMd.replace(/^Оновлено:.*$/m, m => `**${m}**`)) : '<p>Документ не завантажився.</p>';
-    doc.querySelector('.ar-doc-box').scrollTop = 0; doc.hidden = false;
-  });
+  /* два документи обміну контекстом: наш (ARKHITEKTURA.md) і Танчин (INTERFEIS.md); на кнопці — дата «Оновлено» */
+  const docBtn = (label, key) => {
+    const btn = document.createElement('button');
+    btn.className = 'ar-btn2 ar-dec'; btn.innerHTML = `${label}<small></small>`;
+    foot.append(btn);
+    let text = '';
+    if (A[key]) fetch(A[key]).then(r => r.text()).then(t => {
+      text = t; const d = (t.match(/^Оновлено:\s*(.+)$/m) || [])[1];
+      if (d && d.trim() !== '—') btn.querySelector('small').textContent = 'оновлено ' + d;
+      else btn.querySelector('small').textContent = 'ще не заповнено';
+    });
+    btn.addEventListener('click', () => {
+      doc.querySelector('.ar-doc-body').innerHTML = text ? md(text.replace(/^Оновлено:.*$/m, m => `**${m}**`)) : '<p>Документ не завантажився.</p>';
+      doc.querySelector('.ar-doc-box').scrollTop = 0; doc.hidden = false;
+    });
+  };
+  docBtn('Рішення по логіці', 'arch/ARKHITEKTURA.md');
+  docBtn('Від Інтерфейсу', 'INTERFEIS.md');
 
 
   const $sum = ar.querySelector('.ar-sum'), $list = ar.querySelector('.ar-list');
