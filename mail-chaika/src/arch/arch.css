@@ -296,7 +296,7 @@ aside.side .demo .seg button.sub:active{transform:scale(.97)}
 .ar-btn2:active{transform:scale(.98)}
 .ar-btn2 small{font:400 11px/1 "Silpo Text",sans-serif;color:var(--k3,#777)}
 .ar-btn2 small:empty{display:none}
-.ar-foot{display:flex;gap:8px;padding-top:16px;border-top:1px solid var(--k4,#beb8ad)}
+.ar-foot{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding-top:16px;border-top:1px solid var(--k4,#beb8ad)}
 /* тексти — тільки в модалці */
 aside.side > .cap{display:none}
 body.ar-arch aside.side > .demo{display:none}
@@ -369,3 +369,4 @@ aside.side .demo-lbl{margin:0}
 .ar-tag.st-accepted{border-color:#fff;color:#fff}
 .ar-tag.st-missed{border-style:dashed}
 .ar-tag.t-thanks{background:#fff;color:#000}
+.ar-foot .ar-info{grid-column:1 / -1}
