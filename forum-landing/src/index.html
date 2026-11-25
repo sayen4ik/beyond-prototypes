@@ -48,10 +48,11 @@ html,body{overflow-x:clip}
 .hero .mover img{display:block;width:auto;max-width:none;border-radius:0}
 .mv-l{right:calc(50% + var(--u)*1.2)} .hero .mv-l img{height:calc(var(--u)*56)}
 .mv-r{left:calc(50% + var(--u)*.4)} .hero .mv-r img{height:calc(var(--u)*60)}
-.names{z-index:2;pointer-events:none;opacity:0;transition:opacity .45s}
-.names.on{opacity:1}
+.names{z-index:2;pointer-events:none}
+.names .who1{opacity:0;transform:translate(-50%,-30%) translateY(8px);transition:opacity .4s,transform .4s;transition-delay:0s}
+.names.on .who1{opacity:1;transform:translate(-50%,-30%);transition-delay:var(--d,0s)}   /* по черзі зліва направо: Танка, GitHub, Андрій */
 .hero .names img{visibility:hidden}   /* невидима копія лише тримає розмір, підписи стоять на місці */
-@media (prefers-reduced-motion:reduce){.names{opacity:1}}
+@media (prefers-reduced-motion:reduce){.names .who1{opacity:1;transform:translate(-50%,-30%);transition:none}}
 /* гном трясе жабу: рука з жабою окремим шаром, гойдається від плеча */
 .gn-b{position:absolute;left:0;top:0;transform-origin:8.8% 66.7%;animation:shake 2.6s ease-in-out infinite}
 @keyframes shake{0%,50%,100%{transform:none}58%{transform:rotate(-4deg)}66%{transform:rotate(3.5deg)}74%{transform:rotate(-3deg)}82%{transform:rotate(2.5deg)}90%{transform:rotate(-1.2deg)}}
@@ -198,8 +199,8 @@ ul.facts li{margin-bottom:10px}
 </div>
 <div class="mover mv-l go"><img class="gn-a" src="data:image/webp;base64,@@FILE:a/_6592681a07c5.webp@@" alt="Гном"><img class="gn-b" src="data:image/webp;base64,@@FILE:a/_ff97e606744e.webp@@" alt="Рука гнома тримає жабу"></div>
 <div class="mover mv-r go"><img src="data:image/webp;base64,@@FILE:a/_517b6c94636e.webp@@" alt="Відьма тягне до жаби руки"></div>
-<div class="mover mv-l names" aria-hidden="false"><img src="data:image/webp;base64,@@FILE:a/_6592681a07c5.webp@@" alt=""><span class="who1" style="left:27%;top:100%">Танка</span><span class="who1" style="left:80%;top:93%">GitHub</span></div>
-<div class="mover mv-r names"><img src="data:image/webp;base64,@@FILE:a/_517b6c94636e.webp@@" alt=""><span class="who1" style="left:60%;top:100%">Андрій</span></div>
+<div class="mover mv-l names" aria-hidden="false"><img src="data:image/webp;base64,@@FILE:a/_6592681a07c5.webp@@" alt=""><span class="who1" style="left:27%;top:100%">Танка</span><span class="who1" style="left:80%;top:93%;--d:.35s">GitHub</span></div>
+<div class="mover mv-r names"><img src="data:image/webp;base64,@@FILE:a/_517b6c94636e.webp@@" alt=""><span class="who1" style="left:60%;top:100%;--d:.7s">Андрій</span></div>
 </div>
 </header>
 
