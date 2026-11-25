@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Одне дерево на двох</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neucha&family=Nunito:wght@400;600;800&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow storybook column; the illustration opens, sections read top to bottom like pages of a picture book */
+:root{
+  --paper:#ECEAE3; --paper-2:#E2DFD6; --ink:#1F1D1A; --ink-soft:#5B5750;
+  --gnome:#D9563C; --frog:#9DBE3F; --frog-ink:#56701A; --line:#C9C4B8; --bark:#BFA98C; --plum:#9B6FD1; --sun:#E8B83B; --clay:#DE8259; --sheet:#FBFAF5; --sky:#5B9BD8; --wood:#3A322A;
+  --display:'Neucha','Comic Sans MS',cursive; --text:'Nunito',system-ui,sans-serif; --mono:'JetBrains Mono',ui-monospace,monospace;
+  color-scheme:light;
+}
+body{background:var(--paper);color:var(--ink);font-family:var(--text);font-size:18px;line-height:1.55}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+section{padding-block:56px}
+section:first-of-type{border-top:0}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.1;text-wrap:balance;margin:0}
+h1,h2,.hero .lede{text-align:center}
+.hero .lede{margin-inline:auto}
+.whohead p{text-align:center;max-width:30ch;margin:0 auto 34px}
+.hx{position:relative}
+.hx h2{margin-bottom:150px}
+.arr{position:absolute;top:22px;width:190px;height:150px;overflow:visible;filter:url(#handbox)}
+.arr.l{right:calc(50% + 92px)} .arr.r{left:calc(50% + 92px)}
+.arr path{fill:none;stroke:var(--ink);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+@media (max-width:760px){.arr{display:none}.hx h2{margin-bottom:20px}}
+h1{font-size:clamp(44px,9vw,76px)}
+h2{font-size:clamp(34px,6vw,48px);margin-bottom:20px}
+h3{font-size:28px}
+p{margin:0 0 14px;max-width:62ch}
+.lede{font-size:21px;color:var(--ink-soft)}
+html,body{overflow-x:clip}
+/* обкладинка на всю ширину: лісова галявина «на вильот», гном із жабою заходять зліва, відьма справа, поки гортаємо */
+.hero{height:200vh;padding:0;margin-inline:calc(50% - 50vw)}
+.heropin{position:sticky;top:0;height:100vh;overflow:hidden;--u:min(1vh,1.3vw)}
+.herobg{position:absolute;left:0;right:0;bottom:0;height:max(calc(var(--u)*84),calc(100vw/2.698));background:url(data:image/webp;base64,@@FILE:a/_2af3b09ded1e.webp@@) center bottom/cover no-repeat;-webkit-mask-image:linear-gradient(#000 86%,transparent);mask-image:linear-gradient(#000 86%,transparent);transform-origin:50% 100%;will-change:transform}
+.herotext{position:relative;z-index:2;padding:calc(var(--u)*3) 16px 0}
+.herotext h1{font-size:clamp(40px,calc(var(--u)*9),96px)}
+.herotext .lede{max-width:52ch;margin:4px auto 0;line-height:1.35;color:var(--ink);text-shadow:0 0 6px var(--paper),0 0 6px var(--paper),0 0 12px var(--paper)}   /* два рядки, з паперовим ореолом на випадок листя під текстом */
+.mover{position:absolute;z-index:1;bottom:calc(var(--u)*9);will-change:transform}
+.hero .mover img{display:block;width:auto;max-width:none;border-radius:0}
+.mv-l{right:calc(50% + var(--u)*1.2)} .hero .mv-l img{height:calc(var(--u)*56)}
+.mv-r{left:calc(50% + var(--u)*.4)} .hero .mv-r img{height:calc(var(--u)*60)}
+.names{z-index:2;pointer-events:none;opacity:0;transition:opacity .45s}
+.names.on{opacity:1}
+.hero .names img{visibility:hidden}   /* невидима копія лише тримає розмір, підписи стоять на місці */
+@media (prefers-reduced-motion:reduce){.names{opacity:1}}
+/* гном трясе жабу: рука з жабою окремим шаром, гойдається від плеча */
+.gn-b{position:absolute;left:0;top:0;transform-origin:8.8% 66.7%;animation:shake 2.6s ease-in-out infinite}
+@keyframes shake{0%,50%,100%{transform:none}58%{transform:rotate(-4deg)}66%{transform:rotate(3.5deg)}74%{transform:rotate(-3deg)}82%{transform:rotate(2.5deg)}90%{transform:rotate(-1.2deg)}}
+@media (prefers-reduced-motion:reduce){.gn-b{animation:none}}
+.who1{position:absolute;transform:translate(-50%,-30%);white-space:nowrap;font-family:var(--display);font-size:calc(var(--u)*4.6);line-height:1;color:var(--ink);-webkit-text-stroke:calc(var(--u)*1) var(--paper);paint-order:stroke fill}
+@media (prefers-reduced-motion:reduce){.hero{height:100vh}}
+.hero figure{margin:24px 0 0}
+.hero img{display:block;width:100%;border-radius:6px}
+.hero figcaption,.cap{font-size:15px;color:var(--ink-soft);margin-top:10px}
+code,.mono{font-family:var(--mono);font-size:.82em;background:var(--paper-2);padding:1px 6px;border-radius:4px}
+.who{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:24px;margin:20px 0 34px;align-items:stretch}
+.team .role{flex:1}
+.role{display:flex;flex-direction:column;gap:10px;padding:18px 20px;position:relative}
+.role::before{content:"";position:absolute;inset:0;border:3px solid var(--ink);border-radius:14px 18px 12px 20px;filter:url(#handbox);pointer-events:none}   /* рамка від руки */
+.team{display:flex;flex-direction:column}
+.crew{display:flex;gap:14px;justify-content:center;align-items:flex-end;margin-bottom:-4px;position:relative;z-index:1}   /* стоять на верхньому краї картки */
+.crew span{display:flex;flex-direction:column-reverse;align-items:center;font-family:var(--display);font-size:21px;line-height:1.1}
+.dude{display:block;width:84px;height:auto;overflow:visible}
+.role b{font-family:var(--display);font-weight:400;font-size:26px;display:block}
+.role.r1 b{color:var(--gnome)} .role.r2 b{color:var(--frog-ink)}
+.word{font-family:var(--display);font-size:28px}
+.mid{text-align:center;margin-inline:auto}
+.palsrow{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:44px;align-items:center;margin:28px calc(50% - min(580px,50vw - 16px)) 0}   /* мультик ліворуч, правила праворуч */
+.palsside p{margin-top:18px}
+@media (max-width:900px){.palsrow{grid-template-columns:minmax(0,1fr);gap:20px}}
+#pals{display:block;width:100%;height:auto;overflow:visible;filter:url(#handbox)}
+#pals text{font-family:var(--display)}
+.task{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:56px;align-items:start;text-align:center;margin:0 calc(50% - min(520px,50vw - 16px)) 64px}   /* задача ліворуч, згадка про фронтів праворуч */
+.task h3{font-size:34px;margin-bottom:12px;text-wrap:balance}
+.task p{max-width:40ch;margin-inline:auto}
+@media (max-width:760px){.task{grid-template-columns:minmax(0,1fr);gap:32px}}
+.bridge{display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:48px}
+.hl{position:relative;z-index:0;text-align:center;font-size:21px;max-width:36ch;margin:0;padding:12px 20px}
+.hl::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--sun);opacity:.4;border-radius:8px 14px 10px 16px;filter:url(#handbox)}   /* маркер */
+.offer2{position:relative;z-index:0;width:min(150px,40%);margin:26px 0 60px}
+/* за гномом шматок лісу в колі; ковпак стирчить над колом */
+.offer2::before{content:"";position:absolute;z-index:-1;left:50%;top:73%;width:176%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:var(--paper-2) url(data:image/webp;base64,@@FILE:a/_2af3b09ded1e.webp@@) 34% 100%/auto 150% no-repeat}
+.offer2 img{display:block;width:100%;height:auto;max-width:none}
+.who2{position:absolute;transform:translate(-50%,-20%);white-space:nowrap;font-family:var(--display);font-size:22px;line-height:1;color:var(--ink);-webkit-text-stroke:5px var(--paper);paint-order:stroke fill}
+.offer{display:block;width:min(300px,80%);height:auto;border-radius:6px}
+.arr2{width:60px;height:96px;overflow:visible;filter:url(#handbox)}
+.arr2 path{fill:none;stroke:var(--ink);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.say{display:flex;align-items:center;justify-content:center;gap:20px;max-width:680px}
+@media (min-width:760px){.say{position:relative;display:block;max-width:560px}.say .sayer{position:absolute;right:calc(100% + 22px);top:50%;transform:translateY(-50%)}}   /* по центру стоїть сам прямокутник бульбашки, аватарка висить ліворуч */
+@keyframes blink{0%,91%,100%{transform:scaleY(1)}94%,97%{transform:scaleY(.08)}}
+.blink{animation:blink 4.2s infinite;transform-box:fill-box;transform-origin:center}
+@media (prefers-reduced-motion:reduce){.blink{animation:none}}
+@keyframes hover{0%,100%{transform:translateY(-3px)}50%{transform:translateY(3px)}}
+.sayer .dude{width:74px;overflow:hidden;animation:hover 3.6s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){.sayer .dude{animation:none}}   /* у бульбашках лише голова-зірочка, імʼя під нею */
+.sayer{flex:none;display:flex;flex-direction:column;gap:4px;align-items:center;font-family:var(--display);font-size:21px;line-height:1.1}
+.bub{position:relative;margin:0;padding:18px 24px;font-family:var(--display);font-size:clamp(24px,4.4vw,32px);line-height:1.15}
+.bub::before{content:"";position:absolute;inset:0;border:3px solid var(--ink);border-radius:16px 20px 14px 22px;filter:url(#handbox);pointer-events:none}
+.bub cite{display:block;margin-top:10px;font-family:var(--text);font-style:normal;font-size:15px;color:var(--ink-soft)}
+.tail{position:absolute;left:-17px;top:calc(50% - 14px);width:22px;height:24px;overflow:visible}
+.tail path{fill:var(--paper);stroke:var(--ink);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.comic{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px 22px;margin:26px calc(50% - min(540px,50vw - 16px)) 0}   /* комікс ширший за колонку тексту */
+@media (max-width:820px){.comic{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.comic{grid-template-columns:minmax(0,1fr)}}
+.pn{margin:0;position:relative;padding:12px 14px 14px;display:flex;flex-direction:column;gap:8px}
+.pnl{display:block;width:100%;height:auto;filter:url(#handbox)}
+.pn figcaption{font-size:16px;line-height:1.4;display:grid;grid-template-columns:28px 1fr;gap:6px;align-items:baseline}
+.pn figcaption b{font-family:var(--display);font-weight:400;font-size:30px;line-height:1;color:var(--gnome)}
+ol.steps{list-style:none;counter-reset:s;padding:0;margin:20px 0 0;display:grid;gap:14px}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:baseline}
+ol.steps li::before{content:counter(s);font-family:var(--display);font-size:30px;color:var(--gnome);text-align:right}
+ol.steps li.split{background:var(--paper-2);border-radius:10px;padding:10px 12px 10px 0}
+.tree{margin:20px 0 8px;overflow-x:auto}
+.tree svg{display:block;width:100%;max-width:560px;height:auto;margin:0 auto}
+ul.facts{padding-left:22px;margin:0}
+ul.facts li{margin-bottom:10px}
+.dict{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:20px}
+.flowhead{text-align:center;font-size:32px;margin:48px 0 0}
+.flow{list-style:none;counter-reset:f;padding:0;position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;margin:30px calc(50% - min(570px,50vw - 16px)) 44px}
+.flow::before{content:"";position:absolute;left:0;right:0;top:16px;border-top:3px dotted var(--ink-soft)}   /* пунктир: це один процес, крок за кроком */
+.flow li{counter-increment:f;position:relative;padding-top:52px}
+.flow li::before{content:counter(f);position:absolute;top:0;left:0;width:34px;height:34px;box-sizing:border-box;border-radius:50%;background:var(--paper);border:2.5px solid var(--ink);display:grid;place-items:center;font-family:var(--display);font-size:22px;line-height:1}
+.flow h3{font-size:26px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.flow h3 .mono{font-size:14px}
+.flow p{margin:6px 0 0;font-size:16px}
+.flow .fig{color:var(--ink-soft);font-size:15px}
+@media (max-width:820px){.flow{grid-template-columns:minmax(0,1fr);gap:22px}.flow::before{left:16px;right:auto;top:0;bottom:0;border-top:0;border-left:3px dotted var(--ink-soft)}.flow li{padding:0 0 0 52px}}
+.dict.solo{grid-template-columns:minmax(0,420px);justify-content:center}
+.term{padding:16px 18px;background:var(--paper-2);border-radius:12px}
+.term h3{font-size:26px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.term h3 .mono{font-size:14px;background:var(--paper)}
+.term p{margin:6px 0 0;font-size:16px}
+.term .fig{color:var(--ink-soft);font-size:15px}
+.quote{font-family:var(--display);font-size:clamp(34px,7vw,54px);line-height:1.1;margin:24px 0 6px}
+.files{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:18px 0}
+.file{border:2px solid var(--ink);border-radius:12px;padding:14px 16px}
+.file .mono{background:none;padding:0;font-size:15px}
+.file p{font-size:16px;margin:6px 0 0}
+.rules{counter-reset:r;list-style:none;padding:0;margin:10px 0 0}
+.rules li{counter-increment:r;padding-left:34px;position:relative;margin-bottom:8px}
+.rules li::before{content:counter(r);position:absolute;left:0;font-family:var(--display);font-size:24px;line-height:1.1;color:var(--frog-ink)}
+.end{padding-block:56px 80px}
+.btnwrap{position:relative;display:inline-block;margin:20px 0}
+.wreath{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;filter:url(#handbox)}
+.btn{position:relative;display:inline-block;margin-top:0;font-family:var(--display);font-size:clamp(34px,6vw,56px);line-height:1.1;color:var(--paper);background:var(--ink);padding:25px 56px 21px;border-radius:999px;text-decoration:none}
+.btn:hover{background:var(--gnome)}
+.btn:focus-visible{outline:3px solid var(--gnome);outline-offset:3px}
+.grow{margin:18px calc(50% - min(600px,50vw - 16px)) 22px}   /* схема ширша за колонку тексту */
+.grow svg{display:block;width:100%;max-width:100%;max-height:calc(100vh - 64px);min-height:300px;height:auto;margin:0 auto}
+.legend{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;max-width:520px;margin:0 auto;font-family:var(--display);font-size:22px}
+.legend .lm{font-family:var(--text);font-size:14px;color:var(--ink-soft);order:3;flex-basis:100%;text-align:center}
+#tree .limb{transition:stroke .3s,stroke-width .3s}
+#tree .leaf{transition:transform .35s cubic-bezier(.3,1.6,.5,1);transform-box:fill-box;transform-origin:0 50%}
+@media (prefers-reduced-motion:reduce){#tree .limb,#tree .leaf{transition:none}}
+.legend .lt{color:var(--gnome)} .legend .la{color:var(--frog-ink)}
+.ctl{display:flex;gap:14px;align-items:center;margin-top:8px}
+.ctl input{flex:1;min-width:0;height:28px;margin:0;background:none;-webkit-appearance:none;appearance:none;cursor:pointer}
+.ctl input::-webkit-slider-runnable-track{height:2px;background:var(--line);border-radius:1px}
+.ctl input::-moz-range-track{height:2px;background:var(--line);border-radius:1px}
+.ctl input::-moz-range-progress{background:var(--line)}
+.ctl input::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;margin-top:-8px;border-radius:50%;background:var(--paper);border:2px solid var(--line);box-sizing:border-box}
+.ctl input::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--paper);border:2px solid var(--line);box-sizing:border-box}
+.ctl button{font-family:var(--display);font-size:20px;background:var(--ink);color:var(--paper);border:0;border-radius:999px;padding:6px 16px;cursor:pointer;white-space:nowrap}
+.ctl button:hover{background:var(--gnome)}
+.ctl input:focus-visible{outline:2px solid var(--ink-soft);outline-offset:4px;border-radius:14px}
+.grow{position:relative}
+@media (min-width:900px){.info{position:absolute;top:10px;left:0}.info .now{margin-top:0;min-height:0}.info .now span{display:block;margin:0 0 4px}}
+.now{margin:12px 0 2px;max-width:none;min-height:3.1em}
+.now span{font-family:var(--display);font-size:30px;margin-right:12px}
+.now b{font-weight:600;font-size:21px}
+#tree .tag{font-family:var(--text);font-weight:800;font-size:15px;paint-order:stroke;stroke:var(--paper);stroke-width:5px;stroke-linejoin:round}
+#tree .side,#tree .main{font-family:var(--display)}
+#tree .side{font-size:32px}
+.sidecap{display:none;justify-content:space-between;font-family:var(--display);font-size:26px;line-height:1.1;margin-bottom:4px}
+.sidecap .lt{color:var(--gnome)} .sidecap .la{color:var(--frog-ink)}
+@media (max-width:700px){.sidecap{display:flex}}
+#tree .day{font-family:var(--display);font-size:19px;fill:var(--ink-soft)}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="handbox" x="-5%" y="-30%" width="110%" height="160%"><feTurbulence type="fractalNoise" baseFrequency="0.022" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
+<main class="wrap">
+
+<header class="hero">
+<div class="heropin">
+<div class="herobg"></div>
+<div class="herotext">
+<h1>Одне дерево на двох</h1>
+<p class="lede">Як ми в команді тестуємо роботу над Поштовою Чайкою в одному прототипі, і що таке GitHub для дизайнера.</p>
+</div>
+<div class="mover mv-l go"><img class="gn-a" src="data:image/webp;base64,@@FILE:a/_6592681a07c5.webp@@" alt="Гном"><img class="gn-b" src="data:image/webp;base64,@@FILE:a/_ff97e606744e.webp@@" alt="Рука гнома тримає жабу"></div>
+<div class="mover mv-r go"><img src="data:image/webp;base64,@@FILE:a/_517b6c94636e.webp@@" alt="Відьма тягне до жаби руки"></div>
+<div class="mover mv-l names" aria-hidden="false"><img src="data:image/webp;base64,@@FILE:a/_6592681a07c5.webp@@" alt=""><span class="who1" style="left:27%;top:100%">Танка</span><span class="who1" style="left:80%;top:93%">GitHub</span></div>
+<div class="mover mv-r names"><img src="data:image/webp;base64,@@FILE:a/_517b6c94636e.webp@@" alt=""><span class="who1" style="left:60%;top:100%">Андрій</span></div>
+</div>
+</header>
+
+<section>
+<div class="whohead">
+<p>На форумі геймифікації дві ролі. Зони відповідальності в кожного свої.</p>
+<div class="hx">
+<svg class="arr l" viewBox="0 0 190 150" aria-hidden="true"><path d="M186 12C112 6 96 52 92 138M78 122L92 140L106 123"/></svg>
+<svg class="arr r" viewBox="0 0 190 150" aria-hidden="true"><path d="M4 12C78 6 94 52 98 138M84 123L98 140L112 122"/></svg>
+<h2>Хто ми</h2>
+</div>
+</div>
+<div class="who">
+<div class="team"><div class="crew"><span><svg class="dude" data-w="a" data-n="1" viewBox="-48 -110 96 114" aria-hidden="true"></svg>Андрій</span><span><svg class="dude" data-w="t" data-n="3" data-c="var(--sky)" viewBox="-48 -110 96 114" aria-hidden="true"></svg>Юля</span></div><div class="role r2"><div><b>Продуктові дизайнери</b>UX, екрани, стани, логіка фічі</div></div></div>
+<div class="team"><div class="crew"><span><svg class="dude" data-w="t" data-n="0" viewBox="-48 -110 96 114" aria-hidden="true"></svg>Танка</span><span><svg class="dude" data-w="t" data-n="2" data-c="var(--plum)" viewBox="-48 -110 96 114" aria-hidden="true"></svg>Христя</span></div><div class="role r1"><div><b>Продуктові моушн-ілюстратори</b>ілюстрації, анімації, як усе рухається і живе</div></div></div>
+</div>
+<p style="text-align:center;max-width:44ch;margin-inline:auto">Спільне в нас слово <span class="word">«продуктові»</span>. Фічу беремо парами: один продуктовий дизайнер і один моушн-ілюстратор.</p>
+</section>
+
+<section>
+<h2>Як ми працюємо зазвичай</h2>
+<div class="comic">
+<figure class="pn"><svg class="pnl" data-k="1" viewBox="0 0 240 170" aria-hidden="true"></svg><figcaption><b>1</b>Гейм-дизайнер пише опис фічі.</figcaption></figure>
+<figure class="pn"><svg class="pnl" data-k="2" viewBox="0 0 240 170" aria-hidden="true"></svg><figcaption><b>2</b>Продуктовий дизайнер збирає на обговорення всіх: гейм-дизайнера, продуктових дизайнерів і моушн-ілюстраторів.</figcaption></figure>
+<figure class="pn"><svg class="pnl" data-k="3" viewBox="0 0 240 170" aria-hidden="true"></svg><figcaption><b>3</b>Усі разом верхньорівнево обговорюємо рішення: які елементи, які анімації.</figcaption></figure>
+<figure class="pn"><svg class="pnl" data-k="4" viewBox="0 0 240 170" aria-hidden="true"></svg><figcaption><b>4</b>Далі більше працюємо вдвох, кожен у своєму куточку. Продуктовий дизайнер детально робить UX, моушн-ілюстратор робить ілюстрації чи драфти анімацій.</figcaption></figure>
+<figure class="pn"><svg class="pnl" data-k="5" viewBox="0 0 240 170" aria-hidden="true"></svg><figcaption><b>5</b>Зустрічаємось і пробуємо звести одне з одним.</figcaption></figure>
+<figure class="pn"><svg class="pnl" data-k="6" viewBox="0 0 240 170" aria-hidden="true"></svg><figcaption><b>6</b>І так по колу, ітераціями. Періодично звіряємось з усіма на порадницях.</figcaption></figure>
+</div>
+<div class="bridge">
+<p class="hl">Про те, як буває, коли зводиш вручну і перекидаєшся HTML-файлами, розповідала Юля на прикладі Зали Змагань.</p>
+<svg class="arr2" viewBox="0 0 60 96" aria-hidden="true"><path d="M34 4C46 30 16 54 28 88M16 75L28 90L40 76"/></svg>
+<div class="say">
+<span class="sayer"><svg class="dude" data-w="a" data-n="1" viewBox="-34 -106 68 68" aria-hidden="true"></svg>Андрій</span>
+<blockquote class="bub"><svg class="tail" viewBox="0 0 22 24" aria-hidden="true"><path d="M20 3L3 21L20 16"/></svg>Треба якусь магію зробити, щоб злити гілки в Клоді: твою, мою і Юліну<cite>16 листопада, у Слаку</cite></blockquote>
+</div>
+<svg class="arr2" viewBox="0 0 60 96" aria-hidden="true"><path d="M24 4C46 22 44 44 28 50C14 55 13 38 25 39C38 41 35 70 31 88M19 74L31 90L43 75"/></svg>
+<div class="offer2"><img class="gn-a" src="data:image/webp;base64,@@FILE:a/_6592681a07c5.webp@@" alt="Гном Танка"><img class="gn-b" src="data:image/webp;base64,@@FILE:a/_ff97e606744e.webp@@" alt="Рука гнома простягає жабу GitHub"><span class="who2" style="left:27%;top:100%">Танка</span><span class="who2" style="left:80%;top:93%">GitHub</span></div>
+</div>
+</section>
+
+<section style="border-top:0;padding-top:20px">
+<div class="task">
+<div>
+<h3>Наша задача: Поштова Чайка</h3>
+<p>Поштова Чайка приносить гостю пошту: листи від Їдолів і сервісні повідомлення. Треба придумати, як вона зʼявляється на Хоумспейсі, як віддає лист і як влаштований розділ пошти.</p>
+</div>
+<div>
+<h3>І тут згадали: фронти ж так і працюють</h3>
+<p>Десять людей пишуть один застосунок, і ніхто не пересилає файлів. Кожен робить задачу у своїй гілці й вливає в стовбур.</p>
+</div>
+</div>
+<h2>Експеримент:<br><span style="white-space:nowrap">Поштову Чайку</span> робимо інакше</h2>
+<div class="grow">
+<div class="sidecap"><span class="lt">Гілки Танки</span><span class="la">Гілки Андрія</span></div>
+<svg id="tree" viewBox="-84 0 768 650" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Дерево Поштової Чайки: з кожним злиттям стовбур вищає і товщає, а гілка вкривається листям"></svg>
+<div class="ctl">
+<input id="tslider" type="range" min="0" max="2000" value="0" aria-label="Тиждень Поштової Чайки, від 17 до 23 листопада">
+</div>
+<div class="info" hidden><p class="now" aria-live="polite"><span id="nd"></span><b id="nt"></b></p>
+<p class="cap" id="nc"></p></div>
+</div>
+<ul class="facts">
+<li>Кожен працює над своєю частиною, але в одному прототипі.</li>
+<li>Поки це дві вкладки: «Інтерфейс» (Танка) і «Архітектура» (Андрій). Ми бачимо частини одне одного. Працюючи над візуальною концепцією розділу, я можу заглянути в архітектуру, яку робить Андрій.</li>
+<li>Обмінюватись ідеями й передавати рішення стало легше, без перекидання HTML.</li>
+<li>У кінці все зіллється в один розділ, вкладок не буде.</li>
+<li>Це ще експеримент. Але поки все каже, що підхід хороший.</li>
+</ul>
+</section>
+
+<section>
+<h2>Що таке GitHub і все оце</h2>
+<p>Ми, дизайнери, команд git не пишемо. Ми кажемо Клоду «створи гілку» чи «пуш і злий», а технічну частину він робить сам. Досить розуміти, що відбувається.</p>
+<div class="dict">
+<div class="term"><h3>GitHub</h3><p>Місце в інтернеті, де лежить репозиторій. У кожного на компʼютері своя копія, але всі вони зводяться в одну спільну тут. І ще він показує прототип як сайт за посиланням.</p></div>
+<div class="term"><h3>Репозиторій</h3><p>Папка проєкту, яка памʼятає всю свою історію. У нас це <code>beyond-prototypes</code>: там Поштова Чайка, Зали та інші прототипи.</p></div>
+<div class="term"><h3>Стовбур <span class="mono">main</span></h3><p>Чистовик. Те, що зараз правда і що бачать усі.</p></div>
+<div class="term"><h3>Гілка <span class="mono">branch</span></h3><p>Твоя чернетка-копія стовбура. Пробуєш що завгодно, а чистовик від цього не ламається.</p></div>
+</div>
+<h3 class="flowhead">Як зміна потрапляє в чистовик</h3>
+<ol class="flow">
+<li><h3>Коміт <span class="mono">commit</span></h3><p>Версія, збережена на твоєму компʼютері, з підписом, що змінилось: «Поштова Чайка: стани конверта». До неї завжди можна повернутись.</p></li>
+<li><h3>Пуш <span class="mono">push</span></h3><p>Відправила свою гілку з компʼютера на GitHub. Вона лежить там як гілка, окремо від чистовика, і її вже можна показати за посиланням.</p></li>
+<li><h3>Прохання влити <span class="mono">pull request</span></h3><p>«Подивись, що я зробила. Можна вливати в стовбур?»</p></li>
+<li><h3>Злиття <span class="mono">merge</span></h3><p>Гілку влили, і зміни зʼявились у чистовику. У Поштової Чайки за тиждень таких було 20.</p></li>
+</ol>
+<p class="cap" style="text-align:center;max-width:52ch;margin:0 auto"><b>Конфлікт</b> буває, коли двоє змінили одне й те саме місце. Git нічого тихо не затирає, а питає: «яку версію лишаємо?»</p>
+</section>
+
+<section>
+<h2>Наші Клоди пишуть один одному</h2>
+<p class="mid">Щоб не переказувати все вручну, у Поштової Чайки є два файли рішень. Кожен веде свій Клод.</p>
+<div class="palsrow">
+<div class="pals">
+<svg id="pals" viewBox="0 -64 700 424" role="img" aria-label="Два Клоди стоять обабіч дерева-репозиторію й передають один одному записки з рішеннями через дупло в стовбурі"></svg>
+</div>
+<div class="palsside">
+<ol class="rules">
+<li>Перед роботою Клод читає чужий файл.</li>
+<li>Після роботи оновлює свій.</li>
+<li>Чужий файл ніколи не править, а пише запит у своєму.</li>
+</ol>
+<p>Обидва документи можна відкрити просто в прототипі, кнопками на панелі.</p>
+</div>
+</div>
+</section>
+
+<section class="end" style="text-align:center">
+<span class="btnwrap"><a class="btn" href="https://sayen4ik.github.io/beyond-prototypes/mail-chaika/" target="_blank" rel="noopener">Відкрити Поштову Чайку</a></span>
+</section>
+
+</main>
+<script>
+(function(){
+  const hero=document.querySelector('.hero'),hl=document.querySelector('.mv-l.go'),hr=document.querySelector('.mv-r.go'),hb=document.querySelector('.herobg'),nm=document.querySelectorAll('.names');
+  if(!hero||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  let tick=false;
+  function par(){tick=false;const r=hero.getBoundingClientRect(),tot=r.height-innerHeight,p=tot>0?Math.max(0,Math.min(1,-r.top/tot)):1;
+    const e=1-Math.pow(1-Math.min(1,p/.85),3),d=(1-e)*innerWidth*.62;
+    hl.style.transform=`translateX(${(-d).toFixed(1)}px) rotate(${(-(1-e)*4).toFixed(2)}deg)`;
+    hr.style.transform=`translateX(${d.toFixed(1)}px) rotate(${((1-e)*4).toFixed(2)}deg)`;
+    nm.forEach(n=>n.classList.toggle('on',p>=.84));
+    hb.style.transform=`translateY(${((1-e)*5*Math.min(innerHeight/100,innerWidth*.013)).toFixed(1)}px)`}   // ліс трохи підіймається
+  const ask=()=>{if(!tick){tick=true;requestAnimationFrame(par)}};
+  addEventListener('scroll',ask,{passive:true});addEventListener('resize',ask);par();
+})();
+</script>
+<script>
+(function(){
+const NS='http://www.w3.org/2000/svg';
+const D=[
+{d:'17.11',w:'t',n:'перший прототип: Поштова Чайка на прогрес-барі, сумка, розділ пошти'},
+{d:'18.11',w:'t',n:'вхід без налітання на камеру, Поштова Чайка підстрибує'},
+{d:'19.11',w:'t',n:'4 стани Хоумспейсу, доручення Батата',c:2},
+{d:'19.11',w:'a',n:'перша гілка Андрія. Росла з 18.11, поки Танка зливала свою',s:2.2,wd:150},
+{d:'19.11',w:'t',n:'стани конверта, лист Їдола, пірʼїнка'},
+{d:'19.11',w:'t',n:'старт із порожнього Хоумспейсу'},
+{d:'19.11',w:'t',n:'однаковий блік у всіх випадках'},
+{d:'19.11',w:'t',n:'слід бліку не відривається від пірʼїнки'},
+{d:'19.11',w:'t',n:'блік розгоряється, поки тане пірʼїнка'},
+{d:'19.11',w:'t',n:'панель праворуч'},
+{d:'19.11',w:'t',n:'іконка-конверт, варіанти для випадків 2 і 3'},
+{d:'19.11',w:'t',n:'варіант без бліку, хвильки від конверта'},
+{d:'19.11',w:'t',n:'хвильки після кидка'},
+{d:'20.11',w:'t',n:'перемикач версій А/Б'},
+{d:'20.11',w:'t',n:'кнопки версій А/Б у рамці'},
+{d:'21.11',w:'a',n:'вкладка «Архітектура»'},
+{d:'21.11',w:'a',n:'мокап пристрою, жести пальцем'},
+{d:'22.11',w:'a',n:'винагороди, модалки, стани',c:2},
+{d:'23.11',w:'a',n:'доручення Батата, панель і документ для Інтерфейсу'},
+{d:'23.11',w:'a',n:'обмін контекстом між Клодами'}
+];
+const K=["перший прототип", "вхід Поштової Чайки", "стани Хоумспейсу", "перша гілка Андрія", "стани конверта", "порожній старт", "однаковий блік", "слід бліку", "блік і пірʼїнка", "панель праворуч", "іконка-конверт", "без бліку", "хвильки", "перемикач А/Б", "кнопки А/Б", "вкладка «Архітектура»", "мокап пристрою", "винагороди, стани", "доручення Батата", "обмін контекстом"];
+const N=D.length,cx=300,ground=612,PER=4;
+const svg=document.getElementById('tree'),inp=document.getElementById('tslider');
+const mkEl=(t,a,par)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);par.appendChild(e);return e};
+// «від руки»: легкий шум зсуває всі лінії, як у малюнку фломастером
+const fl=mkEl('filter',{id:'hand',filterUnits:'userSpaceOnUse',x:-90,y:-10,width:780,height:670},mkEl('defs',{},svg));
+mkEl('feTurbulence',{type:'fractalNoise',baseFrequency:.03,numOctaves:2,seed:4,result:'n'},fl);
+mkEl('feDisplacementMap',{in:'SourceGraphic',in2:'n',scale:5,xChannelSelector:'R',yChannelSelector:'G'},fl);
+const G=mkEl('g',{filter:'url(#hand)'},svg);
+const el=(t,a,par)=>mkEl(t,a,par||G);
+const rnd=i=>{const x=Math.sin(i*127.1+3.3)*43758.5453;return x-Math.floor(x)};
+const col=w=>w==='t'?'var(--gnome)':'var(--frog-ink)',leafCol=w=>w==='t'?'var(--gnome)':'var(--frog)';
+const sm=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x)};
+const lerp=(a,b,u)=>a+(b-a)*u;
+const topY=p=>470-295*Math.pow(Math.min(p,N)/N,.9);
+// плавна кількість злиттів: росте в останній п'ятій частині кожного кроку
+const mergedSmooth=p=>{const k=Math.min(Math.floor(p),N);return p>=N?N:k+sm((p-k-.8)/.2)};
+const g0=el('path',{d:`M40 ${ground} H560`,fill:'none','stroke-width':2.5,'stroke-linecap':'round'});g0.style.stroke='var(--ink)';
+[52,172,216,384,428,548].forEach((x,i)=>{const t=el('path',{d:`M${x} ${ground} l${-4+rnd(i)*3} ${-9-rnd(i+9)*6} M${x+5} ${ground} l${2+rnd(i+3)*3} ${-7-rnd(i+5)*5}`,fill:'none','stroke-width':2,'stroke-linecap':'round'});t.style.stroke='var(--ink)'});
+const LEAF='M-11 0C-6 -8 4 -9 11 0C4 9 -6 8 -11 0Z';
+el('text',{x:cx,y:ground+30,'text-anchor':'middle',class:'side'}).textContent='GitHub-репозиторій';
+// дуги: кожна зміна відходить від стовбура і вливається трохи вище; знизу вгору за часом
+const base=ground-112,stepY=(base-(topY(N)+35))/N;   // дуги починаються над головами чоловічків
+const B=D.map((m,i)=>{
+  const s=m.s??i,e=i+1,dir=m.w==='t'?-1:1,yE=base-(i+1)*stepY;
+  const yS=base-s*stepY+stepY*.9,wd=m.wd??(86+52*rnd(i));
+  const path=el('path',{d:`M${cx} ${yS.toFixed(1)}C${cx+dir*wd} ${(yS-6).toFixed(1)} ${cx+dir*wd} ${(yE-12).toFixed(1)} ${cx} ${yE.toFixed(1)}`,fill:'none','stroke-linecap':'round'});
+  path.style.stroke=col(m.w);const L=path.getTotalLength();
+  const buds=(m.c===2?[.38,.62]:[.5]).map(t=>{const q=path.getPointAtLength(L*t);const c=el('circle',{cx:q.x,cy:q.y,'stroke-width':2.2});c.style.fill='var(--paper)';c.style.stroke='var(--ink)';return{t,c}});
+  const mid=path.getPointAtLength(L*.5);
+  const tag=el('text',{x:(mid.x+dir*13).toFixed(1),y:(mid.y+5).toFixed(1),'text-anchor':dir<0?'end':'start',class:'tag'});tag.textContent=K[i];tag.style.fill=col(m.w);
+  return{s,e,path,L,buds,tag,T:[cx,yE],w:m.w};
+});
+[[-60,'t','Гілки Танки'],[660,'a','Гілки Андрія']].forEach(([x,w,t])=>{const e=el('text',{transform:`translate(${x} 400) rotate(-90)`,'text-anchor':'middle',class:'side'});e.textContent=t;e.style.fill=col(w)});
+// чоловічки з головами-зірочками: піднімають руки, поки росте їхня гілка
+const act={t:false,a:false},still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function mkFig(g,w,x0,ground,n,c){
+  const mk=(t,a)=>el(t,a,g),ink=e=>{e.style.stroke='var(--ink)';return e};
+  ink(mk('path',{d:`M${x0-7} ${ground-24}V${ground}M${x0+7} ${ground-24}V${ground}`,fill:'none','stroke-width':2.5,'stroke-linecap':'round'}));
+  const arms=[-1,1].map(sd=>({sd,line:ink(mk('path',{fill:'none','stroke-width':2.5,'stroke-linecap':'round'}))}));
+  const body=ink(mk('path',{d:w==='t'?`M${x0-17} ${ground-20}Q${x0} ${ground-80} ${x0+17} ${ground-20}Z`:`M${x0-13} ${ground-46}H${x0+13}Q${x0+14} ${ground-19} ${x0} ${ground-18}Q${x0-14} ${ground-19} ${x0-13} ${ground-46}Z`,'stroke-width':2.2,'stroke-linejoin':'round'}));body.style.fill=c||leafCol(w);
+  arms.forEach(a=>{a.hand=ink(mk('circle',{r:4.2,'stroke-width':2}));a.hand.style.fill='var(--paper)'});
+  const head=mk('g');let d='';for(let i=0;i<14;i++){const r=i%2?11.5:20+rnd(i+n*13)*5,an=(-90+i*360/14)*Math.PI/180;d+=(i?'L':'M')+(r*Math.cos(an)).toFixed(1)+' '+(r*Math.sin(an)).toFixed(1)}
+  const st=ink(el('path',{d:d+'Z','stroke-width':2.2,'stroke-linejoin':'round'},head));st.style.fill=c||leafCol(w);
+  [-4,4].forEach(x=>{el('circle',{cx:x,cy:1,r:1.7},head).style.fill='var(--ink)'});
+  return{w,x0,arms,head,amp:.12,ph:n*.37,gy:ground,sy:ground-(w==='t'?42:41),sx:w==='t'?8:12};
+}
+const P=[['t',112],['a',488]].map(([w,x0],n)=>mkFig(el('g',{filter:'url(#hand)'},svg),w,x0,ground,n));
+// ті самі чоловічки в картках «Хто ми»
+document.querySelectorAll('.dude').forEach((sv,k)=>{const w=sv.dataset.w,f=mkEl('filter',{id:'hand'+k},mkEl('defs',{},sv));
+  mkEl('feTurbulence',{type:'fractalNoise',baseFrequency:.03,numOctaves:2,seed:4+k,result:'n'},f);mkEl('feDisplacementMap',{in:'SourceGraphic',in2:'n',scale:5,xChannelSelector:'R',yChannelSelector:'G'},f);
+  const fg=mkEl('g',{filter:`url(#hand${k})`},sv),q=mkFig(fg,w,0,0,+sv.dataset.n,sv.dataset.c);q.amp=0;pose(q,0);
+  if(sv.closest('.sayer')){[...fg.children].forEach(c=>{if(c!==q.head)c.style.display='none'});q.head.querySelectorAll('circle').forEach(c=>{c.classList.add('blink');c.style.animationDelay=(-k*1.7)+'s'});sv.style.animationDelay=(-k*1.3)+'s'}});   // біля бульбашок лишаємо тільки голову   // у картках стоять спокійно, руки опущені
+function pose(q,u){
+  const th=(-38+112*q.amp*u)*Math.PI/180;
+  q.arms.forEach(a=>{const sx=q.x0+a.sd*q.sx,sy=q.sy,hx=sx+a.sd*27*Math.cos(th),hy=sy-27*Math.sin(th);
+    a.line.setAttribute('d',`M${sx} ${sy}L${hx.toFixed(1)} ${hy.toFixed(1)}`);a.hand.setAttribute('cx',hx.toFixed(1));a.hand.setAttribute('cy',hy.toFixed(1))});
+  q.head.setAttribute('transform',`translate(${q.x0} ${(q.gy-72-3*q.amp*u).toFixed(1)}) rotate(${((u-.5)*12*q.amp).toFixed(1)})`);
+}
+function dance(now){P.forEach(q=>{q.amp+=((q.always??(act[q.w]?1:.12))-q.amp)*.08;const t=(now/1500+q.ph)%1;pose(q,t<.7?sm(t/.7):1-sm((t-.7)/.3))});requestAnimationFrame(dance)}
+const trunk=el('path',{'stroke-width':2.5,'stroke-linejoin':'round'});trunk.style.fill='var(--bark)';trunk.style.stroke='var(--ink)';
+const bark=el('path',{fill:'none','stroke-width':1.6,'stroke-linecap':'round'});bark.style.stroke='var(--wood)';bark.style.opacity=.55;
+const mainT=el('text',{'text-anchor':'start',class:'main'});mainT.textContent='main';mainT.style.fill='var(--ink)';
+// крона: листя розкладене спіраллю, як насіння в соняшнику
+const leaves=[];
+D.forEach((m,i)=>{for(let k=0;k<PER;k++){const j=i*PER+k,r=11.4*Math.sqrt(j+.6),a=j*2.39996;
+  const g=el('g');const lf=el('path',{d:LEAF,'stroke-width':1.8,'stroke-linejoin':'round'},g);lf.style.fill=leafCol(m.w);lf.style.stroke='var(--ink)';
+  leaves.push({i,g,dx:r*Math.cos(a),dy:r*Math.sin(a)*.9,rot:a*180/Math.PI+(rnd(j)-.5)*40})}});
+function drawTrunk(p,m){
+  const W=7+2.7*m,top=topY(p);
+  const half=u=>(W/2)*Math.pow(1-u,.6)+1.6+W*.38*Math.exp(-u*13);
+  const pts=[];for(let j=0;j<=28;j++){const u=j/28;pts.push([half(u),ground-u*(ground-top)])}
+  let d='M'+(cx-pts[0][0])+' '+ground;
+  pts.forEach(q=>d+='L'+(cx-q[0]).toFixed(1)+' '+q[1].toFixed(1));
+  pts.reverse().forEach(q=>d+='L'+(cx+q[0]).toFixed(1)+' '+q[1].toFixed(1));
+  trunk.setAttribute('d',d+'Z');
+  let bd='';if(W>22){const n=Math.floor((W-14)/9);for(let j=0;j<n;j++){const x=cx+(j-(n-1)/2)*(W*.62/n),y1=ground-10-rnd(j)*40,y2=y1-40-rnd(j+7)*70;bd+=`M${x.toFixed(1)} ${y1.toFixed(1)}Q${(x+3).toFixed(1)} ${((y1+y2)/2).toFixed(1)} ${x.toFixed(1)} ${y2.toFixed(1)}`}}
+  bark.setAttribute('d',bd);
+  const fs=Math.max(14,Math.min(32,W*.5));mainT.setAttribute('font-size',fs.toFixed(1));mainT.setAttribute('transform',`translate(${(cx+fs*.3).toFixed(1)} ${ground-34}) rotate(-90)`);mainT.style.opacity=sm((W-22)/8).toFixed(2);
+}
+function drawBranch(b,p){
+  const f=Math.max(0,Math.min(1,(p-b.s)/(b.e-b.s)));
+  if(f<=0){b.path.style.visibility='hidden';b.tag.style.opacity=0;b.buds.forEach(d=>d.c.style.visibility='hidden');return f}
+  const g=Math.min(f/.75,1),done=f>=1;
+  b.tag.style.opacity=(sm((g-.35)/.2)*(1-sm((f-.82)/.18))).toFixed(2);   // підпис видно, поки гілка — чернетка        // росте суцільною, після злиття лишається пунктиром
+  b.path.style.visibility='visible';
+  b.path.style.strokeDasharray=done?'1 7':`${(g*b.L).toFixed(1)} ${b.L.toFixed(1)}`;
+  b.path.style.strokeWidth=done?3:4.5;b.path.style.opacity=done?.85:1;
+  b.buds.forEach(d=>{d.c.style.visibility=g>=d.t?'visible':'hidden';d.c.setAttribute('r',done?3.4:5.2)});
+  return f;
+}
+const who={t:'Танка',a:'Андрій'},nd=document.getElementById('nd'),nt=document.getElementById('nt'),nc=document.getElementById('nc');
+function upd(){
+  const p=inp.value/100,m=mergedSmooth(p);
+  const F=B.map(b=>drawBranch(b,p));
+  act.t=act.a=false;B.forEach((b,i)=>{if(F[i]>0&&F[i]<1)act[b.w]=true});
+  if(still)P.forEach(q=>{q.amp=q.always??(act[q.w]?1:.12);pose(q,.7)});
+  drawTrunk(p,m);
+  const R=11.4*Math.sqrt(PER*m+.6),cy=topY(p)-R*.5-4;
+  leaves.forEach(l=>{const b=B[l.i],v=sm((F[l.i]-.8)/.2);
+    if(v<=0){l.g.style.visibility='hidden';return}
+    const x=lerp(b.T[0],cx+l.dx,v),y=lerp(b.T[1],cy+l.dy,v);
+    l.g.style.visibility='visible';l.g.setAttribute('transform',`translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${l.rot.toFixed(0)}) scale(${(.25+.75*v).toFixed(2)})`)});
+  const merged=Math.min(Math.floor(p+1e-6),N);
+  if(p>=N){nd.textContent='23.11';nt.textContent=N+' злиттів за тиждень. Жодного пересланого файлу.'}
+  else{const k=Math.floor(p),mm=D[k],f=p-k;nd.textContent=mm.d+' · '+who[mm.w];nt.textContent=mm.n+(f>=.8?' — вливається':'')}
+  nc.textContent='Злиттів у стовбур: '+merged+' з '+N;
+}
+inp.addEventListener('input',upd);
+// сценка «Клоди листуються»: дві руді істотки стоять обабіч дерева й передають записки через дупло
+(function(){
+  const sv=document.getElementById('pals');if(!sv)return;
+  const add=(t,a,par)=>mkEl(t,a,par||sv),gy=250,cx=350,hy=158,HR=18;
+  const pen=(e,w=2.4,fill='none')=>{e.style.stroke='var(--ink)';e.style.fill=fill;e.setAttribute('stroke-width',w);e.setAttribute('stroke-linecap','round');e.setAttribute('stroke-linejoin','round');return e};
+  pen(add('path',{d:`M30 ${gy}H670`}));
+  [[66,-1],[236,1],[462,-1],[640,1]].forEach(([x,d])=>pen(add('path',{d:`M${x} ${gy}l${-3*d} -10M${x+6} ${gy}l${3*d} -8`}),2));
+  // дерево-репозиторій: стовбур, дупло-скринька, крона з листя обох
+  let d=`M${cx-44} ${gy}`;const half=u=>24*Math.pow(1-u,.55)+5+16*Math.exp(-u*12),top=44,L=[],R=[];
+  for(let k=0;k<=20;k++){const u=k/20,y=gy-u*(gy-top);L.push(`L${(cx-half(u)).toFixed(1)} ${y.toFixed(1)}`);R.unshift(`L${(cx+half(u)).toFixed(1)} ${y.toFixed(1)}`)}
+  pen(add('path',{d:`M${cx-half(0)} ${gy}`+L.join('')+R.join('')+'Z'}),2.6,'var(--bark)');
+  pen(add('path',{d:`M${cx-9} ${gy-12}q3 -30 -1 -52M${cx+10} ${gy-18}q-3 -22 1 -40`}),1.6).style.opacity=.5;
+  const mt=add('text',{transform:`translate(${cx+7} ${gy-22}) rotate(-90)`,'font-size':20});mt.textContent='main';mt.style.fill='var(--ink)';
+  pen(add('ellipse',{cx:cx,cy:hy,rx:HR,ry:21}),2.4,'var(--wood)');
+  for(let q=0;q<46;q++){const r=10.2*Math.sqrt(q+.6),a=q*2.39996,g=add('g',{transform:`translate(${(cx+r*Math.cos(a)).toFixed(1)} ${(8+r*Math.sin(a)*.9).toFixed(1)}) rotate(${(a*180/Math.PI+(rnd(q)-.5)*40).toFixed(0)})`});
+    pen(mkEl('path',{d:'M-11 0C-6 -8 4 -9 11 0C4 9 -6 8 -11 0Z'},g),1.8,q%5===0||q>36?'var(--frog)':'var(--gnome)')}
+  // істотка: квадратне тільце, ручки з боків, чотири ніжки, очі-рисочки; у руці зошит кольору господаря
+  function pal(x,colr,name,book,side){
+    const g=add('g'),m=(t,a)=>add(t,a,g);
+    [-22,-9,6,19].forEach(dx=>pen(m('path',{d:`M${x+dx} ${gy-16}v16h7v-16`}),2.4,'var(--clay)'));
+    pen(m('path',{d:`M${x-46} ${gy-52}h12v16h-12ZM${x+34} ${gy-52}h12v16h-12Z`}),2.4,'var(--clay)');
+    pen(m('path',{d:`M${x-34} ${gy-78}H${x+34}V${gy-16}H${x-34}Z`}),2.6,'var(--clay)');
+    [-13,13].forEach(dx=>{m('path',{d:`M${x+dx-3} ${gy-62}h6v15h-6Z`}).style.fill='var(--ink)'});
+    const b=m('g',{transform:`translate(${x+side*62} ${gy-46}) rotate(${side*8})`});
+    pen(mkEl('path',{d:'M-17 -22H17V22H-17Z'},b),2.4,colr);pen(mkEl('path',{d:'M-10 -12H10M-10 -4H10M-10 4H4'},b),1.8).style.stroke='var(--sheet)';
+    const t1=add('text',{x:x,y:gy+26,'text-anchor':'middle','font-size':24});t1.textContent=name;t1.style.fill='var(--ink)';
+    const t2=add('text',{x:x,y:gy+47,'text-anchor':'middle','font-size':17});t2.textContent=book;t2.style.fill='var(--ink-soft)';
+    return{g,x};
+  }
+  // сторінки малюємо раніше за істоток: вони вилітають з-під зошита й ховаються під нього
+  function page(colr){const w=add('g'),g=mkEl('g',{},w);pen(mkEl('path',{d:'M-15 -11H15V11H-15Z'},g),2.2,'var(--sheet)');pen(mkEl('path',{d:'M-15 -11H15V-5H-15Z'},g),2.2,colr);pen(mkEl('path',{d:'M-9 1H9M-9 6H3'},g),1.5);return{w,g}}
+  const n1=page('var(--gnome)'),n2=page('var(--frog)');
+  const A=pal(128,'var(--gnome)','Клод Танки (she/her)','зошит «Інтерфейс»',1),B=pal(572,'var(--frog)','Клод Андрія (he/him)','зошит «Архітектура»',-1);
+  const cap=add('text',{x:cx,y:gy+96,'text-anchor':'middle','font-size':28});
+  const sm=x=>{x=Math.max(0,Math.min(1,x));return x*x*(3-2*x)};
+  const seg=(t,a,b)=>Math.max(0,Math.min(1,(t-a)/(b-a))),lerp=(a,b,u)=>a+(b-a)*u,NEAR=92,by=gy-46;
+  const walkA=t=>sm(seg(t,.06,.18))-sm(seg(t,.28,.40))+sm(seg(t,.72,.84))-sm(seg(t,.93,1));
+  const walkB=t=>sm(seg(t,.34,.46))-sm(seg(t,.66,.78));
+  const moving=(t,list)=>list.some(([a,b])=>t>a&&t<b);
+  function place(p,dx,walk,now){const bob=walk?-4*Math.abs(Math.sin(now/90)):0,tilt=walk?3*Math.sin(now/90):0;
+    p.g.setAttribute('transform',`translate(${dx.toFixed(1)} ${bob.toFixed(1)}) rotate(${tilt.toFixed(1)} ${p.x} ${gy})`)}
+  // u=0 сторінка під зошитом, u=1 порівнялась із дуплом і просто зникла; з дупла так само просто з'являється
+  function fly(n,u,bookX,side){
+    if(u<=0||u>=1){n.w.style.visibility='hidden';return}
+    const e=sm(u),x=lerp(bookX,cx,e),y=lerp(by,hy,e)-26*Math.sin(Math.PI*e);
+    n.w.style.visibility='visible';n.g.setAttribute('transform',`translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${(side*8*(1-e)).toFixed(1)})`)}
+  const T=13000;
+  function frame(now){
+    const t=(now%T)/T,ax=A.x+NEAR*walkA(t)+62,bx=B.x-NEAR*walkB(t)-62;
+    place(A,NEAR*walkA(t),moving(t,[[.06,.18],[.28,.40],[.72,.84],[.93,1]]),now);
+    place(B,-NEAR*walkB(t),moving(t,[[.34,.46],[.66,.78]]),now);
+    // червона: із зошита Клода Танки в дупло, потім з дупла в зошит Клода Андрія
+    if(t<.3)fly(n1,seg(t,.18,.26),ax,1);else fly(n1,1-seg(t,.46,.54),bx,-1);
+    // зелена: навпаки
+    if(t<.7)fly(n2,seg(t,.56,.64),bx,-1);else fly(n2,1-seg(t,.84,.92),ax,1);
+    const red=t>=.46&&t<.64,green=t>=.84;
+    cap.textContent=green?'«Булька гасне разом з останнім листом»':'«Без чарівних бліків»';cap.style.fill=green?'var(--frog-ink)':'var(--gnome)';
+    cap.style.opacity=(red?sm(seg(t,.50,.54))*(1-sm(seg(t,.60,.64))):green?sm(seg(t,.88,.92))*(1-sm(seg(t,.97,1))):0).toFixed(2);
+  }
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)frame(T*.22);
+  else (function loop(now){frame(now);requestAnimationFrame(loop)})(performance.now());
+})();
+// комікс «Як ми працюємо зазвичай»: шість кадрів із тими самими чоловічками
+(function(){
+  const W={t:['t',0],a:['a',1],g:['a',5,'var(--sun)'],h:['t',2,'var(--plum)'],y:['t',3,'var(--sky)']},gy=140;
+  document.querySelectorAll('.pnl').forEach(sv=>{
+    const k=+sv.dataset.k,add=(t,a,par)=>mkEl(t,a,par||sv);
+    const pen=(e,w=2.2,fill='none')=>{e.style.stroke='var(--ink)';e.style.fill=fill;e.setAttribute('stroke-width',w);e.setAttribute('stroke-linecap','round');e.setAttribute('stroke-linejoin','round');return e};
+    pen(add('path',{d:`M8 ${gy}H232`}));
+    const who=(id,x,amp,u,sc=.78)=>{const [w,n,c]=W[id],q=mkFig(add('g',{transform:`translate(${x} ${gy}) scale(${sc}) translate(${-x} ${-gy})`}),w,x,gy,n,c);q.amp=amp;pose(q,u)};
+    const paper=(x,y,r,sc)=>{const g=add('g',{transform:`translate(${x} ${y}) rotate(${r}) scale(${sc})`});pen(add('path',{d:'M-12 -16H12V16H-12Z'},g),2.2/sc,'var(--sheet)');pen(add('path',{d:'M-7 -8H7M-7 -2H7M-7 4H3'},g),1.6/sc)};
+    const txt=(x,y,t,sz)=>{const e=add('text',{x,y,'text-anchor':'middle','font-size':sz});e.style.fontFamily='var(--display)';e.style.fill='var(--ink)';e.textContent=t};
+    const cloud=(x,y,rx,ry,tx)=>{pen(add('ellipse',{cx:x,cy:y,rx,ry}),2.2,'var(--sheet)');[[.5,1.3,4],[.8,1.75,2.5]].forEach(([a,b,r])=>pen(add('circle',{cx:x+(tx-x)*a,cy:y+ry*b,r}),1.8,'var(--sheet)'))};
+    const screen=(x,y,sc)=>{const g=add('g',{transform:`translate(${x} ${y}) scale(${sc})`});pen(add('path',{d:'M-11 -15H11V15H-11Z'},g),2/sc,'var(--sheet)');pen(add('path',{d:'M-11 -9H11M-6 -2H6M-6 4H6'},g),1.5/sc)};
+    const spark=(x,y,r,fill)=>pen(add('path',{d:`M${x} ${y-r}Q${x} ${y} ${x+r} ${y}Q${x} ${y} ${x} ${y+r}Q${x} ${y} ${x-r} ${y}Q${x} ${y} ${x} ${y-r}Z`}),2,fill);
+    const blob=(x,y)=>{pen(add('path',{d:`M${x-13} ${y+12}C${x-18} ${y-8} ${x-8} ${y-18} ${x} ${y-16}C${x+10} ${y-18} ${x+18} ${y-6} ${x+13} ${y+12}Z`}),2.2,'var(--gnome)');[-5,5].forEach(d=>{pen(add('circle',{cx:x+d,cy:y-5,r:3.6}),1.6,'var(--sheet)');add('circle',{cx:x+d+.8,cy:y-4.5,r:1.3}).style.fill='var(--ink)'})};
+    if(k===1){who('g',76,.45,.6);paper(152,102,7,1.7);pen(add('path',{d:'M178 78L194 56M176 81L178 78L181 80Z'}),2.4);txt(152,58,'опис фічі',18)}
+    if(k===2){who('a',26,1,1,.6);who('y',73,0,0,.6);who('g',120,0,0,.6);who('t',167,1,1,.6);who('h',214,0,0,.6);cloud(120,38,34,21,120);paper(120,38,-4,.85)}
+    if(k===3){who('a',39,0,0,.64);who('y',93,0,0,.64);who('t',147,0,0,.64);who('h',201,0,0,.64);cloud(66,34,27,19,66);screen(66,34,.75);cloud(174,34,27,19,174);spark(174,34,11,'var(--gnome)')}
+    if(k===4){const dv=pen(add('path',{d:'M120 14V134'}),2);dv.style.stroke='var(--ink-soft)';dv.setAttribute('stroke-dasharray','2 7');
+      who('a',44,.9,.5);screen(86,112,1);screen(94,106,1);screen(102,100,1);
+      who('t',198,.9,.5);blob(152,124);pen(add('path',{d:'M130 108q-5 8 0 16M172 106q5 8 0 16'}),1.8)}
+    if(k===5){who('a',44,1,.35);who('t',196,1,.35);
+      pen(add('path',{d:'M78 86H108V96C120 92 120 110 108 106V118H78Z',transform:'rotate(-7 93 102)'}),2.2,'var(--frog)');
+      pen(add('path',{d:'M162 84H132V94C120 90 120 108 132 104V116H162Z',transform:'rotate(8 147 100)'}),2.2,'var(--gnome)');
+      pen(add('path',{d:'M112 74L107 64M120 71V60M128 74L133 64'}),2);txt(120,48,'?!',34)}
+    if(k===6){who('a',46,.3,.5);who('t',194,.3,.5);
+      pen(add('path',{d:'M90 78C98 52 142 52 150 78M141 72L151 80L156 68'}),2.4);
+      pen(add('path',{d:'M150 104C142 130 98 130 90 104M99 110L89 102L84 114'}),2.4);
+      txt(120,98,'×2, ×3…',20)}
+  });
+})();
+// повзунок завдовжки як лінія землі (від x=40 до x=560 у координатах малюнка)
+const ctl=document.querySelector('.ctl'),info=document.querySelector('.info');
+const narrow=matchMedia('(max-width:700px)'),sideT=[...svg.querySelectorAll('text.side[transform]')];
+let vbX=-84,vbW=768;
+function frameTree(){vbX=narrow.matches?22:-84;vbW=narrow.matches?556:768;svg.setAttribute('viewBox',`${vbX} 0 ${vbW} 650`);sideT.forEach(t=>t.style.display=narrow.matches?'none':'')}
+function fit(){frameTree();const r=svg.getBoundingClientRect(),k=Math.min(r.width/vbW,r.height/650),off=(r.width-vbW*k)/2;ctl.style.marginLeft=(off+(40-vbX)*k).toFixed(1)+'px';ctl.style.width=(520*k).toFixed(1)+'px';
+  const wide=matchMedia('(min-width:900px)').matches;info.style.left=wide?off.toFixed(1)+'px':'';info.style.width=wide?(228*k).toFixed(1)+'px':''}
+addEventListener('resize',fit);fit();
+upd();
+if(!still)requestAnimationFrame(dance);
+})();
+</script>
+
+</body>
+</html>
