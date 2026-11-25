@@ -80,12 +80,12 @@
 .ar-card-in{display:flex;flex-direction:column;gap:12px;padding:24px;background:#000;border:1px solid var(--ar-w32)}
 /* Доручення Батата — завжди в сріблястій рамці 4 px (прочитане — тьмяніша). Звичайні листи — без неї:
    непрочитаний — яскрава внутрішня обводка, прочитаний — тьмяна й приглушений текст */
-.ar-card.t-task,.ar-card.t-thanks{background:var(--ar-w32);border-color:var(--ar-w32)}   /* листи Батата — у сріблястій рамці */
-.ar-card:not(.t-task):not(.t-thanks){padding:0;border:0}
+.ar-card.t-task{background:var(--ar-w32);border-color:var(--ar-w32)}   /* листи Батата — у сріблястій рамці */
+.ar-card:not(.t-task){padding:0;border:0}
 .ar-card.unread .ar-card-in{border-color:var(--ar-w72);background:#1a1a1a}   /* непрочитане: яскрава обводка + легка заливка (10% білого, непрозора — щоб рамка доручення не просвічувала) */
 .ar-card-in{transition:background .35s,border-color .35s}
 /* усі плашки однаково: 24 px усередині, обводка 32% — переглянуте й винагороди, 72% — непрочитане */
-.ar-card.t-task .ar-card-in,.ar-card.t-thanks .ar-card-in{padding:19px}   /* +4 рамка +1 обводка = ті самі 24 */
+.ar-card.t-task .ar-card-in{padding:19px}   /* +4 рамка +1 обводка = ті самі 24 */
 .ar-card:not(.unread) .ar-tag{opacity:.55}
 .ar-card h3,.ar-card p,.ar-card .ar-meta,.ar-card .ar-ava,.ar-card .ar-ava b{transition:color .35s,opacity .35s,border-color .35s}
 .ar-card:not(.unread) h3{color:rgba(255,255,255,.6)}
@@ -320,12 +320,7 @@ body.ar-arch aside.side > .demo{display:none}
 aside.side .demo-group{gap:8px}
 aside.side .demo-lbl{margin:0}
 
-/* доручення: соціальний доказ і знак у колекцію */
-.ar-proof{display:block;margin:0;font:500 12px/1.2 var(--ar-text);color:var(--ar-w72)}
-.ar-proof::before{content:"";display:inline-block;width:6px;height:6px;margin:0 6px 1px 0;border-radius:50%;background:#e5302f;vertical-align:middle}
-.ar-paper .ar-proof{margin-top:14px}
 .ar-block .ar-gain{justify-content:flex-end}
-.ar-seal{display:block;margin-top:6px;text-align:right;font:500 12px/1.2 var(--ar-text);color:#fff}
 
 /* спойлер «магічний пил»: текст прозорий, поверх — canvas з частинками; при розкритті текст проступає (--ar-reveal 0→1) */
 .ar-spoil{position:relative;color:transparent !important;-webkit-text-fill-color:transparent}
@@ -355,18 +350,62 @@ aside.side .demo-lbl{margin:0}
 .ar-cat-grid em{font:600 14px/1 var(--ar-text);font-style:normal}
 .ar-cat-grid s{font-weight:400;color:#8a8a85;margin-right:4px}
 
-/* доручення «виконується»: тане смужка часу до кінця терміну, по ній біжить легкий відблиск — видно, що процес триває */
-.ar-prog{display:flex;flex-direction:column;gap:8px;width:100%}
-.ar-paper .ar-prog{margin-top:16px}
-.ar-prog-bar{position:relative;display:block;height:4px;border-radius:2px;background:rgba(255,255,255,.14);overflow:hidden}
-.ar-prog-bar i{position:relative;display:block;height:100%;border-radius:2px;background:#fff;overflow:hidden}
-.ar-prog-bar i::after{content:"";position:absolute;top:0;bottom:0;width:40px;left:-40px;background:linear-gradient(90deg,transparent,rgba(0,0,0,.45),transparent);animation:ar-prog 1.8s linear infinite}
-@keyframes ar-prog{to{left:100%}}
-@media (prefers-reduced-motion:reduce){.ar-prog-bar i::after{animation:none}}
-.ar-prog-txt{display:flex;justify-content:space-between;gap:8px;font:400 12px/1.15 var(--ar-text);color:var(--ar-w72)}
-.ar-prog-txt b{font-weight:500;color:#fff}
 /* теги станів: виконано — спокійний, «наступного разу» — пунктир, без тривожності */
 .ar-tag.st-accepted{border-color:#fff;color:#fff}
 .ar-tag.st-missed{border-style:dashed}
-.ar-tag.t-thanks{background:#fff;color:#000}
 .ar-foot .ar-info{grid-column:1 / -1}
+
+/* СПшка Батата: дефіцит — лишилось X з N (смужка тане) і таймер */
+.ar-tag.st-got{border-color:#fff;color:#fff}
+.ar-tag.st-gone,.ar-tag.st-missed{border-style:dashed}
+
+/* перемикач умови доручення — три сегменти */
+.ar-seg3{display:flex;gap:4px;padding:4px;border-radius:12px;background:var(--k4,#beb8ad)}
+.ar-seg3 button{flex:1;min-height:36px;padding:6px 4px;border:0;border-radius:8px;background:transparent;color:var(--k2,#333);cursor:pointer;font:500 12px/1.15 "Silpo Text",sans-serif}
+.ar-seg3 button.on{background:var(--k6,#f6f4ee);color:var(--k1,#111);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.ar-btn2:disabled{opacity:.4;cursor:default;pointer-events:none}
+.ar-tag.st-used{background:#fff;color:#000;border-color:#fff}
+.ar-tag.st-lapsed{border-style:dashed}
+
+/* «Затисни, щоб отримати»: кругла кнопка з радіальним прогресом */
+.ar-hold-wrap{display:flex;justify-content:center;margin:24px 0 4px}
+.ar-modal{overflow:visible}
+.ar-hold{--p:0;position:relative;width:132px;height:132px;padding:0;border:0;border-radius:50%;background:#000;color:#fff;cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none;
+  box-shadow:inset 0 0 0 1px var(--ar-w32);transform:scale(calc(1 - var(--p) * .06));transition:box-shadow .2s}
+.ar-hold svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);overflow:visible}
+.ar-hold circle{fill:none;stroke-width:3}
+.ar-hold .trk{stroke:rgba(255,255,255,.14)}
+.ar-hold .prg{stroke:#fff;stroke-linecap:round;stroke-dasharray:100;stroke-dashoffset:calc(100 - var(--p) * 100)}
+.ar-hold span{position:relative;font:500 12px/1.25 var(--ar-text);letter-spacing:.06em;text-transform:uppercase}
+.ar-hold.holding{box-shadow:inset 0 0 0 1px #fff,0 0 calc(var(--p) * 28px) rgba(255,255,255,calc(var(--p) * .45))}
+.ar-hold.burst{animation:ar-burst .38s ease-out forwards}
+@keyframes ar-burst{0%{transform:scale(.94);box-shadow:0 0 0 0 rgba(255,255,255,.8)}100%{transform:scale(1.15);opacity:0;box-shadow:0 0 0 40px rgba(255,255,255,0)}}
+/* СПшка-винагорода: квиток */
+.ar-coupon{position:relative;display:flex;color:#fff;flex-direction:column;align-items:center;gap:4px;margin:18px 0 4px;padding:18px 16px 16px;border:1px solid var(--ar-w72);background:#0b0b0b;text-align:center;
+  -webkit-mask:radial-gradient(circle 9px at 0 50%,transparent 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 9px at 100% 50%,transparent 98%,#000) right/51% 100% no-repeat;
+          mask:radial-gradient(circle 9px at 0 50%,transparent 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 9px at 100% 50%,transparent 98%,#000) right/51% 100% no-repeat}
+.ar-coupon small{font:500 10px/1 var(--ar-text);letter-spacing:.14em;text-transform:uppercase;color:var(--ar-w72)}
+.ar-coupon-v{font:600 56px/1 var(--ar-title)}
+.ar-coupon > span{font:400 15px/1.2 var(--ar-serif);letter-spacing:.6px;color:#fff}
+.ar-coupon em{font:400 12px/1.2 var(--ar-text);font-style:normal;color:var(--ar-w72)}
+.ar-coupon.ar-fly{animation:ar-fly .8s cubic-bezier(.2,.9,.25,1.25) both}
+@keyframes ar-fly{0%{transform:translateY(220px) scale(.25) rotate(-10deg);opacity:0;filter:brightness(3)}55%{opacity:1}100%{transform:none;filter:none}}
+@media (prefers-reduced-motion:reduce){.ar-coupon.ar-fly,.ar-hold.burst{animation:none}}
+.ar-acts2{display:flex;flex-direction:column;gap:8px}
+.ar-acts2 .ar-btn{margin:0}
+.ar-btn.ghost2{background:transparent;color:#fff;border:1px solid var(--ar-w72)}
+.ar-offers{display:flex;flex-direction:column;gap:10px}
+.ar-offers span{display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;background:#fff;font:500 14px/1.2 var(--ar-text)}
+.ar-offers i{width:44px;height:44px;border-radius:10px;background:#e6e5e1}
+
+/* доручення: великі числа (лишилось з N, таймер) — у рядку тегів праворуч; біжучий рядок — по центру картки */
+.ar-tagrow{justify-content:space-between}
+.ar-sp{display:flex;gap:16px;margin-left:auto}
+.ar-sp-cell{display:flex;flex-direction:column;align-items:flex-end;gap:3px}
+.ar-sp-cell b{font:600 26px/1 var(--ar-title);color:#fff;font-variant-numeric:tabular-nums}
+.ar-sp-cell small{font:400 11px/1 var(--ar-text);color:var(--ar-w72)}
+.ar-card-in > .ar-tick,.ar-paper > .ar-tick{display:block;flex:none;width:100%;margin:0}
+.ar-paper > .ar-tick{margin:18px 0 0}
+.ar-paper .ar-tagrow{align-items:flex-start;padding-right:44px;margin-bottom:16px}
+.ar-card-in .ar-sp-txt{display:flex;justify-content:space-between;gap:8px;font:400 12px/1.15 var(--ar-text);color:var(--ar-w72)}
+.ar-card-in .ar-sp-txt b{font-weight:500;color:#fff}
