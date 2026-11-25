@@ -530,7 +530,7 @@ inp.addEventListener('input',upd);
   document.querySelectorAll('.pnl').forEach(sv=>{
     const k=+sv.dataset.k,add=(t,a,par)=>mkEl(t,a,par||sv);
     const pen=(e,w=2.2,fill='none')=>{e.style.stroke='var(--ink)';e.style.fill=fill;e.setAttribute('stroke-width',w);e.setAttribute('stroke-linecap','round');e.setAttribute('stroke-linejoin','round');return e};
-    pen(add('path',{d:`M8 ${gy}H232`}));
+    pen(add('path',{d:`M8 ${gy}H232`}),1.6).style.stroke='var(--line)';   // земля в коміксі світла й тонка
     const who=(id,x,amp,u,sc=.78)=>{const [w,n,c]=W[id],q=mkFig(add('g',{transform:`translate(${x} ${gy}) scale(${sc}) translate(${-x} ${-gy})`}),w,x,gy,n,c);q.amp=amp;pose(q,u)};
     const paper=(x,y,r,sc)=>{const g=add('g',{transform:`translate(${x} ${y}) rotate(${r}) scale(${sc})`});pen(add('path',{d:'M-12 -16H12V16H-12Z'},g),2.2/sc,'var(--sheet)');pen(add('path',{d:'M-7 -8H7M-7 -2H7M-7 4H3'},g),1.6/sc)};
     const txt=(x,y,t,sz)=>{const e=add('text',{x,y,'text-anchor':'middle','font-size':sz});e.style.fontFamily='var(--display)';e.style.fill='var(--ink)';e.textContent=t};
