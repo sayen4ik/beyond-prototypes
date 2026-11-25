@@ -15,14 +15,16 @@
   if (h1) h1.textContent = 'Поштова чайка';
 
   /* ---------- модель ---------- */
-  const TYPES = {task: {name: 'Доручення'}, thanks: {name: 'Відповідь Батата'}, announce: {name: 'Анонс'}, parcel: {name: 'Посилка'}, rare: {name: 'Відзнака'}, rewards: {name: 'Винагороди'}};
+  const TYPES = {task: {name: 'Доручення'}, announce: {name: 'Анонс'}, parcel: {name: 'Посилка'}, rare: {name: 'Відзнака'}, rewards: {name: 'Винагороди'}};
   const SENDERS = {
     batat: {name: 'Великий Батат', ini: 'ВБ'},
     uriad: {name: 'Таємний уряд', ini: 'ТУ'},
     tbd:   {name: 'Відправник ?', ini: '?', tbd: true}      /* хто шле Посилку — ще думаємо */
   };
-  /* стани доручення: нове → виконується → виконано (приходить новий лист-відповідь) | наступного разу (не виконав або сплив термін) */
-  const STAGES = [['new', 'Нове'], ['accepted', 'Виконується'], ['done', 'Виконано'], ['missed', 'Наступного разу']];
+  /* стани доручення: нове → отримано | розібрали (не встиг у перші N) | час вийшов */
+  const STAGES = [['new', 'Нове'], ['got', 'Отримано'], ['used', 'Виконано'], ['lapsed', 'Не використано'], ['gone', 'Розібрали'], ['missed', 'Час вийшов']];
+  /* умови доручення: time — тільки час, count — тільки кількість, both — кількість на час */
+  const SP_MODES = [['time', 'Тільки час'], ['count', 'Тільки кількість'], ['both', 'Кількість на час']];
 
   const task = (what, term, prize, stage) => ({what, term, prize, stage});
 
@@ -70,9 +72,10 @@
      Фокус мокапу — сьогоднішнє доручення Батата: сьогодні інших листів немає, тільки воно й винагороди. */
   const INIT = [
     {id: 'd10', type: 'task', from: 'batat', day: 'today', date: 'Сьогодні, 11:40', seen: false, read: false,
-      title: 'Піца за пів ціни', lines: ['Тільки сьогодні: −50% на піцу в замовленні онлайн. Батат щедрий рідко — не проґав.'],
-      task: Object.assign(task('Замовити піцу онлайн', 'тільки сьогодні', '−50% на піцу', 'new'),
-        {gain: {m: 150, z: 30}, seal: true, committed: 412})},
+      title: 'Піца за пів ціни', lines: ['Батат роздає СПшку −50% на піцу. Перші 500 — встигнуть, решта — ні.'],
+      /* доручення = спецпропозиція (СПшка): отримують перші N, хто натисне «Отримати», і лише впродовж вікна.
+         win — тривалість вікна, хв; endsAt виставляється при старті (Скинути / тогл) */
+      task: Object.assign(task('', '', '−50% на піцу', 'new'), {mode: 'both', limit: 500, taken: 431, win: 200, endsAt: 0, useBy: 'до неділі, 30 листопада', gain: {m: 150, z: 30}})},
     {id: 'a8', type: 'announce', from: 'uriad', day: 'week', date: 'П\'ятниця, 12:00', seen: false, read: false,
       title: 'Нова гра у Парку Атракціонів', lines: ['У Парку Атракціонів з\'явилась нова гра.'], cta: 'Перейти в Парк'},
     {id: 'a7', type: 'announce', from: 'uriad', day: 'month', date: '14 листопада', seen: true, read: false,
@@ -99,8 +102,8 @@
   ];
 
   /* стан пам'ятається між заходами (знята булька не повертається); «Скинути» в панелі — повертає все як було */
-  const KEY = 'mc-arch-v11';
-  const S = {letters: structuredClone(INIT), open: null, extra: 0, tab: 'ui', screen: 'home', expanded: new Set()};
+  const KEY = 'mc-arch-v14';
+  const S = {spMode: (() => { try { return localStorage.getItem('mc-sp-mode') || 'both'; } catch (e) { return 'both'; } })(), letters: structuredClone(INIT), open: null, extra: 0, tab: 'ui', screen: 'home', expanded: new Set()};
   try {
     S.tab = localStorage.getItem('mc-tab') === 'arch' ? 'arch' : 'ui';
     const saved = JSON.parse(localStorage.getItem(KEY) || 'null');
@@ -160,12 +163,15 @@
       <li><b>Відзнака</b> — між винагородою й листом: плашка з нагородами, тег і рядок тексту, відкривається листом.</li>
       <li><b>Хоумспейс</b>: булька на іконці пошти світиться, поки в розділі є хоч один непереглянутий лист (винагороди не рахуються). Виняток — доручення від Батата: поки воно непрочитане й термін не сплив, булька світиться екстра і гасне лише тоді, коли лист відкрили (прочитаність, а не перегляд). Гасне разом з останньою булькою в розділі. Після «Скинути» — світиться.</li>
       <li><b>Лист</b> відкривається модалкою по центру: затемнення, хрестик, дія під карткою.</li>
-      <li><b>Доручення</b>: нове → виконується → виконано (приходить «Відповідь Батата» з нагородою) | наступного разу (не виконав або сплив термін).</li>
+      <li><b>Доручення</b> = спецпропозиція Батата: отримують перші N, хто натисне «Отримати», і лише впродовж обмеженого часу. Стани: нове → отримано | розібрали | час вийшов.</li>
     </ul>`;
   side.innerHTML = `<div class="ar-ctl">
       <span class="ar-lbl">Що прийшло</span>
       <button class="ar-row ar-tgl" role="switch" aria-checked="false"><span>Є новий лист від Батата</span><i></i></button>
-      <div class="ar-btns"><button class="ar-btn2 ar-check-in">Чек прийшов</button><button class="ar-btn2 ar-expire">Термін сплив</button></div>
+      <span class="ar-lbl">Умова доручення</span>
+      <div class="ar-seg3">${SP_MODES.map(([k, n]) => `<button data-mode="${k}">${n}</button>`).join('')}</div>
+      <div class="ar-btns"><button class="ar-btn2 ar-gone">Розібрали</button><button class="ar-btn2 ar-expire">Час вийшов</button></div>
+      <div class="ar-btns"><button class="ar-btn2 ar-used">Скористався СП</button><button class="ar-btn2 ar-lapse">Термін СП минув</button></div>
       <div class="ar-btns"><button class="ar-btn2 ar-add">+ Винагорода</button><button class="ar-btn2 ar-reset">Скинути</button></div>
     </div>`;
   const sideHost = document.querySelector('aside.side');
@@ -247,7 +253,6 @@
   function tagsHtml(l) {
     let s = `<span class="ar-tag t-${l.type}">${TYPES[l.type].name}</span>`;
     if (l.type === 'task' && l.task.stage !== 'new') s += `<span class="ar-tag st st-${l.task.stage}">${stageName(l.task.stage)}</span>`;
-    if (l.type === 'thanks' && l.claimed) s += '<span class="ar-tag st st-done">Нагороду забрано</span>';
     return `<span class="ar-tags">${s}</span>`;
   }
 
@@ -308,24 +313,31 @@
   /* булька «непереглянуто» — в одному місці для всіх: правий верхній кут плашки */
   /* доручення Батата з незакінченим терміном: булька живе за прочитаністю й світиться хвилями (як на Хоумспейсі) */
   /* «живий» лист Батата (булька за прочитаністю, з хвилями): нове доручення або відповідь Батата, поки не прочитані */
-  const isBatatLive = l => l.from === 'batat' && !l.read && ((l.type === 'task' && l.task.stage === 'new') || l.type === 'thanks');
+  const isBatatLive = l => l.from === 'batat' && !l.read && l.type === 'task' && l.task.stage === 'new';
   const bubHtml = l => isBatatLive(l) ? '<i class="ar-bub ar-wave" title="Непрочитане доручення"></i>' : l.seen ? '' : '<i class="ar-bub" title="Непереглянуто"></i>';
   /* нове доручення, поки не прийняте: біжить рядок «Тільки сьогодні, тільки зараз» поруч із тегом */
-  const TICK = 'Тільки сьогодні, тільки зараз';
-  /* соціальний доказ: скільки гостей уже прийняли доручення. Знак за виконане — у колекцію (назва ще умовна) */
-  const SEAL = 'Сургуч Батата';
-  const progLeft = () => { const n = new Date(), e = new Date(n); e.setHours(23, 59, 0, 0); return Math.max(0, e - n); };
-  const progHtml = l => {
-    const left = progLeft(), h = Math.floor(left / 36e5), m = Math.floor(left % 36e5 / 6e4);
-    const p = Math.max(.04, Math.min(1, left / (12 * 36e5)));   /* вікно доручення — умовно з полудня до кінця дня */
-    return `<span class="ar-prog"><span class="ar-prog-bar"><i style="width:${(p * 100).toFixed(1)}%"></i></span><span class="ar-prog-txt"><span>Чекаємо чек</span><b>лишилось ${h} год ${m} хв</b></span></span>`;
+  const TICK = 'Тільки зараз, кількість обмежена';
+  const TICKS_BY = {time: 'Тільки зараз, час обмежений', count: 'Кількість обмежена, хто перший', both: TICK};
+  /* ---------- Спецпропозиція Батата: перші N + обмежений час ----------
+     Лічильник «лишилось X з N» і таймер оновлюються наживо (раз на секунду), без перерендеру */
+  const spLeft = t => Math.max(0, (t.endsAt || 0) - Date.now());
+  const hms = ms => { const v = Math.ceil(ms / 1e3), h = Math.floor(v / 3600), m = Math.floor(v % 3600 / 60), x = v % 60;
+    return (h ? h + ':' : '') + String(m).padStart(h ? 2 : 1, '0') + ':' + String(x).padStart(2, '0'); };
+  /* три умови: time — тільки час, count — тільки кількість, both — кількість на час */
+  const useCount = t => t.mode !== 'time', useTime = t => t.mode !== 'count';
+  const spWho = t => t.mode === 'time' ? 'кожен, хто встигне' : `перші ${t.limit} гостей`;
+  /* СПшка як винагорода: квиток із вирізами, срібне −50% */
+  const couponHtml = (t, fly) => `<div class="ar-coupon${fly ? ' ar-fly' : ''}"><small>СПшка Батата</small><b class="ar-coupon-v">${silver(t.prize.split(' ')[0])}</b><span>${esc(t.prize.split(' ').slice(1).join(' '))}</span><em>діє ${esc(t.useBy)}</em></div>`;
+  /* великі числа вгорі: скільки лишилось (з N) і таймер; без смужки — тут дефіцит, а не прогрес */
+  const spHtml = l => {
+    const t = l.task, left = t.limit - t.taken;
+    return `<span class="ar-sp" data-sp="${l.id}">${useCount(t) ? `<span class="ar-sp-cell"><b class="ar-sp-n">${left}</b><small>з ${t.limit}</small></span>` : ''}${useTime(t) ? `<span class="ar-sp-cell"><b class="ar-sp-t">${hms(spLeft(t))}</b><small>лишилось</small></span>` : ''}</span>`;
   };
-  const proofTxt = n => `${n} ${plural(n, 'гість уже прийняв', 'гості вже прийняли', 'гостей уже прийняли')}`;
   const tickHtml = l => l.type === 'task' && l.task.stage === 'new'
-    ? `<span class="ar-tick" aria-label="${TICK}"><span>${Array(6).fill(`<i>${TICK}</i>`).join('')}</span></span>` : '';
+    ? (tx => `<span class="ar-tick" aria-label="${tx}"><span>${Array(6).fill(`<i>${tx}</i>`).join('')}</span></span>`)(TICKS_BY[l.task.mode] || TICK) : '';
   function cardHtml(l) {
-    return `<button class="ar-card t-${l.type}${l.read ? '' : ' unread'}" data-id="${l.id}">${bubHtml(l)}<span class="ar-card-in"><span class="ar-tagrow">${tagsHtml(l)}${tickHtml(l)}</span>
-        <span class="ar-top">${avaHtml(l)}<span class="ar-txt"><h3>${esc(l.title)}</h3><p>${esc(l.lines[0])}</p>${l.type === 'task' && l.task.committed && l.task.stage === 'new' ? `<small class="ar-proof">${proofTxt(l.task.committed)}</small>` : ''}</span></span>${l.type === 'task' && l.task.stage === 'accepted' ? progHtml(l) : ''}
+    return `<button class="ar-card t-${l.type}${l.read ? '' : ' unread'}" data-id="${l.id}">${bubHtml(l)}<span class="ar-card-in"><span class="ar-tagrow">${tagsHtml(l)}${l.type === 'task' && l.task.stage === 'new' && l.task.limit ? spHtml(l) : ''}</span>
+        <span class="ar-top">${avaHtml(l)}<span class="ar-txt"><h3>${esc(l.title)}</h3><p>${esc(l.lines[0])}</p></span></span>${tickHtml(l)}${l.type === 'task' && l.task.stage === 'got' ? `<span class="ar-sp-txt"><span>Скористайся СПшкою</span><b>${esc(l.task.useBy)}</b></span>` : ''}
         <span class="ar-meta"><span>${esc(l.date)}</span><span>${esc(SENDERS[l.from].name)}</span></span>
       </span></button>`;
   }
@@ -392,29 +404,32 @@
     let acts = '', body = l.lines.map(t => `<p>${esc(t)}</p>`).join('');
     if (l.type === 'task') {
       const t = l.task, st = t.stage;
-      /* одна кнопка «Прийняти й виконати»: фіксує прийняття й веде туди, де виконується умова.
-         Виконання — чек, що підходить під умову; тоді приходить окремий лист «Відповідь Батата» з нагородою */
+      /* одна кнопка «Отримати»: СПшку отримують перші N, хто натиснув, поки не вийшов час */
       body += `<div class="ar-block">
-        <div><small>Що зробити</small><span>${esc(t.what)}</span></div>
-        <div><small>Термін</small><span>${esc(t.term)}</span></div>
-        <div><small>Вигода</small><span>${esc(t.prize)}</span></div>
-        ${t.gain ? `<div><small>Нагорода Потойбіччя</small><span>${gainRow(t.gain)}${t.seal ? `<b class="ar-seal">+ ${SEAL}</b>` : ''}</span></div>` : ''}</div>`;
-      if (st === 'new') { body += t.committed ? `<p class="ar-proof">${proofTxt(t.committed)}</p>` : ''; acts = '<button class="ar-btn" data-act="accept">Прийняти й виконати</button>'; }
-      if (st === 'accepted') { body += progHtml(l) + '<p class="ar-note">Зарахуємо, щойно прийде чек онлайн-замовлення з піцою — після збирання.</p>'; acts = '<button class="ar-btn" data-act="shop">До покупок</button>'; }
-      if (st === 'done') body += '<p class="ar-note">Виконано. Батат надіслав відповідь — нагорода в ній.</p>';
-      if (st === 'missed') body += '<p class="ar-note">Цього разу не склалося. Батат ще повернеться з новим дорученням.</p>';
-    }
-    if (l.type === 'thanks') {
-      body += `<div class="ar-block"><div><small>Нагорода Потойбіччя</small><span>${gainRow(l.gain)}${l.seal ? `<b class="ar-seal">+ ${SEAL}</b>` : ''}</span></div></div>`;
-      if (!l.claimed) acts = '<button class="ar-btn" data-act="claim">Забрати нагороду</button>';
-      else body += `<p class="ar-note">Нагороду забрано.${l.seal ? ` ${SEAL} — у твоїй колекції.` : ''}</p>`;
+        <div><small>Спецпропозиція</small><span>${esc(t.prize)}</span></div>
+        ${t.limit ? `<div><small>Хто отримає</small><span>${spWho(t)}</span></div>` : ''}</div>`;
+      if (st === 'new') { body += tickHtml(l); body += `<div class="ar-hold-wrap"><button class="ar-hold" data-hold aria-label="Затисни, щоб отримати"><svg viewBox="0 0 100 100"><circle class="trk" cx="50" cy="50" r="46"/><circle class="prg" cx="50" cy="50" r="46" pathLength="100"/></svg><span>Затисни,<br>щоб отримати</span></button></div>`; }   /* кнопка — у рамці листа */
+      /* отримав → доручення ще не виконане: виконання = скористатися СПшкою до кінця її терміну */
+      if (st === 'got') {
+        body += `${couponHtml(t, S.fly === l.id)}<p class="ar-note">Вона в Забобанці й у «Моїх пропозиціях» Сільпо. Скористайся ${esc(t.useBy)} — і доручення виконано.</p>`;
+        acts = '<div class="ar-acts2"><button class="ar-btn" data-act="shop">До покупок</button><button class="ar-btn ghost2" data-act="offers">До пропозицій</button></div>';
+        S.fly = null;
+      }
+      if (st === 'used') {
+        body += `<div class="ar-block"><div><small>Нагорода за доручення</small><span>${gainRow(t.gain || {})}</span></div></div>`;
+        if (!t.claimed) acts = '<button class="ar-btn" data-act="claim">Забрати нагороду</button>';
+        else body += '<p class="ar-note">Нагороду забрано. Батат пам\'ятає тих, хто виконує.</p>';
+      }
+      if (st === 'lapsed') body += '<p class="ar-note">СПшка цього разу не знадобилась. Батат ще повернеться.</p>';
+      if (st === 'gone') body += '<p class="ar-note">Цього разу розібрали швидше. Батат ще повернеться.</p>';
+      if (st === 'missed') body += '<p class="ar-note">Час вийшов. Батат ще повернеться з новою пропозицією.</p>';
     }
     if (l.type === 'parcel' || l.type === 'rare') {
       body += `<div class="ar-block">${l.items.map(([n, v]) => `<div><span>${esc(n)}</span><span>${esc(v)}</span></div>`).join('')}</div>
         <p class="ar-note">Посилка — це звіт: усе вже нараховано. Від кого вона приходить, ще вирішуємо.</p>`;
     }
     if (l.type === 'announce' && l.cta) acts = `<button class="ar-btn">${esc(l.cta)}</button>`;
-    $paper.innerHTML = `<button class="ar-x" aria-label="Закрити"></button>${tagsHtml(l)}<div class="ar-top"><div class="ar-txt"><h2>${esc(l.title)}</h2></div>${avaHtml(l)}</div>
+    $paper.innerHTML = `<button class="ar-x" aria-label="Закрити"></button><div class="ar-tagrow">${tagsHtml(l)}${l.type === 'task' && l.task.stage === 'new' && l.task.limit ? spHtml(l) : ''}</div><div class="ar-top"><div class="ar-txt"><h2>${esc(l.title)}</h2></div>${avaHtml(l)}</div>
       <div class="ar-meta"><span>${esc(l.date)}</span><span>${esc(SENDERS[l.from].name)}</span></div>${body}`;
     $acts.innerHTML = acts;
     if (S.reveal === l.id) { S.reveal = null; requestAnimationFrame(() => dustOn($paper.querySelector('.ar-txt ~ p, p'), true)); }
@@ -473,7 +488,7 @@
   const syncTgl = () => { const on = !!byId(BATAT); tgl.classList.toggle('on', on); tgl.setAttribute('aria-checked', on); };
   tgl.addEventListener('click', () => {
     if (byId(BATAT)) S.letters = S.letters.filter(l => l.id !== BATAT);
-    else S.letters.unshift(structuredClone(INIT.find(l => l.id === BATAT)));
+    else { S.letters.unshift(structuredClone(INIT.find(l => l.id === BATAT))); spStart(); }
     S.open = null; save(); render(true);
   });
 
@@ -526,12 +541,19 @@
      Нативний перехід: каталог виїжджає справа, розділ трохи відходить ліворуч. «Назад» повертає в розділ */
   const cat = document.createElement('div');
   cat.className = 'ar-cat'; cat.hidden = true;
-  cat.innerHTML = `<div class="ar-cat-bar"><button class="ar-cat-back" aria-label="Назад"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><b>Піца</b><i></i></div>
-    <div class="ar-cat-body"><div class="ar-cat-promo"><small>Доручення Батата · тільки сьогодні</small><b>−50% на піцу</b><span>Знижка застосується до чека після збирання</span></div>
+  const CAT_SHOP = `<div class="ar-cat-bar"><button class="ar-cat-back" aria-label="Назад"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><b>Піца</b><i></i></div>
+    <div class="ar-cat-body"><div class="ar-cat-promo"><small>СПшка Батата · твоя</small><b>−50% на піцу</b><span>Діє на піцу в цьому замовленні</span></div>
     <div class="ar-cat-grid">${[['Маргарита', 189], ['Пепероні', 229], ['Чотири сири', 249], ['Гавайська', 219], ['З грибами', 209], ['Діабола', 239]].map(([t, p]) => `<span><i></i>${t}<em><s>${p} ₴</s> ${Math.round(p / 2)} ₴</em></span>`).join('')}</div></div>`;
+  /* «Мої пропозиції» Сільпо — заглушка: СПшка Батата серед інших пропозицій */
+  const CAT_OFFERS = `<div class="ar-cat-bar"><button class="ar-cat-back" aria-label="Назад"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><b>Мої пропозиції</b><i></i></div>
+    <div class="ar-cat-body"><div class="ar-cat-promo"><small>СПшка Батата · нова</small><b>−50% на піцу</b><span>Діє до неділі, 30 листопада</span></div>
+    <div class="ar-offers">${['−15% на сири', '−20% на каву', '×2 бонуси на фрукти'].map(t => `<span><i></i>${t}</span>`).join('')}</div></div>`;
+  cat.innerHTML = CAT_SHOP;
   phone.append(cat);
   let catT = 0;
-  function pushCat() {
+  function pushCat(kind) {
+    cat.innerHTML = kind === 'offers' ? CAT_OFFERS : CAT_SHOP;
+    cat.querySelector('.ar-cat-back').addEventListener('click', popCat);
     clearTimeout(catT); cat.hidden = false; cat.offsetWidth;   /* перерахунок — щоб перехід стартував з-за краю */
     phone.classList.add('ar-pushed');
   }
@@ -539,9 +561,25 @@
     phone.classList.remove('ar-pushed');
     catT = setTimeout(() => { cat.hidden = true; }, 380);
   }
-  cat.querySelector('.ar-cat-back').addEventListener('click', popCat);
 
-  function render(roll) { renderSum(roll); renderList(); renderOpen(); syncHomeDot(); syncTgl(); }
+  /* живий лічильник: інші гості розбирають СПшку; таймер іде. Добігло — доручення переходить у «Розібрали» / «Час вийшов» */
+  function spStart() { const l = byId(BATAT); if (l && l.task.limit) { Object.assign(l.task, {stage: 'new', claimed: false, mode: S.spMode || 'both', endsAt: Date.now() + l.task.win * 6e4, taken: INIT.find(x => x.id === BATAT).task.taken}); } }
+  function spTick() {
+    const l = byId(BATAT); if (!l || l.task.stage !== 'new' || !l.task.limit) return;
+    const t = l.task;
+    if (useCount(t) && Math.random() < .35 && t.taken < t.limit) t.taken++;
+    const done = useCount(t) && t.taken >= t.limit ? 'gone' : useTime(t) && !spLeft(t) ? 'missed' : '';
+    if (done) { t.stage = done; save(); render(false); return; }
+    document.querySelectorAll(`[data-sp="${l.id}"]`).forEach(el => {
+      const left = t.limit - t.taken;
+      const n = el.querySelector('.ar-sp-n'), tm = el.querySelector('.ar-sp-t');
+      if (n) n.textContent = left;
+      if (tm) tm.textContent = hms(spLeft(t));
+    });
+  }
+  setInterval(() => { if (S.tab === 'arch') spTick(); }, 1000);
+
+  function render(roll) { renderSum(roll); renderList(); renderOpen(); syncHomeDot(); syncTgl(); syncSeg3(); }
 
   /* ---------- «переглянуто»: тільки прокручуванням ----------
      Під час прокрутки дивимось на кожну червону бульку: щойно вона підходить до верхнього краю списку
@@ -660,16 +698,48 @@
     e.stopImmediatePropagation();
     if (S.open) { S.open = null; render(false); } else go('home');   /* з розділу — назад на Хоумспейс */
   }, true);
+  /* «Затисни, щоб отримати»: радіальний прогрес біжить, поки тримаєш (1.4 с); відпустив раніше — тане назад.
+     Добіг — кнопка спалахує, СПшка вилітає й стає винагородою */
+  const HOLD = 1400;
+  let holdRaf = 0, holdP = 0, holdOn = false, holdLast = 0;
+  function holdLoop(now) {
+    const btn = $open.querySelector('[data-hold]'); if (!btn) { holdRaf = 0; return; }
+    const dt = holdLast ? now - holdLast : 16; holdLast = now;
+    holdP = Math.max(0, Math.min(1, holdP + (holdOn ? dt / HOLD : -dt / 400)));
+    btn.style.setProperty('--p', holdP); btn.classList.toggle('holding', holdOn);
+    if (holdP >= 1) { holdRaf = 0; holdOn = false; holdDone(btn); return; }
+    holdRaf = holdP > 0 || holdOn ? requestAnimationFrame(holdLoop) : 0;
+    if (!holdRaf) holdLast = 0;
+  }
+  function holdDone(btn) {
+    const l = byId(S.open), t = l.task;
+    btn.classList.add('burst');
+    if (navigator.vibrate) navigator.vibrate(30);
+    setTimeout(() => {
+      holdP = 0; holdLast = 0;
+      if (useCount(t) && t.taken >= t.limit) t.stage = 'gone';
+      else if (useTime(t) && !spLeft(t)) t.stage = 'missed';
+      else { t.taken++; t.stage = 'got'; S.fly = l.id; }
+      /* модалка розгортається: з висоти «до» плавно до нової, із СПшкою й двома кнопками */
+      const modal = $open.querySelector('.ar-modal'), h0 = modal.offsetHeight;
+      save(); render(false);
+      const h1 = modal.offsetHeight;
+      modal.animate([{height: h0 + 'px', clipPath: 'inset(0)'}, {height: h1 + 'px', clipPath: 'inset(0)'}],
+        {duration: 520, easing: 'cubic-bezier(.2,.8,.2,1)'});
+      $paper.animate([{boxShadow: '0 0 0 0 rgba(255,255,255,.7)'}, {boxShadow: '0 0 40px 2px rgba(255,255,255,0)'}], {duration: 700, easing: 'ease-out'});
+      $acts.animate([{opacity: 0, transform: 'translateY(12px)'}, {opacity: 1, transform: 'none'}], {duration: 360, delay: 380, easing: 'ease-out', fill: 'backwards'});
+    }, 380);
+  }
+  $open.addEventListener('pointerdown', e => { if (!e.target.closest('[data-hold]')) return; e.preventDefault(); holdOn = true; if (!holdRaf) { holdLast = 0; holdRaf = requestAnimationFrame(holdLoop); } });
+  addEventListener('pointerup', () => { holdOn = false; });
+  addEventListener('pointercancel', () => { holdOn = false; });
   $acts.addEventListener('click', e => {
     const b = e.target.closest('[data-act]'); if (!b) return;
     const l = byId(S.open);
     const act = b.dataset.act;
-    if (act === 'claim') { l.claimed = true; save(); render(false); return; }
-    if (act === 'shop') { S.open = null; render(false); setTimeout(pushCat, 180); return; }
-    l.task.stage = 'accepted';
-    if (l.task.committed) l.task.committed++;   /* гість теж прийняв — лічильник +1 */
-    S.open = null; save(); render(false); setTimeout(pushCat, 180); return;   /* одразу туди, де виконується умова */
-    save(); render(false);
+    if (act === 'claim') { l.task.claimed = true; save(); render(false); return; }
+    if (act === 'offers') { S.open = null; render(false); setTimeout(() => pushCat('offers'), 180); return; }
+    if (act === 'shop') { S.open = null; render(false); setTimeout(pushCat, 180); }
   });
   /* демо: прилітає нова винагорода — не новий лист, а ще одна квитанція в сьогоднішній групі Бондуелей */
   side.querySelector('.ar-add').addEventListener('click', () => {
@@ -679,23 +749,34 @@
     g.date = hm; g.seen = false; g.read = false;
     S.open = null; save(); render(true);
   });
-  /* демо доручення: чек прийшов → доручення «Виконано» + новий лист «Відповідь Батата»; термін сплив → «Наступного разу» */
-  side.querySelector('.ar-check-in').addEventListener('click', () => {
-    const l = byId(BATAT); if (!l || l.task.stage === 'done' || l.task.stage === 'missed') return;
-    l.task.stage = 'done'; l.read = true; l.seen = true;
-    const hm = new Date().toTimeString().slice(0, 5);
-    S.letters = S.letters.filter(x => x.id !== BATAT + 't');
-    S.letters.unshift({id: BATAT + 't', type: 'thanks', from: 'batat', day: 'today', date: 'Сьогодні, ' + hm, seen: false, read: false, claimed: false,
-      title: 'Батат задоволений', lines: ['Доручення виконано. Батат тримає слово — ось твоя нагорода.'], gain: l.task.gain || {}, seal: l.task.seal});
-    S.open = null; save(); render(true);
+  /* перемикач умови: доручення стартує заново з новою умовою */
+  const seg3 = side.querySelector('.ar-seg3');
+  const syncSeg3 = () => { const l = byId(BATAT), m = (l && l.task.mode) || S.spMode || 'both';
+    seg3.querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.mode === m));
+    side.querySelector('.ar-gone').disabled = m === 'time'; side.querySelector('.ar-expire').disabled = m === 'count';
+    const got = !!(l && l.task.stage === 'got'); side.querySelector('.ar-used').disabled = !got; side.querySelector('.ar-lapse').disabled = !got; };
+  seg3.addEventListener('click', e => {
+    const b = e.target.closest('[data-mode]'); if (!b) return;
+    S.spMode = b.dataset.mode;
+    const l = byId(BATAT); if (l) { spStart(); l.read = false; l.seen = false; }
+    try { localStorage.setItem('mc-sp-mode', S.spMode); } catch (e) {}
+    S.open = null; save(); render(false);
+  });
+  /* демо після отримання: гість скористався СПшкою (доручення виконано, нагорода) або її термін минув */
+  const after = st => () => { const l = byId(BATAT); if (!l || l.task.stage !== 'got') return; l.task.stage = st; if (st === 'used') { l.read = false; l.seen = false; } S.open = null; save(); render(true); };
+  side.querySelector('.ar-used').addEventListener('click', after('used'));
+  side.querySelector('.ar-lapse').addEventListener('click', after('lapsed'));
+  /* демо доручення: «Розібрали» — лічильник добігає до N; «Час вийшов» — таймер до нуля */
+  side.querySelector('.ar-gone').addEventListener('click', () => {
+    const l = byId(BATAT); if (!l || l.task.stage !== 'new') return;
+    l.task.taken = l.task.limit; spTick();
   });
   side.querySelector('.ar-expire').addEventListener('click', () => {
-    const l = byId(BATAT); if (!l || l.task.stage === 'done') return;
-    l.task.stage = 'missed'; l.read = true; l.seen = true;
-    S.open = null; save(); render(true);
+    const l = byId(BATAT); if (!l || l.task.stage !== 'new') return;
+    l.task.endsAt = Date.now(); spTick();
   });
   side.querySelector('.ar-reset').addEventListener('click', () => {
-    S.letters = structuredClone(INIT); S.open = null; S.extra = 0;
+    S.letters = structuredClone(INIT); spStart(); S.open = null; S.extra = 0;
     try { localStorage.removeItem(KEY); } catch (e) {}
     $list.scrollTop = 0; render(true);
   });
@@ -936,5 +1017,6 @@
     new ResizeObserver(fit).observe(document.body);
   })();
 
+  { const l = byId(BATAT); if (l && l.task.stage === 'new' && !l.task.endsAt) { spStart(); save(); } }   /* перший запуск — вікно стартує зараз */
   setTab(S.tab);
 })();
